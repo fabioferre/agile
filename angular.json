@@ -35,11 +35,38 @@
               {
                 "input": "src/theme/variables.scss"
               },
+
+              {
+                "input": "node_modules/jquery.scrollbar/sass/jquery.scrollbar.scss"
+              },
+
               {
                 "input": "src/global.scss"
+              },
+              {
+                "input": "src/theme/css/app.min.css"
               }
             ],
-            "scripts": [],
+            "scripts": [
+                {
+                    "input": "node_modules/jquery/dist/jquery.min.js"
+                },
+                {
+                    "input": "node_modules/popper.js/dist/umd/popper.min.js"
+                },
+                {
+                    "input": "node_modules/bootstrap/dist/js/bootstrap.min.js"
+                },
+                {
+                  "input": "node_modules/jquery-scroll-lock/dist/jquery-scrollLock.min.js"
+                },
+                {
+                    "input": "node_modules/jquery.scrollbar/jquery.scrollbar.min.js"
+                },
+                {
+                    "input": "src/theme/js/app.min.js"
+                }
+            ],
             "es5BrowserSupport": true
           },
           "configurations": {

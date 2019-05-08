@@ -9,3 +9,6 @@
 @import '~@ionic/angular/css/text-alignment.css';
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
+
+$zmdi-font-path: '~material-design-iconic-font/dist/fonts';
+@import '~material-design-iconic-font/scss/material-design-iconic-font';

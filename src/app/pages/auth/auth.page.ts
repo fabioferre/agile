@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./auth.page.scss'],
 })
 export class AuthPage implements OnInit {
-
+  public background = './assets/bg.jpeg';
+  public auth = 1;
   constructor() { }
 
   ngOnInit() {
+  }
+
+  public changeScreen(event): void {
+    this.auth = event;
   }
 
 }

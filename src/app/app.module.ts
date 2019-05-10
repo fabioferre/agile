@@ -12,7 +12,11 @@ import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { HeaderComponent } from './layout/header/header.component';
 
 @NgModule({
-  declarations: [AppComponent, SidebarComponent, HeaderComponent],
+  declarations: [
+    AppComponent, 
+    SidebarComponent,
+    HeaderComponent
+  ],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
   providers: [

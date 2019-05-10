@@ -13274,6 +13274,16 @@ textarea {
     background-color: #FFF
 }
 
+.login__footer {
+    text-align: center;
+    
+}
+
+.login__footer .link-footer {
+    display: inline-block;
+    padding: 10px 10px;
+    color: #FFF;
+}
 @media screen and (prefers-reduced-motion:reduce) {
     .price-table__action {
         transition: none
@@ -13608,7 +13618,8 @@ textarea {
 [data-ma-theme=red] .header,
 [data-ma-theme=red] .login__block__btn,
 [data-ma-theme=red] .login__block__header,
-[data-ma-theme=red] .top-menu {
+[data-ma-theme=red] .top-menu,
+[data-ma-theme=red] .login__footer{
     background-color: #ff6b68
 }
 
@@ -13621,7 +13632,8 @@ textarea {
 [data-ma-theme=purple] .header,
 [data-ma-theme=purple] .login__block__btn,
 [data-ma-theme=purple] .login__block__header,
-[data-ma-theme=purple] .top-menu {
+[data-ma-theme=purple] .top-menu,
+[data-ma-theme=purple] .login__footer {
     background-color: #d066e2
 }
 
@@ -13634,7 +13646,8 @@ textarea {
 [data-ma-theme=indigo] .header,
 [data-ma-theme=indigo] .login__block__btn,
 [data-ma-theme=indigo] .login__block__header,
-[data-ma-theme=indigo] .top-menu {
+[data-ma-theme=indigo] .top-menu, 
+[data-ma-theme=indigo] .login__footer {
     background-color: #3F51B5
 }
 
@@ -13647,7 +13660,8 @@ textarea {
 [data-ma-theme=blue] .header,
 [data-ma-theme=blue] .login__block__btn,
 [data-ma-theme=blue] .login__block__header,
-[data-ma-theme=blue] .top-menu {
+[data-ma-theme=blue] .top-menu, 
+[data-ma-theme=blue] .login__footer {
     background-color: #2196F3
 }
 
@@ -13660,7 +13674,8 @@ textarea {
 [data-ma-theme=cyan] .header,
 [data-ma-theme=cyan] .login__block__btn,
 [data-ma-theme=cyan] .login__block__header,
-[data-ma-theme=cyan] .top-menu {
+[data-ma-theme=cyan] .top-menu,
+[data-ma-theme=cyan] .login__footer {
     background-color: #00BCD4
 }
 
@@ -13673,7 +13688,7 @@ textarea {
 [data-ma-theme=teal] .header,
 [data-ma-theme=teal] .login__block__btn,
 [data-ma-theme=teal] .login__block__header,
-[data-ma-theme=teal] .top-menu {
+[data-ma-theme=teal] .top-menu, [data-ma-theme=teal] .login__footer  {
     background-color: #39bbb0
 }
 
@@ -13686,7 +13701,7 @@ textarea {
 [data-ma-theme=green] .header,
 [data-ma-theme=green] .login__block__btn,
 [data-ma-theme=green] .login__block__header,
-[data-ma-theme=green] .top-menu {
+[data-ma-theme=green] .top-menu,[data-ma-theme=green] .login__footer{
     background-color: #32c787
 }
 
@@ -13699,7 +13714,7 @@ textarea {
 [data-ma-theme=brown] .header,
 [data-ma-theme=brown] .login__block__btn,
 [data-ma-theme=brown] .login__block__header,
-[data-ma-theme=brown] .top-menu {
+[data-ma-theme=brown] .top-menu,[data-ma-theme=brown] .login__footer {
     background-color: #795548
 }
 
@@ -13712,7 +13727,7 @@ textarea {
 [data-ma-theme=orange] .header,
 [data-ma-theme=orange] .login__block__btn,
 [data-ma-theme=orange] .login__block__header,
-[data-ma-theme=orange] .top-menu {
+[data-ma-theme=orange] .top-menu,[data-ma-theme=orange] .login__footer{
     background-color: #FF9800
 }
 
@@ -13725,7 +13740,8 @@ textarea {
 [data-ma-theme=blue-grey] .header,
 [data-ma-theme=blue-grey] .login__block__btn,
 [data-ma-theme=blue-grey] .login__block__header,
-[data-ma-theme=blue-grey] .top-menu {
+[data-ma-theme=blue-grey] .top-menu,
+[data-ma-theme=blue-grey] .login__footer {
     background-color: #607D8B
 }
 

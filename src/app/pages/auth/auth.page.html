@@ -1,9 +1,20 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>auth</ion-title>
-  </ion-toolbar>
-</ion-header>
+<section id="auth" [ngStyle]="{'background-image': 'url('+background+')'}" >
+   
 
-<ion-content>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 login text-center">
+                <div *ngIf="auth == 1" class="w-100" >
+                    <app-login (auth)="changeScreen($event)"></app-login>
+                </div>
+                <div *ngIf="auth == 2" class="w-100">
+                    <app-register (auth)="changeScreen($event)"></app-register>
+                </div>
+                <div *ngIf="auth == 3" class="w-100">
+                    <app-forget-password (auth)="changeScreen($event)"></app-forget-password>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> 
 
-</ion-content>

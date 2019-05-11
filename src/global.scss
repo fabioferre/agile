@@ -16,3 +16,9 @@ $zmdi-font-path: '~material-design-iconic-font/dist/fonts';
 
 
 
+.ng-invalid.ng-touched ~ .form-group__bar {
+    &::after,
+    &::before {
+        background-color: var(--danger);
+    }
+}

@@ -11,6 +11,9 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { HeaderComponent } from './layout/header/header.component';
+import { HttpClientModule } from '@angular/common/http';
+import { AuthService } from './service/auth.service';
+import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
   declarations: [
@@ -19,10 +22,18 @@ import { HeaderComponent } from './layout/header/header.component';
     HeaderComponent
   ],
   entryComponents: [],
-  imports: [BrowserModule, BrowserAnimationsModule , IonicModule.forRoot(), AppRoutingModule],
+  imports: [
+    BrowserModule, 
+    HttpClientModule,
+    BrowserAnimationsModule, 
+    IonicStorageModule.forRoot({name: '_agile'}),
+    IonicModule.forRoot(), 
+    AppRoutingModule
+  ],
   providers: [
     StatusBar,
     SplashScreen,
+    AuthService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

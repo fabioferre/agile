@@ -1,17 +1,47 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { AuthService } from 'src/app/service/auth.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Storage } from '@ionic/storage';
+
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  @Output() public auth: EventEmitter<number> = new EventEmitter<number>();
-  constructor() { }
+    @Output() public typeAuth: EventEmitter<number> = new EventEmitter<number>();
+    public form: FormGroup = this.fb.group({
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', Validators.required],
+        'system_name':'agile'
+    });
 
-  ngOnInit() {}
+    constructor(
+        private auth: AuthService,
+        private fb: FormBuilder,
+        private router: Router,
+        private storage: Storage
+    ) { }
 
-  public change(screen): void {
-    this.auth.emit(screen);
-  }
+    ngOnInit() { }
+
+    public change(screen): void {
+        this.typeAuth.emit(screen);
+    }
+
+    public submit(): void {
+        if(this.form.valid)
+        {
+            this.auth.authenticate(this.form.value).subscribe(response => {
+               this.storage.set('user', response.user)
+               this.storage.set('system', response.system)
+               this.auth.configSystem(response);
+               this.router.navigate(['/home']);
+            });
+        }
+    }
+
+    
 }

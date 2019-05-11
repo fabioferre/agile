@@ -6,12 +6,12 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
-  @Output() public auth: EventEmitter<number> = new EventEmitter<number>();
+  @Output() public typeAuth: EventEmitter<number> = new EventEmitter<number>();
   constructor() { }
 
   ngOnInit() {}
 
   public change(screen): void {
-    this.auth.emit(screen);
+    this.typeAuth.emit(screen);
   }
 }

@@ -10034,6 +10034,8 @@ select.form-control {
     font-size: .875rem
 }
 
+
+
 .form-group--float .form-control~label {
     font-size: 1rem;
     bottom: .375rem;
@@ -10112,21 +10114,25 @@ select.form-control {
     bottom: -1.5rem
 }
 
-.is-valid~.form-group__bar:after,
-.is-valid~.form-group__bar:before {
+.form-control.form-control--active~.form-group__bar:after, 
+.form-control.form-control--active~.form-group__bar:before {
+    width: 50%;
+}
+.ng-valid.ng-touched~.form-group__bar:after,
+.ng-valid.ng-touched~.form-group__bar:before {
     background-color: #32c787
 }
 
-.is-valid~.form-group__feedback {
+.ng-valid.ng-touched~.form-group__feedback {
     color: #32c787
 }
 
-.is-invalid~.form-group__bar:after,
-.is-invalid~.form-group__bar:before {
+.ng-invalid.ng-touched~.form-group__bar:after,
+.ng-invalid.ng-touched~.form-group__bar:before {
     background-color: #ff6b68
 }
 
-.is-invalid~.form-group__feedback {
+.ng-invalid.ng-touched~.form-group__feedback {
     color: #ff6b68
 }
 

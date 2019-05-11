@@ -21,7 +21,7 @@ export class AuthService implements CanActivate {
 
     public authenticate(credentials: string[]): Observable<any> {
         return this.http.post(`${this.helper.url}/auth/login`, credentials).pipe(
-            retry(10)
+            retry(2)
         );
     }
 

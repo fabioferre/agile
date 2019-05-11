@@ -1,3 +1,4 @@
+import { HelperService } from './../../../service/helper.service';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AuthService } from 'src/app/service/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -22,7 +23,8 @@ export class LoginComponent implements OnInit {
         private auth: AuthService,
         private fb: FormBuilder,
         private router: Router,
-        private storage: Storage
+        private storage: Storage,
+        private helper: HelperService
     ) { }
 
     ngOnInit() { }
@@ -32,12 +34,18 @@ export class LoginComponent implements OnInit {
     }
 
     public submit(): void {
+    
         if(this.form.valid)
         {
+            this.helper.load();
             this.auth.authenticate(this.form.value).subscribe(user => {
+               this.helper.message("Seja bem vindo !")
                this.storage.set('user', user)
                this.auth.configSystem(user);
                this.router.navigate(['/home']);
+            },
+            error => {
+                this.helper.message(error)
             });
         }
     }

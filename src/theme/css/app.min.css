@@ -10800,8 +10800,11 @@ strong {
 .content__title,
 .main {
     position: relative
-}
 
+}
+.main {
+    overflow: auto
+}
 .nav-tabs .nav-link.active:before {
     -webkit-transform: scaleX(1);
     transform: scaleX(1)

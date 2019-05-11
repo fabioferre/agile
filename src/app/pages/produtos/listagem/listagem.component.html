@@ -1,59 +1,70 @@
 
 
 <header class="content__title">
-        <h1>Listagem de produtos</h1>
-        <button type="button" class="btn btn-success btn-add" [routerLink]="['novo']" >
-            <ion-icon name="add"></ion-icon>
-        </button>
-        
-    </header>
+    <h1>Listagem de produtos</h1>
+    <button type="button" class="btn btn-success btn-add" [routerLink]="['novo']" >
+        <ion-icon name="add"></ion-icon>
+    </button>
     
-    <ion-card>
-        <div class="card">
-            <div class="card-body">
-                <mat-form-field>
-                    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-                </mat-form-field>
-                <div class="mat-elevation-z8">
-                    <table mat-table [dataSource]="dataSource" matSort class="w-100 responsive-table">
+</header>
     
-                        <!-- Position Column -->
-                        <ng-container matColumnDef="id">
-                            <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
-                            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-                        </ng-container>
-    
-                            <!-- Name Column -->
-                        <ng-container matColumnDef="image">
-                            <th mat-header-cell *matHeaderCellDef >  </th>
-                            <td mat-cell *matCellDef="let element"> {{element.image }} </td>
-                        </ng-container>
-    
-                        <!-- Name Column -->
-                        <ng-container matColumnDef="name">
-                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>
-                            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-                        </ng-container>
-    
-                        <!-- Weight Column -->
-                        <ng-container matColumnDef="category">
-                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Categoria </th>
-                            <td mat-cell *matCellDef="let element"> {{element.category}} </td>
-                        </ng-container>
-    
-                        <!-- Symbol Column -->
-                        <ng-container matColumnDef="unity">
-                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Unidades </th>
-                            <td mat-cell *matCellDef="let element"> {{element.unity}} </td>
-                        </ng-container>
-    
-                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                    </table>
-    
-                    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-                </div>
-            </div>
+<div class="card  responsive-table">
+    <div class="card-body ">
+        <mat-form-field class="w-100">
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro">
+        </mat-form-field>
+        <div class="mat-elevation-z8 " >
+            <table mat-table [dataSource]="dataSource" matSort class="w-100 ">
+
+                <!-- ID Column -->
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+                    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                </ng-container>
+
+                    <!-- Thumb Column -->
+                <ng-container matColumnDef="image">
+                    <th mat-header-cell *matHeaderCellDef >  </th>
+                    <td mat-cell *matCellDef="let element"> {{element.thumb }} </td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>
+                    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                </ng-container>
+
+                <!-- category Column -->
+                <ng-container matColumnDef="category">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Categoria </th>
+                    <td mat-cell *matCellDef="let element"> {{element.category?.name}} </td>
+                </ng-container>
+
+                <!-- units Column -->
+                <ng-container matColumnDef="unity">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Unidades </th>
+                    <td mat-cell *matCellDef="let element" class="text-center"> {{element.units}} </td>
+                </ng-container>
+
+                <!-- action Column -->
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef > Ações </th>
+                    <td mat-cell *matCellDef="let element"> 
+                        <button class="btn btn-primary mx-1" [routerLink]="['/produtos/editar', element.id]">
+                            <i class="zmdi zmdi-edit"></i>
+                        </button>
+                        <button class="btn btn-danger mx-1" (click)="delete()">
+                            <i class="zmdi zmdi-close"></i>
+                        </button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+            <mat-paginator [pageSizeOptions]="[50, 100, 150, 200, 250]" showFirstLastButtons></mat-paginator>
         </div>
+    </div>
+</div>
     
-    </ion-card>

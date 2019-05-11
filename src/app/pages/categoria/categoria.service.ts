@@ -5,17 +5,17 @@ import { HelperService } from 'src/app/service/helper.service';
 import { retry } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class CategoriaService {
-  
-  constructor(
-    private http: HttpClient,
-    private helper: HelperService) { }
 
-  public get(): Observable<any> {
-    return this.http.get<any>(`${this.helper.url}/categories`).pipe(
-      retry(2)
-    );
-  }
+    constructor(
+        private http: HttpClient,
+        private helper: HelperService) { }
+
+    public get(): Observable<any> {
+        return this.http.get<any>(`${this.helper.url}/categories`).pipe(
+            retry(2)
+        );
+    }
 }

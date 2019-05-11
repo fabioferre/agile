@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CategoriaService } from '../../categoria/categoria.service';
+import { ProdutoService } from '../produto.service';
+import { HelperService } from 'src/app/service/helper.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-novo',
@@ -16,16 +20,24 @@ export class NovoComponent implements OnInit {
         sale_price: [''],
         units: [''],
         code: [''],
-        description: ['']
+        description: [''],
+        sale: [true],
+        stock: [true]
     });
-    categories: any[] = [
-        { id: 'steak-0', name: 'Steak' },
-        { id: 'pizza-1', name: 'Pizza' },
-        { id: 'tacos-2', name: 'Tacos' }
-    ];
-    constructor(private fb: FormBuilder) { }
+    public categories: any;
+    constructor(
+        private fb: FormBuilder,
+        private categoryService: CategoriaService,
+        private productService: ProdutoService,
+        private helper: HelperService,
+        private router: Router
+    ) { }
 
-    ngOnInit() { }
+    ngOnInit() { 
+        this.getCategories();
+        // this.form.controls.sale.setValue(true);
+        // this.form.controls.stock.setValue(true);
+    }
 
     alter(control): void {
         if(this.form.controls[control].enabled)
@@ -36,7 +48,21 @@ export class NovoComponent implements OnInit {
             this.form.controls[control].enable()
         }
     }
+
+    getCategories() {
+        return this.categoryService.get().subscribe(categories => {
+            this.categories = categories;
+            
+        })
+    }
     public submit(): void {
-        console.log(this.form);
+        this.helper.load();
+        if(this.form.valid) {
+            this.productService.store(this.form.value)
+            .subscribe((response)=> {
+                this.helper.message('produto cadastrado')
+                this.router.navigate(['/produtos']);
+            });
+        }
     }
 }

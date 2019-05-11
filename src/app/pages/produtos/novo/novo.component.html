@@ -76,7 +76,7 @@
                         <mat-slide-toggle 
                         class="mat-primary" 
                         (change)="alter('sale_price')" 
-                        checked="true">
+                        formControlName="sale" checked>
                             Disponível para venda?
                         </mat-slide-toggle>
                     </div>
@@ -94,7 +94,8 @@
                         <mat-slide-toggle 
                         class="mat-primary" 
                         (change)="alter('units')"
-                        checked="true">
+                        formControlName="stock" checked
+                        >
                             Disponível para estoque?
                         </mat-slide-toggle>
                     </div>
@@ -122,7 +123,6 @@
                    <button type="submit" class="btn btn-primary">
                        Salvar
                     </button>
-                    
                 </div>
             </div>
         </form>

@@ -18,6 +18,9 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { CategoriaService } from '../categoria/categoria.service';
+import { ProdutoService } from './produto.service';
+import { HelperService } from 'src/app/service/helper.service';
 const routes: Routes = [
     {
         path: '',
@@ -59,6 +62,7 @@ const routes: Routes = [
         NovoComponent,
         EditarComponent,
         ListagemComponent
-    ]
+    ],
+    providers: [CategoriaService, ProdutoService, HelperService]
 })
 export class ProdutosPageModule { }

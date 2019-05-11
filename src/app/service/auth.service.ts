@@ -34,7 +34,6 @@ export class AuthService implements CanActivate {
         return this.storage.get('user').then(val => {
             if (val) {
                 this.configSystem(val);
-                
                 return true;
             } else {
                 this.router.navigate(['/auth']);

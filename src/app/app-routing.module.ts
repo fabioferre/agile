@@ -8,6 +8,8 @@ const routes: Routes = [
   { path: 'pedidos', canActivate: [AuthService], loadChildren: './pages/pedidos/pedidos.module#PedidosPageModule' },
   { path: 'auth', loadChildren: './pages/auth/auth.module#AuthPageModule' },
   { path: 'produtos', loadChildren: './pages/produtos/produtos.module#ProdutosPageModule' },
+  { path: 'cagetoria', loadChildren: './pages/cagetoria/cagetoria.module#CagetoriaPageModule' },
+  { path: 'categoria', loadChildren: './pages/categoria/categoria.module#CategoriaPageModule' },
 
 ];
 

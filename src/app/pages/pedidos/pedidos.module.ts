@@ -7,10 +7,6 @@ import { IonicModule } from '@ionic/angular';
 
 import { PedidosPage } from './pedidos.page';
 
-import { MatTableModule } from '@angular/material/table';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatSortModule} from '@angular/material/sort';
-import {MatInputModule} from '@angular/material/input';
 const routes: Routes = [
   {
     path: '',
@@ -23,11 +19,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes),
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatInputModule
+    RouterModule.forChild(routes)
+  
   ],
   declarations: [PedidosPage]
 })

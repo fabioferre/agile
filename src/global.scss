@@ -15,10 +15,47 @@ $zmdi-font-path: '~material-design-iconic-font/dist/fonts';
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+
+
+
+
 
 .ng-invalid.ng-touched ~ .form-group__bar {
     &::after,
     &::before {
         background-color: var(--danger);
+    }
+}
+
+.btn-add.btn {
+    
+    
+    
+    
+    border-radius: 50%;
+    @include media-breakpoint-down(md) { 
+        width:40px;
+        height: 40px;
+        bottom: 4%;
+        right: 5%;
+        position: fixed;
+        z-index: 10;
+    }
+    @include media-breakpoint-up(md) { 
+        width: 45px;
+        height: 45px;
+        bottom: 5%;
+        right: 4%;
+        position: absolute;
+    }
+    @include media-breakpoint-up(xl) { 
+        width: 55px;
+        height: 55px;
+        bottom: 5%;
+        right: 4%;
+        position: absolute;
     }
 }

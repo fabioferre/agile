@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './service/auth.service';
 import { IonicStorageModule } from '@ionic/storage';
 
+
 @NgModule({
   declarations: [
     AppComponent, 
@@ -28,7 +29,8 @@ import { IonicStorageModule } from '@ionic/storage';
     BrowserAnimationsModule, 
     IonicStorageModule.forRoot({name: '_agile'}),
     IonicModule.forRoot(), 
-    AppRoutingModule
+    AppRoutingModule,
+    
   ],
   providers: [
     StatusBar,

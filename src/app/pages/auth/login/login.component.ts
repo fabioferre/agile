@@ -34,10 +34,9 @@ export class LoginComponent implements OnInit {
     public submit(): void {
         if(this.form.valid)
         {
-            this.auth.authenticate(this.form.value).subscribe(response => {
-               this.storage.set('user', response.user)
-               this.storage.set('system', response.system)
-               this.auth.configSystem(response);
+            this.auth.authenticate(this.form.value).subscribe(user => {
+               this.storage.set('user', user)
+               this.auth.configSystem(user);
                this.router.navigate(['/home']);
             });
         }

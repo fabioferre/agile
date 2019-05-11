@@ -11,7 +11,7 @@ import { HelperService } from './helper.service';
 export class AuthService implements CanActivate {
     public user: any;
     public system: any;
-
+    public store: any;
     constructor(
         private http: HttpClient,
         private router: Router,
@@ -26,14 +26,15 @@ export class AuthService implements CanActivate {
     }
 
     public logout(): void {
-        this.storage.remove('system');
-        this.router.navigate(['/login']);
+        this.storage.remove('user');
+        this.router.navigate(['/auth']);
     }
 
     canActivate() {
-        return this.storage.get('system').then(val => {
+        return this.storage.get('user').then(val => {
             if (val) {
-                this.storage.get('user').then(user =>  this.configSystem({system: val, user: user}));
+                this.configSystem(val);
+                
                 return true;
             } else {
                 this.router.navigate(['/auth']);
@@ -42,9 +43,8 @@ export class AuthService implements CanActivate {
         });
     }
 
-    public configSystem(response): void {
-        this.system = response.system;
-        this.user = response.user;
+    public configSystem(user): void {
+        this.user = user;
     }
 
 

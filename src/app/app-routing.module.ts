@@ -13,7 +13,8 @@ const routes: Routes = [
   { path: 'motoboy', loadChildren: './pages/motoboy/motoboy.module#MotoboyPageModule' },
   { path: 'funcionarios', loadChildren: './pages/funcionarios/funcionarios.module#FuncionariosPageModule' },
   { path: 'lojas', loadChildren: './pages/lojas/lojas.module#LojasPageModule' },
-  { path: 'clientes', loadChildren: './pages/clientes/clientes.module#ClientesPageModule' },  { path: 'bairros', loadChildren: './pages/bairros/bairros.module#BairrosPageModule' }
+  { path: 'clientes', loadChildren: './pages/clientes/clientes.module#ClientesPageModule' },  { path: 'bairros', loadChildren: './pages/bairros/bairros.module#BairrosPageModule' },
+  { path: 'sistema', loadChildren: './pages/sistema/sistema.module#SistemaPageModule' }
 
 ];
 

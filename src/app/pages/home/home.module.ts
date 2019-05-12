@@ -39,7 +39,11 @@ const routes: Routes = [
     MatSelectModule,
     MatFormFieldModule
   ],
+<<<<<<< HEAD
   declarations: [HomePage, PainelPedidoComponent, ListaProdutosComponent],
   providers: [ProdutoService]
+=======
+  declarations: [HomePage, PainelPedidoComponent, ListaProdutosComponent]
+>>>>>>> system
 })
 export class HomePageModule {}

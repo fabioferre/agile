@@ -1,3 +1,4 @@
+import { LocationStrategy, PathLocationStrategy, APP_BASE_HREF} from '@angular/common';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -38,7 +39,7 @@ import { InterceptorService } from './service/interceptor.service';
     SplashScreen,
     AuthService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
   ],
   bootstrap: [AppComponent]
 })

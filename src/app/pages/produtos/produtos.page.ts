@@ -15,7 +15,6 @@ export class ProdutosPage implements OnInit {
                 this.productService.products = products;
             })
         }
-        console.log(this.productService.products)
     }
 
     

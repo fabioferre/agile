@@ -21,6 +21,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { CategoriaService } from '../categoria/categoria.service';
 import { ProdutoService } from './produto.service';
 import { HelperService } from 'src/app/service/helper.service';
+
 const routes: Routes = [
     {
         path: '',
@@ -32,10 +33,10 @@ const routes: Routes = [
             },
             {
                 path: 'novo',
-                component: NovoComponent
+                component: NovoComponent,
             },
             {
-                path: 'editar/:id',
+                path: 'editar',
                 component: EditarComponent
             },
         ]

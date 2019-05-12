@@ -14,17 +14,7 @@ import { PedidosService } from './pedidos.service';
 const routes: Routes = [
   {
     path: '',
-    component: PedidosPage,
-    children:[
-      {
-        path: '',
-        component: ListarPedidosComponent
-      },
-      {
-        path: 'novo',
-        component:  NovoPedidosComponent
-      }
-    ]
+    component: PedidosPage
   }
 ];
 
@@ -34,7 +24,6 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes)
-  
   ],
   declarations: [PedidosPage, ListarPedidosComponent, NovoPedidosComponent],
   providers:[PedidosService]

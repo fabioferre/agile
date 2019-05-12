@@ -10,11 +10,12 @@ export class ProdutosPage implements OnInit {
     constructor(public productService: ProdutoService) { }
 
     ngOnInit(  ) {
-        if(!this.productService.products) {
-            this.productService.get().subscribe(products => {
-                this.productService.products = products;
-            })
-        }
+        console.log(this.productService)
+        // if(!this.productService.products) {
+        //     this.productService.get().subscribe(products => {
+        //         this.productService.products = products;
+        //     })
+        // }
     }
 
     

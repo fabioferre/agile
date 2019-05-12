@@ -5,7 +5,7 @@
 <ion-card>
 
     <div class="card">
-        <form [formGroup]="form" (submit)="submit()">
+        <form [formGroup]="form" (submit)="submit()" *ngIf="product">
             <div class="card-body">
                 <div class="row ">
                     <div class="col-lg-6">

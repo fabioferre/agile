@@ -39,6 +39,8 @@ export class EditarComponent implements OnInit {
         if( !this.product) {
             this.router.navigate(['/produtos'])
         } 
+
+        console.log(this.product)
     }
 
     alter(control): void {

@@ -39,6 +39,6 @@ const routes: Routes = [
     MatSelectModule,
     MatFormFieldModule
   ],
-  declarations: [HomePage, PainelPedidoComponent, ListaProdutosComponent, ProdutoService]
+  declarations: [HomePage, PainelPedidoComponent, ListaProdutosComponent]
 })
 export class HomePageModule {}

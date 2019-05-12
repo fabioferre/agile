@@ -1,24 +1,50 @@
-.painel-item {
-    width: 60px;
-    height: 60px;
-    margin: 3px 5px;
-    padding-top: 5px;
-    display: inline-block;
-    border: 1px solid var(--white);
-    text-align: center;
-    border-radius: 50%;
-    span {
-        display: block;
-        color: var(--white);
-    }
 
-    i {
-        display: inline;
-        font-size: 16px;
-        color: var(--white);
-    }
-}
 
 .painel-header {
+    padding: 20px 0;
+    .painel-title {
+        text-transform: uppercase;
+        color: var(--white);
+        &::after {
+            content: '';
+            display: block;
+            margin: 5px auto;
+            width: 40%;
+            height: 1px;
+            background-color: var(--grey);
+        }
+    }
+    .painel-item {
+        width: 60px;
+        height: 60px;
+        margin: 3px 5px;
+        padding-top: 5px;
+        display: inline-block;
+        border: 1px solid var(--white);
+        text-align: center;
+        border-radius: 50%;
+        transition: all 1s;
+        span {
+            display: block;
+            color: var(--white);
+        }
+    
+        i {
+            display: inline;
+            font-size: 16px;
+            color: var(--white);
+        }
 
+        &:hover, &.active {
+            transform: scale(1.1);
+            box-shadow: 0px 2px 7px 1px rgba(0,0,0,0.75);
+            background-color: var(--white);
+            span, i {
+                color: var(--dark);
+            }
+            transition: all 300ms;
+            cursor: pointer;
+        }
+
+    }
 }

@@ -1,7 +1,7 @@
 import { LojasService } from './lojas.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { EditarLojaComponent  } from './editar-loja/editar-loja.component'
 import { ListarLojasComponent } from './listar-lojas/listar-lojas.component'
@@ -10,6 +10,7 @@ import { NovaLojaComponent } from './nova-loja/nova-loja.component'
 import { IonicModule } from '@ionic/angular';
 
 import { LojasPage } from './lojas.page';
+import { MatInputModule, MatSlideToggleModule, MatSelectModule, MatFormFieldModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 
 const routes: Routes = [
   {
@@ -37,6 +38,14 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatSlideToggleModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
     RouterModule.forChild(routes)
   ],
   declarations: [LojasPage, EditarLojaComponent, ListarLojasComponent, NovaLojaComponent],

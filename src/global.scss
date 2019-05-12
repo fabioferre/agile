@@ -12,6 +12,15 @@
 
 $zmdi-font-path: '~material-design-iconic-font/dist/fonts';
 @import '~material-design-iconic-font/scss/material-design-iconic-font';
+
+$fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~@fortawesome/fontawesome-free/scss/brands';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+
+
+
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 

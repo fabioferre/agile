@@ -19,7 +19,6 @@ export class ListagemComponent implements OnInit {
     ngOnInit() {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-        console.log(this.productService.products)
     }
 
     applyFilter(filterValue: string) {

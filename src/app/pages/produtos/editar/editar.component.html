@@ -10,7 +10,7 @@
                 <div class="row ">
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <label>Nome</label>
+                            <label>Nome</label> <i class="fas fa-user"></i>
                             <input type="text" class="form-control" placeholder="pizza, arroz, frango..."
                                 formControlName="name" [ngClass]="{'form-control--active': form.value.name !== ''}">
                             <i class="form-group__bar"></i>
@@ -25,14 +25,14 @@
                         </div>
                     </div>
                     <div class="col-lg-4 pt-3">
-                        <mat-form-field class="w-100">
+                        <!-- <mat-form-field class="w-100">
                             <mat-label>Categoria</mat-label>
                             <mat-select formControlName="category_id">
                                 <mat-option *ngFor="let category of categories" [value]="category.id">
                                     {{ category.name }}
                                 </mat-option>
                             </mat-select>
-                        </mat-form-field>
+                        </mat-form-field> -->
                     </div>
 
 

@@ -12,10 +12,9 @@ import { Router } from '@angular/router';
 })
 export class EditarComponent implements OnInit {
     private product = this.productService.productToEdit;
-
-    public form: FormGroup = this.fb.group({
+    public form: FormGroup = this.form = this.fb.group({
         name: [ this.product.name, [Validators.required, Validators.minLength(2)]],
-        number: [ this.product.name.number],
+        number: [ this.product.number],
         category_id: [ this.product.category.id],
         weight: [ this.product.weight],
         cost_price: [ this.product.cost_price],
@@ -26,6 +25,7 @@ export class EditarComponent implements OnInit {
         sale: [ this.product.sale],
         stock: [ this.product.stock]
     });
+
     public categories: any;
     constructor(
         private fb: FormBuilder,
@@ -35,6 +35,21 @@ export class EditarComponent implements OnInit {
         private router: Router
     ) { }
 
-    ngOnInit() { }
+    ngOnInit() { 
+        if( !this.product) {
+            this.router.navigate(['/produtos'])
+        } 
+    }
+
+    alter(control): void {
+        if(this.form.controls[control].enabled)
+        {
+            this.form.controls[control].disable()
+            this.form.controls[control].setValue('')
+        } else {
+            this.form.controls[control].enable()
+        }
+    }
+
 
 }

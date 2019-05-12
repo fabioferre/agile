@@ -13625,6 +13625,7 @@ textarea {
 }
 
 [data-ma-theme=red] .header,
+[data-ma-theme=red] .painel-header,
 [data-ma-theme=red] .login__block__btn,
 [data-ma-theme=red] .login__block__header,
 [data-ma-theme=red] .top-menu,
@@ -13642,7 +13643,7 @@ textarea {
 [data-ma-theme=purple] .login__block__btn,
 [data-ma-theme=purple] .login__block__header,
 [data-ma-theme=purple] .top-menu,
-[data-ma-theme=purple] .login__footer {
+[data-ma-theme=purple] .login__footer,[data-ma-theme=purple] .painel-header {
     background-color: #d066e2
 }
 
@@ -13656,7 +13657,7 @@ textarea {
 [data-ma-theme=indigo] .login__block__btn,
 [data-ma-theme=indigo] .login__block__header,
 [data-ma-theme=indigo] .top-menu, 
-[data-ma-theme=indigo] .login__footer {
+[data-ma-theme=indigo] .login__footer,[data-ma-theme=indigo] .painel-header {
     background-color: #3F51B5
 }
 
@@ -13670,7 +13671,7 @@ textarea {
 [data-ma-theme=blue] .login__block__btn,
 [data-ma-theme=blue] .login__block__header,
 [data-ma-theme=blue] .top-menu, 
-[data-ma-theme=blue] .login__footer {
+[data-ma-theme=blue] .login__footer, [data-ma-theme=blue] .painel-header {
     background-color: #2196F3
 }
 
@@ -13684,7 +13685,7 @@ textarea {
 [data-ma-theme=cyan] .login__block__btn,
 [data-ma-theme=cyan] .login__block__header,
 [data-ma-theme=cyan] .top-menu,
-[data-ma-theme=cyan] .login__footer {
+[data-ma-theme=cyan] .login__footer, [data-ma-theme=cyan]  .painel-header {
     background-color: #00BCD4
 }
 
@@ -13697,7 +13698,9 @@ textarea {
 [data-ma-theme=teal] .header,
 [data-ma-theme=teal] .login__block__btn,
 [data-ma-theme=teal] .login__block__header,
-[data-ma-theme=teal] .top-menu, [data-ma-theme=teal] .login__footer  {
+[data-ma-theme=teal] .top-menu, 
+[data-ma-theme=teal] .login__footer,
+ [data-ma-theme=teal] .painel-header  {
     background-color: #39bbb0
 }
 
@@ -13710,7 +13713,9 @@ textarea {
 [data-ma-theme=green] .header,
 [data-ma-theme=green] .login__block__btn,
 [data-ma-theme=green] .login__block__header,
-[data-ma-theme=green] .top-menu,[data-ma-theme=green] .login__footer{
+[data-ma-theme=green] .top-menu,
+[data-ma-theme=green] .login__footer,
+[data-ma-theme=green] .painel-header{
     background-color: #32c787
 }
 
@@ -13723,7 +13728,9 @@ textarea {
 [data-ma-theme=brown] .header,
 [data-ma-theme=brown] .login__block__btn,
 [data-ma-theme=brown] .login__block__header,
-[data-ma-theme=brown] .top-menu,[data-ma-theme=brown] .login__footer {
+[data-ma-theme=brown] .top-menu,
+[data-ma-theme=brown] .login__footer, 
+[data-ma-theme=brown] .painel-header {
     background-color: #795548
 }
 
@@ -13736,7 +13743,9 @@ textarea {
 [data-ma-theme=orange] .header,
 [data-ma-theme=orange] .login__block__btn,
 [data-ma-theme=orange] .login__block__header,
-[data-ma-theme=orange] .top-menu,[data-ma-theme=orange] .login__footer{
+[data-ma-theme=orange] .top-menu,
+[data-ma-theme=orange] .login__footer, 
+[data-ma-theme=orange] .painel-header{
     background-color: #FF9800
 }
 
@@ -13750,7 +13759,8 @@ textarea {
 [data-ma-theme=blue-grey] .login__block__btn,
 [data-ma-theme=blue-grey] .login__block__header,
 [data-ma-theme=blue-grey] .top-menu,
-[data-ma-theme=blue-grey] .login__footer {
+[data-ma-theme=blue-grey] .login__footer, 
+[data-ma-theme=blue-grey] .painel-header {
     background-color: #607D8B
 }
 

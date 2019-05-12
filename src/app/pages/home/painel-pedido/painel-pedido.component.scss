@@ -1,0 +1,24 @@
+.painel-item {
+    width: 60px;
+    height: 60px;
+    margin: 3px 5px;
+    padding-top: 5px;
+    display: inline-block;
+    border: 1px solid var(--white);
+    text-align: center;
+    border-radius: 50%;
+    span {
+        display: block;
+        color: var(--white);
+    }
+
+    i {
+        display: inline;
+        font-size: 16px;
+        color: var(--white);
+    }
+}
+
+.painel-header {
+
+}

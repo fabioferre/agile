@@ -1,11 +1,12 @@
 
 
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="productService.products">
     <div class="row">
-        <div class="col-lg-6 border">
-            <app-lista-produtos></app-lista-produtos>
+        <div class="col-lg-7 bg-white" >
+            <h4 class="text-center pt-4">Produtos</h4>
+            <app-lista-produtos [products]="productService.products"></app-lista-produtos>
         </div>
-        <div class="col-lg-4 offset-1 border ">
+        <div class="col-lg-5  bg-white">
             <app-painel-pedido></app-painel-pedido>
         </div>
     </div>

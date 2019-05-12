@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { ProdutoService } from '../../produtos/produto.service';
 import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { Router } from '@angular/router';
@@ -8,15 +8,21 @@ import { Router } from '@angular/router';
     styleUrls: ['./lista-produtos.component.scss'],
 })
 export class ListaProdutosComponent implements OnInit {
-    displayedColumns: string[] = ['id', 'image', 'name', 'category', 'unity', 'action'];
-    dataSource = new MatTableDataSource<any>(this.productService.products);
+    @Input() public products;
+    displayedColumns: string[] = ['id', 'image', 'name', 'unity', 'sale_price', 'action'];
+    dataSource: any;
+    
 
-    @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
-    constructor(private productService: ProdutoService) { }
+    constructor(private productService: ProdutoService, private router: Router) { }
 
     ngOnInit() {
+        this.dataSource = new MatTableDataSource<any>(this.products);
+        this.dataSource.sort = this.sort;
+    }
 
+    applyFilter(filterValue: string) {
+        this.dataSource.filter = filterValue.trim().toLowerCase();
     }
 
 }

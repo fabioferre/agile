@@ -1,6 +1,8 @@
 
-<!-- <app-novo></app-novo> -->
-<ng-container *ngIf="productService.products; then thenTemplate"></ng-container>
-<ng-template #thenTemplate>
-    <router-outlet ></router-outlet>
-</ng-template>
+<div class="container-fluid" *ngIf="productService.products">
+    <div class="row">
+        <div class="col">
+            <router-outlet ></router-outlet>
+        </div>
+    </div>
+</div>

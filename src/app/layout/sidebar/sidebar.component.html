@@ -44,13 +44,12 @@
                     </li>
                 </ul>
             </li>
-
             <li class="navigation__sub">
                 <a href="#"><i class="zmdi zmdi-archive"></i>Produtos</a>
                 <ul>
-                    <li [routerLink]="['/produtos']" routesrLinkActive="navigation__active">
+                    <li [routerLink]="['/produtos']" routerLinkActive="navigation__active">
                         <a href="javascript:void(0)" >
-                            Lista
+                            lista
                         </a>
                     </li>
                     <li [routerLink]="['/produtos/novo']" routesrLinkActive="navigation__active">
@@ -58,13 +57,14 @@
                             Novo
                         </a>
                     </li>
-                    <li [routerLink]="['/categorias']" routesrLinkActive="navigation__active">
+                    <li [routerLink]="['/categorias']" routerLinkActive="navigation__active">
                         <a href="javascript:void(0)" >
                             categorias
                         </a>
                     </li>
                 </ul>
             </li>
+
 
             <li class="navigation__sub">
                 <a href="#"><i class="fas fa-users"></i>Clientes</a>

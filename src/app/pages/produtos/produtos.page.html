@@ -1,2 +1,6 @@
-<router-outlet></router-outlet>
+
 <!-- <app-novo></app-novo> -->
+<ng-container *ngIf="productService.products; then thenTemplate"></ng-container>
+<ng-template #thenTemplate>
+    <router-outlet></router-outlet>
+</ng-template>

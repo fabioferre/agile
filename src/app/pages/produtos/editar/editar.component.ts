@@ -11,18 +11,20 @@ import { Router } from '@angular/router';
     styleUrls: ['./editar.component.scss'],
 })
 export class EditarComponent implements OnInit {
+    private product = this.productService.productToEdit;
+
     public form: FormGroup = this.fb.group({
-        name: ['', [Validators.required, Validators.minLength(2)]],
-        number: [''],
-        category_id: [''],
-        weight: [''],
-        cost_price: [''],
-        sale_price: [''],
-        units: [''],
-        code: [''],
-        description: [''],
-        sale: [true],
-        stock: [true]
+        name: [ this.product.name, [Validators.required, Validators.minLength(2)]],
+        number: [ this.product.name.number],
+        category_id: [ this.product.category.id],
+        weight: [ this.product.weight],
+        cost_price: [ this.product.cost_price],
+        sale_price: [ this.product.sale_price],
+        units: [ this.product.units],
+        code: [ this.product.code],
+        description: [ this.product.description],
+        sale: [ this.product.sale],
+        stock: [ this.product.stock]
     });
     public categories: any;
     constructor(

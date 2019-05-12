@@ -9,6 +9,8 @@ import { Observable } from 'rxjs';
 })
 export class ProdutoService {
     public products;
+    public productToEdit;
+    public categories;
     constructor(private http: HttpClient, private helper: HelperService) { }
 
     public get(): Observable<any> {
@@ -18,6 +20,6 @@ export class ProdutoService {
     }
 
     public store(product):  Observable<any> {
-        return this.http.post<any>(`${this.helper.url}/products/store`, product);
+        return this.http.post<any>(`${this.helper.url}/products`, product);
     }
 } 

@@ -63,6 +63,6 @@ const routes: Routes = [
         EditarComponent,
         ListagemComponent
     ],
-    providers: [CategoriaService, ProdutoService, HelperService]
+    providers: [ProdutoService, HelperService]
 })
 export class ProdutosPageModule { }

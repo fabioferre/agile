@@ -1,23 +1,25 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { ProdutoService } from '../produto.service';
+import { Router } from '@angular/router';
 @Component({
     selector: 'app-listagem',
     templateUrl: './listagem.component.html',
     styleUrls: ['./listagem.component.scss'],
 })
 export class ListagemComponent implements OnInit {
- 
     displayedColumns: string[] = ['id', 'image', 'name', 'category', 'unity', 'action'];
-    dataSource:MatTableDataSource<any>;
+    dataSource = new MatTableDataSource<any>(this.productService.products);
+
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
 
-    constructor(private productService: ProdutoService) { }
+    constructor(private productService: ProdutoService, private router: Router) { }
 
     ngOnInit() {
-        
-        this.getProducts();
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        console.log(this.productService.products)
     }
 
     applyFilter(filterValue: string) {
@@ -28,26 +30,13 @@ export class ListagemComponent implements OnInit {
         }
     }
 
-    private getProducts(): void {
-        if(!this.productService.products)
-        {
-            this.productService.get().subscribe(products => {
-                this.buildTable(products);
-            })
-        } else {
-            this.buildTable(this.productService.products);
-        }
-    }
-
-
-    private buildTable(products): void {
-        this.dataSource = new MatTableDataSource<any>(products)
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-        this.productService.products = products;
-    }
     public delete(): void {
 
+    }
+
+    public edit(product): void {
+        this.productService.productToEdit = product;
+        this.router.navigate(['/produtos/editar', product.id]);
     }
 
     get produtc() {

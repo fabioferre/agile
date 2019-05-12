@@ -18,7 +18,7 @@ export class NovoComponent implements OnInit {
         weight: [''],
         cost_price: [''],
         sale_price: [''],
-        units: [''],
+        units: [1],
         code: [''],
         description: [''],
         sale: [true],
@@ -56,13 +56,17 @@ export class NovoComponent implements OnInit {
         })
     }
     public submit(): void {
-        this.helper.load();
+        
         if(this.form.valid) {
+            this.helper.load();
             this.productService.store(this.form.value)
-            .subscribe((response)=> {
+            .subscribe((product)=> {
                 this.helper.message('produto cadastrado')
+                this.productService.products.push(product)
                 this.router.navigate(['/produtos']);
-            });
+            }, error => this.helper.message(error) );
+        } else {
+            
         }
     }
 }

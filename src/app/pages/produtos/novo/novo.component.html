@@ -94,8 +94,7 @@
                         <mat-slide-toggle 
                         class="mat-primary" 
                         (change)="alter('units')"
-                        formControlName="stock" checked
-                        >
+                        formControlName="stock" checked>
                             Disponível para estoque?
                         </mat-slide-toggle>
                     </div>
@@ -120,7 +119,7 @@
                 <div class="clearfix"></div>
 
                 <div class="mt-5 text-center">
-                   <button type="submit" class="btn btn-primary">
+                   <button type="submit" class="btn btn-primary" [disabled]="!form.valid">
                        Salvar
                     </button>
                 </div>

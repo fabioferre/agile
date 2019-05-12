@@ -20,34 +20,128 @@
         <ul class="navigation">
             <li [routerLink]="['/home']" routerLinkActive="navigation__active">
                 <a href="javascript:void(0)" >
-                    <i class="zmdi zmdi-home"></i> Home
+                    <i class="fas fa-cash-register"></i> Caixa
                 </a>
             </li>
-            <li [routerLink]="['/pedidos']" routerLinkActive="navigation__active">
-                <a href="javascript:void(0)" >
-                    <i class="zmdi zmdi-format-list-bulleted"></i> Pedidos
-                </a>
+           
+            <li class="navigation__sub">
+                <a href="#"><i class="fas fa-list-ol"></i>Pedidos</a>
+                <ul>
+                    <li [routerLink]="['/pedidos']" routerLinkActive="navigation__active">
+                        <a href="javascript:void(0)" >
+                            lista
+                        </a>
+                    </li>
+                    <li [routerLink]="['/pedidos/novo']" routesrLinkActive="navigation__active">
+                        <a href="javascript:void(0)" >
+                            Novo
+                        </a>
+                    </li>
+                    <li [routerLink]="['/mesas']" routerLinkActive="navigation__active">
+                        <a href="javascript:void(0)" >
+                           Mesas
+                        </a>
+                    </li>
+                </ul>
             </li>
-            <li [routerLink]="['/produtos']" routerLinkActive="navigation__active">
-                <a href="javascript:void(0)" >
-                    <i class="zmdi zmdi-archive"></i>Produtos
-                </a>
+
+            <li class="navigation__sub">
+                <a href="#"><i class="zmdi zmdi-archive"></i>Produtos</a>
+                <ul>
+                    <li [routerLink]="['/produtos']" routesrLinkActive="navigation__active">
+                        <a href="javascript:void(0)" >
+                            Lista
+                        </a>
+                    </li>
+                    <li [routerLink]="['/produtos/novo']" routesrLinkActive="navigation__active">
+                        <a href="javascript:void(0)" >
+                            Novo
+                        </a>
+                    </li>
+                    <li [routerLink]="['/categorias']" routesrLinkActive="navigation__active">
+                        <a href="javascript:void(0)" >
+                            categorias
+                        </a>
+                    </li>
+                </ul>
             </li>
-            <li [routerLink]="['/mesas']" routerLinkActive="navigation__active">
-                <a href="javascript:void(0)" >
-                    <i class="zmdi zmdi-local-library"></i>Mesas
-                </a>
+
+            <li class="navigation__sub">
+                <a href="#"><i class="fas fa-users"></i>Clientes</a>
+                <ul>
+                    <li [routerLink]="['/clientes']" routerLinkActive="navigation__active">
+                        <a href="javascript:void(0)" >
+                            lista
+                        </a>
+                    </li>
+                    <li [routerLink]="['/produtos/novo']" routesrLinkActive="navigation__active">
+                        <a href="javascript:void(0)" >
+                            Novo
+                        </a>
+                    </li>
+                </ul>
             </li>
+
+            <li class="navigation__sub">
+                <a href="#"><i class="fas fa-concierge-bell"></i>Mesas</a>
+                <ul>
+                    <li [routerLink]="['/mesas']" routerLinkActive="navigation__active">
+                        <a href="javascript:void(0)" >
+                            lista
+                        </a>
+                    </li>
+                    <li [routerLink]="['/produtos/novo']" routesrLinkActive="navigation__active">
+                        <a href="javascript:void(0)" >
+                            Novo
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+           
             <li [routerLink]="['/motoboy']" routerLinkActive="navigation__active">
                 <a href="javascript:void(0)" >
-                    <i class="zmdi zmdi-archive"></i>Motoboy
+                    <i class="fas fa-motorcycle"></i>Motoboy
                 </a>
             </li>
-            <li [routerLink]="['/clientes']" routerLinkActive="navigation__active">
-                <a href="javascript:void(0)" >
-                    <i class="zmdi zmdi-accounts-list-alt"></i>clientes
-                </a>
+
+            <li class="navigation__sub">
+                <a href="#"><i class="fas fa-cog"></i>Loja</a>
+                <ul>
+                    <li [routerLink]="['/mesas']" routerLinkActive="navigation__active">
+                        <a href="javascript:void(0)" >
+                            lista
+                        </a>
+                    </li>
+                    <li [routerLink]="['/produtos/novo']" routesrLinkActive="navigation__active">
+                        <a href="javascript:void(0)" >
+                            nova
+                        </a>
+                    </li>
+                </ul>
             </li>
+
+            <li class="navigation__sub">
+                <a href="#"><i class="fas fa-cog"></i>Configurações</a>
+                <ul>
+                    <li [routerLink]="['/mesas']" routerLinkActive="navigation__active">
+                        <a href="javascript:void(0)" >
+                            impressora
+                        </a>
+                    </li>
+                    <li [routerLink]="['/produtos/novo']" routesrLinkActive="navigation__active">
+                        <a href="javascript:void(0)" >
+                            sistema
+                        </a>
+                    </li>
+                    <li [routerLink]="['/produtos/novo']" routesrLinkActive="navigation__active">
+                        <a href="javascript:void(0)" >
+                            tema
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            
 
             
 

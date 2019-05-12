@@ -1,4 +1,3 @@
-import { LocationStrategy, PathLocationStrategy, APP_BASE_HREF} from '@angular/common';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -16,6 +15,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthService } from './service/auth.service';
 import { IonicStorageModule } from '@ionic/storage';
 import { InterceptorService } from './service/interceptor.service';
+import { HelperService } from './service/helper.service';
 
 
 @NgModule({
@@ -38,6 +38,7 @@ import { InterceptorService } from './service/interceptor.service';
     StatusBar,
     SplashScreen,
     AuthService,
+    HelperService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
   ],

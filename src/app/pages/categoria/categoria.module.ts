@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
-import { NovoCategoriaComponent } from './novo-categoria/novo-categoria.component'
 import { EditarCategoriaComponent } from './editar-categoria/editar-categoria.component'
 import { ListarCategoriaComponent } from './listar-categoria/listar-categoria.component'
 import { IonicModule } from '@ionic/angular';
@@ -20,10 +19,6 @@ const routes: Routes = [
         component: ListarCategoriaComponent
       },
       {
-        path: 'novo',
-        component:NovoCategoriaComponent
-      },
-      {
         path: 'editar',
         component:  EditarCategoriaComponent
       }
@@ -38,7 +33,7 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [CategoriaPage, NovoCategoriaComponent, EditarCategoriaComponent, ListarCategoriaComponent ],
+  declarations: [CategoriaPage, EditarCategoriaComponent, ListarCategoriaComponent ],
   providers:[CategoriaService]
 })
 export class CategoriaPageModule {}

@@ -1,7 +1,7 @@
 import { FuncionariosService } from './funcionarios.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { EditarFuncionarioComponent } from './editar-funcionario/editar-funcionario.component';
 import { ListarFuncionarioComponent } from './listar-funcionario/listar-funcionario.component';
@@ -9,6 +9,7 @@ import { NovoFuncionarioComponent } from './novo-funcionario/novo-funcionario.co
 import { IonicModule } from '@ionic/angular';
 
 import { FuncionariosPage } from './funcionarios.page';
+import { MatInputModule, MatSlideToggleModule, MatSelectModule, MatFormFieldModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 
 const routes: Routes = [
   {
@@ -36,6 +37,14 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatSlideToggleModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
     RouterModule.forChild(routes)
   ],
   declarations: [FuncionariosPage, ListarFuncionarioComponent, NovoFuncionarioComponent, EditarFuncionarioComponent],

@@ -25,4 +25,8 @@ export class ListaProdutosComponent implements OnInit {
         this.dataSource.filter = filterValue.trim().toLowerCase();
     }
 
+    test(element: any, event) {
+        console.log(event)
+    }
+
 }

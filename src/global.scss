@@ -103,3 +103,12 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
     }
 }
 
+
+
+.table-hover.link-table tbody tr:hover {
+    cursor: pointer;
+}
+
+.link-element:hover {
+    cursor: pointer;
+}

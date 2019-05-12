@@ -1,7 +1,7 @@
 
 <div class="painel  border">
     <div class="painel-header  text-center">
-        <h4 class="painel-title">Tipo de venda</h4>
+        <h4 class="painel-title">venda</h4>
         <div class="painel-item active">
             <i class="fas fa-cash-register"></i> 
             <span>Caixa</span>
@@ -21,7 +21,49 @@
     </div>
 
     <div class="painel-body">
-        table
+        <caption>Pedidos</caption>
+        <table class="order-list text-center">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>QTD</th>
+                    <th>Preço</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>Pizza</td>
+                    <td>
+                        1
+                        <a href="javascript:void(0)" class="float-left btn-order text-danger">
+                            <i class="fas fa-minus-circle"></i>
+                        </a>
+                       
+                        <a href="javascript:void(0)" class="float-right btn-order text-primary">
+                            <i class="fas fa-plus-circle"></i>
+                        </a>
+                    </td>
+                    <td>87$</td>
+                    <td>
+                        <a href="javascript:void(0)" class="d-block text-center text-dark">
+                            <i class="fas fa-times"></i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="row text-center text-theme border-to">
+            <div class="col-lg-6 ">
+                Subtotal
+            </div>
+            <div class="col-lg-6">
+                R$ 555
+            </div>
+        </div>
+
+       
     </div>
     
 </div>

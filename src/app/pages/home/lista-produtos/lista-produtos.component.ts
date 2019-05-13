@@ -1,3 +1,4 @@
+import { HomeService } from './../home.service';
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { ProdutoService } from '../../produtos/produto.service';
 import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
@@ -11,10 +12,14 @@ import { Router } from '@angular/router';
 export class ListaProdutosComponent implements OnInit {
     displayedColumns: string[] = ['select','id', 'image', 'name', 'unity', 'sale_price'];
     dataSource = new MatTableDataSource<any>(this.productService.products);
-    selection  = new SelectionModel<any>(true, []);
+    selection  = this.homeService.selection;
 
     @ViewChild(MatSort) sort: MatSort;
-    constructor(private productService: ProdutoService, private router: Router) { }
+    constructor(
+        private productService: ProdutoService, 
+        public homeService: HomeService,
+        private router: Router
+    ) { }
 
     ngOnInit() {
         this.dataSource.sort = this.sort;
@@ -24,6 +29,7 @@ export class ListaProdutosComponent implements OnInit {
     isAllSelected() {
         const numSelected = this.selection.selected.length;
         const numRows = this.dataSource.data.length;
+     
         return numSelected === numRows;
     }
 
@@ -47,9 +53,12 @@ export class ListaProdutosComponent implements OnInit {
     }
 
 
-    putOrder(order): void {
-        console.log(order);
-        
+    putOrder(product): void {
+        if(this.selection.isSelected(product)) {
+            this.homeService.removeProductSelected(product)
+        } else {
+            this.homeService.productSelected.push(product)
+        }
     }
    
 

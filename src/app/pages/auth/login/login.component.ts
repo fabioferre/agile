@@ -39,9 +39,11 @@ export class LoginComponent implements OnInit {
         {
             this.helper.load();
             this.auth.authenticate(this.form.value).subscribe(user => {
+                console.log(user)
                this.helper.message("Seja bem vindo !")
                this.storage.set('user', user)
                this.auth.configSystem(user);
+               
                this.router.navigate(['/home']);
             },
             error => {

@@ -89,8 +89,8 @@
 
         <div class="row ">
             <div class="col-lg-12 ">
-                <div id="order-information" class="">
-                    <div class="wallet negative"  *ngIf="client">
+                <div id="order-information" *ngIf="client_id || table_id">
+                    <div class="wallet negative"  *ngIf="client_id">
                         R$ 545 <i class="fas fa-wallet"></i>
                     </div>
                     <div class="client-order"  *ngIf="client_id">

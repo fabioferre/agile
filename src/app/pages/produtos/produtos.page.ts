@@ -1,3 +1,4 @@
+import { HelperService } from './../../service/helper.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProdutoService } from './produto.service';
 @Component({
@@ -7,12 +8,16 @@ import { ProdutoService } from './produto.service';
 })
 export class ProdutosPage implements OnInit {
     
-    constructor(public productService: ProdutoService) { }
+    constructor(public productService: ProdutoService,
+                public helper : HelperService) { }
 
     ngOnInit(  ) {
+   
         if(!this.productService.products) {
+            
             this.productService.get().subscribe(products => {
                 this.productService.products = products;
+               
             })
         }
     }

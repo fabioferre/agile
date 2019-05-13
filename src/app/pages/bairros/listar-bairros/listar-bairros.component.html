@@ -2,8 +2,8 @@
 
 <header class="content__title">
   <h1>Listagem de bairros</h1>
-  <button type="button" class="btn btn-success btn-add" [routerLink]="['novo']" >
-      <ion-icon name="add"></ion-icon>
+  <button type="button" class="btn bg-theme btn-add text-white" [routerLink]="['novo']" >
+    <i class="fas fa-plus fa-2x" ></i>
   </button>
   
 </header>
@@ -16,38 +16,38 @@
       <div class="mat-elevation-z8 " >
           <table mat-table [dataSource]="dataSource" matSort class="w-100 ">
 
-              <!-- item1 Column -->
-              <ng-container matColumnDef="item">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
-                  <td mat-cell *matCellDef="let element"> {{element.item1}} </td>
+              <!-- name Column -->
+              <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>
+                  <td mat-cell *matCellDef="let element"> {{element.name}} </td>
               </ng-container>
 
-                  <!-- item2 Column -->
-              <ng-container matColumnDef="item2">
-                  <th mat-header-cell *matHeaderCellDef >  </th>
-                  <td mat-cell *matCellDef="let element"> {{element.item2 }} </td>
+                  <!-- frete Column -->
+              <ng-container matColumnDef="frete">
+                  <th mat-header-cell *matHeaderCellDef > Frete </th>
+                  <td mat-cell *matCellDef="let element"> {{element.frete }} </td>
               </ng-container>
 
               <!-- item3 Column -->
-              <ng-container matColumnDef="item3">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>
-                  <td mat-cell *matCellDef="let element"> {{element.item3}} </td>
+              <ng-container matColumnDef="city">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Cidade </th>
+                  <td mat-cell *matCellDef="let element"> {{element.city}} </td>
               </ng-container>
 
               <!-- item4 Column -->
-              <ng-container matColumnDef="item4">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Categoria </th>
-                  <td mat-cell *matCellDef="let element"> {{element.item4?.item}} </td>
+              <ng-container matColumnDef="state">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
+                  <td mat-cell *matCellDef="let element"> {{element.state}} </td>
               </ng-container>
 
               <!-- item5 Column -->
-              <ng-container matColumnDef="item5">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Unidades </th>
-                  <td mat-cell *matCellDef="let element" > {{element.item5}} </td>
+              <ng-container matColumnDef="region">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> região </th>
+                  <td mat-cell *matCellDef="let element" > {{element.region}} </td>
               </ng-container>
 
               <!-- item6 Column -->
-              <ng-container matColumnDef="item6">
+              <ng-container matColumnDef="action">
                   <th mat-header-cell *matHeaderCellDef > Ações </th>
                   <td mat-cell *matCellDef="let element"> 
                       <button class="btn btn-primary mx-1" (click)="edit(element)">

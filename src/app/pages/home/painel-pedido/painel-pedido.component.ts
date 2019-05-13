@@ -108,6 +108,7 @@ export class PainelPedidoComponent implements OnInit {
             console.log(response);
             this.homeService.removeUnits(this.form.value.products);
             this.homeService.productSelected = [];
+            this.homeService.selection.deselect(this.form.value.products);
         });
     }
 

@@ -1,6 +1,7 @@
+import { HomeService } from './home.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
@@ -18,6 +19,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { ClienteModalComponent } from './modal/cliente-modal/cliente-modal.component';
+import {  MatCheckboxModule } from '@angular/material';
 const routes: Routes = [
   {
     path: '',
@@ -26,9 +29,13 @@ const routes: Routes = [
 ];
 
 @NgModule({
+  entryComponents: [
+    ClienteModalComponent
+  ],
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     IonicModule,
     RouterModule.forChild(routes),
     MatTableModule,
@@ -37,9 +44,15 @@ const routes: Routes = [
     MatInputModule,
     MatSlideToggleModule,
     MatSelectModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatCheckboxModule
   ],
-  declarations: [HomePage, PainelPedidoComponent, ListaProdutosComponent],
-  providers: [ProdutoService]
+  declarations: [
+    HomePage, 
+    PainelPedidoComponent, 
+    ListaProdutosComponent, 
+    ClienteModalComponent
+  ],
+  providers: [ProdutoService, HomeService ]
 })
 export class HomePageModule {}

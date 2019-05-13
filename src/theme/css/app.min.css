@@ -5438,7 +5438,7 @@ fieldset:disabled a.btn {
 .list-group-item-action:hover {
     color: #495057;
     text-decoration: none;
-    background-color: #000
+    background-color: rgba(0, 0, 0, 0.157)
 }
 
 .list-group-item-action:active {
@@ -5452,7 +5452,7 @@ fieldset:disabled a.btn {
     padding: 1rem 2rem;
     margin-bottom: 0;
     background-color: transparent;
-    border: 0 solid rgba(0, 0, 0, .125)
+    border: 1px solid rgba(0, 0, 0, .125)
 }
 
 .list-group-item:first-child {
@@ -10029,7 +10029,8 @@ select.form-control {
 }
 
 .form-group--float .form-control.form-control--active~label,
-.form-group--float .form-control:focus~label {
+.form-group--float .form-control:focus~label, 
+.form-group--float .form-control.ng-dirty~label {
     bottom: 2.25rem;
     font-size: .875rem
 }
@@ -10115,7 +10116,9 @@ select.form-control {
 }
 
 .form-control.form-control--active~.form-group__bar:after, 
-.form-control.form-control--active~.form-group__bar:before {
+.form-control.form-control--active~.form-group__bar:before,
+.form-control.ng-dirty~.form-group__bar:after, 
+.form-control.ng-dirty~.form-group__bar:before{
     width: 50%;
 }
 .ng-valid.ng-touched~.form-group__bar:after,

@@ -12,7 +12,7 @@ export default class Model {
 
     }
 
-    public get(): Observable<any> {
+    public get(parans?): Observable<any> {
         this.helper.load();
         return this.http.get<any>(`${this.helper.url}/${this.url}`).pipe(
             retry(10),

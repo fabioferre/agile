@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class ListaProdutosComponent implements OnInit {
     displayedColumns: string[] = ['select','id', 'image', 'name', 'unity', 'sale_price'];
     dataSource = new MatTableDataSource<any>(this.productService.products);
-    selection  = new SelectionModel<any>(true, []);
+    selection  = this.homeService.selection;
 
     @ViewChild(MatSort) sort: MatSort;
     constructor(
@@ -29,6 +29,7 @@ export class ListaProdutosComponent implements OnInit {
     isAllSelected() {
         const numSelected = this.selection.selected.length;
         const numRows = this.dataSource.data.length;
+     
         return numSelected === numRows;
     }
 

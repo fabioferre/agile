@@ -69,8 +69,8 @@ caption {
     .btn-order {
         font-size: 20px;
     }
-    tr {
-        border-bottom: 1px solid var(--secondary);
+    tr>td {
+        padding: 10px 0;
     }
 }
 

@@ -43,7 +43,7 @@
                         </ng-container>
 
                         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="select(row)"></tr>
                     </table>
                     <div class="text-center pt-4 my-3" *ngIf="alertToRegister">
                         Nenhum encontrado, deseja cadastrar? &nbsp;
@@ -61,7 +61,7 @@
 
         <ng-template #formTemplate>
             <div class="col-lg-12 " >
-                <form [formGroup]="form">
+                <form [formGroup]="form" (submit)="saveClient()">
                     <div class="form-row py-4 px-2">
                         <div class="col-lg-12">
                             <div class="form-group">
@@ -180,7 +180,7 @@
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-12 mx-auto">
-                            <button class="btn btn-primary btn-block" type="button">
+                            <button class="btn btn-primary btn-block" [disabled]="form.invalid" type="button">
                                 Salvar
                             </button>
                         </div>

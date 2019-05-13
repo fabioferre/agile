@@ -1,3 +1,5 @@
+import { ClientesService } from './../../../clientes/clientes.service';
+import { HomeService } from './../../home.service';
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 import { ModalController } from '@ionic/angular';
@@ -41,7 +43,9 @@ export class ClienteModalComponent implements OnInit {
     ]
     constructor(
         public modalCrl: ModalController,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private homeService: HomeService,
+        private clientService: ClientesService
     ) { }
 
     ngOnInit() { }
@@ -52,13 +56,23 @@ export class ClienteModalComponent implements OnInit {
         if(this.dataSource.filteredData.length < 1)
         {
             this.alertToRegister = true;
-            console.log('true')
         } else {
             this.alertToRegister = false;
-            console.log('false')
         }
     }
 
+
+    public select(client): void {
+        this.homeService.client = client;
+    }
+
+
+    public saveClient(): void {
+        this.clientService.create(this.form.value).subscribe(client => {
+            this.select(this.form.value);
+        })
+        
+    }
     
 
 

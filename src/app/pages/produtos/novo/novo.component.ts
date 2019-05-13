@@ -59,7 +59,7 @@ export class NovoComponent implements OnInit {
         
         if(this.form.valid) {
             this.helper.load();
-            this.productService.store(this.form.value)
+            this.productService.create(this.form.value)
             .subscribe((product)=> {
                 this.helper.message('produto cadastrado')
                 this.productService.products.push(product)

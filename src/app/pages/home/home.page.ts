@@ -26,7 +26,6 @@ export class HomePage implements OnInit {
                 this.productService.products = products;
                 this.productService.products.map(product => {
                     product.qtd = 1;
-                    product.units = 5;
                 })
                 this.helper.load(false);
             });

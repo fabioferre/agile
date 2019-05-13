@@ -1,3 +1,4 @@
+import { PedidosService } from './pedidos.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 
@@ -10,10 +11,16 @@ export class PedidosPage implements OnInit {
    
     
 
-    constructor() { }
+    constructor(public pedidosService: PedidosService) { }
 
     ngOnInit() {
-       
+        if(!this.pedidosService.pedidos) {
+            this.pedidosService.get().subscribe(pedidos => {
+                this.pedidosService.pedidos = pedidos;
+                console.log(pedidos);
+                
+            })
+        }
     }
 
     

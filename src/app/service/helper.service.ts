@@ -5,7 +5,7 @@ import { ToastController, LoadingController, ModalController } from '@ionic/angu
   providedIn: 'root'
 })
 export class HelperService {
-  private apiURL = 'http://tagmus.com.br/api';
+  private apiURL = 'http://tagmus/api';
   constructor(
     private toastCtrl: ToastController,
     private loading: LoadingController,

@@ -1,20 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { ListarPedidosComponent } from './listar-pedidos/listar-pedidos.component';
-import { NovoPedidosComponent } from './novo-pedidos/novo-pedidos.component';
-
-
 import { IonicModule } from '@ionic/angular';
-
 import { PedidosPage } from './pedidos.page';
 import { PedidosService } from './pedidos.service';
+import { MatTableModule, MatPaginatorModule, MatSortModule, MatFormFieldModule, MatInputModule, MatSlideToggleModule, MatSelectModule } from '@angular/material';
 
 const routes: Routes = [
   {
     path: '',
-    component: PedidosPage
+    component: PedidosPage,
+    children:[
+      {
+        path: '',
+        component: ListarPedidosComponent
+      }
+    ]
   }
 ];
 
@@ -23,9 +26,17 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatSlideToggleModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [PedidosPage, ListarPedidosComponent, NovoPedidosComponent],
+  declarations: [PedidosPage, ListarPedidosComponent],
   providers:[PedidosService]
 })
 export class PedidosPageModule {}

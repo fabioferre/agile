@@ -14,13 +14,13 @@ export class PedidosPage implements OnInit {
     constructor(public pedidosService: PedidosService) { }
 
     ngOnInit() {
-        if(!this.pedidosService.pedidos) {
+   
             this.pedidosService.get().subscribe(pedidos => {
                 this.pedidosService.pedidos = pedidos;
                 console.log(pedidos);
                 
             })
-        }
+      
     }
 
     

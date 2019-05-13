@@ -24,12 +24,8 @@ export class CategoriasComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (!this.categoriasService.categories) {
-      this.categoriasService.get().subscribe(categories => {
-        this.categoriasService.categories = categories;
 
-      })
-    }
+
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
@@ -76,7 +72,7 @@ export class CategoriasComponent implements OnInit {
 
   create(data){
     this.categoriasService.create(data).subscribe(categories => {
-      this.categoriasService.categories = categories;
+      this.categoriasService.categories.push(categories) ;
 
     })
   }

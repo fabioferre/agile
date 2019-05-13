@@ -13,12 +13,21 @@ export default class Model {
     }
 
     public get(parans?): Observable<any> {
-        this.helper.load();
+
         return this.http.get<any>(`${this.helper.url}/${this.url}`).pipe(
             retry(10),
             finalize(() => {
                 this.helper.load(false);
             })
+        );
+
+    }
+
+    public getNoLoad(parans?): Observable<any> {
+
+        return this.http.get<any>(`${this.helper.url}/${this.url}`).pipe(
+            retry(1),
+       
         );
 
     }

@@ -1,3 +1,4 @@
+import { HelperService } from './../../../service/helper.service';
 import { HomeService } from './../home.service';
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { ModalController, AlertController } from '@ionic/angular';
@@ -25,7 +26,8 @@ export class PainelPedidoComponent implements OnInit {
         private modalCtrl: ModalController,
         public homeService: HomeService,
         private alertCtrl: AlertController,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private helper: HelperService
     ) { }
 
     ngOnInit() {
@@ -106,6 +108,7 @@ export class PainelPedidoComponent implements OnInit {
         console.log(this.form)
         this.homeService.create(this.form.value).subscribe((response) => {
             console.log(response);
+            this.helper.message("Pedido efetuado")
             this.homeService.removeUnits(this.form.value.products);
             this.homeService.productSelected = [];
             this.homeService.selection.deselect(this.form.value.products);

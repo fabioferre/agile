@@ -14,16 +14,20 @@ export class ProdutosPage implements OnInit {
         public helper: HelperService) { }
 
     ngOnInit() {
-
+       
         if (!this.productService.products) {
-
             this.productService.get().subscribe(products => {
                 this.productService.products = products;
-
+                
             });
-
-
         }
+
+        if (!this.categoriasService.categories) {
+            this.categoriasService.getNoLoad().subscribe(categories => {
+              this.categoriasService.categories = categories;
+      
+            })
+          }
 
 
     }

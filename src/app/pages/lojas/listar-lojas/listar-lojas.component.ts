@@ -10,8 +10,8 @@ import { Router } from '@angular/router';
 })
 export class ListarLojasComponent implements OnInit {
 
-  displayedColumns: string[] = ['item1', 'item2', 'item3', 'item4', 'item5', 'item6'];
-  dataSource = new MatTableDataSource<any>([]);
+  displayedColumns: string[] = ['name', 'phone', 'cellphone', 'address_neighborhood', 'address_street', 'action'];
+  dataSource = new MatTableDataSource<any>(this.lojasService.lojas);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;

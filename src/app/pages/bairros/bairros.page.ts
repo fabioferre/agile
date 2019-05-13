@@ -1,3 +1,5 @@
+import { BairrosService } from './bairros.service';
+import { HelperService } from './../../service/helper.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BairrosPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    public bairrosService: BairrosService,
+    public helper: HelperService) { }
 
-  ngOnInit() {
-  }
+  ngOnInit(  ) {
+    
+       if(!this.bairrosService.bairros) {
+           this.bairrosService.get().subscribe(bairros => {
+               this.bairrosService.bairros = bairros;
+               this.helper.load(false);
+           })
+       }
+   }
 
 }

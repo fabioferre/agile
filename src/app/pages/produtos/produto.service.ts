@@ -1,28 +1,21 @@
 import { Injectable } from '@angular/core';
-
+import { HttpClient } from '@angular/common/http';
 import Model from 'src/app/service/model';
+import { HelperService } from 'src/app/service/helper.service';
+
+
 
 
 @Injectable({
     providedIn: 'root'
 })
 export class ProdutoService extends Model{
-    protected url = 'products'
     public products;
     public productToEdit;
     public categories;
-    constructor(http, helper) { super(http, helper)}
-
-    // public get(): Observable<any> {
-    //     return this.http.get<any>(`${this.helper.url}/products`).pipe(
-    //         retry(2)
-    //     )
-    // }
-
-    // public store(product):  Observable<any> {
-    //     return this.http.post<any>(`${this.helper.url}/products`, product);
-    // }
-
+    
+    protected url = 'products'
+    constructor(http :HttpClient , helper : HelperService) { super(http, helper)}
 
     
 } 

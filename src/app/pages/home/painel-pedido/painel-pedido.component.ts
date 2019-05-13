@@ -31,11 +31,11 @@ export class PainelPedidoComponent implements OnInit {
     ngOnInit() {
         this.changeActive();
     }   
-    get client() {
-        return this.form.value.client;
+    get client_id() {
+        return this.form.value.client_id;
     }
-    get table() {
-        return this.form.value.table;
+    get table_id() {
+        return this.form.value.table_id;
     }
     async modalClient(request?) {
         const modal = await this.modalCtrl.create({

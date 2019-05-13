@@ -9,6 +9,7 @@ import { ProdutosPage } from './produtos.page';
 import { ListagemComponent } from './listagem/listagem.component';
 import { NovoComponent } from './novo/novo.component';
 import { EditarComponent } from './editar/editar.component';
+import { CategoriasComponent } from './categorias/categorias.component'
 
 // materialize
 import { MatTableModule } from '@angular/material/table';
@@ -18,8 +19,10 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import { CategoriaService } from '../categoria/categoria.service';
+
+//service
 import { ProdutoService } from './produto.service';
+import { CategoriasService } from './categorias.service';
 
 
 const routes: Routes = [
@@ -39,7 +42,12 @@ const routes: Routes = [
                 path: 'editar',
                 component: EditarComponent
             },
+            {
+                path: 'categorias',
+                component: CategoriasComponent
+            }
         ]
+      
     }
 ];
 
@@ -62,8 +70,9 @@ const routes: Routes = [
         ProdutosPage,
         NovoComponent,
         EditarComponent,
-        ListagemComponent
+        ListagemComponent,
+        CategoriasComponent
     ],
-    providers: [ProdutoService]
+    providers: [ProdutoService, CategoriasService]
 })
 export class ProdutosPageModule { }

@@ -24,6 +24,7 @@ export default class Model {
     }
 
     public getById(id): Observable<any> {
+        this.helper.load();
         return this.http.get<any>(`${this.helper.url}/${this.url}/${id}`).pipe(
             retry(10),
             finalize(() => {
@@ -33,6 +34,7 @@ export default class Model {
     }
 
     public updateById(id, params): Observable<any> {
+        this.helper.load();
         return this.http.put<any>(`${this.helper.url}/${this.url}/${id}`, params).pipe(
             finalize(() => {
                 this.helper.load(false);
@@ -41,6 +43,7 @@ export default class Model {
     }
 
     public create(params): Observable<any>  {
+        this.helper.load();
         return this.http.post<any>(`${this.helper.url}/${this.url}`, params).pipe(
             finalize(() => {
                 this.helper.load(false);

@@ -1,6 +1,6 @@
+import { CategoriasService } from './../categorias.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CategoriaService } from '../../categoria/categoria.service';
 import { ProdutoService } from '../produto.service';
 import { HelperService } from 'src/app/service/helper.service';
 import { Router } from '@angular/router';
@@ -27,8 +27,8 @@ export class NovoComponent implements OnInit {
     public categories: any;
     constructor(
         private fb: FormBuilder,
-        private categoryService: CategoriaService,
-        private productService: ProdutoService,
+        private categoriasService :CategoriasService,
+        public productService: ProdutoService,
         private helper: HelperService,
         private router: Router
     ) { }
@@ -50,7 +50,7 @@ export class NovoComponent implements OnInit {
     }
 
     getCategories() {
-        return this.categoryService.get().subscribe(categories => {
+        return this.categoriasService.get().subscribe(categories => {
             this.categories = categories;
             
         })
@@ -59,7 +59,7 @@ export class NovoComponent implements OnInit {
         
         if(this.form.valid) {
             this.helper.load();
-            this.productService.store(this.form.value)
+            this.productService.create(this.form.value)
             .subscribe((product)=> {
                 this.helper.message('produto cadastrado')
                 this.productService.products.push(product)

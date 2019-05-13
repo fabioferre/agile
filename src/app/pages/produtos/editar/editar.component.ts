@@ -1,6 +1,6 @@
+import { CategoriasService } from './../categorias.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { CategoriaService } from '../../categoria/categoria.service';
 import { ProdutoService } from '../produto.service';
 import { HelperService } from 'src/app/service/helper.service';
 import { Router } from '@angular/router';
@@ -29,10 +29,10 @@ export class EditarComponent implements OnInit {
     public categories: any;
     constructor(
         private fb: FormBuilder,
-        private categoryService: CategoriaService,
         private productService: ProdutoService,
         private helper: HelperService,
-        private router: Router
+        private router: Router,
+        public categoriasService:CategoriasService
     ) { }
 
     ngOnInit() { 

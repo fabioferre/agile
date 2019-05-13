@@ -1,3 +1,4 @@
+import { HomeService } from './../home.service';
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { ProdutoService } from '../../produtos/produto.service';
 import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
@@ -14,7 +15,11 @@ export class ListaProdutosComponent implements OnInit {
     selection  = new SelectionModel<any>(true, []);
 
     @ViewChild(MatSort) sort: MatSort;
-    constructor(private productService: ProdutoService, private router: Router) { }
+    constructor(
+        private productService: ProdutoService, 
+        public homeService: HomeService,
+        private router: Router
+    ) { }
 
     ngOnInit() {
         this.dataSource.sort = this.sort;
@@ -47,9 +52,12 @@ export class ListaProdutosComponent implements OnInit {
     }
 
 
-    putOrder(order): void {
-        console.log(order);
-        
+    putOrder(product): void {
+        if(this.selection.isSelected(product)) {
+            this.homeService.removeProductSelected(product)
+        } else {
+            this.homeService.productSelected.push(product)
+        }
     }
    
 

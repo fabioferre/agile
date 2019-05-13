@@ -1,3 +1,4 @@
+import { HomeService } from './../home.service';
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ClienteModalComponent } from '../modal/cliente-modal/cliente-modal.component';
@@ -9,10 +10,10 @@ declare var $: any;
     styleUrls: ['./painel-pedido.component.scss'],
 })
 export class PainelPedidoComponent implements OnInit {
-    public search = {
-        name: 'cliente'
-    };
-    constructor(private modalCtrl: ModalController) { }
+    constructor(
+        private modalCtrl: ModalController,
+        public homeService: HomeService
+    ) { }
 
     ngOnInit() {
         this.changeActive();
@@ -32,4 +33,5 @@ export class PainelPedidoComponent implements OnInit {
             $(this).addClass('active');
         });
     }
+
 }

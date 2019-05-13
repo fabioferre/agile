@@ -1,3 +1,4 @@
+import { HomeService } from './home.service';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/service/auth.service';
 import { ProdutoService } from '../produtos/produto.service';
@@ -10,16 +11,26 @@ import { HelperService } from 'src/app/service/helper.service';
 })
 export class HomePage implements OnInit {
 
-    constructor(private auth: AuthService, public productService: ProdutoService,
-        private helper: HelperService) { }
+    constructor(
+        private auth: AuthService, 
+        public productService: ProdutoService,
+        private helper: HelperService,
+        private homeService: HomeService) { }
 
     ngOnInit() {
 
         if (!this.productService.products) {
             this.productService.get().subscribe(products => {
                 this.productService.products = products;
+                this.productService.products.map(product => {
+                    product.qtd = 1;
+                })
                 this.helper.load(false);
             });
+        }
+        
+        if(!this.homeService.productSelected) {
+            this.homeService.productSelected = [];
         }
     }
 

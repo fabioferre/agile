@@ -34,21 +34,27 @@
             </thead>
 
             <tbody>
-                <tr>
-                    <td>Pizza</td>
+                <tr  *ngFor="let product of homeService.productSelected">
+                    <td>{{ product.name }}</td>
                     <td>
-                        1
-                        <a href="javascript:void(0)" class="float-left btn-order text-danger">
+                        {{  product.qtd }}
+                        <a href="javascript:void(0)" 
+                        (click)="homeService.lessProduct(product)"
+                        class="float-left btn-order text-danger">
                             <i class="fas fa-minus-circle"></i>
                         </a>
 
-                        <a href="javascript:void(0)" class="float-right btn-order text-primary">
+                        <a href="javascript:void(0)"
+                         class="float-right btn-order text-primary"
+                         (click)="homeService.plusProduct(product)">
                             <i class="fas fa-plus-circle"></i>
                         </a>
                     </td>
-                    <td>R$ 87</td>
+                    <td> {{ product.sale_price | currency:'BRL':'R$':'1.2-2'}} </td>
                     <td>
-                        <a href="javascript:void(0)" class="d-block text-center text-dark">
+                        <a href="javascript:void(0)" 
+                            (click)="homeService.removeProductSelected(product)" 
+                            class="d-block text-center text-dark">
                             <i class="fas fa-times"></i>
                         </a>
                     </td>
@@ -68,7 +74,7 @@
                 Frete
             </div>
             <div class="col-lg-6">
-                R$ 555
+                R$ 00
             </div>
         </div>
         <div class="row mx-0  price-content">
@@ -76,7 +82,7 @@
                 Total
             </div>
             <div class="col-lg-6">
-                R$ 555
+                {{ homeService.totalPrice | currency:'BRL':'R$':'1.2-2' }}
             </div>
         </div>
 

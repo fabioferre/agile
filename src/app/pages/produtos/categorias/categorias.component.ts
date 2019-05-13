@@ -55,18 +55,17 @@ export class CategoriasComponent implements OnInit {
     const alert = await this.alertCtrl.create({
       header: "Cadastrar categoria",
       inputs: [{
-        name: "name", type: "text", label: "Nome da categoria"
+        name: "name", type: "text",  placeholder: 'Nome da categoria'
       }],
       buttons: [{
         text: "Cadastrar",
         cssClass: "secondary",
         handler: (data) => {
           if (!data) {
-            console.log("selecione")
             return false;
           } else {
             this.create(data);
-            console.log(data)
+           
           }
         }
       }]

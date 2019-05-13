@@ -112,3 +112,18 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 .link-element:hover {
     cursor: pointer;
 }
+
+ion-modal.sm{
+    --width: 90% !important;
+    --height: 65% !important;
+}
+
+ion-modal.md{
+    --width: 55% !important;
+    --height: 86% !important
+}
+
+ion-modal.lg{
+    --width: 80% !important;
+    --height: 100% !important;
+}

@@ -1,14 +1,35 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { ClienteModalComponent } from '../modal/cliente-modal/cliente-modal.component';
+declare var $: any;
 
 @Component({
-  selector: 'app-painel-pedido',
-  templateUrl: './painel-pedido.component.html',
-  styleUrls: ['./painel-pedido.component.scss'],
+    selector: 'app-painel-pedido',
+    templateUrl: './painel-pedido.component.html',
+    styleUrls: ['./painel-pedido.component.scss'],
 })
 export class PainelPedidoComponent implements OnInit {
+    public search = {
+        name: 'cliente'
+    };
+    constructor(private modalCtrl: ModalController) { }
 
-  constructor() { }
+    ngOnInit() {
+        this.changeActive();
+    }   
 
-  ngOnInit() {}
+    async modalClient(request?) {
+        const modal = await this.modalCtrl.create({
+            component: ClienteModalComponent
+        });
 
+        return await modal.present();
+    }
+
+    public changeActive(): void {
+        $('.painel-item').click(function(){
+            $('.painel-item.active').removeClass('active')
+            $(this).addClass('active');
+        });
+    }
 }

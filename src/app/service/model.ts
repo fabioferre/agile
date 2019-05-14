@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { retry, finalize } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { retry, finalize, catchError } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
 import { HelperService } from './helper.service';
 
 export default class Model {
@@ -13,21 +13,22 @@ export default class Model {
     }
 
     public get(parans?): Observable<any> {
-
-        return this.http.get<any>(`${this.helper.url}/${this.url}`).pipe(
+        this.helper.load();
+        return this.http.get<any>(`${this.helper.url}/${this.url}?${parans}`).pipe(
             retry(10),
             finalize(() => {
                 this.helper.load(false);
-            })
+            }),
+            catchError(error =>  of( this.helper.message(error)))
         );
 
     }
 
     public getNoLoad(parans?): Observable<any> {
 
-        return this.http.get<any>(`${this.helper.url}/${this.url}`).pipe(
+        return this.http.get<any>(`${this.helper.url}/${this.url}?${parans}`).pipe(
             retry(1),
-       
+            catchError(error => of( this.helper.message(error)))
         );
 
     }
@@ -38,7 +39,8 @@ export default class Model {
             retry(10),
             finalize(() => {
                 this.helper.load(false);
-            })
+            }),
+            catchError(error => of( this.helper.message(error)))
         )
     }
 
@@ -47,7 +49,8 @@ export default class Model {
         return this.http.put<any>(`${this.helper.url}/${this.url}/${id}`, params).pipe(
             finalize(() => {
                 this.helper.load(false);
-            })
+            }),
+            catchError(error => of( this.helper.message(error)))
         )
     }
 
@@ -56,8 +59,23 @@ export default class Model {
         return this.http.post<any>(`${this.helper.url}/${this.url}`, params).pipe(
             finalize(() => {
                 this.helper.load(false);
-            })
+            }),
+            catchError(error => of( this.helper.message(error)))
         )
     }
+
+    public deleteById(id): Observable<any> {
+  
+        this.helper.load();
+        return this.http.delete<any>(`${this.helper.url}/${this.url}/${id}`).pipe(
+            retry(1),
+            finalize(() => {
+                this.helper.message("Item excluido", "danger")
+              
+            }),
+            catchError(error =>  of( this.helper.message(error)))
+        )
+    }
+
 
 }

@@ -18,11 +18,13 @@ export class NovoComponent implements OnInit {
         weight: [''],
         cost_price: [''],
         sale_price: [''],
-        units: [1],
+        units: [0],
         code: [''],
         description: [''],
         sale: [true],
-        stock: [true]
+        stock: [true],
+        brand: [''],
+        minimum_units:[1]
     });
     public categories: any;
     constructor(

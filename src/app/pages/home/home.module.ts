@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
+import { Printer } from '@ionic-native/printer/ngx';
 
 import { HomePage } from './home.page';
 import { PainelPedidoComponent } from './painel-pedido/painel-pedido.component';
@@ -53,6 +54,6 @@ const routes: Routes = [
     ListaProdutosComponent, 
     ClienteModalComponent
   ],
-  providers: [ProdutoService, HomeService ]
+  providers: [ProdutoService, HomeService, Printer]
 })
 export class HomePageModule {}

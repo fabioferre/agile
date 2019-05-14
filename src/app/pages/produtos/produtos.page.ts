@@ -18,7 +18,6 @@ export class ProdutosPage implements OnInit {
         if (!this.productService.products) {
             this.productService.get().subscribe(products => {
                 this.productService.products = products;
-                
             });
         }
 

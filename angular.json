@@ -63,6 +63,9 @@
                             },
                             {
                                 "input": "src/theme/js/app.min.js"
+                            },
+                            {
+                                "input": "node_modules/jquery-mask-plugin/dist/jquery.mask.min.js"
                             }
                         ],
                         "stylePreprocessorOptions": {

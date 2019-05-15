@@ -16,6 +16,7 @@ import { AuthService } from './service/auth.service';
 import { IonicStorageModule } from '@ionic/storage';
 import { InterceptorService } from './service/interceptor.service';
 import { HelperService } from './service/helper.service';
+import { ProdutoService } from './pages/produtos/produto.service';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { HelperService } from './service/helper.service';
     SplashScreen,
     AuthService,
     HelperService,
+    ProdutoService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
     {

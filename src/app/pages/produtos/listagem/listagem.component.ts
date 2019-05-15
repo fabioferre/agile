@@ -35,7 +35,7 @@ export class ListagemComponent implements OnInit {
 
     public edit(product): void {
         this.productService.productToEdit = product;
-        this.router.navigate(['/produtos/editar']);
+        this.router.navigate(['/produtos/editar', product.id]);
     }
 
     get product() {

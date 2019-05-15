@@ -39,7 +39,7 @@ const routes: Routes = [
                 component: NovoComponent,
             },
             {
-                path: 'editar',
+                path: 'editar/:id',
                 component: EditarComponent
             },
             {

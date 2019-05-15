@@ -1,16 +1,16 @@
 <header class="content__title">
-    <h1>novo Produto</h1>
+    <h1>Editar Produto</h1>
 </header>
 
 <ion-card>
 
     <div class="card">
-        <form [formGroup]="form" >
+        <form [formGroup]="form" (submit)="submit()">
             <div class="card-body">
                 <div class="row ">
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <label>Nome</label> <i class="fas fa-user"></i>
+                            <label>Nome</label>
                             <input type="text" class="form-control" placeholder="pizza, arroz, frango..."
                                 formControlName="name" [ngClass]="{'form-control--active': form.value.name !== ''}">
                             <i class="form-group__bar"></i>
@@ -25,14 +25,14 @@
                         </div>
                     </div>
                     <div class="col-lg-4 pt-3">
-                        <!-- <mat-form-field class="w-100">
+                        <mat-form-field class="w-100">
                             <mat-label>Categoria</mat-label>
                             <mat-select formControlName="category_id">
                                 <mat-option *ngFor="let category of categories" [value]="category.id">
                                     {{ category.name }}
                                 </mat-option>
                             </mat-select>
-                        </mat-form-field> -->
+                        </mat-form-field>
                     </div>
 
 
@@ -44,42 +44,56 @@
                             <i class="form-group__bar"></i>
                         </div>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-md-4">
                         <div class="form-group">
-                            <label>Preço de custo</label>
-                            <input type="text" class="form-control" placeholder="30 R$" formControlName="cost_price">
+                            <label>Marca</label>
+                            <input type="text" class="form-control" placeholder="Dolly" formControlName="brand">
                             <i class="form-group__bar"></i>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Código</label>
-                            <input type="text" class="form-control" placeholder="0000 000000" formControlName="code">
+                            <input type="text" class="form-control" placeholder="0000000000" formControlName="code">
                             <i class="form-group__bar"></i>
                         </div>
                     </div>
-                    <div class="col-lg-6 text-center pt-3">
+                    <div class="col-lg-4 text-center pt-3">
                         <mat-slide-toggle class="mat-primary" (change)="alter('sale_price')" formControlName="sale"
                             checked>
                             Disponível para venda?
                         </mat-slide-toggle>
                     </div>
-                    <div class="col">
+                    <div class="col-4">
                         <div class="form-group">
                             <label>Preço de venda</label>
-                            <input type="text" class="form-control" placeholder="30 R$" formControlName="sale_price">
+                            <input type="text" class="form-control" placeholder="R$" formControlName="sale_price">
                             <i class="form-group__bar"></i>
                         </div>
                     </div>
-                    <div class="col-lg-6 text-center pt-3">
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label>Preço de custo</label>
+                            <input type="text" class="form-control" placeholder="R$" formControlName="cost_price">
+                            <i class="form-group__bar"></i>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 text-center pt-3">
                         <mat-slide-toggle class="mat-primary" (change)="alter('units')" formControlName="stock" checked>
                             Disponível para estoque?
                         </mat-slide-toggle>
                     </div>
-                    <div class="col">
+                    <div class="col-4">
                         <div class="form-group">
                             <label>Unidades</label>
-                            <input type="text" class="form-control" placeholder="1" formControlName="units">
+                            <input type="text" class="form-control" placeholder="0" formControlName="units">
+                            <i class="form-group__bar"></i>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label>Unidade minima</label>
+                            <input type="text" class="form-control" placeholder="0" formControlName="minimum_units">
                             <i class="form-group__bar"></i>
                         </div>
                     </div>
@@ -94,7 +108,7 @@
                 <div class="clearfix"></div>
 
                 <div class="mt-5 text-center">
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary" [disabled]="!form.valid">
                         Salvar
                     </button>
                 </div>

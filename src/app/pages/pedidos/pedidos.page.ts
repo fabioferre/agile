@@ -1,3 +1,4 @@
+import { HelperService } from './../../service/helper.service';
 import { PedidosService } from './pedidos.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 
@@ -8,24 +9,26 @@ import { Component, OnInit, ViewChild } from '@angular/core';
     styleUrls: ['./pedidos.page.scss'],
 })
 export class PedidosPage implements OnInit {
-   
-    
 
-    constructor(public pedidosService: PedidosService) { }
+
+
+    constructor(public pedidosService: PedidosService,
+        public helper: HelperService) { }
 
     ngOnInit() {
-   
-            this.pedidosService.get().subscribe(pedidos => {
-                this.pedidosService.pedidos = pedidos;
-                console.log(pedidos);
-                
-            })
-      
+        let date = this.helper.date(null, "-1 day")
+ 
+        this.pedidosService.get(`filter=[["created_at",">=", "${date}"]]`).subscribe(pedidos => {
+            this.pedidosService.pedidos = pedidos;
+            console.log(pedidos);
+
+        })
+
     }
 
-    
+
 
 }
 
-  
+
 

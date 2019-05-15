@@ -58,6 +58,7 @@ export class ListaProdutosComponent implements OnInit {
             this.homeService.removeProductSelected(product)
         } else {
             this.homeService.productSelected.push(product)
+            
         }
     }
    

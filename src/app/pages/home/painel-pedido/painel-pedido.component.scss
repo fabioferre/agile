@@ -29,6 +29,9 @@
         border-radius: 50%;
         position: relative;
         transition: all 1s;
+        &.disabled {
+            pointer-events: none;
+        }
         span {
             display: block;
             color: var(--white);

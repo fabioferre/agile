@@ -1,6 +1,6 @@
 import { LojasService } from './lojas.service';
 import { Component, OnInit } from '@angular/core';
-import { HelperService } from 'src/app/service/helper.service';
+
 
 @Component({
   selector: 'app-lojas',
@@ -9,13 +9,13 @@ import { HelperService } from 'src/app/service/helper.service';
 })
 export class LojasPage implements OnInit {
 
-  constructor(public lojasService: LojasService, public helper: HelperService) { }
+  constructor(public lojasService: LojasService) { }
 
   ngOnInit(  ) {
     if(!this.lojasService.lojas) {
         this.lojasService.get().subscribe(lojas => {
             this.lojasService.lojas = lojas;
-            this.helper.load(false);
+         
         })
     }
 }

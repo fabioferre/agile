@@ -8,7 +8,6 @@ const routes: Routes = [
   { path: 'pedidos', canActivate: [AuthService], loadChildren: './pages/pedidos/pedidos.module#PedidosPageModule' },
   { path: 'auth', loadChildren: './pages/auth/auth.module#AuthPageModule' },
   { path: 'produtos', loadChildren: './pages/produtos/produtos.module#ProdutosPageModule' },
-  { path: 'categorias', loadChildren: './pages/categoria/categoria.module#CategoriaPageModule' },
   { path: 'mesas', loadChildren: './pages/mesas/mesas.module#MesasPageModule' },
   { path: 'motoboy', loadChildren: './pages/motoboy/motoboy.module#MotoboyPageModule' },
   { path: 'funcionarios', loadChildren: './pages/funcionarios/funcionarios.module#FuncionariosPageModule' },

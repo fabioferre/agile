@@ -53,6 +53,6 @@ const routes: Routes = [
     ListaProdutosComponent, 
     ClienteModalComponent
   ],
-  providers: [ HomeService ]
+  providers: [ProdutoService, HomeService ]
 })
 export class HomePageModule {}

@@ -16,6 +16,7 @@ export class PedidosPage implements OnInit {
         public helper: HelperService) { }
 
     ngOnInit() {
+       
         let date = this.helper.date(null, "-1 day")
  
         this.pedidosService.get({

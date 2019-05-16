@@ -45,7 +45,7 @@ export class HelperService {
                 message: message,
                 position: "top",
                 color: status,
-                duration: 3000,
+                duration: 1000,
                 showCloseButton: true
             });
 
@@ -64,6 +64,11 @@ export class HelperService {
         }
 
 
+    }
+
+    async  loadDismiss() {
+
+       await this.loading.dismiss();
     }
 
     async modalDismiss(status?, then?) {

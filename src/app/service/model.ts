@@ -3,6 +3,8 @@ import { retry, finalize, catchError } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { HelperService } from './helper.service';
 import * as $ from 'jquery';
+import { LoadingController } from '@ionic/angular';
+import { async } from 'q';
 export default class Model {
 
     protected url;
@@ -13,19 +15,16 @@ export default class Model {
     }
 
     public get(parans?): Observable<any> {
-        this.helper.load();
      
         let urlParans = '';
         $.each(parans, function(e,i){
-            console.log(e)
-            console.log(i)
             urlParans = `${urlParans}${e}=${JSON.stringify(i)}&`;
-        })
-        console.log(urlParans);
+        });
+
         return this.http.get<any>(`${this.helper.url}/${this.url}?${urlParans}`).pipe(
             retry(10),
             finalize(() => {
-                this.helper.load(false);
+                this.helper.loadDismiss()
             }),
             catchError(error =>  of( this.helper.message(error)))
         );
@@ -46,7 +45,7 @@ export default class Model {
         return this.http.get<any>(`${this.helper.url}/${this.url}/${id}`).pipe(
             retry(10),
             finalize(() => {
-                this.helper.load(false);
+               this.helper.loadDismiss()
             }),
             catchError(error => of( this.helper.message(error)))
         )
@@ -55,14 +54,17 @@ export default class Model {
     public updateById(id, params): Observable<any> {
         return this.http.put<any>(`${this.helper.url}/${this.url}/${id}`, params).pipe(
             finalize(() => {
+                this.helper.loadDismiss()
             }),
             catchError(error => of( this.helper.message(error)))
         )
     }
 
     public create(params): Observable<any>  {
+        this.helper.load();
         return this.http.post<any>(`${this.helper.url}/${this.url}`, params).pipe(
             finalize(() => {
+                this.helper.loadDismiss()
             }),
             catchError(error => of( this.helper.message(error)))
         )
@@ -74,6 +76,7 @@ export default class Model {
         return this.http.delete<any>(`${this.helper.url}/${this.url}/${id}`).pipe(
             retry(1),
             finalize(() => {
+                this.helper.loadDismiss()
                 this.helper.message("Item excluido", "danger")
               
             }),

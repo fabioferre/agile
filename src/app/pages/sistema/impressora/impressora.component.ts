@@ -30,7 +30,7 @@ export class ImpressoraComponent implements OnInit {
         private router: Router) { }
 
     ngOnInit() {
-        console.log(this.helper.order)
+        
         this.print();
     }
 

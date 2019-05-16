@@ -121,7 +121,7 @@ export class PainelPedidoComponent implements OnInit {
             this.homeService.productSelected = [];
         });
     }
-
+ 
 
   
 

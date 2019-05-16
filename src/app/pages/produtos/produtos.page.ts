@@ -16,6 +16,7 @@ export class ProdutosPage implements OnInit {
     ngOnInit() {
        
         if (!this.productService.products) {
+            this.helper.load();
             this.productService.get().subscribe(products => {
                 this.productService.products = products;
             });

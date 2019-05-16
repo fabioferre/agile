@@ -20,7 +20,7 @@ export class HomePage implements OnInit, OnDestroy {
         private homeService: HomeService) { }
 
     ngOnInit() {
-        
+        this.helper.load();
         this.productService.get({
             filter: [ 
                 ["sale", "1"]

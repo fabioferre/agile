@@ -37,7 +37,6 @@ export class PainelPedidoComponent implements OnInit {
 
     ngOnInit() {
         this.changeActive();
-        document.querySelector('body').style.visibility = 'hidden';
     }
     get client_id() {
         return this.form.value.client_id;
@@ -124,17 +123,17 @@ export class PainelPedidoComponent implements OnInit {
     }
 
     print(id) {
-        this.printable.style.visibility = 'visible';
+        this.printable.nativeElement.style.display = 'block';
         document.querySelector('body').style.visibility = 'hidden';
         
         this.printer.isAvailable().then(onSuccess => {},erro=>{});
 
         this.printer.print('algo').then(onSuccess => {
             document.querySelector('body').style.visibility = 'visible';
-            this.printable.style.visibility = 'hidden';
+            this.printable.nativeElement.style.display = 'none';
         }, onError => {
             document.querySelector('body').style.visibility = 'visible';
-            this.printable.style.visibility = 'hidden';
+            this.printable.nativeElement.style.display = 'none';
         });
 
     }

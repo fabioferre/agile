@@ -29,7 +29,9 @@ export class ImpressoraComponent implements OnInit {
     private helper: HelperService,
     private router: Router) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.print();
+   }
 
   print() {
     this.printer.isAvailable().then(onSuccess=>{
@@ -41,12 +43,13 @@ export class ImpressoraComponent implements OnInit {
     let options: PrintOptions = {
       name: 'MyDocument',
       printerId: 'printer007',
-      duplex: true,
-      landscape: true,
+      duplex: false,
+      landscape: false,
       grayscale: true
     }
 
     this.printer.print("estou vivo", options).then(onSuccess=>{
+      this.router.navigate(['/']);
       console.log(onSuccess)
     }, onError=>{
       console.log(onError)

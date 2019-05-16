@@ -49,7 +49,7 @@ export class HelperService {
                 showCloseButton: true
             });
 
-        toast.present().then(() => this.loading.dismiss());
+        toast.present();
 
     }
 

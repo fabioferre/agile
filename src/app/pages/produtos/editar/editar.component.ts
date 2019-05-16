@@ -48,14 +48,14 @@ export class EditarComponent implements OnInit {
 
     }
 
-    alter(control): void {
-        if (this.form.controls[control].enabled) {
-            this.form.controls[control].disable()
-            this.form.controls[control].setValue('')
-        } else {
-            this.form.controls[control].enable()
-        }
-    }
+    // alter(control): void {
+    //     if (this.form.controls[control].enabled) {
+    //         this.form.controls[control].disable()
+    //         this.form.controls[control].setValue('')
+    //     } else {
+    //         this.form.controls[control].enable()
+    //     }
+    // }
 
     getCategories() {
         return this.categoriasService.get().subscribe(categories => {

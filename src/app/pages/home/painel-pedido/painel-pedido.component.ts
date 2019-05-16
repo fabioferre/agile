@@ -6,6 +6,7 @@ import { ClienteModalComponent } from '../modal/cliente-modal/cliente-modal.comp
 import { FormBuilder, Validators } from '@angular/forms';
 import { Printer, PrintOptions } from '@ionic-native/printer/ngx';
 import * as $ from 'jquery';
+import { Router } from '@angular/router';
 
 
 
@@ -25,14 +26,14 @@ export class PainelPedidoComponent implements OnInit {
         type: [1]
     });
 
-    @ViewChild('printable') public printable;
     constructor(
         private modalCtrl: ModalController,
         public homeService: HomeService,
         private alertCtrl: AlertController,
         private fb: FormBuilder,
         private helper: HelperService,
-        private printer: Printer
+        private printer: Printer,
+        private router: Router
     ) { }
 
     ngOnInit() {
@@ -112,39 +113,15 @@ export class PainelPedidoComponent implements OnInit {
     public storeOrder() {
         // console.log(this.form)
         this.homeService.create(this.form.value).subscribe((response) => {
-            
-            this.print(response.id);
-            
+            this.helper.order = response;
+            this.router.navigate(['/sistema/impressora']);
             this.homeService.selection.clear()
             this.helper.message("Pedido efetuado")
             this.homeService.removeUnits(this.form.value.products);
             this.homeService.productSelected = [];
         });
     }
-
-    print(id) {
-        let options: PrintOptions = {
-            name: 'MyDocument',
-            printerId: 'printer007',
-            duplex: false,
-            landscape: false,
-            grayscale: true
-          }
-       
-        this.printable.nativeElement.style.display = 'block';
-        document.querySelector('body').style.visibility = 'hidden';
-        
-        this.printer.isAvailable().then(onSuccess => {},erro=>{});
-
-        this.printer.print('algo', options).then(onSuccess => {
-            document.querySelector('body').style.visibility = 'visible';
-            this.printable.nativeElement.style.display = 'none';
-        }, onError => {
-            document.querySelector('body').style.visibility = 'visible';
-            this.printable.nativeElement.style.display = 'none';
-        });
-
-    }
+ 
 
   
 

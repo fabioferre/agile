@@ -74,9 +74,14 @@
                     <div class="col-4">
                         <div class="form-group">
                             <label>Preço de custo</label>
-                            <input type="text" class="form-control money" placeholder="R$" formControlName="cost_price">
+                            <input type="text" 
+                            class="form-control money" 
+                            placeholder="R$"   name="money"
+                            [brmasker]="{form: forms.get('cost_price'), money: true}"
+                            formControlName="cost_price">
                             <i class="form-group__bar"></i>
                         </div>
+                        
                     </div>
                     <div class="col-lg-4 text-center pt-3">
                         <mat-slide-toggle class="mat-primary" (change)="alter('units')" formControlName="stock" checked>

@@ -123,12 +123,20 @@ export class PainelPedidoComponent implements OnInit {
     }
 
     print(id) {
+        let options: PrintOptions = {
+            name: 'MyDocument',
+            printerId: 'printer007',
+            duplex: false,
+            landscape: false,
+            grayscale: true
+          }
+       
         this.printable.nativeElement.style.display = 'block';
         document.querySelector('body').style.visibility = 'hidden';
         
         this.printer.isAvailable().then(onSuccess => {},erro=>{});
 
-        this.printer.print('algo').then(onSuccess => {
+        this.printer.print('algo', options).then(onSuccess => {
             document.querySelector('body').style.visibility = 'visible';
             this.printable.nativeElement.style.display = 'none';
         }, onError => {

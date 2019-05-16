@@ -25,6 +25,7 @@ export class PainelPedidoComponent implements OnInit {
         type: [1]
     });
 
+    public printable = false;
     constructor(
         private modalCtrl: ModalController,
         public homeService: HomeService,
@@ -111,8 +112,9 @@ export class PainelPedidoComponent implements OnInit {
     public storeOrder() {
         // console.log(this.form)
         this.homeService.create(this.form.value).subscribe((response) => {
-           
-            // this.print(response.id);
+            
+            this.print(response.id);
+            
             this.homeService.selection.clear()
             this.helper.message("Pedido efetuado")
             this.homeService.removeUnits(this.form.value.products);
@@ -121,10 +123,17 @@ export class PainelPedidoComponent implements OnInit {
     }
 
     print(id) {
-      
-       this.printer.isAvailable().then(onSuccess => {},erro=>{});
+        this.printable = true;
+        document.querySelector('body').style.visibility = 'hidden';
+        this.printer.isAvailable().then(onSuccess => {},erro=>{});
 
-       this.printer.print('algo').then(onSuccess => {}, onError => {});
+        this.printer.print('algo').then(onSuccess => {
+            document.querySelector('body').style.visibility = 'visible';
+            this.printable = false;
+        }, onError => {
+            document.querySelector('body').style.visibility = 'visible';
+            this.printable = false;
+        });
 
     }
 
@@ -135,17 +144,3 @@ export class PainelPedidoComponent implements OnInit {
 
 }
 
-
-
-
-@Component({
-    selector: 'app-impressora',
-    templateUrl: './impressora.component.html',
-    styleUrls: ['./painel-pedido.component.scss'],
-})
-export class ImpressoraComponent implements OnInit {
-    ngOnInit() {
-       
-    }
-
-}

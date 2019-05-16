@@ -9,6 +9,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { HomePage } from './home.page';
 import { PainelPedidoComponent } from './painel-pedido/painel-pedido.component';
+import { CupomFiscalComponent } from './painel-pedido/cupom-fiscal/cupom-fiscal.component';
 import { ListaProdutosComponent } from './lista-produtos/lista-produtos.component';
 import { ProdutoService } from '../produtos/produto.service';
 
@@ -53,7 +54,8 @@ const routes: Routes = [
     HomePage, 
     PainelPedidoComponent, 
     ListaProdutosComponent, 
-    ClienteModalComponent
+    ClienteModalComponent,
+    CupomFiscalComponent
   ],
   providers: [ HomeService, Printer]
 })

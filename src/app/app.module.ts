@@ -1,7 +1,8 @@
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -32,8 +33,7 @@ import { ProdutoService } from './pages/produtos/produto.service';
     BrowserAnimationsModule, 
     IonicStorageModule.forRoot({name: '_agile'}),
     IonicModule.forRoot(), 
-    AppRoutingModule,
-    
+    AppRoutingModule
   ],
   providers: [
     StatusBar,

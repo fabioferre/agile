@@ -1,6 +1,6 @@
 import { HelperService } from './../../../service/helper.service';
 import { HomeService } from './../home.service';
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import { ModalController, AlertController, } from '@ionic/angular';
 import { ClienteModalComponent } from '../modal/cliente-modal/cliente-modal.component';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -25,7 +25,7 @@ export class PainelPedidoComponent implements OnInit {
         type: [1]
     });
 
-    public printable = false;
+    @ViewChild('printable') public printable;
     constructor(
         private modalCtrl: ModalController,
         public homeService: HomeService,
@@ -37,6 +37,7 @@ export class PainelPedidoComponent implements OnInit {
 
     ngOnInit() {
         this.changeActive();
+        document.querySelector('body').style.visibility = 'hidden';
     }
     get client_id() {
         return this.form.value.client_id;
@@ -123,16 +124,17 @@ export class PainelPedidoComponent implements OnInit {
     }
 
     print(id) {
-        this.printable = true;
+        this.printable.style.visibility = 'visible';
         document.querySelector('body').style.visibility = 'hidden';
+        
         this.printer.isAvailable().then(onSuccess => {},erro=>{});
 
         this.printer.print('algo').then(onSuccess => {
             document.querySelector('body').style.visibility = 'visible';
-            this.printable = false;
+            this.printable.style.visibility = 'hidden';
         }, onError => {
             document.querySelector('body').style.visibility = 'visible';
-            this.printable = false;
+            this.printable.style.visibility = 'hidden';
         });
 
     }

@@ -135,9 +135,24 @@ $color-gray: #BCBCBC;
 }
 .ttu { text-transform: uppercase; }
 
+
+body * {
+    visibility: hidden;
+}
+.printable, .printable * {
+    visibility: visible;
+}
+.printable {
+    position: fixed;
+    left: 0;
+    top: 0;
+    min-height: 50%;
+}
+
+
 .printer-ticket {
 	display: table !important;
-	width: 100%;
+    width: 100%;
 	max-width: 150px;
 	font-weight: light;
 	line-height: 1.3em;

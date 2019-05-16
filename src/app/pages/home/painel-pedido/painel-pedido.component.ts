@@ -134,3 +134,18 @@ export class PainelPedidoComponent implements OnInit {
 
 
 }
+
+
+
+
+@Component({
+    selector: 'app-impressora',
+    templateUrl: './impressora.component.html',
+    styleUrls: ['./painel-pedido.component.scss'],
+})
+export class ImpressoraComponent implements OnInit {
+    ngOnInit() {
+       
+    }
+
+}

@@ -40,7 +40,6 @@ export class NovoComponent implements OnInit {
         this.getCategories();
         // this.form.controls.sale.setValue(true);
         // this.form.controls.stock.setValue(true);
-        $('.money').mask('000.000.000.000.000,00', {reverse: true});
     }
 
     alter(control): void {

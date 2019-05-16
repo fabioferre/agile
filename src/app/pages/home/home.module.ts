@@ -54,8 +54,7 @@ const routes: Routes = [
     HomePage, 
     PainelPedidoComponent, 
     ListaProdutosComponent, 
-    ClienteModalComponent,
-    CupomFiscalComponent
+    ClienteModalComponent
   ],
   providers: [ HomeService, Printer]
 })

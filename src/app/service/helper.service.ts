@@ -10,6 +10,7 @@ export class HelperService {
     public today: string;
     public hours: string;
     public format: string;
+    public order: any;
     constructor(
         private toastCtrl: ToastController,
         private loading: LoadingController,
@@ -124,6 +125,7 @@ export class HelperService {
 
         return this;
     }
+
 
 
 

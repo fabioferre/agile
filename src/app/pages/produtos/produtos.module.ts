@@ -73,6 +73,6 @@ const routes: Routes = [
         ListagemComponent,
         CategoriasComponent
     ],
-    providers: [ProdutoService, CategoriasService]
+    providers: [ CategoriasService]
 })
 export class ProdutosPageModule { }

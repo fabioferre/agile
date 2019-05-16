@@ -1,19 +1,23 @@
 import { HomeService } from './../home.service';
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, ChangeDetectorRef } from '@angular/core';
 import { ProdutoService } from '../../produtos/produto.service';
 import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import {SelectionModel} from '@angular/cdk/collections';
 import { Router } from '@angular/router';
+
+
+
+
 @Component({
     selector: 'app-lista-produtos',
     templateUrl: './lista-produtos.component.html',
     styleUrls: ['./lista-produtos.component.scss'],
 })
 export class ListaProdutosComponent implements OnInit {
-    displayedColumns: string[] = ['select','id', 'image', 'name', 'unity', 'sale_price'];
-    dataSource = new MatTableDataSource<any>(this.productService.products);
-    selection  = this.homeService.selection;
-
+    @Input() public products: any;
+    public displayedColumns: string[] = ['select','id', 'image', 'name', 'unity', 'sale_price'];
+    public dataSource: any;
+    public selection:any
     @ViewChild(MatSort) sort: MatSort;
     constructor(
         private productService: ProdutoService, 
@@ -22,7 +26,9 @@ export class ListaProdutosComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        this.dataSource = new MatTableDataSource<any>(this.products);
         this.dataSource.sort = this.sort;
+        this.selection = this.homeService.selection;
     }
 
     /** Whether the number of selected elements matches the total number of rows. */
@@ -61,6 +67,7 @@ export class ListaProdutosComponent implements OnInit {
             
         }
     }
-   
+    
+
 
 }

@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProdutoService } from '../produto.service';
 import { HelperService } from 'src/app/service/helper.service';
 import { Router } from '@angular/router';
+import * as $ from 'jquery';
 
 @Component({
     selector: 'app-novo',
@@ -39,6 +40,7 @@ export class NovoComponent implements OnInit {
         this.getCategories();
         // this.form.controls.sale.setValue(true);
         // this.form.controls.stock.setValue(true);
+        $('.money').mask('000.000.000.000.000,00', {reverse: true});
     }
 
     alter(control): void {

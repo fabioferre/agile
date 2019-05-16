@@ -5,7 +5,9 @@ import { ModalController, AlertController, } from '@ionic/angular';
 import { ClienteModalComponent } from '../modal/cliente-modal/cliente-modal.component';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Printer, PrintOptions } from '@ionic-native/printer/ngx';
-declare var $: any;
+import * as $ from 'jquery';
+
+
 
 @Component({
     selector: 'app-painel-pedido',
@@ -107,14 +109,14 @@ export class PainelPedidoComponent implements OnInit {
 
 
     public storeOrder() {
-        console.log(this.form)
+        // console.log(this.form)
         this.homeService.create(this.form.value).subscribe((response) => {
-            console.log(response);
-            this.print(response.id);
+           
+            // this.print(response.id);
+            this.homeService.selection.clear()
             this.helper.message("Pedido efetuado")
             this.homeService.removeUnits(this.form.value.products);
             this.homeService.productSelected = [];
-            this.homeService.selection.deselect(this.form.value.products);
         });
     }
 

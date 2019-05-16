@@ -55,6 +55,6 @@ const routes: Routes = [
     ListaProdutosComponent, 
     ClienteModalComponent
   ],
-  providers: [ProdutoService, HomeService, Printer]
+  providers: [ HomeService, Printer]
 })
 export class HomePageModule {}

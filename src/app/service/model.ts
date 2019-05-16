@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { retry, finalize, catchError } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { HelperService } from './helper.service';
-
+import * as $ from 'jquery';
 export default class Model {
 
     protected url;
@@ -14,7 +14,15 @@ export default class Model {
 
     public get(parans?): Observable<any> {
         this.helper.load();
-        return this.http.get<any>(`${this.helper.url}/${this.url}?${parans}`).pipe(
+     
+        let urlParans = '';
+        $.each(parans, function(e,i){
+            console.log(e)
+            console.log(i)
+            urlParans = `${urlParans}${e}=${JSON.stringify(i)}&`;
+        })
+        console.log(urlParans);
+        return this.http.get<any>(`${this.helper.url}/${this.url}?${urlParans}`).pipe(
             retry(10),
             finalize(() => {
                 this.helper.load(false);

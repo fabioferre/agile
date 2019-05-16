@@ -30,30 +30,30 @@ export class ImpressoraComponent implements OnInit {
         private router: Router) { }
 
     ngOnInit() {
-        
+        console.log(this.helper.order)
         this.print();
     }
 
     print() {
-        // this.printer.isAvailable().then(onSuccess => {
-        //     console.log(onSuccess)
-        // }, onError => {
-        //     console.log(onError)
-        // });
+        this.printer.isAvailable().then(onSuccess => {
+            console.log(onSuccess)
+        }, onError => {
+            console.log(onError)
+        });
 
-        // let options: PrintOptions = {
-        //     name: 'MyDocument',
-        //     printerId: 'printer007',
-        //     duplex: false,
-        //     landscape: false,
-        //     grayscale: true
-        // }
+        let options: PrintOptions = {
+            name: 'MyDocument',
+            printerId: 'printer007',
+            duplex: false,
+            landscape: false,
+            grayscale: true
+        }
 
-        // this.printer.print("estou vivo", options).then(onSuccess => {
-        //     this.router.navigate(['/']);
-        //     console.log(onSuccess)
-        // }, onError => {
-        //     console.log(onError)
-        // });
+        this.printer.print("estou vivo", options).then(onSuccess => {
+            this.router.navigate(['/']);
+            console.log(onSuccess)
+        }, onError => {
+            console.log(onError)
+        });
     }
 }

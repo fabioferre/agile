@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
-import { Printer } from '@ionic-native/printer/ngx';
+
 
 import { HomePage } from './home.page';
 import { PainelPedidoComponent } from './painel-pedido/painel-pedido.component';
@@ -22,6 +22,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { ClienteModalComponent } from './modal/cliente-modal/cliente-modal.component';
 import {  MatCheckboxModule } from '@angular/material';
+import { Printer } from '@ionic-native/printer/ngx';
 const routes: Routes = [
   {
     path: '',

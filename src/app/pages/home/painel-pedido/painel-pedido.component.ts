@@ -1,7 +1,7 @@
 import { HelperService } from './../../../service/helper.service';
 import { HomeService } from './../home.service';
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { ModalController, AlertController } from '@ionic/angular';
+import { Component, OnInit} from '@angular/core';
+import { ModalController, AlertController, } from '@ionic/angular';
 import { ClienteModalComponent } from '../modal/cliente-modal/cliente-modal.component';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Printer, PrintOptions } from '@ionic-native/printer/ngx';
@@ -119,37 +119,16 @@ export class PainelPedidoComponent implements OnInit {
     }
 
     print(id) {
-        this.printer.isAvailable().then(onSuccess => {
-            console.log(onSuccess)
-        }, onError => {
-            console.log(onError)
-        });
+      
+       this.printer.isAvailable().then(onSuccess => {},erro=>{});
 
-        let options: PrintOptions = {
-            name: 'orders',
-            printerId: id,
-            duplex: true,
-            landscape: true,
-            grayscale: true
-        }
-        let text = `<h1>Pedido Nº ${id}<h1>      
-            <table border="1">
-            <tr>
-            <td>nome</td>
-            <td>qtd</td>
-            </tr>
-            <tr>
-            <td>Coca</td>
-            <td>R$ 4.00</td>
-            </tr>
-            </table>
-                    `
-        this.printer.print(text, options).then(onSuccess => {
-            console.log(onSuccess)
-        }, onError => {
-            console.log(onError)
-        });
+       this.printer.print('algo').then(onSuccess => {}, onError => {});
+
     }
+
+  
+
+
 
 
 }

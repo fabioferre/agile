@@ -73,8 +73,10 @@ export class EditarComponent implements OnInit {
                     console.log(this.form.value)
                     const idx = this.productService.products.indexOf(this.product);
                     this.productService.products[idx] = product;
+                    this.helper.load();
                     this.helper.message('Edição efetuada ')
                     this.router.navigate(['/produtos']);
+                   
                 }, error => this.helper.message(error));
         } else {
 

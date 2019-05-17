@@ -59,9 +59,11 @@ export class HelperService {
             this.loading.dismiss();
         } else {
             let loading = await this.loading.create({
-                message: "Processando..."
+                duration: 3000,
             });
-            return await loading.present();
+           
+            return await loading;
+             
         }
 
 

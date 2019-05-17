@@ -67,18 +67,20 @@
                     <div class="col-4">
                         <div class="form-group">
                             <label>Preço de venda</label>
-                            <input type="text" class="form-control money"  placeholder="R$" formControlName="sale_price">
+                            <input type="text" 
+                            class="form-control money" 
+                             placeholder="R$"
+                             formControlName="sale_price">
                             <i class="form-group__bar"></i>
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="form-group">
                             <label>Preço de custo</label>
-                            <input type="text" 
+                            <input [brmasker]="{mask: '00:00', type:'num'}" type="text" 
                             class="form-control money" 
-                            placeholder="R$"   name="money"
-                            [brmasker]="{form: forms.get('cost_price'), money: true}"
-                            formControlName="cost_price">
+                            formControlName="cost_price"
+                            >
                             <i class="form-group__bar"></i>
                         </div>
                         

@@ -42,7 +42,7 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 .btn-add.btn {
     
     
-    
+    color: var(--white);
     
     border-radius: 50%;
     @include media-breakpoint-down(md) { 
@@ -129,15 +129,35 @@ ion-modal.lg{
 }
 
 
+@include media-breakpoint-down(md) { 
+    ion-modal.md.responsive {
+        --width: 95% !important;
+        --height: 80% !important
+    }
+}
+@include media-breakpoint-up(md) { 
+    ion-modal.md.responsive {
+        --width: 70% !important;
+        --height: 50% !important
+    }
+}
+@include media-breakpoint-up(xl) { 
+    ion-modal.md.responsive {
+        --width: 400px !important;
+        --height: 180px !important
+    }
+}
+
 $color-gray: #BCBCBC;
 .text {
 	&-center { text-align: center; }
 }
 .ttu { text-transform: uppercase; }
 
+
 .printer-ticket {
 	display: table !important;
-	width: 100%;
+    width: 100%;
 	max-width: 150px;
 	font-weight: light;
 	line-height: 1.3em;

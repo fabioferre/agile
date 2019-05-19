@@ -2,8 +2,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            
-            <span *ngIf="showForm">
+            <span *ngIf="showForm" class="ml-2 mt-2 text-theme">
                 Formulario de cadastro
             </span>
             <a href="javascript:void(0)" (click)="modalCrl.dismiss()" class="close mt-3 mr-3">
@@ -43,8 +42,10 @@
                         </ng-container>
 
                         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="select(row)"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;" 
+                        (click)="homeService.selectClient(row); modalCrl.dismiss()"></tr>
                     </table>
+
                     <div class="text-center pt-4 my-3" *ngIf="alertToRegister">
                         Nenhum encontrado, deseja cadastrar? &nbsp;
                         <button class="btn btn-danger mr-2" (click)="modalCrl.dismiss()">
@@ -54,139 +55,12 @@
                             Sim
                         </button>
                     </div>
-
                 </div>
             </div>
         </div>
 
         <ng-template #formTemplate>
-            <div class="col-lg-12 " >
-                <form [formGroup]="form" (submit)="saveClient()">
-                    <div class="form-row py-4 px-2">
-                        <div class="col-lg-12">
-                            <div class="form-group">
-                                <label>Nome</label>
-                                <input type="text"
-                                class="form-control"
-                                placeholder="João Alberto..." 
-                                formControlName="name">
-                                <i class="form-group__bar"></i>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label>Celular</label>
-                                <input type="text"
-                                 class="form-control" 
-                                 placeholder="(11) 00000-0000" 
-                                 formControlName="cell_phone">
-                                <i class="form-group__bar"></i>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label>Telefone</label>
-                                <input type="text" 
-                                class="form-control" 
-                                placeholder="(11) 0000-0000" 
-                                formControlName="landline">
-                                <i class="form-group__bar"></i>
-                            </div>
-                        </div>
-                        
-                        <div class="col-12 mt-4 mb-2 text-uppercase px-0 text-theme border-bottom ">
-                            <h5 class="text-center">Endereço</h5>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label>Rua</label>
-                                <input type="text" 
-                                class="form-control"
-                                 placeholder="Ex: Estrada dos imigrantes..." 
-                                 formControlName="address_street">
-                                <i class="form-group__bar"></i>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="form-group">
-                                <label>Número</label>
-                                <input type="text" 
-                                class="form-control" 
-                                placeholder="Ex: 258" 
-                                formControlName="address_number">
-                                <i class="form-group__bar"></i>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="form-group">
-                                <label>CEP</label>
-                                <input type="text" 
-                                class="form-control" 
-                                placeholder="" 
-                                formControlName="address_zipcode">
-                                <i class="form-group__bar"></i>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="form-group">
-                                <label>Cidade</label>
-                                <input type="text" 
-                                class="form-control" 
-                                placeholder="Ex: São paulo, Rio de janeiro...." 
-                                formControlName="address_city">
-                                <i class="form-group__bar"></i>
-                            </div>
-                        </div>
-                        <div class="col-lg-2">
-                            <div class="form-group">
-                                <label>Estado</label>
-                                <input type="text" 
-                                class="form-control" 
-                                placeholder="Ex: sp, rj, bh, etc... " 
-                                formControlName="address_state">
-                                <i class="form-group__bar"></i>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 pt-3">
-                            <mat-form-field class="w-100">
-                                <mat-label>Bairros</mat-label>
-                                <mat-select formControlName="neighborhood_id">
-                                    <mat-option *ngFor="let neighborhood of neighborhoods" [value]="neighborhood.id">
-                                        {{ neighborhood.name }}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label>Complemento</label>
-                                <input type="text" 
-                                class="form-control" 
-                                placeholder="" 
-                                formControlName="address_complement">
-                                <i class="form-group__bar"></i>
-                            </div>
-                        </div>
-                        
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label>Ponto de referencia</label>
-                                <input type="text" 
-                                class="form-control" 
-                                placeholder="" 
-                                formControlName="address_complement">
-                                <i class="form-group__bar"></i>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-12 mx-auto">
-                            <button class="btn btn-primary btn-block" [disabled]="form.invalid" type="button">
-                                Salvar
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
+           <app-form-register-client></app-form-register-client>
         </ng-template>
     </div>
 </div>

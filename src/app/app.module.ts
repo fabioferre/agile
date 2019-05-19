@@ -1,7 +1,8 @@
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -11,12 +12,14 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { HeaderComponent } from './layout/header/header.component';
+
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthService } from './service/auth.service';
 import { IonicStorageModule } from '@ionic/storage';
 import { InterceptorService } from './service/interceptor.service';
 import { HelperService } from './service/helper.service';
 import { ProdutoService } from './pages/produtos/produto.service';
+import { HomeService } from './pages/home/home.service';
 
 
 @NgModule({
@@ -32,8 +35,7 @@ import { ProdutoService } from './pages/produtos/produto.service';
     BrowserAnimationsModule, 
     IonicStorageModule.forRoot({name: '_agile'}),
     IonicModule.forRoot(), 
-    AppRoutingModule,
-    
+    AppRoutingModule
   ],
   providers: [
     StatusBar,
@@ -41,6 +43,7 @@ import { ProdutoService } from './pages/produtos/produto.service';
     AuthService,
     HelperService,
     ProdutoService,
+    HomeService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
     {

@@ -6,15 +6,15 @@ const routes: Routes = [
   { path: '', redirectTo: 'home', canActivate: [AuthService], pathMatch: 'full' },
   { path: 'home', canActivate: [AuthService], loadChildren: './pages/home/home.module#HomePageModule' },
   { path: 'pedidos', canActivate: [AuthService], loadChildren: './pages/pedidos/pedidos.module#PedidosPageModule' },
-  { path: 'auth', loadChildren: './pages/auth/auth.module#AuthPageModule' },
-  { path: 'produtos', loadChildren: './pages/produtos/produtos.module#ProdutosPageModule' },
-  { path: 'mesas', loadChildren: './pages/mesas/mesas.module#MesasPageModule' },
-  { path: 'motoboy', loadChildren: './pages/motoboy/motoboy.module#MotoboyPageModule' },
-  { path: 'funcionarios', loadChildren: './pages/funcionarios/funcionarios.module#FuncionariosPageModule' },
-  { path: 'lojas', loadChildren: './pages/lojas/lojas.module#LojasPageModule' },
-  { path: 'clientes', loadChildren: './pages/clientes/clientes.module#ClientesPageModule' },
-  { path: 'bairros', loadChildren: './pages/bairros/bairros.module#BairrosPageModule' },
-  { path: 'sistema', loadChildren: './pages/sistema/sistema.module#SistemaPageModule' }
+  { path: 'auth', canActivate: [AuthService], loadChildren: './pages/auth/auth.module#AuthPageModule' },
+  { path: 'produtos', canActivate: [AuthService], loadChildren: './pages/produtos/produtos.module#ProdutosPageModule' },
+  { path: 'mesas', canActivate: [AuthService], loadChildren: './pages/mesas/mesas.module#MesasPageModule' },
+  { path: 'motoboy', canActivate: [AuthService], loadChildren: './pages/motoboy/motoboy.module#MotoboyPageModule' },
+  { path: 'funcionarios', canActivate: [AuthService], loadChildren: './pages/funcionarios/funcionarios.module#FuncionariosPageModule' },
+  { path: 'lojas', canActivate: [AuthService], loadChildren: './pages/lojas/lojas.module#LojasPageModule' },
+  { path: 'clientes', canActivate: [AuthService], loadChildren: './pages/clientes/clientes.module#ClientesPageModule' },
+  { path: 'bairros', canActivate: [AuthService], loadChildren: './pages/bairros/bairros.module#BairrosPageModule' },
+  { path: 'sistema', canActivate: [AuthService], loadChildren: './pages/sistema/sistema.module#SistemaPageModule' }
 
 ];
 

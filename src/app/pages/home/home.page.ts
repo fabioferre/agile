@@ -20,7 +20,7 @@ export class HomePage implements OnInit, OnDestroy {
         private homeService: HomeService) { }
 
     ngOnInit() {
-        
+        this.helper.load();
         this.productService.get({
             filter: [ 
                 ["sale", "1"]
@@ -31,18 +31,14 @@ export class HomePage implements OnInit, OnDestroy {
                 product.qtd = 1;
             })
             this.helper.load(false);
+            console.log();
         });
        
-
-        if(!this.homeService.productSelected) {
-            this.homeService.productSelected = [];
-        }
     }
 
 
     ngOnDestroy(): void {
-        this.homeService.productSelected = [];
-        this.homeService.selection.clear();
+        this.homeService.clearPainel()
         
     }
 

@@ -113,3 +113,12 @@ caption {
    
 }
 
+
+.printable, .printable * {
+    visibility: visible
+}
+.printable {
+	min-height: 50%;
+}
+
+

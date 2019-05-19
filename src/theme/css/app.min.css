@@ -11469,7 +11469,7 @@ textarea {
     margin-left: -.5rem
 }
 
-.avatar-char,
+
 .avatar-img {
     border-radius: 50%;
     width: 3rem;
@@ -11486,7 +11486,9 @@ textarea {
 
 .avatar-char {
     font-size: 1.2rem;
-    color: #FFF
+    color: #FFF;
+    width: 5rem;
+    height: 3rem;
 }
 
 .ma-backdrop {

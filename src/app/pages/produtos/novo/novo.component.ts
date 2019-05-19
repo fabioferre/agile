@@ -17,6 +17,7 @@ export class NovoComponent implements OnInit {
         number: [''],
         category_id: [''],
         weight: [''],
+        weight_type: [''],
         cost_price: [''],
         sale_price: [''],
         units: [0],
@@ -27,7 +28,7 @@ export class NovoComponent implements OnInit {
         brand: [''],
         minimum_units:[1]
     });
-    public categories: any;
+    public categories = this.categoriasService.categories;
     constructor(
         private fb: FormBuilder,
         private categoriasService :CategoriasService,
@@ -37,10 +38,9 @@ export class NovoComponent implements OnInit {
     ) { }
 
     ngOnInit() { 
-        this.getCategories();
+        // this.getCategories();
         // this.form.controls.sale.setValue(true);
         // this.form.controls.stock.setValue(true);
-        $('.money').mask('000.000.000.000.000,00', {reverse: true});
     }
 
     alter(control): void {
@@ -53,12 +53,7 @@ export class NovoComponent implements OnInit {
         }
     }
 
-    getCategories() {
-        return this.categoriasService.get().subscribe(categories => {
-            this.categories = categories;
-            
-        })
-    }
+   
     public submit(): void {
         
         if(this.form.valid) {

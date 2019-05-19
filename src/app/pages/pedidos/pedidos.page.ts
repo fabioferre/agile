@@ -12,10 +12,12 @@ export class PedidosPage implements OnInit {
 
 
 
-    constructor(public pedidosService: PedidosService,
+    constructor(
+        public pedidosService: PedidosService,
         public helper: HelperService) { }
 
     ngOnInit() {
+       
         let date = this.helper.date(null, "-1 day")
  
         this.pedidosService.get({

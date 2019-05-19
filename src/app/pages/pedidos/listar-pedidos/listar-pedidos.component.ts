@@ -5,41 +5,47 @@ import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-listar-pedidos',
-  templateUrl: './listar-pedidos.component.html',
-  styleUrls: ['./listar-pedidos.component.scss'],
+    selector: 'app-listar-pedidos',
+    templateUrl: './listar-pedidos.component.html',
+    styleUrls: ['./listar-pedidos.component.scss'],
 })
 export class ListarPedidosComponent implements OnInit {
+    public displayedColumns: string[] = ['status','created_at', 'id', 'type', 'total', 'action'];
+    public dataSource = new MatTableDataSource<any>(this.pedidosService.pedidos);
+    @ViewChild(MatSort) sort: MatSort;
 
-  displayedColumns: string[] = ['id', 'created_at', 'type', 'total', 'status', 'action'];
-  dataSource = new MatTableDataSource<any>(this.pedidosService.pedidos);
+    public typeSelling = {
+        type1: 'Balcão',
+        type2: 'Entrega',
+        type3: 'Cliente',
+        type4: 'Mesa'
+    };
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+    constructor(
+        private pedidosService: PedidosService,
+        private router: Router) { }
 
-  constructor(private pedidosService:PedidosService,
-    private router: Router) { }
+    ngOnInit() {
+        this.dataSource.sort = this.sort;
+    }
 
-  ngOnInit() {
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-  }
+    applyFilter(filterValue: string) {
+        this.dataSource.filter = filterValue.trim().toLowerCase();
 
-  applyFilter(filterValue: string) {
-      this.dataSource.filter = filterValue.trim().toLowerCase();
+        if (this.dataSource.paginator) {
+            this.dataSource.paginator.firstPage();
+        }
+    }
 
-      if (this.dataSource.paginator) {
-          this.dataSource.paginator.firstPage();
-      }
-  }
+    public delete(): void {
+        ''
+    }
 
-  public delete(): void {
+    public edit(req): void {
 
-  }
+        this.router.navigate(['/motoboy/editar']);
+    }
 
-  public edit(req): void {
 
-      this.router.navigate(['/motoboy/editar']);
-  }
 
 }

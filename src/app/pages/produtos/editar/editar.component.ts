@@ -18,6 +18,7 @@ export class EditarComponent implements OnInit {
         number: [this.product.number],
         category_id: [this.product.category ? this.product.category.id : ''],
         weight: [this.product.weight],
+        weight_type: [this.product.weight_type],
         cost_price: [this.product.cost_price],
         sale_price: [this.product.sale_price],
         units: [this.product.units],
@@ -73,8 +74,10 @@ export class EditarComponent implements OnInit {
                     console.log(this.form.value)
                     const idx = this.productService.products.indexOf(this.product);
                     this.productService.products[idx] = product;
+                    this.helper.load();
                     this.helper.message('Edição efetuada ')
                     this.router.navigate(['/produtos']);
+                   
                 }, error => this.helper.message(error));
         } else {
 

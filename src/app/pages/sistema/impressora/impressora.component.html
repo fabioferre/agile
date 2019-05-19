@@ -1,87 +1,140 @@
-<div class="printer">
-    <table class="printer-ticket text-black printable">
-    <thead>
-       <tr>
-           <th class="title" colspan="3">Tagmus Sistemas</th>
-       </tr>
-       <tr>
-           <th colspan="3">17/11/2015 - 11:57:52</th>
-       </tr>
-       <tr>
-           <th colspan="3">
-               Nome do cliente <br />
-               000.000.000-00
-           </th>
-       </tr>
-       <tr>
-           <th class="ttu" colspan="3">
-               <b>Cupom não fiscal</b>
-           </th>
-       </tr>
-   </thead>
-   <tbody>
-       <tr class="top">
-           <td colspan="3">Doce de brigadeiro</td>
-       </tr>
-       <tr>
-           <td>R$7,99</td>
-           <td>2.0</td>
-           <td>R$15,98</td>
-       </tr>
-       <tr>
-           <td colspan="3">Opcional Adicicional: grande</td>
-       </tr>
-       <tr>
-           <td>R$0,33</td>
-           <td>2.0</td>
-           <td>R$0,66</td>
-       </tr>
-   </tbody>
-   <tfoot>
-       <tr class="sup ttu p--0">
-           <td colspan="3">
-               <b>Totais</b>
-           </td>
-       </tr>
-       <tr class="ttu">
-           <td colspan="2">Sub-total</td>
-           <td align="right">R$43,60</td>
-       </tr>
-       <tr class="ttu">
-           <td colspan="2">Taxa de serviço</td>
-           <td align="right">R$0,00</td>
-       </tr>
-       <tr class="ttu">
-           <td colspan="2">Desconto</td>
-           <td align="right">0,00%</td>
-       </tr>
-       <tr class="ttu">
-           <td colspan="2">Total</td>
-           <td align="right">R$45,56</td>
-       </tr>
-       <tr class="sup ttu p--0">
-           <td colspan="3">
-               <b>Pagamentos</b>
-           </td>
-       </tr>
-       <tr class="ttu">
-           <td colspan="2">Total pago</td>
-           <td align="right">R$10,00</td>
-       </tr>
-       <tr class="ttu">
-           <td colspan="2">Troco</td>
-           <td align="right">R$0,44</td>
-       </tr>
-       <tr class="sup">
-           <td colspan="3" align="center">
-               <b>Pedido:</b>
-           </td>
-       </tr>
-       <tr class="sup">
-           <td colspan="3" align="center">
-               www.site.com
-           </td>
-       </tr>
-   </tfoot>
-</table>
-</div>
+<header class="content__title">
+    <h1>Configurar impressora</h1>
+</header>
+
+<ion-card>
+
+    <div class="card">
+        <form [formGroup]="form" (submit)="set()">
+            <div class="card-body">
+                <div class="row ">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label>Nome da Loja</label>
+                            <input type="text" 
+                            class="form-control"
+                            formControlName="company_name" >
+                            <i class="form-group__bar"></i>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label>Número</label>
+                            <input type="text" class="form-control" placeholder="nº no cardapio"
+                                formControlName="number" >
+                            <i class="form-group__bar"></i>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="form-group">
+                                    <label>Peso</label>
+                                    <input type="text" 
+                                        class="form-control" 
+                                        placeholder="Ex: 0,02, 0,30"
+                                        formControlName="weight">
+                                    <i class="form-group__bar"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Marca</label>
+                            <input type="text" 
+                            class="form-control" 
+                            placeholder=""
+                            formControlName="brand">
+                            <i class="form-group__bar"></i>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Código</label>
+                            <input type="text"
+                            class="form-control" 
+                            placeholder="0000000000000"
+                            maxlength="13"
+                            formControlName="code">
+                            <i class="form-group__bar"></i>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 text-center pt-3">
+                        <mat-slide-toggle class="mat-primary" 
+                        
+                            formControlName="sale"
+                            checked>
+                            Disponível para venda?
+                        </mat-slide-toggle>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label>Preço de venda</label>
+                            <input type="text" 
+                            class="form-control money" 
+                            placeholder="R$" 
+                            formControlName="sale_price"
+                           >
+                            <i class="form-group__bar"></i>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label>Preço de custo</label>
+                            <input type="text" 
+                            class="form-control money" 
+                            placeholder="R$" 
+                            formControlName="cost_price">
+                            <i class="form-group__bar"></i>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 text-center pt-3">
+                        <mat-slide-toggle class="mat-primary"  
+                        formControlName="stock" 
+                        checked>
+                            Disponível para estoque?
+                        </mat-slide-toggle>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label>Unidades</label>
+                            <input type="number" 
+                            class="form-control" 
+                            placeholder="0" 
+                            min="0" 
+                            formControlName="units">
+                            <i class="form-group__bar"></i>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label>Unidade minima</label>
+                            <input type="number" class="form-control" placeholder="0" min="0" formControlName="minimum_units">
+                            <i class="form-group__bar"></i>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label>Descrição</label>
+                    <textarea class="form-control textarea-autosize"></textarea>
+                    <i class="form-group__bar"></i>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="mt-5 text-center">
+                    <button type="submit" class="btn btn-primary" [disabled]="!form.valid">
+                        Salvar
+                    </button> 
+                    <a href="javascript:history.go(-1)" class="btn btn-secondary ml-4">
+                        Voltar
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</ion-card>

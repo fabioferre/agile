@@ -1,5 +1,5 @@
+import { SistemaService } from './../sistema.service';
 import { Component, OnInit } from '@angular/core';
-import { Printer, PrintOptions } from '@ionic-native/printer/ngx';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HelperService } from 'src/app/service/helper.service';
 import { Router } from '@angular/router';
@@ -10,50 +10,31 @@ import { Router } from '@angular/router';
     styleUrls: ['./impressora.component.scss'],
 })
 export class ImpressoraComponent implements OnInit {
+    public printer_options;
     public form: FormGroup = this.fb.group({
-        name: ['', [Validators.required, Validators.minLength(2)]],
-        number: [''],
-        category_id: [''],
-        weight: [''],
-        cost_price: [''],
-        sale_price: [''],
-        units: [1],
-        code: [''],
-        description: [''],
-        sale: [true],
-        stock: [true]
+        company_name: ['Teste', [Validators.required, Validators.minLength(2)]],
+        rate_service: [null],
+        copy: [null],
+        font_size: [null]
     });
 
-    constructor(private printer: Printer,
+    constructor(
         private fb: FormBuilder,
         private helper: HelperService,
-        private router: Router) { }
+        private router: Router,
+        public sistema : SistemaService) { }
 
     ngOnInit() {
-        console.log(this.helper.order)
-        this.print();
+   
     }
 
-    print() {
-        this.printer.isAvailable().then(onSuccess => {
-            console.log(onSuccess)
-        }, onError => {
-            console.log(onError)
-        });
+    set(){
 
-        let options: PrintOptions = {
-            name: 'MyDocument',
-            printerId: 'printer007',
-            duplex: false,
-            landscape: false,
-            grayscale: true
-        }
-
-        this.printer.print("estou vivo", options).then(onSuccess => {
-            this.router.navigate(['/']);
-            console.log(onSuccess)
-        }, onError => {
-            console.log(onError)
-        });
+        this.sistema.setPrinter()
     }
+
+    get(){
+        this.sistema.getPrinter()
+    }
+
 }

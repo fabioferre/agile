@@ -10,9 +10,10 @@ import Model from 'src/app/service/model';
 export class HomeService extends Model {
     protected url = 'orders';
     public productSelected: any = [];
+    public selection = new SelectionModel<any>(true, this.productSelected);
     public client: any;
     public table: any;
-    public selection = new SelectionModel<any>(true, this.productSelected);
+    public order_id: number;
 
 
     constructor(
@@ -65,8 +66,10 @@ export class HomeService extends Model {
 
     public removeProducUnits(listProducts) {
         for (let product of listProducts) {
-            const idx = this.productSelected.indexOf(product);
-            this.productSelected[idx].units -= product.qtd;
+            if(!product.old) {
+                const idx = this.productSelected.indexOf(product);
+                this.productSelected[idx].units -= product.qtd;
+            }
         }
     }
 
@@ -74,6 +77,7 @@ export class HomeService extends Model {
         this.productSelected = [];
         this.client = null;
         this.table = null;
+        this.order_id = null;
         this.selection.clear();
     }
     public  selectClient(client) {

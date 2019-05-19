@@ -34,7 +34,13 @@ export class PedidoMesasComponent implements OnInit {
         this.homeService.table = table_selected;
         if(table_selected.status > 1) {
             this.tableService.getById(table_selected.id).subscribe((table => {
+                
                 this.homeService.productSelected = JSON.parse(table.products);
+                this.homeService.order_id = table_selected.order_id;
+
+                this.homeService.productSelected.map(product => {
+                    product.old = true;
+                })
                 this.router.navigate(['/home']);
             }));  
         }  else {

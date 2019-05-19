@@ -37,7 +37,7 @@ export class HomePage implements OnInit, OnDestroy {
 
 
     ngOnDestroy(): void {
-        // this.homeService.clearPainel()
+        this.homeService.clearPainel()
         
     }
 

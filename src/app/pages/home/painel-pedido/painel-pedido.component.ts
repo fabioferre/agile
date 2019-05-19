@@ -97,10 +97,12 @@ export class PainelPedidoComponent implements OnInit {
         });
         return await modal.present();
     }
-
-    async showPayment() {
+    public prepareSale(): void {
         this.form.controls.total.setValue(this.homeService.totalPrice);
         this.form.controls.products.setValue(this.homeService.productSelected);
+    }
+    async showPayment() {
+        this.prepareSale();
         const alert = await this.alertCtrl.create({
             header: 'Forma de pagamento',
             inputs: [
@@ -150,21 +152,26 @@ export class PainelPedidoComponent implements OnInit {
 
 
     public storeOrder() {
-        
         if(this.form.valid) {
             this.homeService.create(this.form.value).subscribe((response) => {
                 this.homeService.removeProducUnits(this.form.value.products);
                 this.homeService.clearPainel();
                 this.changeActive(1);
-                // this.helper.order = response;
-                
-                // this.router.navigate(['/sistema/impressora']);
                 this.helper.message("Pedido efetuado");
             });
         } else {
             this.helper.message('Selecione ao menos um produto', 'warning')
         }
-        console.log(this.form.value)
+    }
+
+    public updateOrder(order_id): void {
+        this.prepareSale();
+        this.homeService.updateById(order_id, this.form.value).subscribe(response => {
+            this.homeService.removeProducUnits(this.form.value.products);
+            this.homeService.clearPainel();
+            this.changeActive(1);
+            this.helper.message("Pedido acrescentado");
+        });
     }
 
 }

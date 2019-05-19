@@ -8,6 +8,7 @@ import { async } from 'q';
 export default class Model {
     isLoading = false;
     protected url;
+    protected requestURL = 'http://tagmus.com.br/api';
     constructor(
         protected http: HttpClient,
         protected helper: HelperService) {
@@ -22,7 +23,7 @@ export default class Model {
             urlParans = `${urlParans}${e}=${JSON.stringify(i)}&`;
         });
 
-        return this.http.get<any>(`${this.helper.url}/${this.url}?${urlParans}`).pipe(
+        return this.http.get<any>(`${this.requestURL}/${this.url}?${urlParans}`).pipe(
             retry(10),
             finalize(() => {
                 this.isLoading = false;
@@ -36,7 +37,7 @@ export default class Model {
 
     public getNoLoad(parans: any = ''): Observable<any> {
 
-        return this.http.get<any>(`${this.helper.url}/${this.url}?${parans}`).pipe(
+        return this.http.get<any>(`${this.requestURL}/${this.url}?${parans}`).pipe(
             retry(1),
             catchError(error => of( this.helper.message(error)))
         );
@@ -45,7 +46,7 @@ export default class Model {
 
     public getById(id): Observable<any> {
         this.load();
-        return this.http.get<any>(`${this.helper.url}/${this.url}/${id}`).pipe(
+        return this.http.get<any>(`${this.requestURL}/${this.url}/${id}`).pipe(
             retry(10),
             finalize(() => {
                 this.isLoading = false;
@@ -56,7 +57,7 @@ export default class Model {
 
     public updateById(id, params): Observable<any> {
         this.load();
-        return this.http.put<any>(`${this.helper.url}/${this.url}/${id}`, params).pipe(
+        return this.http.put<any>(`${this.requestURL}/${this.url}/${id}`, params).pipe(
             finalize(() => {
                 this.isLoading = false;
                 this.helper.load(false);
@@ -67,7 +68,7 @@ export default class Model {
 
     public create(params): Observable<any>  {
         this.load();
-        return this.http.post<any>(`${this.helper.url}/${this.url}`, params).pipe(
+        return this.http.post<any>(`${this.requestURL}/${this.url}`, params).pipe(
             finalize(() => {
                 this.isLoading = false;
                 this.helper.load(false);
@@ -78,7 +79,7 @@ export default class Model {
 
     public deleteById(id): Observable<any> {
         this.load();
-        return this.http.delete<any>(`${this.helper.url}/${this.url}/${id}`).pipe(
+        return this.http.delete<any>(`${this.requestURL}/${this.url}/${id}`).pipe(
             retry(1),
             finalize(() => {
                 this.isLoading = false;

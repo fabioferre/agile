@@ -1,4 +1,9 @@
 .table-place:hover::before {
-    content: 'Abrir' !important;
+    content: 'Selecionar' ;
  
+}
+
+.disabled {
+    pointer-events: none;
+    opacity: 0.5;
 }

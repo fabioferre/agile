@@ -51,7 +51,7 @@ export class PainelPedidoComponent implements OnInit {
         for( let type  in this.types) {
             this.types[type] = false;
         }
-        
+        this.setTypeSelling = typeToActive;
         this.types[`selling${typeToActive}`] = true
     }
 
@@ -61,13 +61,14 @@ export class PainelPedidoComponent implements OnInit {
             this.form.addControl('client', new FormControl( this.homeService.client) );
             this.form.controls.client_id.setValue(this.homeService.client.id) ;
 
-        } else if(this.types.selling4 && this.homeService.table) {
+        } else if( this.homeService.table) {
             this.form.addControl('table', new FormControl( this.homeService.table) );
-            this.form.controls.client_id.setValue(this.homeService.table.id) ;
+            this.form.controls.table_id.setValue(this.homeService.table.id) ;
+            this.changeActive(4);
         } else {
             this.changeActive(1);
         }
-      
+     
     }
     
     set setTypeSelling(type) {
@@ -75,8 +76,6 @@ export class PainelPedidoComponent implements OnInit {
     }
 
     async modalClient(type?) {
-        this.setTypeSelling = type;
-        
         this.homeService.client = null;
         this.homeService.table = null;
 
@@ -90,7 +89,6 @@ export class PainelPedidoComponent implements OnInit {
     }
 
     async modalTable(type?) {
-        this.setTypeSelling = type;
         const modal = await this.modalCtrl.create({
             component: TableModalComponent
         });
@@ -158,7 +156,7 @@ export class PainelPedidoComponent implements OnInit {
                 this.homeService.removeProducUnits(this.form.value.products);
                 this.homeService.clearPainel();
                 this.changeActive(1);
-                this.helper.order = response;
+                // this.helper.order = response;
                 
                 // this.router.navigate(['/sistema/impressora']);
                 this.helper.message("Pedido efetuado");

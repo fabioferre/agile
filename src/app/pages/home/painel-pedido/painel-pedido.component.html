@@ -21,7 +21,7 @@
         </div>
         <div class="painel-item " 
         [ngClass]="{'active': types.selling4 }"
-        (click)="modalTable(4); changeActive(4)">
+        (click)="changeActive(4)" [routerLink]="['/pedidos/mesas']">
             <i class="fas fa-concierge-bell"></i>
             <span>Mesa</span>
         </div>
@@ -123,11 +123,11 @@
                     <div class="table-order"  *ngIf="homeService.table">
                         <span class="order-info-item ">
                             <strong>Lugares:</strong>
-                            1
+                            {{ homeService.table.places }}
                         </span>
                         <span class="order-info-item ">
                             <strong>Mesa: </strong>
-                            2
+                            {{ homeService.table.name }}
                         </span>
                     </div>
 

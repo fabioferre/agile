@@ -9,7 +9,10 @@
                     </h6>
                     <div class="actions actions--inverse">
                         <div class="actions__item">
-                            <a href="javascript:void(0)" class="text-white " (click)="getTables()">
+                            <a href="javascript:void(0)" 
+                            class="text-white " 
+                            (click)="getTables()"
+                            [ngClass]="{'disabled': !tableService.tables}">
                                 <i class="fas fa-sync  " [ngClass]="{'fa-spin': !tableService.tables}"></i>
                             </a>
                         </div>

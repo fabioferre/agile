@@ -31,14 +31,13 @@ export class HomePage implements OnInit, OnDestroy {
                 product.qtd = 1;
             })
             this.helper.load(false);
-            console.log();
         });
        
     }
 
 
     ngOnDestroy(): void {
-        this.homeService.clearPainel()
+        // this.homeService.clearPainel()
         
     }
 

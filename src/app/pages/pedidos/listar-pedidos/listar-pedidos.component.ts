@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProdutoService } from '../../produtos/produto.service';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { Router } from '@angular/router';
+import { HelperService } from 'src/app/service/helper.service';
 
 @Component({
     selector: 'app-listar-pedidos',
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class ListarPedidosComponent implements OnInit {
     public displayedColumns: string[] = ['status','created_at', 'id', 'type', 'total', 'action'];
-    public dataSource = new MatTableDataSource<any>(this.pedidosService.pedidos);
+    public dataSource: any;  
     @ViewChild(MatSort) sort: MatSort;
 
     public typeSelling = {
@@ -23,10 +24,24 @@ export class ListarPedidosComponent implements OnInit {
 
     constructor(
         private pedidosService: PedidosService,
-        private router: Router) { }
+        private router: Router,
+        private helper: HelperService ) { }
 
     ngOnInit() {
-        this.dataSource.sort = this.sort;
+        
+        let date = this.helper.date(null, "-1 day")
+ 
+        this.pedidosService.get({
+            filter: [
+                ['created_at', '>=', date]
+            ]
+        }).subscribe(pedidos => {
+            this.pedidosService.pedidos = pedidos;
+            // console.log(pedidos);
+            this.dataSource = new MatTableDataSource<any>(pedidos);
+            this.dataSource.sort = this.sort;
+
+        })
     }
 
     applyFilter(filterValue: string) {

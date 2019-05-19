@@ -12,16 +12,15 @@ export class NovoClienteComponent implements OnInit {
 
   public form: FormGroup = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(2)]],
-    number: [''],
-    category_id: [''],
-    weight: [''],
-    cost_price: [''],
-    sale_price: [''],
-    units: [1],
-    code: [''],
-    description: [''],
-    sale: [true],
-    stock: [true]
+    cell_phone: [''],
+    address_street: [''],
+    address_zipcode: [''],
+    address_city: [''],
+    address_state: [''],
+    address_complement: [1],
+    reference_point: [''],
+    neighborhood_id: [''],
+    category: [1]
 });
 
   constructor(private fb: FormBuilder,

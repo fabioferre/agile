@@ -23,7 +23,7 @@ export class ListarPedidosComponent implements OnInit {
     };
 
     constructor(
-        private pedidosService: PedidosService,
+        public pedidosService: PedidosService,
         private router: Router,
         private helper: HelperService ) { }
 

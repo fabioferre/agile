@@ -36,6 +36,20 @@ export class ImpressoraService extends Model {
     this.storage.set('printer_options', this.printer_options);
   }
 
+  printer(request){
+    let data =   {
+      "order": request.id,
+      "total": request.total,
+      "type": request.type,
+      "freight": request.freight,
+      "printer_options": this.printer_options,
+      "products": request.products,
+      "client": request.client,
+      "table": request.table
+  }
+    this.create( data).subscribe();
+  }
+
 
 
 }

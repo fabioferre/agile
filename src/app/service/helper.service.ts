@@ -24,7 +24,7 @@ export class HelperService {
 
     message(message?, style?) {
         if (style) {
-            this.toast(style, "Atenção: " + message);
+            this.toast(style,  message);
         } else {
             if (message.error) {
                 for (let i in message.error.errors) {
@@ -46,7 +46,7 @@ export class HelperService {
                 message: message,
                 position: "top",
                 color: status,
-                duration: 1000,
+                duration: 3000,
                 showCloseButton: true
             });
 
@@ -59,7 +59,7 @@ export class HelperService {
             this.loading.dismiss();
         } else {
             let loading = await this.loading.create({
-                duration: 3000,
+                duration: 5000,
             });
            
             return await loading;

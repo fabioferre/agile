@@ -11,8 +11,9 @@
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label>Nome</label>
-                            <input type="text" class="form-control" placeholder="pizza, arroz, frango..."
-                                formControlName="name" [ngClass]="{'form-control--active': form.value.name !== ''}">
+                            <input type="text" 
+                            class="form-control"
+                            formControlName="name" >
                             <i class="form-group__bar"></i>
                         </div>
                     </div>
@@ -20,7 +21,7 @@
                         <div class="form-group">
                             <label>Número</label>
                             <input type="text" class="form-control" placeholder="nº no cardapio"
-                                formControlName="number" [ngClass]="{'form-control--active': form.value.number !== ''}">
+                                formControlName="number" >
                             <i class="form-group__bar"></i>
                         </div>
                     </div>
@@ -35,31 +36,58 @@
                         </mat-form-field>
                     </div>
 
-
                     <div class="col-lg-4">
-                        <div class="form-group">
-                            <label>Peso</label>
-                            <input type="text" class="form-control" placeholder="10g, 10kl, 20lt..."
-                                formControlName="weight">
-                            <i class="form-group__bar"></i>
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="form-group">
+                                    <label>Peso</label>
+                                    <input type="text" 
+                                        class="form-control" 
+                                        placeholder="Ex: 0,02, 0,30"
+                                        formControlName="weight"
+                                        [brmasker]="{form: form.get('weight'), money: true, decimal: 3}">
+                                    <i class="form-group__bar"></i>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 pt-4">
+                                <mat-form-field class="w-100">
+                                    <mat-label>Tipo</mat-label>
+                                    <mat-select formControlName="category_id">
+                                        <mat-option *ngFor="let weight_tipe of productService.weight_types" 
+                                        [value]="weight_tipe.id">
+                                            {{ weight_tipe.name }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Marca</label>
-                            <input type="text" class="form-control" placeholder="Dolly" formControlName="brand">
+                            <input type="text" 
+                            class="form-control" 
+                            placeholder=""
+                            formControlName="brand">
                             <i class="form-group__bar"></i>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Código</label>
-                            <input type="text" class="form-control" placeholder="0000000000" formControlName="code">
+                            <input type="text"
+                            class="form-control" 
+                            placeholder="0000000000000"
+                            maxlength="13"
+                            formControlName="code"
+                            [brmasker]="{form: form.get('code'), type:'num'}">
                             <i class="form-group__bar"></i>
                         </div>
                     </div>
                     <div class="col-lg-4 text-center pt-3">
-                        <mat-slide-toggle class="mat-primary" (change)="alter('sale_price')" formControlName="sale"
+                        <mat-slide-toggle class="mat-primary" 
+                            (change)="alter('sale_price');alter('cost_price');" 
+                            formControlName="sale"
                             checked>
                             Disponível para venda?
                         </mat-slide-toggle>
@@ -69,38 +97,47 @@
                             <label>Preço de venda</label>
                             <input type="text" 
                             class="form-control money" 
-                             placeholder="R$"
-                             formControlName="sale_price">
+                            placeholder="R$" 
+                            formControlName="sale_price"
+                            [brmasker]="{form: form.get('sale_price'), money: true, decimalCaracter: '.'}">
                             <i class="form-group__bar"></i>
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="form-group">
                             <label>Preço de custo</label>
-                            <input [brmasker]="{mask: '00:00', type:'num'}" type="text" 
+                            <input type="text" 
                             class="form-control money" 
-                            formControlName="cost_price"
-                            >
+                            placeholder="R$" 
+                            [brmasker]="{form: form.get('cost_price'), money: true, decimalCaracter: '.'}"
+                            formControlName="cost_price">
                             <i class="form-group__bar"></i>
                         </div>
                         
                     </div>
                     <div class="col-lg-4 text-center pt-3">
-                        <mat-slide-toggle class="mat-primary" (change)="alter('units')" formControlName="stock" checked>
+                        <mat-slide-toggle class="mat-primary" 
+                        (change)="alter('units');alter('minimum_units')" 
+                        formControlName="stock" 
+                        checked>
                             Disponível para estoque?
                         </mat-slide-toggle>
                     </div>
                     <div class="col-4">
                         <div class="form-group">
                             <label>Unidades</label>
-                            <input type="text" class="form-control" placeholder="0" formControlName="units">
+                            <input type="number" 
+                            class="form-control" 
+                            placeholder="0" 
+                            min="0" 
+                            formControlName="units">
                             <i class="form-group__bar"></i>
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="form-group">
                             <label>Unidade minima</label>
-                            <input type="text" class="form-control" placeholder="0" formControlName="minimum_units">
+                            <input type="number" class="form-control" placeholder="0" min="0" formControlName="minimum_units">
                             <i class="form-group__bar"></i>
                         </div>
                     </div>
@@ -118,6 +155,9 @@
                     <button type="submit" class="btn btn-primary" [disabled]="!form.valid">
                         Salvar
                     </button>
+                    <a href="javascript:history.go(-1)" class="btn btn-secondary ml-4">
+                        Voltar
+                    </a>
                 </div>
             </div>
         </form>

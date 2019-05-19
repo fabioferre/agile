@@ -7,36 +7,47 @@ import { IonicModule } from '@ionic/angular';
 import { PedidosPage } from './pedidos.page';
 import { PedidosService } from './pedidos.service';
 import { MatTableModule, MatPaginatorModule, MatSortModule, MatFormFieldModule, MatInputModule, MatSlideToggleModule, MatSelectModule } from '@angular/material';
+import { PedidoMesasComponent } from './pedido-mesas/pedido-mesas.component';
+import { MesasService } from '../mesas/mesas.service';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: PedidosPage,
-    children:[
-      {
+    {
         path: '',
-        component: ListarPedidosComponent
-      }
-    ]
-  }
+        component: PedidosPage,
+        children: [
+            {
+                path: '', 
+                redirectTo: 'lista', 
+                pathMatch: 'full' 
+            },
+            {
+                path: 'lista',
+                component: ListarPedidosComponent
+            },
+            {
+                path: 'mesas',
+                component: PedidoMesasComponent
+            },
+        ]
+    }
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatSlideToggleModule,
-    MatSelectModule,
-    MatFormFieldModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    RouterModule.forChild(routes)
-  ],
-  declarations: [PedidosPage, ListarPedidosComponent],
-  providers:[PedidosService]
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatSlideToggleModule,
+        MatSelectModule,
+        MatFormFieldModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSortModule,
+        RouterModule.forChild(routes)
+    ],
+    declarations: [PedidosPage, ListarPedidosComponent, PedidoMesasComponent],
+    providers: [PedidosService, MesasService]
 })
-export class PedidosPageModule {}
+export class PedidosPageModule { }

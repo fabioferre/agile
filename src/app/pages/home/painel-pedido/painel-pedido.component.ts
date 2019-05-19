@@ -3,10 +3,10 @@ import { HomeService } from './../home.service';
 import { Component, OnInit, ViewChild} from '@angular/core';
 import { ModalController, AlertController, } from '@ionic/angular';
 import { ClienteModalComponent } from '../modal/cliente-modal/cliente-modal.component';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Printer, PrintOptions } from '@ionic-native/printer/ngx';
-import * as $ from 'jquery';
 import { Router } from '@angular/router';
+import { TableModalComponent } from '../modal/table-modal/table-modal.component';
 
 
 
@@ -26,6 +26,13 @@ export class PainelPedidoComponent implements OnInit {
         type: [1]
     });
 
+    public types = {
+        selling1: true,
+        selling2: false,
+        selling3: false,
+        selling4: false,
+    };
+
     constructor(
         private modalCtrl: ModalController,
         public homeService: HomeService,
@@ -37,27 +44,60 @@ export class PainelPedidoComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.changeActive();
-    }
-    get client_id() {
-        return this.form.value.client_id;
-    }
-    get table_id() {
-        return this.form.value.table_id;
-    }
-    async modalClient(request?) {
-        const modal = await this.modalCtrl.create({
-            component: ClienteModalComponent
-        });
+        this.checkSelling();
+    }   
 
+    public changeActive(typeToActive): void {
+        for( let type  in this.types) {
+            this.types[type] = false;
+        }
+        
+        this.types[`selling${typeToActive}`] = true
+    }
+
+    public checkSelling() {
+        if( (this.types.selling2 || this.types.selling3) && this.homeService.client) {
+
+            this.form.addControl('client', new FormControl( this.homeService.client) );
+            this.form.controls.client_id.setValue(this.homeService.client.id) ;
+
+        } else if(this.types.selling4 && this.homeService.table) {
+            this.form.addControl('table', new FormControl( this.homeService.table) );
+            this.form.controls.client_id.setValue(this.homeService.table.id) ;
+        } else {
+            this.changeActive(1);
+        }
+      
+    }
+    
+    set setTypeSelling(type) {
+        this.form.controls.type.setValue(type);
+    }
+
+    async modalClient(type?) {
+        this.setTypeSelling = type;
+        
+        this.homeService.client = null;
+        this.homeService.table = null;
+
+        const modal = await this.modalCtrl.create({
+            component: ClienteModalComponent,
+        });
+        modal.onDidDismiss().then(()=> {
+            this.checkSelling()
+        });
         return await modal.present();
     }
 
-    public changeActive(): void {
-        $('.painel-item').click(function () {
-            $('.painel-item.active').removeClass('active')
-            $(this).addClass('active');
+    async modalTable(type?) {
+        this.setTypeSelling = type;
+        const modal = await this.modalCtrl.create({
+            component: TableModalComponent
         });
+        modal.onDidDismiss().then(()=> {
+            this.checkSelling()
+        });
+        return await modal.present();
     }
 
     async showPayment() {
@@ -89,6 +129,7 @@ export class PainelPedidoComponent implements OnInit {
                 {
                     text: 'cancelar',
                     handler: () => {
+                       
                     }
                 },
                 {
@@ -111,22 +152,22 @@ export class PainelPedidoComponent implements OnInit {
 
 
     public storeOrder() {
-        // console.log(this.form)
-        this.homeService.create(this.form.value).subscribe((response) => {
-            this.helper.order = response;
-            this.router.navigate(['/sistema/impressora']);
-            this.homeService.selection.clear()
-            this.helper.message("Pedido efetuado")
-            this.homeService.removeUnits(this.form.value.products);
-            this.homeService.productSelected = [];
-        });
+        
+        if(this.form.valid) {
+            this.homeService.create(this.form.value).subscribe((response) => {
+                this.homeService.removeProducUnits(this.form.value.products);
+                this.homeService.clearPainel();
+                this.changeActive(1);
+                this.helper.order = response;
+                
+                // this.router.navigate(['/sistema/impressora']);
+                this.helper.message("Pedido efetuado");
+            });
+        } else {
+            this.helper.message('Selecione ao menos um produto', 'warning')
+        }
+        console.log(this.form.value)
     }
- 
-
-  
-
-
-
 
 }
 

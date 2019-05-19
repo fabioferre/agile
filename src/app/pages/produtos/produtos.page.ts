@@ -23,11 +23,10 @@ export class ProdutosPage implements OnInit {
         }
 
         if (!this.categoriasService.categories) {
-            this.categoriasService.getNoLoad().subscribe(categories => {
-              this.categoriasService.categories = categories;
-      
-            })
-          }
+            this.categoriasService.get().subscribe(categories => {
+                this.categoriasService.categories = categories;
+            });
+        }
 
 
     }

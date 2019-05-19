@@ -23,6 +23,11 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { ClienteModalComponent } from './modal/cliente-modal/cliente-modal.component';
 import {  MatCheckboxModule } from '@angular/material';
 import { Printer } from '@ionic-native/printer/ngx';
+import { FormRegisterClientComponent } from './modal/cliente-modal/form-register-client/form-register-client.component';
+import { ClientesService } from '../clientes/clientes.service';
+import { BairrosService } from '../bairros/bairros.service';
+import { BrMaskerModule } from 'br-mask';
+import { TableModalComponent } from './modal/table-modal/table-modal.component';
 const routes: Routes = [
   {
     path: '',
@@ -32,7 +37,8 @@ const routes: Routes = [
 
 @NgModule({
   entryComponents: [
-    ClienteModalComponent
+    ClienteModalComponent,
+    TableModalComponent
   ],
   imports: [
     CommonModule,
@@ -47,14 +53,17 @@ const routes: Routes = [
     MatSlideToggleModule,
     MatSelectModule,
     MatFormFieldModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    BrMaskerModule
   ],
   declarations: [
     HomePage, 
     PainelPedidoComponent, 
     ListaProdutosComponent, 
-    ClienteModalComponent
+    ClienteModalComponent,
+    TableModalComponent,
+    FormRegisterClientComponent
   ],
-  providers: [ HomeService, Printer]
+  providers: [ ClientesService, BairrosService, Printer]
 })
 export class HomePageModule {}

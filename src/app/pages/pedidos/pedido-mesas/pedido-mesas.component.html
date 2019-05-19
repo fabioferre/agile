@@ -1,0 +1,35 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card card--inverse widget-signups">
+                <div class="card-body">
+                    <h6 class="card-subtitle">
+                        Número exibido em <span class="text-warning"> amarelo</span> é a
+                        quantidade de lugares
+                    </h6>
+                    <div class="actions actions--inverse">
+                        <div class="actions__item">
+                            <a href="javascript:void(0)" class="text-white " (click)="getTables()">
+                                <i class="fas fa-sync  " [ngClass]="{'fa-spin': !tableService.tables}"></i>
+                            </a>
+                        </div>
+                        <div class="actions__item">
+                            <i data-toggle="dropdown" class="zmdi zmdi-more-vert"></i>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a href="#" class="dropdown-item">Refresh</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="widget-signups__list">
+                        <div class="table-place " *ngFor="let table of tableService.tables"
+                            [ngClass]="{'busy': table.status == 2}" (click)="getOrder(table)">
+                            <span>{{ table.name }}</span>
+                            <p>{{ table.places }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

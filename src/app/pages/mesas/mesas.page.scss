@@ -1,0 +1,56 @@
+.table-place {
+    width: 100px;
+    height: 80px;
+    display: inline-block;
+    border-radius: 20%;
+    background-color: rgba(30, 255, 0, 0.26);
+    text-align: center;
+    position: relative;
+    margin: 10px 20px 0;
+    text-transform: uppercase;
+    span {
+        position: relative;
+        top: 15px;
+        font-weight: bold;
+    }
+    p {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        color: var(--warning);
+    }
+    &.busy {
+        pointer-events: none;
+        background-color: transparent;
+        &::after {
+            content: 'Ocupada';
+            height: 100%;
+            background-color: rgba(235, 2, 2, 0.26);
+            padding-top: 31px;
+            font-size: 12px;
+        }
+    }
+    &::before, &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 0;
+        border-radius: 20%;
+        font-weight: bold;
+        transition: all 300ms;
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
+    &:hover::before {
+        content: 'Editar';
+        height: 100%;
+        background-color: rgba(1, 15, 22, 0.63);
+        z-index: 10;
+        transition: all 300ms;
+    }
+}

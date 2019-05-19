@@ -9,15 +9,28 @@ import Model from 'src/app/service/model';
 })
 export class HomeService extends Model {
     protected url = 'orders';
-    public productSelected: any;
+    public productSelected: any = [];
     public client: any;
-    selection = new SelectionModel<any>(true, this.productSelected);
+    public table: any;
+    public selection = new SelectionModel<any>(true, this.productSelected);
+
+
     constructor(
         protected http: HttpClient,
         protected helper: HelperService
     ) { super(http, helper); }
 
+    get totalPrice() {
+        let total = 0;
+        for (let product of this.productSelected) {
+            total = total + this.getTotalSale(product);
+        }
+        return total;
+    }
 
+    get frete() {
+        return 0;
+    }
 
     public removeProductSelected(product): void {
         this.productSelected.splice(this.productSelected.indexOf(product), 1)
@@ -30,7 +43,7 @@ export class HomeService extends Model {
             if (this.productSelected[idx].qtd < product.units) {
                 this.productSelected[idx].qtd++;
             }else{
-                this.helper.message("Produto sem estoque !", "danger")
+                this.helper.message("Limite no estoque!", "secondary")
             }
         } else {
 
@@ -41,31 +54,32 @@ export class HomeService extends Model {
 
     public lessProduct(product, event) {
         const idx = this.productSelected.indexOf(product);
-
         if (this.productSelected[idx].qtd > 1) {
             this.productSelected[idx].qtd--;
         }
     }
 
-
     public getTotalSale(product) {
         return product.sale_price * product.qtd;
     }
 
-    public removeUnits(listProducts) {
+    public removeProducUnits(listProducts) {
         for (let product of listProducts) {
             const idx = this.productSelected.indexOf(product);
             this.productSelected[idx].units -= product.qtd;
         }
     }
 
-    get totalPrice() {
-        let total = 0;
-        for (let product of this.productSelected) {
-            total = total + this.getTotalSale(product);
-        }
-        return total;
+    public clearPainel(): void {
+        this.productSelected = [];
+        this.client = null;
+        this.table = null;
+        this.selection.clear();
     }
+    public  selectClient(client) {
+        this.client = client;
+    }
+    
 
 
 }

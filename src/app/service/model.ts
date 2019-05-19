@@ -14,7 +14,7 @@ export default class Model {
 
     }
 
-    public get(parans?): Observable<any> {
+    public get(parans: any = ''): Observable<any> {
       this.load();
      
         let urlParans = '';
@@ -34,7 +34,7 @@ export default class Model {
 
     }
 
-    public getNoLoad(parans?): Observable<any> {
+    public getNoLoad(parans: any = ''): Observable<any> {
 
         return this.http.get<any>(`${this.helper.url}/${this.url}?${parans}`).pipe(
             retry(1),

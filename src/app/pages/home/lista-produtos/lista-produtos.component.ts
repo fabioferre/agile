@@ -4,8 +4,7 @@ import { ProdutoService } from '../../produtos/produto.service';
 import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import {SelectionModel} from '@angular/cdk/collections';
 import { Router } from '@angular/router';
-
-
+import { HelperService } from 'src/app/service/helper.service';
 
 
 @Component({
@@ -22,13 +21,16 @@ export class ListaProdutosComponent implements OnInit {
     constructor(
         private productService: ProdutoService, 
         public homeService: HomeService,
-        private router: Router
+        private router: Router,
+        private helper: HelperService
     ) { }
 
     ngOnInit() {
         this.dataSource = new MatTableDataSource<any>(this.products);
         this.dataSource.sort = this.sort;
         this.selection = this.homeService.selection;
+        // this.homeService.productSelected? 
+        //     this.homeService.productSelected.forEach(product => this.selection.select(product) ): null;
     }
 
     /** Whether the number of selected elements matches the total number of rows. */
@@ -63,8 +65,12 @@ export class ListaProdutosComponent implements OnInit {
         if(this.selection.isSelected(product)) {
             this.homeService.removeProductSelected(product)
         } else {
-            this.homeService.productSelected.push(product)
-            
+            if(product.units <= 0) {
+                this.helper.message('Produto sem estoque!','warning');
+                this.selection.toggle(product);
+            } else {
+                this.homeService.productSelected.push(product)
+            }
         }
     }
     

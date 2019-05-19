@@ -12,7 +12,8 @@ export class PedidosPage implements OnInit {
 
 
 
-    constructor(public pedidosService: PedidosService,
+    constructor(
+        public pedidosService: PedidosService,
         public helper: HelperService) { }
 
     ngOnInit() {

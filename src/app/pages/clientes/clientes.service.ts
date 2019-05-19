@@ -7,6 +7,6 @@ import Model from 'src/app/service/model';
   providedIn: 'root'
 })
 export class ClientesService extends Model {
-
+  protected url = 'client/partner';
   constructor(protected http: HttpClient, protected helper: HelperService) { super(http, helper) }
 }

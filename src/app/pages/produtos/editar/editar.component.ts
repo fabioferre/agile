@@ -34,7 +34,7 @@ export class EditarComponent implements OnInit {
     public categories: any;
     constructor(
         private fb: FormBuilder,
-        private productService: ProdutoService,
+        public productService: ProdutoService,
         private helper: HelperService,
         private router: Router,
         public categoriasService: CategoriasService

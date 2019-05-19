@@ -6,7 +6,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'home', canActivate: [AuthService], pathMatch: 'full' },
   { path: 'home', canActivate: [AuthService], loadChildren: './pages/home/home.module#HomePageModule' },
   { path: 'pedidos', canActivate: [AuthService], loadChildren: './pages/pedidos/pedidos.module#PedidosPageModule' },
-  { path: 'auth', canActivate: [AuthService], loadChildren: './pages/auth/auth.module#AuthPageModule' },
+  { path: 'auth', loadChildren: './pages/auth/auth.module#AuthPageModule' },
   { path: 'produtos', canActivate: [AuthService], loadChildren: './pages/produtos/produtos.module#ProdutosPageModule' },
   { path: 'mesas', canActivate: [AuthService], loadChildren: './pages/mesas/mesas.module#MesasPageModule' },
   { path: 'motoboy', canActivate: [AuthService], loadChildren: './pages/motoboy/motoboy.module#MotoboyPageModule' },

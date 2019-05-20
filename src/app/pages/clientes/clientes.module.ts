@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { EditarClienteComponent } from './editar-cliente/editar-cliente.component';
 import { ListarClienteComponent } from './listar-cliente/listar-cliente.component';
 import { NovoClienteComponent } from './novo-cliente/novo-cliente.component';
+import { BrMaskerModule } from 'br-mask';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -44,6 +45,7 @@ const routes: Routes = [
     MatSelectModule,
     MatFormFieldModule,
     MatTableModule,
+    BrMaskerModule,
     MatPaginatorModule,
     MatSortModule,
     RouterModule.forChild(routes)

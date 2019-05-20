@@ -4,9 +4,9 @@ import { Component, OnInit, ViewChild} from '@angular/core';
 import { ModalController, AlertController, } from '@ionic/angular';
 import { ClienteModalComponent } from '../modal/cliente-modal/cliente-modal.component';
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
-import { Printer, PrintOptions } from '@ionic-native/printer/ngx';
 import { Router } from '@angular/router';
 import { TableModalComponent } from '../modal/table-modal/table-modal.component';
+import { ImpressoraService } from '../../sistema/impressora.service';
 
 
 
@@ -39,8 +39,8 @@ export class PainelPedidoComponent implements OnInit {
         private alertCtrl: AlertController,
         private fb: FormBuilder,
         private helper: HelperService,
-        private printer: Printer,
-        private router: Router
+        private router: Router,
+        private impressora:ImpressoraService
     ) { }
 
     ngOnInit() {
@@ -154,10 +154,12 @@ export class PainelPedidoComponent implements OnInit {
     public storeOrder() {
         if(this.form.valid) {
             this.homeService.create(this.form.value).subscribe((response) => {
+                console.log(response)
                 this.homeService.removeProducUnits(this.form.value.products);
                 this.homeService.clearPainel();
                 this.changeActive(1);
                 this.helper.message("Pedido efetuado");
+                this.printer(response, this.form.value)
             });
         } else {
             this.helper.message('Selecione ao menos um produto', 'warning')
@@ -172,6 +174,10 @@ export class PainelPedidoComponent implements OnInit {
             this.changeActive(1);
             this.helper.message("Pedido acrescentado");
         });
+    }
+
+    printer(id, request){
+        this.impressora.printer(id, request)
     }
 
 }

@@ -9,9 +9,8 @@ import { ClientesService } from '../clientes.service';
   styleUrls: ['./listar-cliente.component.scss'],
 })
 export class ListarClienteComponent implements OnInit {
-
-  displayedColumns: string[] = ['item1', 'item2', 'item3', 'item4', 'item5', 'item6'];
-  dataSource = new MatTableDataSource<any>([]);
+  displayedColumns: string[] = ['name', 'cell_phone', 'address_street', 'amount', 'action'];
+  dataSource = new MatTableDataSource<any>(this.clientService.clientes);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;

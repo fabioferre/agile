@@ -10,7 +10,7 @@ export default class Model {
     protected url;
     protected requestURL = 'http://tagmus.com.br/api';
     constructor(
-        protected http: HttpClient,
+        public http: HttpClient,
         protected helper: HelperService) {
 
     }

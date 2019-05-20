@@ -18,9 +18,7 @@ export class PedidoMesasComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        if (!this.tableService.tables) {
-            this.getTables();
-        }
+        this.getTables();
     }
 
     public getTables(): void {

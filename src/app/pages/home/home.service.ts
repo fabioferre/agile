@@ -17,8 +17,8 @@ export class HomeService extends Model {
 
 
     constructor(
-        protected http: HttpClient,
-        protected helper: HelperService
+         http: HttpClient,
+         helper: HelperService
     ) { super(http, helper); }
 
     get totalPrice() {

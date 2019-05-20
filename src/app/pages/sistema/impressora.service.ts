@@ -17,7 +17,7 @@ export class ImpressoraService extends Model {
   };
   printers:any;
   protected url = 'printer'
-  protected requestURL = 'http://localhost:3002';
+  protected urlApi = 'http://localhost:3002';
   constructor(
     http: HttpClient,
     helper: HelperService,

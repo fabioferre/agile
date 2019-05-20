@@ -9,6 +9,7 @@ import { PedidosService } from './pedidos.service';
 import { MatTableModule, MatPaginatorModule, MatSortModule, MatFormFieldModule, MatInputModule, MatSlideToggleModule, MatSelectModule } from '@angular/material';
 import { PedidoMesasComponent } from './pedido-mesas/pedido-mesas.component';
 import { MesasService } from '../mesas/mesas.service';
+import { MostraPedidoComponent } from './mostra-pedido/mostra-pedido.component';
 
 const routes: Routes = [
     {
@@ -23,6 +24,10 @@ const routes: Routes = [
             {
                 path: 'lista',
                 component: ListarPedidosComponent
+            },
+            {
+                path: ':id',
+                component: MostraPedidoComponent
             },
             {
                 path: 'mesas',
@@ -47,7 +52,12 @@ const routes: Routes = [
         MatSortModule,
         RouterModule.forChild(routes)
     ],
-    declarations: [PedidosPage, ListarPedidosComponent, PedidoMesasComponent],
+    declarations: [
+        PedidosPage,
+         ListarPedidosComponent, 
+        PedidoMesasComponent,
+        MostraPedidoComponent
+    ],
     providers: [PedidosService, MesasService]
 })
 export class PedidosPageModule { }

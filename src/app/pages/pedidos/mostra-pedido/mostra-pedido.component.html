@@ -1,0 +1,38 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-8 mx-auto" *ngIf="order">
+            <div class="row">
+                <div class="col-lg-6 ">
+                    <ul class="list-group bg-white" >
+                        <li class="list-group-item" *ngFor="let product of order.current_products" >
+                            {{ product.product_name }} <br>
+                            <strong>Preço:</strong> {{ product.price  | currency:'BRL':'R$':'1.2-2' }} <br>
+                            <strong>Quantidade:</strong> {{ product.quantity }} <br>
+                            <strong>Total produto:</strong>
+                             {{ product.quantity * product.price  | currency:'BRL':'R$':'1.2-2' }} 
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-6  bg-white pt-4">
+                    <p>
+                        <span>Subtotal:</span> {{ order.subtotal | currency:'BRL':'R$':'1.2-2' }}
+                    </p>
+                    <p>
+                        <span>Frete:</span> {{ order.freight | currency:'BRL':'R$':'1.2-2' }}
+                    </p>
+                    <p>
+                        <span>Total:</span> {{ order.total | currency:'BRL':'R$':'1.2-2' }}
+                    </p>
+                    <p>
+                        <span>Forma de pagamento:</span> {{  order.form_payment  }}
+                    </p>
+                    <div class="form-group mt-3 text-center">
+                        <button class="btn btn-outline-success" (click)="finalize()">
+                            <i class="fas fa-dollar-sign"></i> Fechar pedido
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

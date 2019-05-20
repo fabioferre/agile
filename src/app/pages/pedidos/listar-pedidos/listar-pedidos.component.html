@@ -56,7 +56,7 @@
                         data-toggle="tooltip" data-placement="top" 
                         title="Finalizar pedido"  
                         (click)="finalize(element)"
-                        [routerLink]="['/pedidos', element.id]">
+                        [routerLink]="['/pedidos/detalhes', element.id]">
                             <i class="fas fa-dollar-sign"></i>
                         </button> 
                         <button class="btn btn-danger mx-1" *ngIf="element.status < 4"

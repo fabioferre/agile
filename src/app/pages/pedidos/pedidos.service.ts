@@ -19,6 +19,6 @@ export class PedidosService extends Model {
   }
 
   public changeStatus(order) {
-    return this.http.put(`${this.requestURL}/status/order${order.id}`, order)
+    return this.http.put(`${this.urlApi}/status/order/${order.id}`, order)
   }
 }

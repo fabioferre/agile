@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HelperService } from 'src/app/service/helper.service';
 import Model from 'src/app/service/model';
-import { Observable } from 'rxjs';
-import { retry } from 'rxjs/operators';
 import { Storage } from '@ionic/storage';
 
 @Injectable({
@@ -36,18 +34,19 @@ export class ImpressoraService extends Model {
     this.storage.set('printer_options', this.printer_options);
   }
 
-  printer(request){
-    let data =   {
-      "order": request.id,
+  printer(data, request){
+    let dado =   {
+      "order": data.id,
       "total": request.total,
-      "type": request.type,
+      "type": data.type,
       "freight": request.freight,
       "printer_options": this.printer_options,
       "products": request.products,
       "client": request.client,
       "table": request.table
   }
-    this.create( data).subscribe();
+ 
+    this.create( dado).subscribe();
   }
 
 

@@ -12,7 +12,6 @@ export class ListagemComponent implements OnInit {
     displayedColumns: string[] = ['id', 'image', 'name', 'brand', 'category', 'unity', 'action'];
     dataSource = new MatTableDataSource<any>(this.productService.products);
 
-    @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
 
     constructor(
@@ -21,7 +20,6 @@ export class ListagemComponent implements OnInit {
         private alertCtrl: AlertController) { }
 
     ngOnInit() {
-        this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
     }
 

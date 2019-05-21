@@ -13,14 +13,12 @@ export class ListarBairrosComponent implements OnInit {
   displayedColumns: string[] = ['name', 'frete', 'city', 'state', 'region', 'action'];
   dataSource = new MatTableDataSource<any>(this.bairrosService.bairros);
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private bairrosService: BairrosService,
     private router: Router) { }
 
   ngOnInit() {
-      this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
   }
 

@@ -31,7 +31,7 @@ export class EditarComponent implements OnInit {
         minimum_units: [this.product.minimum_units]
     });
 
-    public categories: any;
+    public categories = this.categoriasService.categories;
     constructor(
         private fb: FormBuilder,
         public productService: ProdutoService,
@@ -41,22 +41,29 @@ export class EditarComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.getCategories();
+ 
         if (!this.product) {
             this.router.navigate(['/produtos'])
         }
 
-
+        if(!this.product.sale) {
+            this.alter('cost_price')
+            this.alter('sale_price')
+        }
+        if(!this.product.stock) {
+            this.alter('units')
+            this.alter('minimum_units')
+        }
     }
 
-    // alter(control): void {
-    //     if (this.form.controls[control].enabled) {
-    //         this.form.controls[control].disable()
-    //         this.form.controls[control].setValue('')
-    //     } else {
-    //         this.form.controls[control].enable()
-    //     }
-    // }
+    alter(control): void {
+        if (this.form.controls[control].enabled) {
+            this.form.controls[control].disable()
+            this.form.controls[control].setValue('')
+        } else {
+            this.form.controls[control].enable()
+        }
+    }
 
     getCategories() {
         return this.categoriasService.get().subscribe(categories => {
@@ -68,17 +75,13 @@ export class EditarComponent implements OnInit {
     public submit(): void {
 
         if (this.form.valid) {
-            this.helper.load();
             this.productService.updateById(this.form.value.id, this.form.value)
                 .subscribe((product) => {
-                    console.log(this.form.value)
                     const idx = this.productService.products.indexOf(this.product);
                     this.productService.products[idx] = product;
-                    this.helper.load();
-                    this.helper.message('Edição efetuada ')
+                    this.helper.message('Edição efetuada com exito')
                     this.router.navigate(['/produtos']);
-                   
-                }, error => this.helper.message(error));
+                });
         } else {
 
         }

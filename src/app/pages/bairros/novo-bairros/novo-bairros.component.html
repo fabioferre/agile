@@ -11,12 +11,11 @@
             <div class="row ">
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <label>Cabeçalho</label>
+                        <label>Nome</label>
                         <input type="text" 
                             class="form-control" 
-                            placeholder="pizza, arroz, frango..."
-                            formControlName="name"
-                            [ngClass]="{'form-control--active': form.value.name !== ''}">
+                            placeholder=""
+                            formControlName="name" >
                         <i class="form-group__bar"></i>
                     </div>
                 </div>
@@ -31,88 +30,6 @@
                         <i class="form-group__bar"></i>
                     </div>
                 </div>
-                <!-- <div class="col-lg-4 pt-3">
-                    <mat-form-field class="w-100">
-                        <mat-label>Categoria</mat-label>
-                        <mat-select formControlName="category_id">
-                            <mat-option *ngFor="let category of categories" [value]="category.id">
-                                {{ category.name }}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div> -->
-
-                
-                <div class="col-lg-4">
-                    <div class="form-group">
-                        <label>Peso</label>
-                        <input type="text" 
-                            class="form-control" 
-                            placeholder="10g, 10kl, 20lt..."
-                            formControlName="weight">
-                        <i class="form-group__bar"></i>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="form-group">
-                        <label>Preço de custo</label>
-                        <input type="text" 
-                            class="form-control" 
-                            placeholder="30 R$"
-                            formControlName="cost_price">
-                        <i class="form-group__bar"></i>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>Código</label>
-                        <input type="text" 
-                            class="form-control" 
-                            placeholder="0000 000000"
-                            formControlName="code">
-                        <i class="form-group__bar"></i>
-                    </div>
-                </div>
-                <div class="col-lg-6 text-center pt-3">
-                    <mat-slide-toggle 
-                    class="mat-primary" 
-                    formControlName="sale" checked>
-                        Disponível para venda?
-                    </mat-slide-toggle>
-                </div>
-                <div class="col">
-                    <div class="form-group">
-                        <label>Preço de venda</label>
-                        <input type="text" 
-                        class="form-control" 
-                        placeholder="30 R$"
-                        formControlName="sale_price">
-                        <i class="form-group__bar"></i>
-                    </div>
-                </div>
-                <div class="col-lg-6 text-center pt-3">
-                    <mat-slide-toggle 
-                    class="mat-primary" 
-                    formControlName="stock" checked>
-                        Disponível para estoque?
-                    </mat-slide-toggle>
-                </div>
-                <div class="col">
-                    <div class="form-group">
-                        <label>Unidades</label>
-                        <input type="text" 
-                        class="form-control" 
-                        placeholder="1"
-                        formControlName="units">
-                        <i class="form-group__bar"></i>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label>Descrição</label>
-                <textarea class="form-control textarea-autosize"></textarea>
-                <i class="form-group__bar"></i>
             </div>
 
             <div class="clearfix"></div>

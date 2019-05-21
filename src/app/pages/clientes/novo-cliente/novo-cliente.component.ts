@@ -41,9 +41,7 @@ export class NovoClienteComponent implements OnInit {
       });
     }
   }
-  saveClient() {
 
-  }
   public submit(): void {
     if (this.form.valid) {
       this.clientesService.create(this.form.value)

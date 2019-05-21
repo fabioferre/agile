@@ -36,8 +36,10 @@ export class ListarClienteComponent implements OnInit {
   }
 
   public edit(req): void {
-
-      this.router.navigate(['/clientes/editar']);
+    this.clientService.clientToEdit = req;
+      this.router.navigate(['/clientes/editar', req]);
   }
+
+
 
 }

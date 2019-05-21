@@ -11,17 +11,17 @@
                 <div class="row">
                     <div class="form-group col-9">
                         <input type="text" 
-                        placeholder="Nome" 
+                        placeholder="Nome"
                         class="form-control" 
-                        formControlName="name"
-                        [brmasker]="{form: form.value.name, len: '10'}">
+                        minlength="7"
+                        formControlName="name">
                     </div>
                     <div class="form-group col-3">
                         <input type="text" 
-                        placeholder="Lugares" 
+                        placeholder="Lugares"
                         class="form-control" 
                         formControlName="places"
-                            [brmasker]="{form: form.value.places, len: '3', type:'num'}">
+                        min="0" max="50">
                         <i class="form-group__bar"></i>
                     </div>
                     <div class="col-lg-6 mx-auto">

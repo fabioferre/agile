@@ -57,7 +57,6 @@ export class NovoComponent implements OnInit {
     public submit(): void {
         
         if(this.form.valid) {
-            this.helper.load();
             this.productService.create(this.form.value)
             .subscribe((product)=> {
                 this.helper.message('produto cadastrado')

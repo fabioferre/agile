@@ -12,14 +12,12 @@ export class ListarMotoboyComponent implements OnInit {
   displayedColumns: string[] = ['name', 'cellphone', 'phone', 'cpf', 'address_neighborhood', 'action'];
   dataSource = new MatTableDataSource<any>(this.motoboyService.motoboy);
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private motoboyService:MotoboyService,
     private router: Router) { }
 
   ngOnInit() {
-      this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
   }
 

@@ -12,14 +12,12 @@ export class ListarClienteComponent implements OnInit {
   displayedColumns: string[] = ['name', 'cell_phone', 'address_street', 'amount', 'action'];
   dataSource = new MatTableDataSource<any>(this.clientService.clientes);
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private clientService: ClientesService,
     private router: Router) { }
 
   ngOnInit() {
-      this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
   }
 

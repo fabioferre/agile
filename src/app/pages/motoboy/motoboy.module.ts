@@ -6,6 +6,7 @@ import { ListarMotoboyComponent } from './listar-motoboy/listar-motoboy.componen
 import { EditarMotoboyComponent } from './editar-motoboy/editar-motoboy.component';
 import { NovoMotoboyComponent } from './novo-motoboy/novo-motoboy.component';
 import { IonicModule } from '@ionic/angular';
+import { BrMaskerModule } from 'br-mask';
 
 import { MotoboyPage } from './motoboy.page';
 import { MotoboyService } from './motoboy.service';
@@ -45,6 +46,7 @@ const routes: Routes = [
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    BrMaskerModule,
     RouterModule.forChild(routes)
   ],
   declarations: [MotoboyPage, ListarMotoboyComponent, EditarMotoboyComponent,  NovoMotoboyComponent],

@@ -13,17 +13,18 @@ export class NovoFuncionarioComponent implements OnInit {
 
   public form: FormGroup = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(2)]],
-    number: [''],
-    category_id: [''],
-    weight: [''],
-    cost_price: [''],
-    sale_price: [''],
-    units: [1],
-    code: [''],
-    description: [''],
-    sale: [true],
-    stock: [true]
+    cellphone: [''],
+    phone: [''],
+    address_street: [''],
+    address_number: [''],
+    address_zipcode: [''],
+    address_city: [""],
+    address_complement: [''],
+    address_neighborhood: [''],
+    address_state: [""],
+    cpf: ['', [Validators.required, Validators.minLength(14)]],
 });
+
 
   constructor(private fb: FormBuilder,
     private helper: HelperService,
@@ -38,7 +39,7 @@ export class NovoFuncionarioComponent implements OnInit {
         .subscribe(( funcionarios) => {
           this.helper.message('Funcionarios cadastrado !')
           console.log(funcionarios)
-          this.funcionariosService. funcionarios.push( funcionarios)
+          this.funcionariosService. funcionarios.push(funcionarios)
           this.router.navigate(['/funcionarios']);
         }, erro =>{
           console.log(erro)

@@ -23,19 +23,19 @@ export class EditarMotoboyComponent implements OnInit {
     address_neighborhood: [''],
     address_state: [""],
     cpf: ['', [Validators.required, Validators.minLength(14)]],
-});
+  });
 
-constructor(private fb: FormBuilder,
-  private helper: HelperService,
-  private router: Router,
-  public motoboyService: MotoboyService) { }
+  constructor(private fb: FormBuilder,
+    private helper: HelperService,
+    private router: Router,
+    public motoboyService: MotoboyService) { }
 
   ngOnInit() {
-      if(this.motoboyService.motoboyEdit){
-        this.form.patchValue(this.motoboyService.motoboyEdit.people)
-      }else{
-        this.router.navigate(['/motoboy']);
-      }
+    if (this.motoboyService.motoboyEdit) {
+      this.form.patchValue(this.motoboyService.motoboyEdit.people)
+    } else {
+      this.router.navigate(['/motoboy']);
+    }
   }
 
   public submit(): void {
@@ -43,7 +43,7 @@ constructor(private fb: FormBuilder,
       this.motoboyService.updateById(this.motoboyService.motoboyEdit.id, this.form.value)
         .subscribe((motoboy) => {
           const idx = this.motoboyService.motoboy.indexOf(this.motoboy);
-          this.motoboyService.motoboy[idx] =motoboy;
+          this.motoboyService.motoboy[idx] = motoboy;
           this.helper.message('Edição efetuada ')
           this.router.navigate(['/motoboy']);
 

@@ -38,7 +38,7 @@ export class ListarFuncionarioComponent implements OnInit {
 
   public edit(req): void {
 
-      this.router.navigate(['/funcionarios/editar']);
+      this.router.navigate(['/funcionarios/editar', req]);
   }
 
 }

@@ -8,6 +8,7 @@ import Model from 'src/app/service/model';
 })
 export class FuncionariosService extends Model {
 public funcionarios;
+public funcionarioEdit;
 protected url = 'employees';
   constructor(public http: HttpClient, public helper: HelperService) { super(http, helper)}
 }

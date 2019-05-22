@@ -1,10 +1,10 @@
 <header class="content__title">
-  <h1>Clientes</h1>
-  
+    <h1>Cadastar cliente</h1>
+
 </header>
 <div class="card">
     <div class="col-lg-12 ">
-        <form [formGroup]="form" (submit)="saveClient()">
+        <form [formGroup]="form" (submit)="submit()">
             <div class="form-row py-4 px-2">
                 <div class="col-lg-6">
                     <div class="form-group">
@@ -13,18 +13,24 @@
                         <i class="form-group__bar"></i>
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-3">
                     <div class="form-group">
                         <label>Celular</label>
-                        <input type="text" class="form-control"
-                         placeholder="11 00000-0000" 
-                         formControlName="cell_phone" 
-                         [brmasker]="{form: form.get('cell_phone'), phone: true}">
+                        <input type="text" class="form-control" placeholder="(11) 00000-0000" formControlName="cell_phone"
+                            [brmasker]="{form: form.get('cell_phone'), phone: true}">
                         <i class="form-group__bar"></i>
                     </div>
                 </div>
-                
-                <div class="col-lg-6 pt-4">
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <label>Telefone fixo</label>
+                        <input type="text" class="form-control" placeholder="(11) 0000-0000" formControlName="landline"
+                            [brmasker]="{form: form.get('landline'), phone: true}">
+                        <i class="form-group__bar"></i>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 pt-4">
                     <mat-form-field class="w-100">
                         <mat-label>Bairros</mat-label>
                         <mat-select formControlName="neighborhood_id">
@@ -34,16 +40,16 @@
                         </mat-select>
                     </mat-form-field>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-2">
                     <div class="form-group">
                         <label>CEP</label>
-                        <input type="text" class="form-control"  
-                        [brmasker]="{form: form.get('address_zipcode'), mask: '00000-000', type:'num', len: 9}"
-                        formControlName="address_zipcode">
+                        <input  type="text" class="form-control"
+                            [brmasker]="{form: form.get('address_zipcode'), mask: '00000-000', type:'num', len: 9}"
+                            formControlName="address_zipcode">
                         <i class="form-group__bar"></i>
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-5">
                     <div class="form-group">
                         <label>Rua</label>
                         <input type="text" class="form-control" placeholder="Ex: Rua das palmeiras..."
@@ -51,17 +57,25 @@
                         <i class="form-group__bar"></i>
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-2">
                     <div class="form-group">
                         <label>Número</label>
                         <input type="text" class="form-control" placeholder="Ex: A10" formControlName="address_number">
                         <i class="form-group__bar"></i>
                     </div>
                 </div>
-                <div class="col-lg-12">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Complemento</label>
+                        <input type="text" class="form-control" placeholder="Ex: Ap-12"
+                            formControlName="address_complement">
+                        <i class="form-group__bar"></i>
+                    </div>
+                </div>
+                <div class="col-lg-6">
                     <div class="form-group">
                         <label>Ponto de referencia</label>
-                        <input type="text" class="form-control" formControlName="address_complement">
+                        <input type="text" class="form-control" formControlName="reference_point">
                         <i class="form-group__bar"></i>
                     </div>
                 </div>

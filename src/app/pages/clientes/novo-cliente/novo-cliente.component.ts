@@ -1,3 +1,4 @@
+import { ClientesService } from 'src/app/pages/clientes/clientes.service';
 import { BairrosService } from 'src/app/pages/bairros/bairros.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
@@ -14,6 +15,7 @@ export class NovoClienteComponent implements OnInit {
   public form: FormGroup = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(2)]],
     cell_phone: [''],
+    landline: [''],
     address_street: [''],
     address_zipcode: [''],
     address_city: [''],
@@ -23,22 +25,31 @@ export class NovoClienteComponent implements OnInit {
     neighborhood_id: [''],
     address_number: [null],
     category: [1]
-});
+  });
 
   constructor(private fb: FormBuilder,
     private helper: HelperService,
     private router: Router,
-    public bairroService: BairrosService,) { }
+    public bairroService: BairrosService,
+    public clientesService: ClientesService) { }
 
   ngOnInit() {
 
-    if(!this.bairroService.bairros){
+    if (!this.bairroService.bairros) {
       this.bairroService.get().subscribe((bairros) => {
-          this.bairroService.bairros = bairros;
+        this.bairroService.bairros = bairros;
       });
-  } 
+    }
   }
-saveClient(){
-  
-}
+
+  public submit(): void {
+    if (this.form.valid) {
+      this.clientesService.create(this.form.value)
+        .subscribe((client) => {
+          this.helper.message('cliente cadastrado !')
+          this.clientesService.clientes.push(client)
+          this.router.navigate(['/clientes']);
+        });
+    }
+  }
 }

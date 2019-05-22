@@ -18,8 +18,6 @@ export class FormRegisterClientComponent implements OnInit {
         address_street: [''],
         address_number: [''],
         address_zipcode: [''],
-        address_city: [''],
-        address_state: [''],
         address_complement: [''],
         reference_point: [''],
         neighborhood_id: [''],

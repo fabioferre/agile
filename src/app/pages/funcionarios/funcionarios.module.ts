@@ -7,6 +7,7 @@ import { EditarFuncionarioComponent } from './editar-funcionario/editar-funciona
 import { ListarFuncionarioComponent } from './listar-funcionario/listar-funcionario.component';
 import { NovoFuncionarioComponent } from './novo-funcionario/novo-funcionario.component';
 import { IonicModule } from '@ionic/angular';
+import { BrMaskerModule } from 'br-mask';
 
 import { FuncionariosPage } from './funcionarios.page';
 import { MatInputModule, MatSlideToggleModule, MatSelectModule, MatFormFieldModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
@@ -45,6 +46,7 @@ const routes: Routes = [
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    BrMaskerModule,
     RouterModule.forChild(routes)
   ],
   declarations: [FuncionariosPage, ListarFuncionarioComponent, NovoFuncionarioComponent, EditarFuncionarioComponent],

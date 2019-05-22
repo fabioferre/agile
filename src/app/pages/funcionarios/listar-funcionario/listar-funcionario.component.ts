@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class ListarFuncionarioComponent implements OnInit {
 
-  displayedColumns: string[] = ['item1', 'item2', 'item3', 'item4', 'item5', 'item6'];
+  displayedColumns: string[] = ['name', 'cellphone', 'phone', 'cpf', 'address_neighborhood', 'action'];
   dataSource = new MatTableDataSource<any>([]);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;

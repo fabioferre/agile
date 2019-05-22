@@ -1,3 +1,4 @@
+import { FuncionariosService } from './../funcionarios.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { HelperService } from 'src/app/service/helper.service';
@@ -26,8 +27,23 @@ export class NovoFuncionarioComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private helper: HelperService,
-    private router: Router) { }
+    private router: Router,
+    public funcionariosService: FuncionariosService) { }
 
   ngOnInit() {}
+ 
+  public submit(): void {
+    if (this.form.valid) {
+      this.funcionariosService.create(this.form.value)
+        .subscribe(( funcionarios) => {
+          this.helper.message('Funcionarios cadastrado !')
+          console.log(funcionarios)
+          this.funcionariosService. funcionarios.push( funcionarios)
+          this.router.navigate(['/funcionarios']);
+        }, erro =>{
+          console.log(erro)
+        });
+    }
+  }
 
 }

@@ -39,7 +39,7 @@ export class NovoMotoboyComponent implements OnInit {
           this.helper.message('cliente cadastrado !')
           console.log(motoboy)
           this.motoboyService.motoboy.push(motoboy)
-          // this.router.navigate(['/motoboy']);
+          this.router.navigate(['/motoboy']);
         }, erro =>{
           console.log(erro)
         });

@@ -9,13 +9,11 @@ import { HelperService } from 'src/app/service/helper.service';
 })
 export class ClientesPage implements OnInit {
 
-  constructor(public clietes: ClientesService,
-            public helper: HelperService) { }
+  constructor(public clietes: ClientesService) { }
 
   ngOnInit() {
 
     if (!this.clietes.clientes) {
-      this.helper.load();
       this.clietes.get().subscribe(clientes => {
           this.clietes.clientes = clientes;
       });

@@ -1,3 +1,4 @@
+import { FuncionariosService } from './funcionarios.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FuncionariosPage implements OnInit {
 
-  constructor() { }
+  constructor(public funcionariosService: FuncionariosService) { }
 
   ngOnInit() {
+    if (!this.funcionariosService.funcionarios) {
+      this.funcionariosService.get().subscribe(funcionarios => {
+          this.funcionariosService.funcionarios = funcionarios;
+          console.log(funcionarios)
+      });
+  }
   }
 
 }

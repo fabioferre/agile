@@ -10,12 +10,10 @@ import { MotoboyService } from './motoboy.service';
 })
 export class MotoboyPage implements OnInit {
 
-  constructor(public motoboyService : MotoboyService,
-              public helper :HelperService) { }
+  constructor(public motoboyService : MotoboyService) { }
 
   ngOnInit() {
     if (!this.motoboyService.motoboy) {
-      this.helper.load();
       this.motoboyService.get().subscribe(motoboy => {
           this.motoboyService.motoboy = motoboy;
           console.log(motoboy)

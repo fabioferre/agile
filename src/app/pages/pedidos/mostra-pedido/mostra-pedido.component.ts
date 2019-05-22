@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PedidosService } from '../pedidos.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HomeService } from '../../home/home.service';
@@ -9,7 +9,7 @@ import { HelperService } from 'src/app/service/helper.service';
     templateUrl: './mostra-pedido.component.html',
     styleUrls: ['./mostra-pedido.component.scss'],
 })
-export class MostraPedidoComponent implements OnInit {
+export class MostraPedidoComponent implements OnInit, OnDestroy {
     public order: any;
     constructor(
         public orderService: PedidosService, 
@@ -40,5 +40,9 @@ export class MostraPedidoComponent implements OnInit {
             this.helper.message('Pedido finalizado!');
             this.router.navigate(['/pedidos']);
         });
+    }
+
+    ngOnDestroy(): void {
+        this.orderService.orderToFinalize = [];
     }
 }

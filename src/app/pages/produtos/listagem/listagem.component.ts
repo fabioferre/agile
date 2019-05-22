@@ -9,8 +9,8 @@ import { AlertController } from '@ionic/angular';
     styleUrls: ['./listagem.component.scss'],
 })
 export class ListagemComponent implements OnInit {
-    displayedColumns: string[] = ['id', 'image', 'name', 'brand', 'category', 'unity', 'action'];
-    dataSource = new MatTableDataSource<any>(this.productService.products);
+    public displayedColumns: string[] = ['id', 'image', 'name', 'brand', 'category', 'unity', 'action'];
+    public dataSource = new MatTableDataSource<any>(this.productService.products);
 
     @ViewChild(MatSort) sort: MatSort;
 
@@ -20,7 +20,15 @@ export class ListagemComponent implements OnInit {
         private alertCtrl: AlertController) { }
 
     ngOnInit() {
-        this.dataSource.sort = this.sort;
+        
+        if (!this.productService.products) {
+            this.productService.get().subscribe(products => {
+                this.productService.products = products;
+                this.dataSource.data = products;
+                this.dataSource._updateChangeSubscription();
+                this.dataSource.sort = this.sort;
+            });
+        }
     }
 
     applyFilter(filterValue: string) {
@@ -41,25 +49,29 @@ export class ListagemComponent implements OnInit {
     }
 
 
-    async delete(id) {
+    async delete(product) {
         const alert = await this.alertCtrl.create({
-            header: "Deseja excluir ?",
-            message: 'Esta ação vai remover este item',
-
+            header: 'Tem certeza?',
             buttons: [
                 {
-                    text: "Sim",
+                    text: 'Cancelar',
                     handler: () => {
-                        this.productService.deleteById(id).subscribe(product => {
-                
-                        });
+
                     }
                 },
                 {
-                    text: 'Cancelar',
-                    role: 'cancel',
-                    cssClass: 'secondary',
-                },
+                    text: 'Deletar',
+                    cssClass: 'danger',
+                    handler: () => {
+                        console.log()
+                        this.productService.deleteById(product.id).subscribe(response => {
+                            this.productService.products.slice(this.productService.products.indexOf(product), 1);
+                            this.dataSource.data = this.productService.products;
+                            this.dataSource._updateChangeSubscription();
+                        });
+                        
+                    }
+                }
             ]
         })
 

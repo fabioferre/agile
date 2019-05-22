@@ -28,7 +28,9 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 @import '~bootstrap/scss/variables';
 @import '~bootstrap/scss/mixins';
 
-
+.alert-button.ion-focusable.ion-activatable.danger {
+    color: var(--danger);
+}
 
 
 

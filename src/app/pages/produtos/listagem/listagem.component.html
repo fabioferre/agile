@@ -6,12 +6,12 @@
     
 </header>
 
-<div class="card  responsive-table">
+<div class="card  responsive-table" >
     <div class="card-body ">
         <mat-form-field class="w-100">
             <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro">
         </mat-form-field>
-        <div class="mat-elevation-z8 ">
+        <div class="mat-elevation-z8 " *ngIf="productService.products">
             <table mat-table [dataSource]="dataSource" matSort class="w-100 ">
 
                 <!-- ID Column -->
@@ -58,7 +58,7 @@
                         <button class="btn btn-primary mx-1" (click)="edit(element)">
                             <i class="zmdi zmdi-edit"></i>
                         </button>
-                        <button class="btn btn-danger mx-1" (click)="delete(element.id)">
+                        <button class="btn btn-danger mx-1" (click)="delete(element)">
                             <i class="zmdi zmdi-close"></i>
                         </button>
                     </td>

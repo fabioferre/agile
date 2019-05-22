@@ -5,10 +5,9 @@
   <button type="button" class="btn bg-theme btn-add text-white" [routerLink]="['novo']" >
     <i class="fas fa-plus fa-2x" ></i>
   </button>
-  
 </header>
   
-<div class="card  responsive-table">
+<div class="card  responsive-table" *ngIf="nbService.bairros">
   <div class="card-body ">
       <mat-form-field class="w-100">
           <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro">
@@ -53,7 +52,7 @@
                       <button class="btn btn-primary mx-1" (click)="edit(element)">
                           <i class="zmdi zmdi-edit"></i>
                       </button>
-                      <button class="btn btn-danger mx-1" (click)="delete()">
+                      <button class="btn btn-danger mx-1" (click)="alertDelete(element)">
                           <i class="zmdi zmdi-close"></i>
                       </button>
                   </td>
@@ -63,6 +62,11 @@
               <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
 
+          <div class="text-center py-4 " *ngIf="!nbService.bairros.length">
+            <h5>Nenhum bairro cadastrado! Deseja cadastrar?
+                <a [routerLink]="['novo']" class="text-theme">Sim</a> 
+            </h5>
+          </div>
       </div>
   </div>
 </div>

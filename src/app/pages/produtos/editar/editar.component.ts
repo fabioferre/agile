@@ -1,5 +1,5 @@
 import { CategoriasService } from './../categorias.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ProdutoService } from '../produto.service';
 import { HelperService } from 'src/app/service/helper.service';
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
     templateUrl: './editar.component.html',
     styleUrls: ['./editar.component.scss'],
 })
-export class EditarComponent implements OnInit {
+export class EditarComponent implements OnInit, OnDestroy {
 
     private product = this.productService.productToEdit;
     public form: FormGroup = this.form = this.fb.group({
@@ -73,18 +73,20 @@ export class EditarComponent implements OnInit {
     }
 
     public submit(): void {
-
         if (this.form.valid) {
             this.productService.updateById(this.form.value.id, this.form.value)
                 .subscribe((product) => {
                     const idx = this.productService.products.indexOf(this.product);
                     this.productService.products[idx] = product;
                     this.helper.message('Edição efetuada com exito')
+                    
                     this.router.navigate(['/produtos']);
                 });
-        } else {
+        } 
+    }
 
-        }
+    ngOnDestroy(): void {
+        this.productService.productToEdit = [];
     }
 
 

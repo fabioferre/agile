@@ -16,7 +16,6 @@ export class MotoboyPage implements OnInit {
     if (!this.motoboyService.motoboy) {
       this.motoboyService.get().subscribe(motoboy => {
           this.motoboyService.motoboy = motoboy;
-          console.log(motoboy)
       });
   }
   }

@@ -59,22 +59,10 @@
                     </li>
                 </ul>
             </li>
-
-
-            <li class="navigation__sub">
-                <a href="#"><i class="fas fa-users"></i>Clientes</a>
-                <ul>
-                    <li [routerLink]="['/clientes']" routerLinkActive="navigation__active">
-                        <a href="javascript:void(0)" >
-                            lista
-                        </a>
-                    </li>
-                    <li [routerLink]="['/produtos/novo']" routesrLinkActive="navigation__active">
-                        <a href="javascript:void(0)" >
-                            Novo
-                        </a>
-                    </li>
-                </ul>
+            <li [routerLink]="['/clientes']" routerLinkActive="navigation__active">
+                <a href="javascript:void(0)" >
+                    <i class="fas fa-users"></i>Clientes
+                </a>
             </li>
 
             <li [routerLink]="['/mesas']" routerLinkActive="navigation__active">

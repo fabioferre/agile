@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { HelperService } from 'src/app/service/helper.service';
 import { Router } from '@angular/router';
+import { LojasService } from '../../lojas/lojas.service';
 
 @Component({
   selector: 'app-editar-funcionario',
@@ -13,6 +14,8 @@ export class EditarFuncionarioComponent implements OnInit {
   public funcionario = this.funcionariosService.funcionarioEdit;
   public form: FormGroup = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(2)]],
+    occupation: [''],
+    store_id: [''],
     cellphone: [''],
     phone: [''],
     address_street: [''],
@@ -28,11 +31,17 @@ export class EditarFuncionarioComponent implements OnInit {
   constructor(public funcionariosService: FuncionariosService,
     private fb: FormBuilder,
     private helper: HelperService,
-    private router: Router, ) { }
+    private router: Router,
+    public lojasService: LojasService ) { }
 
   ngOnInit() {
     if (this.funcionariosService.funcionarioEdit) {
-      this.form.patchValue(this.funcionariosService.funcionarioEdit.people)
+      this.form.patchValue(this.funcionariosService.funcionarioEdit)
+      if (!this.lojasService.lojas) {
+        this.lojasService.get().subscribe((lojas) => {
+          this.lojasService.lojas = lojas;
+        });
+      }
     } else {
       this.router.navigate(['/funcionarios']);
     }

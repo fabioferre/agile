@@ -6,10 +6,17 @@
     <div class="col-lg-12 ">
         <form [formGroup]="form" (submit)="submit()">
             <div class="form-row py-4 px-2">
-                <div class="col-12">
+                <div class="col-8">
                     <div class="form-group">
                         <label>Nome</label>
                         <input type="text" class="form-control" placeholder="João Alberto..." formControlName="name">
+                        <i class="form-group__bar"></i>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label>Cargo</label>
+                        <input type="text" class="form-control" placeholder="Ex. cozinheiro" formControlName="occupation">
                         <i class="form-group__bar"></i>
                     </div>
                 </div>
@@ -37,6 +44,16 @@
                         <i class="form-group__bar"></i>
                     </div>
                 </div>
+                <div class="col-lg-3 pt-4">
+                    <mat-form-field class="w-100">
+                        <mat-label>Loja</mat-label>
+                        <mat-select formControlName="store_id">
+                            <mat-option *ngFor="let loja of lojasService.lojas" [value]="loja.id">
+                                {{ loja.name }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
   
                 <div class="col-lg-5">
                     <div class="form-group">
@@ -45,7 +62,7 @@
                         <i class="form-group__bar"></i>
                     </div>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-lg-4">
                     <div class="form-group">
                         <label>CEP</label>
                         <input type="text" class="form-control"
@@ -54,7 +71,7 @@
                         <i class="form-group__bar"></i>
                     </div>
                 </div>
-                <div class="col-lg-5">
+                <div class="col-lg-6">
                     <div class="form-group">
                         <label>Rua</label>
                         <input type="text" class="form-control" placeholder="Ex: Rua das palmeiras..."
@@ -62,14 +79,14 @@
                         <i class="form-group__bar"></i>
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-3">
                     <div class="form-group">
                         <label>Número</label>
                         <input type="text" class="form-control" placeholder="Ex: A10" formControlName="address_number">
                         <i class="form-group__bar"></i>
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-3">
                     <div class="form-group">
                         <label>Complemento</label>
                         <input type="text" class="form-control" placeholder="Ex: Ap-12"

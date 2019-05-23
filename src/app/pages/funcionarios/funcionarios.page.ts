@@ -14,7 +14,6 @@ export class FuncionariosPage implements OnInit {
     if (!this.funcionariosService.funcionarios) {
       this.funcionariosService.get().subscribe(funcionarios => {
           this.funcionariosService.funcionarios = funcionarios;
-          console.log(funcionarios)
       });
   }
   }

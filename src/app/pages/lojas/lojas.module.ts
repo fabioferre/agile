@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { EditarLojaComponent  } from './editar-loja/editar-loja.component'
 import { ListarLojasComponent } from './listar-lojas/listar-lojas.component'
 import { NovaLojaComponent } from './nova-loja/nova-loja.component'
+import { BrMaskerModule } from 'br-mask';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -46,6 +47,7 @@ const routes: Routes = [
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    BrMaskerModule,
     RouterModule.forChild(routes)
   ],
   declarations: [LojasPage, EditarLojaComponent, ListarLojasComponent, NovaLojaComponent],

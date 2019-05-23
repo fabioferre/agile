@@ -32,7 +32,7 @@ export class EditarMotoboyComponent implements OnInit {
 
   ngOnInit() {
     if (this.motoboyService.motoboyEdit) {
-      this.form.patchValue(this.motoboyService.motoboyEdit.people)
+      this.form.patchValue(this.motoboyService.motoboyEdit)
     } else {
       this.router.navigate(['/motoboy']);
     }

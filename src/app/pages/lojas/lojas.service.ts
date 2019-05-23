@@ -8,6 +8,7 @@ import { HelperService } from 'src/app/service/helper.service';
 })
 export class LojasService extends Model {
   public lojas;
+  public lojaEdit;
   protected url = 'stores'
   constructor(http :HttpClient , helper : HelperService) { super(http, helper)}
 }

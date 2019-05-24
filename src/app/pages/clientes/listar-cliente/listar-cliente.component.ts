@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { Router } from '@angular/router';
 import { ClientesService } from '../clientes.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-listar-cliente',
@@ -15,7 +16,8 @@ export class ListarClienteComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private clientService: ClientesService,
-    private router: Router) { }
+    private router: Router,
+    public navCtrl : NavController) { }
 
   ngOnInit() {
       this.dataSource.sort = this.sort;
@@ -36,6 +38,10 @@ export class ListarClienteComponent implements OnInit {
   public edit(req): void {
     this.clientService.clientToEdit = req;
       this.router.navigate(['/clientes/editar', req]);
+  }
+
+  public show(req): void {
+      this.router.navigate(['/clientes/show', req.id]);
   }
 
 

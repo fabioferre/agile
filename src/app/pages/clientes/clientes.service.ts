@@ -11,6 +11,7 @@ import { of } from 'rxjs';
 export class ClientesService extends Model {
   public clientes;
   public clientToEdit;
+  public clientToShow;
   protected url = 'client/partner';
   
   constructor(http: HttpClient,  helper: HelperService) { super(http, helper) }

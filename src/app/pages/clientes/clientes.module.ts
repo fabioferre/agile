@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { EditarClienteComponent } from './editar-cliente/editar-cliente.component';
 import { ListarClienteComponent } from './listar-cliente/listar-cliente.component';
 import { NovoClienteComponent } from './novo-cliente/novo-cliente.component';
+import { ShowClienteComponent } from './show-cliente/show-cliente.component'
 import { BrMaskerModule } from 'br-mask';
 
 import { IonicModule } from '@ionic/angular';
@@ -17,18 +18,22 @@ const routes: Routes = [
   {
     path: '',
     component: ClientesPage,
-    children:[
+    children: [
       {
         path: '',
         component: ListarClienteComponent
       },
       {
         path: 'novo',
-        component:  NovoClienteComponent
+        component: NovoClienteComponent
       },
       {
         path: 'editar',
-        component:  EditarClienteComponent
+        component: EditarClienteComponent
+      },
+      {
+        path: 'show/:id',
+        component: ShowClienteComponent
       }
     ]
   }
@@ -50,7 +55,7 @@ const routes: Routes = [
     MatSortModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [ClientesPage, EditarClienteComponent, ListarClienteComponent, NovoClienteComponent],
-  providers:[ClientesService]
+  declarations: [ClientesPage, EditarClienteComponent, ListarClienteComponent, NovoClienteComponent,  ShowClienteComponent],
+  providers: [ClientesService]
 })
-export class ClientesPageModule {}
+export class ClientesPageModule { }

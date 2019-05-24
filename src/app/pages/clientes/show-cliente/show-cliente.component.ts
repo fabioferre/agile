@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ShowClienteComponent implements OnInit {
   public client;
-  public sum;
+  public orders;
   constructor(public clientesService : ClientesService,
             private activedRoute: ActivatedRoute,) { }
 
@@ -21,9 +21,9 @@ export class ShowClienteComponent implements OnInit {
       });
     }
 
-      this.clientesService.getSum(this.activedRoute.snapshot.paramMap.get('id')).subscribe((sum) => {
-        this.sum = sum;
-        console.log(sum)
+      this.clientesService.getSum(this.activedRoute.snapshot.paramMap.get('id')).subscribe((orders) => {
+        this.orders = orders;
+   
       });
  
   }

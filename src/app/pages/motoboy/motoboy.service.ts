@@ -8,6 +8,7 @@ import Model from 'src/app/service/model';
   providedIn: 'root'
 })
 export class MotoboyService extends Model {
+  public motoboys: any;
   public motoboy;
   public motoboyEdit;
   protected url = 'motoboy';

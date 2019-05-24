@@ -63,7 +63,7 @@ export class ListaProdutosComponent implements OnInit {
         if(this.selection.isSelected(product)) {
             this.homeService.removeProductSelected(product)
         } else {
-            if(product.units <= 0) {
+            if(product.units <= 0 && product.stock) {
                 this.helper.message('Produto sem estoque!','warning');
                 this.selection.toggle(product);
             } else {

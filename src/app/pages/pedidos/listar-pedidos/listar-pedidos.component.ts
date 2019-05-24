@@ -4,7 +4,8 @@ import { ProdutoService } from '../../produtos/produto.service';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { Router } from '@angular/router';
 import { HelperService } from 'src/app/service/helper.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
+import { ModalMotoboyComponent } from './modal-motoboy/modal-motoboy.component';
 
 @Component({
     selector: 'app-listar-pedidos',
@@ -27,7 +28,8 @@ export class ListarPedidosComponent implements OnInit {
         public orderService: PedidosService,
         private router: Router,
         private helper: HelperService,
-        public alertCtrlh: AlertController
+        public alertCtrl: AlertController,
+        public modalCtrl: ModalController
     ) { }
 
     ngOnInit() {
@@ -65,8 +67,14 @@ export class ListarPedidosComponent implements OnInit {
     }
 
     public finalize(order) {
-        console.log(order)
         this.orderService.orderToFinalize = order;
     }
 
+
+    async outToDeliver(order) {
+        const modal = await this.modalCtrl.create({
+            component: ModalMotoboyComponent
+        }) ;
+        return await modal.present();
+    }
 }

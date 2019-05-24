@@ -41,6 +41,7 @@ export class HomeService extends Model {
     public plusProduct(product, event) {
         const idx = this.productSelected.indexOf(product);
         if (product.stock) {
+            
             if (this.productSelected[idx].qtd < product.units) {
                 this.productSelected[idx].qtd++;
             }else{

@@ -159,7 +159,7 @@ export class PainelPedidoComponent implements OnInit {
                 this.homeService.clearPainel();
                 this.changeActive(1);
                 this.helper.message("Pedido efetuado");
-                this.printer(response, this.form.value)
+                this.printer(response, this.form.value);
             });
         } else {
             this.helper.message('Selecione ao menos um produto', 'warning')

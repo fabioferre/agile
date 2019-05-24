@@ -16,5 +16,12 @@ export class ClientesService extends Model {
   
   constructor(http: HttpClient,  helper: HelperService) { super(http, helper) }
 
+  getSum(id, parans?){
+    return this.http.get<any>(`${this.urlApi}/${this.url}/${id}/orders/sum?${parans}`).pipe(
+      retry(1),
+      catchError(error => of( this.helper.message(error)))
+  );
+  }
 
+  
 }

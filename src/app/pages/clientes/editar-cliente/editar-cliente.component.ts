@@ -46,13 +46,13 @@ export class EditarClienteComponent implements OnInit {
     if (this.form.valid) {
       this.clientesService.updateById(this.form.value.id, this.form.value)
         .subscribe((client) => {
-          console.log(this.form.value)
-          const idx = this.clientesService.clientes.indexOf(this.cliente);
-          this.clientesService.clientes[idx] = client;
-          this.helper.message('Edição efetuada ')
-          this.router.navigate(['/clientes']);
-
-        }, error => this.helper.message(error));
+          if(client){
+            const idx = this.clientesService.clientes.indexOf(this.cliente);
+            this.clientesService.clientes[idx] = client;
+            this.helper.message('Edição efetuada ')
+            this.router.navigate(['/clientes']);
+          }
+        });
     }
 
   }

@@ -46,9 +46,13 @@ export class NovoClienteComponent implements OnInit {
     if (this.form.valid) {
       this.clientesService.create(this.form.value)
         .subscribe((client) => {
-          this.helper.message('cliente cadastrado !')
-          this.clientesService.clientes.push(client)
-          this.router.navigate(['/clientes']);
+          if(client){
+            this.helper.message('cliente cadastrado !')
+            this.clientesService.clientes.push(client)
+            this.router.navigate(['/clientes']);
+
+          }
+
         });
     }
   }

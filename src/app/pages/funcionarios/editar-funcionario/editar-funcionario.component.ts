@@ -50,13 +50,14 @@ export class EditarFuncionarioComponent implements OnInit {
   public submit(): void {
     if (this.form.valid) {
       this.funcionariosService.updateById(this.funcionariosService.funcionarioEdit.id, this.form.value)
-        .subscribe((motoboy) => {
-          const idx = this.funcionariosService.funcionarios.indexOf(this.funcionario);
-          this.funcionariosService.funcionarios[idx] = motoboy;
-          this.helper.message('Edição efetuada ')
-          this.router.navigate(['/funcionarios']);
-
-        }, error => this.helper.message(error));
+        .subscribe((funcionario) => {
+          if(funcionario){
+            const idx = this.funcionariosService.funcionarios.indexOf(this.funcionario);
+            this.funcionariosService.funcionarios[idx] = funcionario;
+            this.helper.message('Edição efetuada ')
+            this.router.navigate(['/funcionarios']);
+          }
+        });
     }
 
   }

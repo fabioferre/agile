@@ -27,8 +27,8 @@ export class EditarBairrosComponent implements OnInit {
         private nbService: BairrosService
     ) { }
 
-    ngOnInit() { 
-        if(this.nbService.bairroToEdit) {
+    ngOnInit() {
+        if (this.nbService.bairroToEdit) {
             this.form.patchValue(this.nbService.bairroToEdit);
         } else {
             this.router.navigate(['bairros']);
@@ -37,11 +37,15 @@ export class EditarBairrosComponent implements OnInit {
 
     public save(): void {
         this.nbService.updateById(this.nbService.bairroToEdit.id, this.form.value)
-        .subscribe(response => {
-            let idx = this.nbService.bairros.indexOf(this.nbService.bairroToEdit);
-            this.nbService.bairros[idx] = this.form.value;
-            this.router.navigate(['/bairros']);
-        })
+            .subscribe(response => {
+                if (response) {
+                    let idx = this.nbService.bairros.indexOf(this.nbService.bairroToEdit);
+                    this.nbService.bairros[idx] = this.form.value;
+                    this.router.navigate(['/bairros']);
+
+                }
+
+            })
     }
 
 }

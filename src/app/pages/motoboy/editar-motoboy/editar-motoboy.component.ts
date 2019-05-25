@@ -42,12 +42,14 @@ export class EditarMotoboyComponent implements OnInit {
     if (this.form.valid) {
       this.motoboyService.updateById(this.motoboyService.motoboyEdit.id, this.form.value)
         .subscribe((motoboy) => {
-          const idx = this.motoboyService.motoboy.indexOf(this.motoboy);
-          this.motoboyService.motoboy[idx] = motoboy;
-          this.helper.message('Edição efetuada ')
-          this.router.navigate(['/motoboy']);
+          if(motoboy){
+            const idx = this.motoboyService.motoboy.indexOf(this.motoboy);
+            this.motoboyService.motoboy[idx] = motoboy;
+            this.helper.message('Edição efetuada ')
+            this.router.navigate(['/motoboy']);
+          }
 
-        }, error => this.helper.message(error));
+        });
     }
 
   }

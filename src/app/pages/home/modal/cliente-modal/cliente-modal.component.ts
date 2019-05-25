@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 import { ModalController } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -17,11 +18,13 @@ export class ClienteModalComponent implements OnInit {
     public alertToRegister: boolean;
     public showForm: boolean;
     public clients: any;
+
     constructor(
         public modalCrl: ModalController,
         private fb: FormBuilder,
         public homeService: HomeService,
-        private clientService: ClientesService
+        private clientService: ClientesService,
+        private router: Router
     ) { }
 
     ngOnInit() {
@@ -37,7 +40,6 @@ export class ClienteModalComponent implements OnInit {
 
     applyFilter(filterValue: string) {
         this.dataSource.filter = filterValue.trim().toLowerCase();
-        
         if(this.dataSource.filteredData.length < 1)
         {
             this.alertToRegister = true;
@@ -45,7 +47,20 @@ export class ClienteModalComponent implements OnInit {
             this.alertToRegister = false;
         }
     }
+    
 
+    public selectClient(client) {
+        this.homeService.selectClient(client);
+        client.status = true;
+       
+
+        if(client.status) {
+           
+
+        }  else {
+            this.modalCrl.dismiss();
+        }
+    }
 
 
 }

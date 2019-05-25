@@ -48,10 +48,7 @@
 
                     <div class="text-center pt-4 my-3" *ngIf="alertToRegister">
                         Nenhum encontrado, deseja cadastrar? &nbsp;
-                        <button class="btn btn-danger mr-2" (click)="modalCrl.dismiss()">
-                            Não
-                        </button>
-                        <button class="btn btn-primary" (click)="showForm = true">
+                        <button class="btn btn-primary" (click)="registerModal()">
                             Sim
                         </button>
                     </div>

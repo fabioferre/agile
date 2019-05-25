@@ -77,6 +77,6 @@ const routes: Routes = [
         PedidosClienteComponent,
         ModalRegistraClienteComponent
     ],
-    providers: [PedidosService, MesasService]
+    providers: [PedidosService, MesasService, BairrosService]
 })
 export class PedidosPageModule { }

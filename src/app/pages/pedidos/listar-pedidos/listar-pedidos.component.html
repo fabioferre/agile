@@ -20,6 +20,7 @@
                         <span class="badge" [ngClass]="'badge-'+element.label?.style">
                             {{  element.label?.name }}
                         </span>
+                        <i class="fas fa-motorcycle ml-3" *ngIf="element.label?.in_table == 4"></i>
                     </td>
                 </ng-container>
                 <!-- item2 Column -->
@@ -57,7 +58,7 @@
                         title="Finalizar pedido"  
                         (click)="finalize(element)"
                         [routerLink]="['/pedidos/detalhes', element.id]"
-                        *ngIf="element.label?.in_table == 1">
+                        *ngIf="element.label?.in_table == 1 || element.label?.in_table == 4">
                             <i class="fas fa-dollar-sign"></i>
                         </button> 
                         <!-- <button class="btn btn-danger mx-1" *ngIf="element.status < 4"

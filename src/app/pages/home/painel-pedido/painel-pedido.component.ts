@@ -21,7 +21,7 @@ export class PainelPedidoComponent implements OnInit {
         products: [[], Validators.required],
         client_id: [null],
         table_id: [null],
-        form_payment: ['', Validators.required],
+        form_payment: [''],
         description: [''],
         type: [1]
     });
@@ -100,9 +100,22 @@ export class PainelPedidoComponent implements OnInit {
     public prepareSale(): void {
         this.form.controls.total.setValue(this.homeService.totalPrice);
         this.form.controls.products.setValue(this.homeService.productSelected);
+        if(this.form.invalid ) {
+            this.helper.message('Selecione ao menos um produto', 'warning')
+            this.homeService.productAlert = false;
+            setTimeout(() => {
+                this.homeService.productAlert = true;
+            }, 100);
+            
+        } else if(this.form.value.type === 1 || this.form.value.type === 2) {
+            this.showPayment();
+            this.homeService.productAlert = false;
+        } else  {
+            this.storeOrder();
+        }
     }
     async showPayment() {
-        this.prepareSale();
+        
         const alert = await this.alertCtrl.create({
             header: 'Forma de pagamento',
             inputs: [
@@ -145,9 +158,7 @@ export class PainelPedidoComponent implements OnInit {
                         if (form_payment) {
                             this.form.controls.form_payment.setValue(form_payment)
                             this.storeOrder();
-                        } else {
-
-                        }
+                        } 
                     }
                 }
             ]
@@ -158,18 +169,13 @@ export class PainelPedidoComponent implements OnInit {
 
 
     public storeOrder() {
-        if(this.form.valid) {
-            console.log(this.form.value)
-            this.homeService.create(this.form.value).subscribe((response) => {
-                this.homeService.removeProducUnits(this.form.value.products);
-                this.homeService.clearPainel();
-                this.changeActive(1);
-                this.helper.message("Pedido efetuado");
-                this.printer(response, this.form.value);
-            });
-        } else {
-            this.helper.message('Selecione ao menos um produto', 'warning')
-        }
+        this.homeService.create(this.form.value).subscribe((response) => {
+            this.homeService.removeProducUnits(this.form.value.products);
+            this.homeService.clearPainel();
+            this.changeActive(1);
+            this.helper.message("Pedido efetuado");
+            this.printer(response, this.form.value);
+        });
     }
 
     public updateOrder(order_id): void {

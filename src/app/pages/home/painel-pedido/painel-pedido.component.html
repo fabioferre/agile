@@ -100,8 +100,11 @@
                 <div id="order-information" *ngIf="homeService.client || homeService.table">
                     
                     <div class="client-order position-static"  *ngIf="homeService.client">
-                        <div class="wallet positive">
-                            {{ homeService.client.account?.amount | currency:'BRL':'R$':'1.2-2'  }} <i class="fas fa-wallet"></i>
+                        <div class="wallet" [ngClass]="{
+                            'positive': homeService.client.account?.amount > 0,
+                            'negative':homeService.client.account?.amount < 0
+                        }">
+                          {{ homeService.client.account?.amount | currency:'BRL':' R$  ':'1.2-2'  }} <i class="fas fa-wallet"></i>
                         </div>
                         <span class="order-info-item ">
                             <strong>Nome:</strong>
@@ -135,7 +138,7 @@
             <div class="col-lg-7 mx-auto">
                 <button type="submit" 
                 class="btn btn-outline-success btn-block"
-                (click)="showPayment()"
+                (click)="prepareSale()"
                 *ngIf="!homeService.order_id; else addOrder">
                     Efetuar pedido
                 </button>

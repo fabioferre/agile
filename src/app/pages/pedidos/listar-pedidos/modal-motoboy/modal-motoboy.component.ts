@@ -51,13 +51,12 @@ export class ModalMotoboyComponent implements OnInit {
 
     public selectMotoboy(motoboy) {
         this.orderService.orderToFinalize.motoboy_id = motoboy.id;
-        this.orderService.orderToFinalize.status = 2;
-        this.orderService.orderToFinalize.type = 2;
         this.modalCrl.dismiss();
         this.orderService.changeStatus( this.orderService.orderToFinalize ).subscribe(response => {
             let idx = this.orderService.pedidos.indexOf(this.orderService.orderToFinalize);
             this.orderService.pedidos[idx] = response;
-        
+            console.log(this.orderService.pedidos[idx])
+            console.log(response, 'editada')
         });
     }
 

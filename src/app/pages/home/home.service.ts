@@ -15,7 +15,7 @@ export class HomeService extends Model {
     public table: any;
     public order_id: number;
 
-
+    public productAlert: boolean;
     constructor(
          http: HttpClient,
          helper: HelperService

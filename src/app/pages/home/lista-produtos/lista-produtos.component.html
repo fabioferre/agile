@@ -1,7 +1,8 @@
 <mat-form-field class="w-100">
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar por Nº, Nome, Estoque e/ou Preço">
 </mat-form-field>
-<div class="mat-elevation-z8 table-hover link-table responsive-table " >
+<div class="mat-elevation-z8 table-hover link-table responsive-table "
+ [ngClass]="{'alertUser': homeService.productAlert}" >
     <table mat-table [dataSource]="dataSource" matSort class="w-100 ">
             
         <ng-container matColumnDef="select">

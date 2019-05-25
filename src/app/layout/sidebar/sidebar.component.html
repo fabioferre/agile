@@ -1,4 +1,3 @@
-
 <aside class="sidebar sidebar">
     <div class="scrollbar-inner">
         <div class="user">
@@ -19,22 +18,27 @@
 
         <ul class="navigation">
             <li [routerLink]="['/home']" routerLinkActive="navigation__active">
-                <a href="javascript:void(0)" >
+                <a href="javascript:void(0)">
                     <i class="fas fa-cash-register"></i> Caixa
                 </a>
             </li>
-           
+
             <li class="navigation__sub">
                 <a href="#"><i class="fas fa-list-ol"></i>Pedidos</a>
                 <ul>
                     <li [routerLink]="['/pedidos/lista']" routerLinkActive="navigation__active">
-                        <a href="javascript:void(0)" >
+                        <a href="javascript:void(0)">
                             lista
                         </a>
                     </li>
                     <li [routerLink]="['/pedidos/mesas']" routerLinkActive="navigation__active">
-                        <a href="javascript:void(0)" >
-                           Mesas
+                        <a href="javascript:void(0)">
+                            Mesas
+                        </a>
+                    </li>
+                    <li [routerLink]="['/pedidos/clientes']" routerLinkActive="navigation__active">
+                        <a href="javascript:void(0)">
+                            Clientes
                         </a>
                     </li>
                 </ul>
@@ -43,51 +47,51 @@
                 <a href="#"><i class="zmdi zmdi-archive"></i>Produtos</a>
                 <ul>
                     <li [routerLink]="['/produtos/lista']" routerLinkActive="navigation__active">
-                        <a href="javascript:void(0)" >
+                        <a href="javascript:void(0)">
                             Lista
                         </a>
                     </li>
                     <li [routerLink]="['/produtos/categorias']" routerLinkActive="navigation__active">
-                        <a href="javascript:void(0)" >
+                        <a href="javascript:void(0)">
                             Categorias
                         </a>
                     </li>
                 </ul>
             </li>
             <li [routerLink]="['/clientes']" routerLinkActive="navigation__active">
-                <a href="javascript:void(0)" >
+                <a href="javascript:void(0)">
                     <i class="fas fa-users"></i>Clientes
                 </a>
             </li>
 
             <li [routerLink]="['/mesas']" routerLinkActive="navigation__active">
-                <a href="javascript:void(0)" >
+                <a href="javascript:void(0)">
                     <i class="fas fa-concierge-bell"></i>Edição de mesas
                 </a>
             </li>
 
 
             <li [routerLink]="['/bairros']" routerLinkActive="navigation__active">
-                <a href="javascript:void(0)" >
+                <a href="javascript:void(0)">
                     <i class="fas fa-map-marked-alt"></i>Bairros
                 </a>
             </li>
 
-           
+
             <li [routerLink]="['/motoboy']" routerLinkActive="navigation__active">
-                <a href="javascript:void(0)" >
+                <a href="javascript:void(0)">
                     <i class="fas fa-motorcycle"></i>Motoboy
                 </a>
             </li>
 
             <li [routerLink]="['/lojas']" routerLinkActive="navigation__active">
-                <a href="javascript:void(0)" >
+                <a href="javascript:void(0)">
                     <i class="fas fa-store"></i>Lojas
                 </a>
             </li>
 
             <li [routerLink]="['/funcionarios']" routerLinkActive="navigation__active">
-                <a href="javascript:void(0)" >
+                <a href="javascript:void(0)">
                     <i class="fas fa-user-cog"></i>Funcionarios
                 </a>
             </li>
@@ -96,27 +100,26 @@
                 <a href="#"><i class="fas fa-cog"></i>Configurações</a>
                 <ul>
                     <li [routerLink]="['/sistema/impressora']" routerLinkActive="navigation__active">
-                        <a href="javascript:void(0)" >
+                        <a href="javascript:void(0)">
                             impressora
                         </a>
                     </li>
                     <li [routerLink]="['/produtos/novo']" routesrLinkActive="navigation__active">
-                        <a href="javascript:void(0)" >
+                        <a href="javascript:void(0)">
                             sistema
                         </a>
                     </li>
                     <li [routerLink]="['/produtos/novo']" routesrLinkActive="navigation__active">
-                        <a href="javascript:void(0)" >
+                        <a href="javascript:void(0)">
                             tema
                         </a>
                     </li>
                 </ul>
             </li>
-            
 
-            
+
+
 
         </ul>
     </div>
 </aside>
-

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import Model from 'src/app/service/model';
 import { HttpClient } from '@angular/common/http';
 import { HelperService } from 'src/app/service/helper.service';
-import { catchError, retryWhen } from 'rxjs/operators';
+import { catchError, retryWhen, finalize } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 @Injectable({
@@ -25,8 +25,13 @@ export class PedidosService extends Model {
     }
 
     public changeStatus(order) {
+        this.helper.load();
         return this.http.patch(`${this.urlApi}/${this.url}/${order.id}/close`, order).pipe(
             catchError((error: any) => of( this.helper.message(error) )),
+            finalize(() => {
+                this.isLoading = false;
+                this.helper.load(false);
+            })
         );
     }
 }

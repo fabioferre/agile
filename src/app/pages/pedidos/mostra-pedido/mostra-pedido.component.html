@@ -42,7 +42,7 @@
                 </div>
                 <div class="col-lg-3  bg-light " >
                     <div class="btn-finalize btn btn-outline-success is-link "
-                    (click)="finalize()" *ngIf="order.status != 2">
+                    (click)="prepareTofinalize()" *ngIf="order.status != 2">
                             <i class="fas fa-dollar-sign"></i> Fechar pedido
                     </div>
                 </div>

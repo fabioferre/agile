@@ -3,6 +3,7 @@ import { PedidosService } from '../pedidos.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HomeService } from '../../home/home.service';
 import { HelperService } from 'src/app/service/helper.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
     selector: 'app-mostra-pedido',
@@ -17,7 +18,8 @@ export class MostraPedidoComponent implements OnInit, OnDestroy {
         private routerActive: ActivatedRoute, 
         public homeService: HomeService,
         public helper: HelperService,
-        private router: Router
+        private router: Router,
+        private alertCtrl: AlertController
     ) { }
 
     ngOnInit() {
@@ -39,6 +41,13 @@ export class MostraPedidoComponent implements OnInit, OnDestroy {
         }
     }
 
+    public prepareTofinalize() {
+        if(this.order.form_payment) {
+            this.finalize();
+        } else {
+            this.showPayment();
+        }
+    }
 
     finalize() {
         this.order.status = 2;
@@ -46,6 +55,62 @@ export class MostraPedidoComponent implements OnInit, OnDestroy {
             this.helper.message('Pedido finalizado!');
             this.router.navigate(['/pedidos']);
         });
+    }
+
+
+    async showPayment() {
+        
+        const alert = await this.alertCtrl.create({
+            header: 'Forma de pagamento',
+            inputs: [
+                {
+                    name: 'form_payment',
+                    type: 'radio',
+                    label: 'Dinheiro',
+                    value: 'dinheiro'
+                },
+                {
+                    name: 'form_payment',
+                    type: 'radio',
+                    label: 'Credito',
+                    value: 'credito'
+                },
+                {
+                    name: 'form_payment',
+                    type: 'radio',
+                    label: 'Debito',
+                    value: 'debito'
+                },
+                {
+                    name: 'form_payment',
+                    type: 'radio',
+                    label: 'Conta cliente',
+                    value: 'wallet'
+                },
+            ],
+            buttons: [
+                {
+                    text: 'cancelar',
+                    handler: () => {
+                       
+                    }
+                },
+                {
+                    text: 'Pagar',
+                    cssClass: 'success',
+                    handler: (form_payment) => {
+                        if (form_payment) {
+                            this.order.form_payment = form_payment;
+                            this.finalize();
+                        } else {
+                            this.helper.message('Selecione forma de pagamento!','warning');
+                        }
+                    }
+                }
+            ]
+        });
+
+        return await alert.present();
     }
 
     ngOnDestroy(): void {

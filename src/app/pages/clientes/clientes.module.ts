@@ -7,12 +7,18 @@ import { EditarClienteComponent } from './editar-cliente/editar-cliente.componen
 import { ListarClienteComponent } from './listar-cliente/listar-cliente.component';
 import { NovoClienteComponent } from './novo-cliente/novo-cliente.component';
 import { ShowClienteComponent } from './show-cliente/show-cliente.component'
+
 import { BrMaskerModule } from 'br-mask';
 
 import { IonicModule } from '@ionic/angular';
 
 import { ClientesPage } from './clientes.page';
 import { MatInputModule, MatSlideToggleModule, MatSelectModule, MatFormFieldModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
+import { StatementsClienteComponent } from './show-cliente/statements-cliente/statements-cliente.component';
+import { PerfilClienteComponent } from './show-cliente/perfil-cliente/perfil-cliente.component';
+import { HistoricoClienteComponent } from './show-cliente/historico-cliente/historico-cliente.component';
+import { MostraPedidoComponent } from '../pedidos/mostra-pedido/mostra-pedido.component';
+import { StatementsModalComponent } from './show-cliente/statements-modal/statements-modal.component';
 
 const routes: Routes = [
   {
@@ -33,13 +39,33 @@ const routes: Routes = [
       },
       {
         path: 'show/:id',
-        component: ShowClienteComponent
+        component: ShowClienteComponent,
+        children: [
+          {
+            path: '',
+            pathMatch:'full', redirectTo: 'perfil'
+          },
+          {
+            path: 'perfil',
+            component: PerfilClienteComponent
+          },
+          {
+            path: 'extrato',
+            component: StatementsClienteComponent
+          },
+          {
+            path: 'historico',
+            component: HistoricoClienteComponent
+          }
+
+        ]
       }
     ]
   }
 ];
 
 @NgModule({
+  entryComponents:[StatementsModalComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -55,7 +81,18 @@ const routes: Routes = [
     MatSortModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [ClientesPage, EditarClienteComponent, ListarClienteComponent, NovoClienteComponent,  ShowClienteComponent],
+  declarations: [
+    ClientesPage,
+    EditarClienteComponent,
+    ListarClienteComponent,
+    NovoClienteComponent,
+    ShowClienteComponent,
+    StatementsClienteComponent,
+    PerfilClienteComponent,
+    HistoricoClienteComponent,
+    MostraPedidoComponent,
+    StatementsModalComponent
+  ],
   providers: [ClientesService]
 })
 export class ClientesPageModule { }

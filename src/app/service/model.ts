@@ -50,6 +50,7 @@ export default class Model {
             retry(10),
             finalize(() => {
                 this.isLoading = false;
+                this.helper.load(false);
             }),
             catchError(error => of( this.helper.message(error)))
         )

@@ -1,9 +1,10 @@
 <div class="container-fluid content-page scrollbar-inner">
     <div class="row">
-        <div class="col-lg-10 mx-auto shadow-lg mt-4 " *ngIf="order">
+        <div class="col-lg-10 mx-auto shadow-lg mt-4 "  
+        *ngIf="order">
             <div class="row bg-theme">
                 <div class="col-lg-3 ">
-                    <div class="painel  ">
+                    <div class="painel">
                         <div class="painel-header border-right text-center  ">
                             <div class="painel-item active disabled" *ngIf="order.type == 1">
                                 <i class="fas fa-cash-register"></i>
@@ -40,7 +41,7 @@
                 </div>
                 <div class="col-lg-3  bg-light " >
                     <div class="btn-finalize btn btn-outline-success is-link "
-                    (click)="finalize()">
+                    (click)="finalize()" *ngIf="order.status != 2">
                             <i class="fas fa-dollar-sign"></i> Fechar pedido
                     </div>
                 </div>

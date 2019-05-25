@@ -47,9 +47,12 @@ export class NovoFuncionarioComponent implements OnInit {
     if (this.form.valid) {
       this.funcionariosService.create(this.form.value)
         .subscribe(( funcionarios) => {
-          this.helper.message('Funcionarios cadastrado !')
-          this.funcionariosService.funcionarios.push(funcionarios)
-          this.router.navigate(['/funcionarios']);
+          if(funcionarios){
+            this.helper.message('Funcionarios cadastrado !')
+            this.funcionariosService.funcionarios.push(funcionarios)
+            this.router.navigate(['/funcionarios']);
+          }
+
         });
     }
   }

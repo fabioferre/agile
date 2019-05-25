@@ -38,7 +38,7 @@ export class EditarClienteComponent implements OnInit {
         if (!this.cliente) {
             this.router.navigate(['/clientes']);
         } else {
-           this.form.patchValue(this.cliente); 
+            this.form.patchValue(this.cliente);
         }
 
         if (!this.bairroService.bairros) {

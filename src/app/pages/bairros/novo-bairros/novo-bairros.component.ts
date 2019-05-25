@@ -31,9 +31,12 @@ export class NovoBairrosComponent implements OnInit {
 
     save() {
         this.nbService.create(this.form.value).subscribe(response => {
-            this.helper.message('Bairro cadastrado com exito');
-            this.nbService.bairros.push(this.form.value);
-            this.router.navigate(['/bairros']);
+            if(response){
+                this.helper.message('Bairro cadastrado com exito');
+                this.nbService.bairros.push(this.form.value);
+                this.router.navigate(['/bairros']);
+            }
+
         })
     }
 }

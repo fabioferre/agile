@@ -9,6 +9,7 @@ import { of } from 'rxjs';
   providedIn: 'root'
 })
 export class ClientesService extends Model {
+
   public clientes;
   public clientToEdit;
   public clientToShow;
@@ -18,6 +19,13 @@ export class ClientesService extends Model {
 
   getSum(id, parans?){
     return this.http.get<any>(`${this.urlApi}/${this.url}/${id}/orders/sum?${parans}`).pipe(
+      retry(1),
+      catchError(error => of( this.helper.message(error)))
+  );
+  }
+
+  statement(id, parans?){
+    return this.http.get<any>(`${this.urlApi}/${this.url}/${id}/statement?${parans}`).pipe(
       retry(1),
       catchError(error => of( this.helper.message(error)))
   );

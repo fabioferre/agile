@@ -9,15 +9,14 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./show-cliente.component.scss'],
 })
 export class ShowClienteComponent implements OnInit {
-  public client;
   public orders;
   constructor(public clientesService : ClientesService,
             private activedRoute: ActivatedRoute,) { }
 
   ngOnInit() {
-    if (!this.client) {
+    if (!this.clientesService.clientToShow ) {
       this.clientesService.getById(this.activedRoute.snapshot.paramMap.get('id')).subscribe((client) => {
-        this.client = client;
+        this.clientesService.clientToShow = client;
       });
     }
 

@@ -1,0 +1,24 @@
+
+<div class="card-body">
+    <h2 class="card-body__title mb-4 text-theme">{{clientesService.clientToShow.name}}</h2>
+    <div class="row" >
+        <div class="col-sm-12 col-md-6">
+            <ul class="icon-list">
+                <li><i class="zmdi zmdi-phone"></i>{{clientesService.clientToShow.cell_phone}}</li>
+                <li><i class="fas fa-phone-square"></i>{{clientesService.clientToShow.landline}}</li>
+                <li><i class="fas fa-map-marked-alt"></i>{{clientesService.clientToShow.address_street}} Nº {{clientesService.clientToShow.address_number}}</li>
+                <li><i class="fas fa-map-marker-alt"></i>{{clientesService.clientToShow.landline}}</li>
+        
+            </ul>
+        </div>
+        <div class="col-sm-12 col-md-6">
+            <ul class="icon-list">
+                <li> <strong>CEP</strong> {{clientesService.clientToShow.address_zipcode}}</li>
+                <li> <strong>Cidade</strong> dsadada</li>
+                <li> <strong>Estado</strong> cxczxzc</li>
+                <li> <strong>Ponto de referencia  </strong>{{clientesService.clientToShow.reference_point}}</li>
+                <li> <strong>Cliente desde</strong>  {{clientesService.clientToShow.created_at | date:'dd/MM/yyyy'}}</li>
+            </ul>
+        </div>
+    </div>
+</div>

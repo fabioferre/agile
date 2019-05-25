@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { retry, finalize, catchError } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { HelperService } from './helper.service';
 import * as $ from 'jquery';
 import { LoadingController } from '@ionic/angular';
@@ -87,7 +87,7 @@ export default class Model {
                 this.helper.message("Item excluido", "danger")
               
             }),
-            catchError(error =>  of( this.helper.message(error)))
+            catchError(this.handleError)
         )
     }
 
@@ -103,5 +103,18 @@ export default class Model {
         });
     }
 
+
+    handleError(error) {
+        let errorMessage = '';
+        if (error.error instanceof ErrorEvent) {
+            // client-side error
+            errorMessage = `Error: ${error.error.message}`;
+        } else {
+            // server-side error
+            errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+        }
+        window.alert(errorMessage);
+        return throwError(errorMessage);
+    }
 
 }

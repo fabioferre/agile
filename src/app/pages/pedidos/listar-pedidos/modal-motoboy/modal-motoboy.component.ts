@@ -49,12 +49,15 @@ export class ModalMotoboyComponent implements OnInit {
     }
 
 
-    public selectMotoboy(order) {
-        order.status = 2;
-        order.type = 2;
+    public selectMotoboy(motoboy) {
+        this.orderService.orderToFinalize.motoboy_id = motoboy.id;
+        this.orderService.orderToFinalize.status = 2;
+        this.orderService.orderToFinalize.type = 2;
         this.modalCrl.dismiss();
-        this.orderService.updateById(order.id, order).subscribe(response => {
-            console.log(response)
+        this.orderService.changeStatus( this.orderService.orderToFinalize ).subscribe(response => {
+            let idx = this.orderService.pedidos.indexOf(this.orderService.orderToFinalize);
+            this.orderService.pedidos[idx] = response;
+        
         });
     }
 

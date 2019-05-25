@@ -26,6 +26,7 @@ export class ClienteModalComponent implements OnInit {
 
     ngOnInit() {
         this.clientService.get().subscribe((clients) => {
+            console.log(clients)
             if(clients.length > 0) {
                 this.dataSource = new MatTableDataSource<any>(clients);
             } else {

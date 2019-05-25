@@ -17,13 +17,6 @@ export class ListarPedidosComponent implements OnInit {
     public dataSource: any;  
     @ViewChild(MatSort) sort: MatSort;
 
-    public typeSelling = {
-        type1: 'Balcão',
-        type2: 'Entrega',
-        type3: 'Cliente',
-        type4: 'Mesa'
-    };
-
     constructor(
         public orderService: PedidosService,
         private router: Router,
@@ -72,6 +65,7 @@ export class ListarPedidosComponent implements OnInit {
 
 
     async outToDeliver(order) {
+        this.orderService.orderToFinalize = order;
         const modal = await this.modalCtrl.create({
             component: ModalMotoboyComponent
         }) ;

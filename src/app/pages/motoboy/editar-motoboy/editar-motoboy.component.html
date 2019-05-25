@@ -1,103 +1,112 @@
 <header class="content__title">
-  <h1>Cadastar motoboy</h1>
+    <h1>Cadastar motoboy</h1>
 
 </header>
 <div class="card">
-  <div class="col-lg-12 ">
-      <form [formGroup]="form" (submit)="submit()">
-          <div class="form-row py-4 px-2">
-              <div class="col-12">
-                  <div class="form-group">
-                      <label>Nome</label>
-                      <input type="text" class="form-control" placeholder="João Alberto..." formControlName="name">
-                      <i class="form-group__bar"></i>
-                  </div>
-              </div>
-              <div class="col-lg-4">
-                  <div class="form-group">
-                      <label>CPF</label>
-                      <input type="text" class="form-control" placeholder="000.000.000-00" formControlName="cpf"
-                          [brmasker]="{form: form.get('cpf'),mask: '000.000.000-00'}" disabled>
-                      <i class="form-group__bar"></i>
-                  </div>
-              </div>
-              <div class="col-lg-4">
-                  <div class="form-group">
-                      <label>Celular</label>
-                      <input type="text" class="form-control" placeholder="(11) 00000-0000"
-                          formControlName="cellphone" [brmasker]="{form: form.get('cellphone'), phone: true}">
-                      <i class="form-group__bar"></i>
-                  </div>
-              </div>
-              <div class="col-lg-4">
-                  <div class="form-group">
-                      <label>Telefone fixo</label>
-                      <input type="text" class="form-control" placeholder="(11) 0000-0000" formControlName="phone"
-                          [brmasker]="{form: form.get('phone'), phone: true}">
-                      <i class="form-group__bar"></i>
-                  </div>
-              </div>
+    <div class="col-lg-12 ">
+        <form [formGroup]="form" (submit)="submit()">
+            <div class="form-row py-4 px-2">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label>Nome</label>
+                        <input type="text" class="form-control" placeholder="João Alberto..." formControlName="name">
+                        <i class="form-group__bar"></i>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label>CPF</label>
+                        <input type="text" class="form-control" placeholder="000.000.000-00" formControlName="cpf"
+                            [brmasker]="{form: form.get('cpf'),mask: '000.000.000-00'}" disabled>
+                        <i class="form-group__bar"></i>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label>Celular</label>
+                        <input type="text" class="form-control" placeholder="(11) 00000-0000"
+                            formControlName="cellphone" [brmasker]="{form: form.get('cellphone'), phone: true}">
+                        <i class="form-group__bar"></i>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label>Telefone fixo</label>
+                        <input type="text" class="form-control" placeholder="(11) 0000-0000" formControlName="phone"
+                            [brmasker]="{form: form.get('phone'), phone: true}">
+                        <i class="form-group__bar"></i>
+                    </div>
+                </div>
 
-              <div class="col-lg-5">
-                  <div class="form-group">
-                      <label>Bairro</label>
-                      <input type="text" class="form-control" formControlName="address_neighborhood">
-                      <i class="form-group__bar"></i>
-                  </div>
-              </div>
-              <div class="col-lg-2">
-                  <div class="form-group">
-                      <label>CEP</label>
-                      <input type="text" class="form-control"
-                          [brmasker]="{form: form.get('address_zipcode'), mask: '00000-000', type:'num', len: 9}"
-                          formControlName="address_zipcode">
-                      <i class="form-group__bar"></i>
-                  </div>
-              </div>
-              <div class="col-lg-5">
-                  <div class="form-group">
-                      <label>Rua</label>
-                      <input type="text" class="form-control" placeholder="Ex: Rua das palmeiras..."
-                          formControlName="address_street">
-                      <i class="form-group__bar"></i>
-                  </div>
-              </div>
-              <div class="col-lg-6">
-                  <div class="form-group">
-                      <label>Número</label>
-                      <input type="text" class="form-control" placeholder="Ex: A10" formControlName="address_number">
-                      <i class="form-group__bar"></i>
-                  </div>
-              </div>
-              <div class="col-lg-6">
-                  <div class="form-group">
-                      <label>Complemento</label>
-                      <input type="text" class="form-control" placeholder="Ex: Ap-12"
-                          formControlName="address_complement">
-                      <i class="form-group__bar"></i>
-                  </div>
-              </div>
-              <div class="col-lg-6">
-                  <div class="form-group">
-                      <label>Estado</label>
-                      <input type="text" class="form-control" placeholder="São paulo" formControlName="address_state">
-                      <i class="form-group__bar"></i>
-                  </div>
-              </div>
-              <div class="col-lg-6">
-                  <div class="form-group">
-                      <label>Cidade</label>
-                      <input type="text" class="form-control" placeholder="São paulo" formControlName="address_city">
-                      <i class="form-group__bar"></i>
-                  </div>
-              </div>
+                <div class="col-lg-5">
+                    <div class="form-group">
+                        <label>Bairro</label>
+                        <input type="text" class="form-control" formControlName="address_neighborhood">
+                        <i class="form-group__bar"></i>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <label>CEP</label>
+                        <input type="text" class="form-control"
+                            [brmasker]="{form: form.get('address_zipcode'), mask: '00000-000', type:'num', len: 9}"
+                            formControlName="address_zipcode">
+                        <i class="form-group__bar"></i>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="form-group">
+                        <label>Rua</label>
+                        <input type="text" class="form-control" placeholder="Ex: Rua das palmeiras..."
+                            formControlName="address_street">
+                        <i class="form-group__bar"></i>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Número</label>
+                        <input type="text" class="form-control" placeholder="Ex: A10" formControlName="address_number">
+                        <i class="form-group__bar"></i>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Complemento</label>
+                        <input type="text" class="form-control" placeholder="Ex: Ap-12"
+                            formControlName="address_complement">
+                        <i class="form-group__bar"></i>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Estado</label>
+                        <input type="text" class="form-control" placeholder="São paulo" formControlName="address_state">
+                        <i class="form-group__bar"></i>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Cidade</label>
+                        <input type="text" class="form-control" placeholder="São paulo" formControlName="address_city">
+                        <i class="form-group__bar"></i>
+                    </div>
+                </div>
 
-              <div class="col-lg-6 col-md-12 mx-auto">
-                  <button class="btn btn-primary btn-block" [disabled]="form.invalid" type="submit">
-                      Salvar
-                  </button>
-              </div>
-          </div>
-      </form>
-  </div>
+                <div class="col-lg-6 mx-auto">
+                    <div class="row">
+                        <div class="col-lg-7 ">
+                            <button type="submit" class="btn btn-primary btn-block" [disabled]="form.invalid">
+                                Atualizar
+                            </button>
+                        </div>
+                        <div class="col-lg-5 ">
+                            <a href="javascript:history.go(-1)" class="btn btn-secondary btn-block">
+                                Voltar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>

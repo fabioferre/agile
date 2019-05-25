@@ -101,7 +101,7 @@
                     
                     <div class="client-order position-static"  *ngIf="homeService.client">
                         <div class="wallet positive">
-                            R$ 00 <i class="fas fa-wallet"></i>
+                            {{ homeService.client.account?.amount | currency:'BRL':'R$':'1.2-2'  }} <i class="fas fa-wallet"></i>
                         </div>
                         <span class="order-info-item ">
                             <strong>Nome:</strong>

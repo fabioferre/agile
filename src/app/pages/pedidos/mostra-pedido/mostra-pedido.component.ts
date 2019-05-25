@@ -7,7 +7,7 @@ import { HelperService } from 'src/app/service/helper.service';
 @Component({
     selector: 'app-mostra-pedido',
     templateUrl: './mostra-pedido.component.html',
-    styleUrls: ['./mostra-pedido.component.scss'],
+    styleUrls: ['./mostra-pedido.component.scss','../../home/painel-pedido/painel-pedido.component.scss'],
 })
 export class MostraPedidoComponent implements OnInit, OnDestroy {
     public order: any;

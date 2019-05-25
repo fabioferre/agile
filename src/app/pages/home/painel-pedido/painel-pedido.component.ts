@@ -124,6 +124,12 @@ export class PainelPedidoComponent implements OnInit {
                     label: 'Debito',
                     value: 'debito'
                 },
+                {
+                    name: 'form_payment',
+                    type: 'radio',
+                    label: 'Conta cliente',
+                    value: 'wallet'
+                },
             ],
             buttons: [
                 {
@@ -153,8 +159,8 @@ export class PainelPedidoComponent implements OnInit {
 
     public storeOrder() {
         if(this.form.valid) {
+            console.log(this.form.value)
             this.homeService.create(this.form.value).subscribe((response) => {
-                console.log(response)
                 this.homeService.removeProducUnits(this.form.value.products);
                 this.homeService.clearPainel();
                 this.changeActive(1);

@@ -79,11 +79,20 @@
                       <i class="form-group__bar"></i>
                   </div>
               </div>
-              <div class="col-lg-6 col-md-12 mx-auto">
-                  <button class="btn btn-primary btn-block" [disabled]="form.invalid" type="submit">
-                      Salvar
-                  </button>
-              </div>
+              <div class="col-lg-6 mx-auto">
+                <div class="row">
+                    <div class="col-lg-7 ">
+                        <button type="submit" class="btn btn-primary btn-block" [disabled]="form.invalid">
+                            Atualizar
+                        </button>
+                    </div>
+                    <div class="col-lg-5 ">
+                        <a href="javascript:history.go(-1)" class="btn btn-secondary btn-block">
+                            Voltar
+                        </a>
+                    </div>
+                </div>
+            </div>
           </div>
       </form>
   </div>

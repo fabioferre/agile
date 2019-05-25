@@ -1,3 +1,39 @@
 p span {
     font-size: 20px
 }
+
+.payment-calcs {
+    margin: 5px;
+    width: 100px;
+    display: inline-block;
+    text-align: center;
+    text-transform: uppercase;
+    border: 1px solid #f3f3f3;
+    h2 {
+        font-size: 18px;
+        color: var(--white);
+    }
+
+    small {
+        font-size: 15px;
+        display: block;
+        color: var(--dark);
+        background:#f3f3f3;
+    }
+}
+
+.content-page {
+    height: 100vh;
+    overflow: auto;
+}
+
+
+.btn-finalize {
+    position: absolute;
+    width: 98%;
+    height: 98%;
+    top: 1%;
+    left: 1%;
+    font-size: 20px;
+    padding-top: 31px;
+}

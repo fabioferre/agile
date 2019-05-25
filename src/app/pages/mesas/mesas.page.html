@@ -14,10 +14,11 @@
                         Número exibido em <span class="text-warning"> amarelo</span> é a
                         quantidade de lugares
                     </h6>
-
+                    
                     <div class="widget-signups__list">
                         <div class="table-place ready-only" *ngFor="let table of tableService.tables"
                             [ngClass]="{'busy': table.status == 2}" (click)="editTable(table)">
+                           
                             <span>{{ table.name }}</span>
                             <p>{{ table.places }}</p>
                         </div>

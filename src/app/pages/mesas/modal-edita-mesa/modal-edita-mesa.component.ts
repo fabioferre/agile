@@ -27,11 +27,20 @@ export class ModalEditaMesaComponent implements OnInit {
         this.form.controls.places.setValue(this.tableService.tableToEdit.places);
     }
 
+    public delete() {
+        this.tableService.deleteById(this.tableService.tableToEdit.id)
+            .subscribe(response => {
+                let idx = this.tableService.tables.indexOf(this.tableService.tableToEdit);
+                this.tableService.tables.splice(idx, 1);
+                this.modalCtrl.dismiss();
+            });
+    }
+
     public update(): void {
         this.tableService.updateById(this.tableService.tableToEdit.id ,this.form.value)
         .subscribe((response) => {
             let idx = this.tableService.tables.indexOf(this.tableService.tableToEdit);
-            this.tableService.tables[idx] = response;
+            this.tableService.tables[idx] = this.form.value;
             this.tableService.tableToEdit = null;
             this.helper.message(`mesa ${response.name} atualizada com sucesso!`);
             this.modalCtrl.dismiss();

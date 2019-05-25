@@ -24,10 +24,20 @@
                         min="0" max="50">
                         <i class="form-group__bar"></i>
                     </div>
-                    <div class="col-lg-6 mx-auto">
-                        <button class="btn btn-primary btn-block" [disabled]="form.invalid">
-                            Atualizar
-                        </button>
+                    <div class="col-lg-7 mx-auto">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <button class="btn btn-primary btn-block" [disabled]="form.invalid">
+                                    Atualizar
+                                </button>
+                            </div>
+                            <div class="col-lg-4">
+                                <button type="button" (click)="delete()"
+                                class="btn btn-danger ">
+                                    Deletar
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </form>

@@ -22,11 +22,14 @@ export class ListagemComponent implements OnInit {
     ngOnInit() {
         
         if (!this.productService.products) {
+            
             this.productService.get().subscribe(products => {
                 this.productService.products = products;
                 this.dataSource.data = products;
                 this.dataSource._updateChangeSubscription();
                 this.dataSource.sort = this.sort;
+
+                console.log(products)
             });
         }
     }
@@ -63,9 +66,11 @@ export class ListagemComponent implements OnInit {
                     text: 'Deletar',
                     cssClass: 'danger',
                     handler: () => {
-                        console.log()
+                       
                         this.productService.deleteById(product.id).subscribe(response => {
-                            this.productService.products.slice(this.productService.products.indexOf(product), 1);
+                            // this.productService.products
+                            // .slice( this.productService.products.indexOf(product), 1);
+                            console.log(this.productService.products.indexOf(product));
                             this.dataSource.data = this.productService.products;
                             this.dataSource._updateChangeSubscription();
                         });

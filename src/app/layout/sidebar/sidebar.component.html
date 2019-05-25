@@ -13,7 +13,7 @@
             <div class="dropdown-menu">
                 <!-- <a class="dropdown-item" href="#">View Profile</a> -->
                 <!-- <a class="dropdown-item" href="#">Settings</a> -->
-                <a class="dropdown-item" (click)="auth.logout()">Logout</a>
+                <a class="dropdown-item" (click)="auth.logout()">Sair</a>
             </div>
         </div>
 
@@ -42,14 +42,9 @@
             <li class="navigation__sub">
                 <a href="#"><i class="zmdi zmdi-archive"></i>Produtos</a>
                 <ul>
-                    <li [routerLink]="['/produtos']" routerLinkActive="navigation__active">
+                    <li [routerLink]="['/produtos/lista']" routerLinkActive="navigation__active">
                         <a href="javascript:void(0)" >
                             Lista
-                        </a>
-                    </li>
-                    <li [routerLink]="['/produtos/novo']" routesrLinkActive="navigation__active">
-                        <a href="javascript:void(0)" >
-                            Novo
                         </a>
                     </li>
                     <li [routerLink]="['/produtos/categorias']" routerLinkActive="navigation__active">

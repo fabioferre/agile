@@ -20,13 +20,14 @@ import { InterceptorService } from './service/interceptor.service';
 import { HelperService } from './service/helper.service';
 import { ProdutoService } from './pages/produtos/produto.service';
 import { HomeService } from './pages/home/home.service';
+import { MostraPedidoComponent } from './pages/pedidos/mostra-pedido/mostra-pedido.component';
 
 
 @NgModule({
   declarations: [
     AppComponent, 
     SidebarComponent,
-    HeaderComponent
+    HeaderComponent,
   ],
   entryComponents: [],
   imports: [

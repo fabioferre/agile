@@ -65,7 +65,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  entryComponents:[StatementsModalComponent],
+  entryComponents:[StatementsModalComponent,  MostraPedidoComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -90,8 +90,8 @@ const routes: Routes = [
     StatementsClienteComponent,
     PerfilClienteComponent,
     HistoricoClienteComponent,
-    MostraPedidoComponent,
-    StatementsModalComponent
+    StatementsModalComponent,
+    MostraPedidoComponent
   ],
   providers: [ClientesService]
 })

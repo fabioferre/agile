@@ -17,6 +17,7 @@ import { PedidosClienteComponent } from './pedidos-cliente/pedidos-cliente.compo
 
 import { ModalRegistraClienteComponent } from './pedidos-cliente/modal-registra-cliente/modal-registra-cliente.component';
 import { BrMaskerModule } from 'br-mask';
+import { BairrosService } from '../bairros/bairros.service';
 
 const routes: Routes = [
     {

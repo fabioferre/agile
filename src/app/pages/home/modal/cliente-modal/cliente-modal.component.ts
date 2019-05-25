@@ -60,6 +60,7 @@ export class ClienteModalComponent implements OnInit {
                     product.old = true;
                     this.homeService.productSelected.push(product);
                 });
+                this.homeService.order_id = client.order_id;
                 this.modalCrl.dismiss();
             });
             

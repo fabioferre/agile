@@ -67,7 +67,7 @@ export class HomeService extends Model {
 
     public removeProducUnits(listProducts) {
         for (let product of listProducts) {
-            if(!product.old) {
+            if(!product.old && product.stock ) {
                 const idx = this.productSelected.indexOf(product);
                 this.productSelected[idx].units -= product.qtd;
             }

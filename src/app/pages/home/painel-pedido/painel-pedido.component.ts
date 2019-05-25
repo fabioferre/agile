@@ -5,7 +5,6 @@ import { ModalController, AlertController, } from '@ionic/angular';
 import { ClienteModalComponent } from '../modal/cliente-modal/cliente-modal.component';
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { TableModalComponent } from '../modal/table-modal/table-modal.component';
 import { ImpressoraService } from '../../sistema/impressora.service';
 
 
@@ -88,15 +87,6 @@ export class PainelPedidoComponent implements OnInit {
         return await modal.present();
     }
 
-    async modalTable(type?) {
-        const modal = await this.modalCtrl.create({
-            component: TableModalComponent
-        });
-        modal.onDidDismiss().then(()=> {
-            this.checkSelling()
-        });
-        return await modal.present();
-    }
     public prepareSale(): void {
         this.form.controls.total.setValue(this.homeService.totalPrice);
         this.form.controls.products.setValue(this.homeService.productSelected);

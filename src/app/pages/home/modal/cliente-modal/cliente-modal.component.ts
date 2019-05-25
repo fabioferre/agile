@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material';
 import { ModalController } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ProdutoService } from 'src/app/pages/produtos/produto.service';
 
 
 @Component({
@@ -49,14 +50,19 @@ export class ClienteModalComponent implements OnInit {
     }
     
 
-    public selectClient(client) {
-        this.homeService.selectClient(client);
-        client.status = true;
-       
-
-        if(client.status) {
-           
-
+    public selectClient(client_selected) {
+        this.homeService.selectClient(client_selected);
+        if(client_selected.status) {
+            this.homeService.productSelected = [];
+            this.clientService.getById(client_selected.id).subscribe(client => {
+                let products = JSON.parse(client.products);
+                products.map(product => {
+                    product.old = true;
+                    this.homeService.productSelected.push(product);
+                });
+                this.modalCrl.dismiss();
+            });
+            
         }  else {
             this.modalCrl.dismiss();
         }

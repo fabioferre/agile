@@ -26,7 +26,7 @@
                     <div class="col-lg-4 pt-3">
                         <mat-form-field class="w-100">
                             <mat-label>Categoria</mat-label>
-                            <mat-select formControlName="category_id">
+                            <mat-select formControlName="category_id" required>
                                 <mat-option *ngFor="let category of categories" [value]="category.id">
                                     {{ category.name }}
                                 </mat-option>
@@ -47,7 +47,7 @@
                             <div class="col-lg-4 pt-4">
                                 <mat-form-field class="w-100">
                                     <mat-label>Tipo</mat-label>
-                                    <mat-select formControlName="weight_type">
+                                    <mat-select formControlName="weight_type" required>
                                         <mat-option *ngFor="let weight_tipe of productService.weight_types"
                                             [value]="weight_tipe.id">
                                             {{ weight_tipe.name }}
@@ -106,7 +106,8 @@
                     <div class="col-4">
                         <div class="form-group">
                             <label>Unidades</label>
-                            <input type="number" class="form-control" placeholder="0" min="0" formControlName="units">
+                            <input type="number" class="form-control" placeholder="0" min="0" 
+                            formControlName="units">
                             <i class="form-group__bar"></i>
                         </div>
                     </div>
@@ -128,8 +129,8 @@
                 <div class="clearfix"></div>
 
                 <div class="mt-5 text-center">
-                    <button type="submit" class="btn btn-primary" [disabled]="!form.valid">
-                        Salvar
+                    <button type="submit" class="btn btn-primary" >
+                        Atualizar
                     </button>
                     <a href="javascript:history.go(-1)" class="btn btn-secondary ml-4">
                         Voltar

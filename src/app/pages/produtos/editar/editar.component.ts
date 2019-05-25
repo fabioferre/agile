@@ -13,24 +13,22 @@ import { Router } from '@angular/router';
 export class EditarComponent implements OnInit, OnDestroy {
 
     private product = this.productService.productToEdit;
-    public form: FormGroup = this.form = this.fb.group({
-        name: [this.product.name, [Validators.required, Validators.minLength(2)]],
-        number: [this.product.number],
-        category_id: [this.product.category ? this.product.category.id : ''],
-        weight: [this.product.weight],
-        weight_type: [this.product.weight_type],
-        cost_price: [this.product.cost_price],
-        sale_price: [this.product.sale_price],
-        units: [this.product.units],
-        code: [this.product.code],
-        description: [this.product.description],
-        sale: [this.product.sale],
-        stock: [this.product.stock],
-        id: [this.product.id],
-        brand: [this.product.brand],
-        minimum_units: [this.product.minimum_units]
+    public form: FormGroup = this.fb.group({
+        name: ['', [Validators.required, Validators.minLength(2)]],
+        number: [''],
+        category_id: [''],
+        weight: [''],
+        weight_type: [''],
+        cost_price: [''],
+        sale_price: [''],
+        units: [''],
+        code: [''],
+        description: [''],
+        sale: [''],
+        stock: [''],
+        brand: [''],
+        minimum_units:['']
     });
-
     public categories = this.categoriasService.categories;
     constructor(
         private fb: FormBuilder,
@@ -44,15 +42,18 @@ export class EditarComponent implements OnInit, OnDestroy {
  
         if (!this.product) {
             this.router.navigate(['/produtos'])
-        }
-
-        if(!this.product.sale) {
-            this.alter('cost_price')
-            this.alter('sale_price')
-        }
-        if(!this.product.stock) {
-            this.alter('units')
-            this.alter('minimum_units')
+        } else {
+            this.form.patchValue(this.product);
+            
+            
+            if(!this.product.sale) {
+                this.alter('cost_price')
+                this.alter('sale_price')
+            }
+            if(!this.product.stock) {
+                this.alter('units')
+                this.alter('minimum_units')
+            }
         }
     }
 
@@ -73,16 +74,16 @@ export class EditarComponent implements OnInit, OnDestroy {
     }
 
     public submit(): void {
-        if (this.form.valid) {
-            this.productService.updateById(this.form.value.id, this.form.value)
-                .subscribe((product) => {
-                    const idx = this.productService.products.indexOf(this.product);
-                    this.productService.products[idx] = product;
-                    this.helper.message('Edição efetuada com exito')
-                    
-                    this.router.navigate(['/produtos']);
-                });
-        } 
+        
+        this.productService.updateById(this.product.id, this.form.value)
+            .subscribe((product) => {
+                const idx = this.productService.products.indexOf(this.product);
+                this.productService.products[idx] = product;
+                this.helper.message('Edição efetuada com exito')
+                
+                this.router.navigate(['/produtos']);
+            });
+       
     }
 
     ngOnDestroy(): void {

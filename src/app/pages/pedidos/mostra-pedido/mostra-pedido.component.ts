@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HomeService } from '../../home/home.service';
 import { HelperService } from 'src/app/service/helper.service';
 import { AlertController } from '@ionic/angular';
+import { ImpressoraService } from '../../sistema/impressora.service';
 
 @Component({
     selector: 'app-mostra-pedido',
@@ -19,10 +20,14 @@ export class MostraPedidoComponent implements OnInit, OnDestroy {
         public homeService: HomeService,
         public helper: HelperService,
         private router: Router,
-        private alertCtrl: AlertController
+        private alertCtrl: AlertController,
+        private impressora: ImpressoraService
     ) { }
 
     ngOnInit() {
+        this.impressora.getOptions().then(res => {
+            this.impressora.printer_options = res;
+        });
         
         if(!this.orderService.orderToFinalize && !this.orderShow){
            
@@ -54,6 +59,9 @@ export class MostraPedidoComponent implements OnInit, OnDestroy {
         this.orderService.changeStatus(this.order).subscribe(order => {
             this.helper.message('Pedido finalizado!');
             this.router.navigate(['/pedidos']);
+            if(this.impressora.printer_options.close){
+                this.impressora.printer(this.order);
+            }
         });
     }
 

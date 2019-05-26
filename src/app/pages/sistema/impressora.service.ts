@@ -8,13 +8,7 @@ import { Storage } from '@ionic/storage';
   providedIn: 'root'
 })
 export class ImpressoraService extends Model {
-  public printer_options = {
-    "company_name": "Tagmus",
-    "rate_service": null,
-    "copy": null,
-    "font_size": "",
-    "default": null
-  };
+  public printer_options: any;
   printers:any;
   protected url = 'printer'
   protected urlApi = 'http://localhost:3002';
@@ -34,17 +28,19 @@ export class ImpressoraService extends Model {
     this.storage.set('printer_options', this.printer_options);
   }
 
-  printer(data, request){
+  printer(request){
+    console.log(request)
     let dado =   {
-      "order": data.id,
+      "order": request.id,
       "total": request.total,
-      "type": data.type,
+      "type": request.type,
       "freight": request.freight,
       "printer_options": this.printer_options,
       "products": request.products,
       "client": request.client,
       "table": request.table
   }
+  console.log(dado)
  
     this.create( dado).subscribe();
   }

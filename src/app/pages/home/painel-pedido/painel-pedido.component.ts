@@ -1,6 +1,6 @@
 import { HelperService } from './../../../service/helper.service';
 import { HomeService } from './../home.service';
-import { Component, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ModalController, AlertController, } from '@ionic/angular';
 import { ClienteModalComponent } from '../modal/cliente-modal/cliente-modal.component';
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
@@ -39,37 +39,46 @@ export class PainelPedidoComponent implements OnInit {
         private fb: FormBuilder,
         private helper: HelperService,
         private router: Router,
-        private impressora:ImpressoraService
+        private impressora: ImpressoraService
     ) { }
 
     ngOnInit() {
         this.checkSelling();
-    }   
+
+        this.impressora.getOptions().then(res => {
+            this.impressora.printer_options = res;
+        });
+
+    }
 
     public changeActive(typeToActive): void {
-        for( let type  in this.types) {
+        for (let type in this.types) {
             this.types[type] = false;
         }
         this.setTypeSelling = typeToActive;
         this.types[`selling${typeToActive}`] = true
     }
 
+
+
+
+
     public checkSelling() {
-        if( (this.types.selling2 || this.types.selling3) && this.homeService.client) {
+        if ((this.types.selling2 || this.types.selling3) && this.homeService.client) {
 
-            this.form.addControl('client', new FormControl( this.homeService.client) );
-            this.form.controls.client_id.setValue(this.homeService.client.id) ;
+            this.form.addControl('client', new FormControl(this.homeService.client));
+            this.form.controls.client_id.setValue(this.homeService.client.id);
 
-        } else if( this.homeService.table) {
-            this.form.addControl('table', new FormControl( this.homeService.table) );
-            this.form.controls.table_id.setValue(this.homeService.table.id) ;
+        } else if (this.homeService.table) {
+            this.form.addControl('table', new FormControl(this.homeService.table));
+            this.form.controls.table_id.setValue(this.homeService.table.id);
             this.changeActive(4);
         } else {
             this.changeActive(1);
         }
-     
+
     }
-    
+
     set setTypeSelling(type) {
         this.form.controls.type.setValue(type);
     }
@@ -81,7 +90,7 @@ export class PainelPedidoComponent implements OnInit {
         const modal = await this.modalCtrl.create({
             component: ClienteModalComponent,
         });
-        modal.onDidDismiss().then(()=> {
+        modal.onDidDismiss().then(() => {
             this.checkSelling()
         });
         return await modal.present();
@@ -90,22 +99,22 @@ export class PainelPedidoComponent implements OnInit {
     public prepareSale(): void {
         this.form.controls.total.setValue(this.homeService.totalPrice);
         this.form.controls.products.setValue(this.homeService.productSelected);
-        if(this.form.invalid ) {
+        if (this.form.invalid) {
             this.helper.message('Selecione ao menos um produto', 'warning')
             this.homeService.productAlert = false;
             setTimeout(() => {
                 this.homeService.productAlert = true;
             }, 100);
-            
-        } else if(this.form.value.type === 1 || this.form.value.type === 2) {
+
+        } else if (this.form.value.type === 1 || this.form.value.type === 2) {
             this.showPayment();
             this.homeService.productAlert = false;
-        } else  {
+        } else {
             this.storeOrder();
         }
     }
     async showPayment() {
-        
+
         const alert = await this.alertCtrl.create({
             header: 'Forma de pagamento',
             inputs: [
@@ -138,7 +147,7 @@ export class PainelPedidoComponent implements OnInit {
                 {
                     text: 'cancelar',
                     handler: () => {
-                       
+
                     }
                 },
                 {
@@ -148,7 +157,7 @@ export class PainelPedidoComponent implements OnInit {
                         if (form_payment) {
                             this.form.controls.form_payment.setValue(form_payment)
                             this.storeOrder();
-                        } 
+                        }
                     }
                 }
             ]
@@ -164,7 +173,10 @@ export class PainelPedidoComponent implements OnInit {
             this.homeService.clearPainel();
             this.changeActive(1);
             this.helper.message("Pedido efetuado");
-            this.printer(response, this.form.value);
+            if(this.impressora.printer_options.create){
+                this.impressora.printer(response);
+            }
+          
         });
     }
 
@@ -175,12 +187,13 @@ export class PainelPedidoComponent implements OnInit {
             this.homeService.clearPainel();
             this.changeActive(1);
             this.helper.message("Pedido acrescentado");
+            if(this.impressora.printer_options.update){
+                this.impressora.printer(response);
+            }
         });
     }
 
-    printer(id, request){
-        this.impressora.printer(id, request)
-    }
+
 
 }
 

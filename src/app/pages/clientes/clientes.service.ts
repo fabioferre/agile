@@ -31,5 +31,12 @@ export class ClientesService extends Model {
   );
   }
 
+  transaction(id, parans?){
+    return this.http.post<any>(`${this.urlApi}/${this.url}/${id}/statement`,parans ).pipe(
+      retry(1),
+      catchError(error => of( this.helper.message(error)))
+  );
+  }
+
   
 }

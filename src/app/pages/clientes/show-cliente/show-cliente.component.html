@@ -3,7 +3,7 @@
     <div class="card profile">
         <div class="profile__info w-100">
             <div class="row quick-stats">
-                <div class="col-sm-6 col-md-4">
+                <div class="col-sm-6 col-md-4" (click)="deposit()">
                     <div class="quick-stats__item bg-success">
                         <div class="quick-stats__info">
                             <h2>R$ {{clientesService.clientToShow.account.amount}}</h2>

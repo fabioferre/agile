@@ -28,10 +28,11 @@ export class ListagemComponent implements OnInit {
                 this.dataSource.data = products;
                 this.dataSource._updateChangeSubscription();
                 this.dataSource.sort = this.sort;
-
                 console.log(products)
             });
         }
+
+        
     }
 
     applyFilter(filterValue: string) {

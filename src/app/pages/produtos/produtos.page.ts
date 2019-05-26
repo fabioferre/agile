@@ -16,7 +16,7 @@ export class ProdutosPage implements OnInit {
     ) { }
 
     ngOnInit() {
-        if (!this.categoriasService.categories) {
+        if (this.categoriasService.categories.length < 1) {
             this.categoriasService.getNoLoad().subscribe(categories => {
                 this.categoriasService.categories = categories;
             });

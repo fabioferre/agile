@@ -4,9 +4,19 @@
         <div class="profile__info w-100">
             <div class="row quick-stats">
                 <div class="col-sm-6 col-md-4" (click)="deposit()">
-                    <div class="quick-stats__item bg-success">
+                    <div class="quick-stats__item client-amount"
+                        [ngClass]="{
+                            'bg-success': clientesService.clientToShow.account.amount > 0,
+                            'bg-danger': clientesService.clientToShow.account.amount < 0
+                        }">
+                        <div class="add-deposit">
+                            <i class="fas fa-plus-circle"></i>
+                        </div>
+                        <div class="remove-deposit">
+                            <i class="fas fa-minus-circle"></i>
+                        </div>
                         <div class="quick-stats__info">
-                            <h2>R$ {{clientesService.clientToShow.account.amount}}</h2>
+                            <h2>R$ {{  clientesService.clientToShow.account.amount }}</h2>
                             <small>Saldo</small>
                         </div>
                     </div>

@@ -5,9 +5,9 @@ import { AlertController } from '@ionic/angular';
 
 
 @Component({
-  selector: 'app-show-cliente',
-  templateUrl: './show-cliente.component.html',
-  styleUrls: ['./show-cliente.component.scss'],
+	selector: 'app-show-cliente',
+	templateUrl: './show-cliente.component.html',
+	styleUrls: ['./show-cliente.component.scss'],
 })
 export class ShowClienteComponent implements OnInit {
   public orders ;
@@ -16,19 +16,19 @@ export class ShowClienteComponent implements OnInit {
     private activedRoute: ActivatedRoute,
     private alertCtrl: AlertController) { }
 
-  ngOnInit() {
-    if (!this.clientesService.clientToShow) {
-      this.clientesService.getById(this.activedRoute.snapshot.paramMap.get('id')).subscribe((client) => {
-        this.clientesService.clientToShow = client;
-      });
-    }
+	ngOnInit() {
+		if (!this.clientesService.clientToShow) {
+			this.clientesService.getById(this.activedRoute.snapshot.paramMap.get('id')).subscribe((client) => {
+				this.clientesService.clientToShow = client;
+			});
+		}
 
-    this.clientesService.getSum(this.activedRoute.snapshot.paramMap.get('id')).subscribe((orders) => {
-      this.orders = orders;
+		this.clientesService.getSum(this.activedRoute.snapshot.paramMap.get('id')).subscribe((orders) => {
+			this.orders = orders;
 
-    });
+		});
 
-  }
+	}
 
   async showOption(type) {
     this.form.type = type;
@@ -74,8 +74,8 @@ export class ShowClienteComponent implements OnInit {
       ]
     });
 
-    return await alert.present();
-  }
+		return await alert.present();
+	}
 
 
   movement() {

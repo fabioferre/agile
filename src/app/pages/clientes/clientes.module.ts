@@ -17,7 +17,6 @@ import { MatInputModule, MatSlideToggleModule, MatSelectModule, MatFormFieldModu
 import { StatementsClienteComponent } from './show-cliente/statements-cliente/statements-cliente.component';
 import { PerfilClienteComponent } from './show-cliente/perfil-cliente/perfil-cliente.component';
 import { HistoricoClienteComponent } from './show-cliente/historico-cliente/historico-cliente.component';
-import { MostraPedidoComponent } from '../pedidos/mostra-pedido/mostra-pedido.component';
 import { StatementsModalComponent } from './show-cliente/statements-modal/statements-modal.component';
 
 const routes: Routes = [
@@ -90,8 +89,7 @@ const routes: Routes = [
     StatementsClienteComponent,
     PerfilClienteComponent,
     HistoricoClienteComponent,
-    StatementsModalComponent,
-    MostraPedidoComponent
+    StatementsModalComponent
   ],
   providers: [ClientesService]
 })

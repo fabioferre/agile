@@ -40,8 +40,7 @@
                             <mat-form-field class="w-100">
                                 <mat-label>Impressora</mat-label>
                                 <mat-select formControlName="default">
-                                    <mat-option *ngFor="let printer of impressora.printers"
-                                        [value]="printer.name">
+                                    <mat-option *ngFor="let printer of impressora.printers" [value]="printer.name">
                                         {{ printer.name }}
                                     </mat-option>
                                 </mat-select>
@@ -54,6 +53,21 @@
                                     formControlName="font_size">
                                 <i class="form-group__bar"></i>
                             </div>
+                        </div>
+                        <div class="col-lg-4 text-center pt-3">
+                            <mat-slide-toggle class="mat-primary" formControlName="create">
+                               criação do pedido ? 
+                            </mat-slide-toggle>
+                        </div>
+                        <div class="col-lg-4 text-center pt-3">
+                            <mat-slide-toggle class="mat-primary" formControlName="update">
+                               atualização do pedido ?
+                            </mat-slide-toggle>
+                        </div>
+                        <div class="col-lg-4 text-center pt-3">
+                            <mat-slide-toggle class="mat-primary" formControlName="close">
+                                fechamento do pedido ?
+                            </mat-slide-toggle>
                         </div>
                     </div>
 

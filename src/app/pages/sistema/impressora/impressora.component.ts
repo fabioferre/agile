@@ -17,7 +17,10 @@ export class ImpressoraComponent implements OnInit {
         rate_service: [null],
         copy: [null],
         font_size: [null],
-        default: [null]
+        default: [null],
+        create: [null],
+        update: [null],
+        close: [null],
     });
 
     constructor(
@@ -49,11 +52,8 @@ export class ImpressoraComponent implements OnInit {
     getOptions() {
         this.impressora.getOptions().then(res => {
             this.printer_options = res;
-            this.form.controls.company_name.setValue(res.company_name);
-            this.form.controls.copy.setValue(res.copy);
-            this.form.controls.default.setValue(res.default);
-            this.form.controls.rate_service.setValue(res.rate_service);
-            this.form.controls.font_size.setValue(res.font_size);
+            this.form.patchValue(res)
+
         })
     }
 

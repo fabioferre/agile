@@ -64,7 +64,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  entryComponents:[StatementsModalComponent,  MostraPedidoComponent],
+  entryComponents:[StatementsModalComponent],
   imports: [
     CommonModule,
     FormsModule,

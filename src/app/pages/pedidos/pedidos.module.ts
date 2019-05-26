@@ -13,9 +13,7 @@ import { PedidoMesasComponent } from './pedido-mesas/pedido-mesas.component';
 
 import { MesasService } from '../mesas/mesas.service';
 import { MostraPedidoComponent } from './mostra-pedido/mostra-pedido.component';
-import { PedidosClienteComponent } from './pedidos-cliente/pedidos-cliente.component';
 
-import { ModalRegistraClienteComponent } from './pedidos-cliente/modal-registra-cliente/modal-registra-cliente.component';
 import { BrMaskerModule } from 'br-mask';
 import { BairrosService } from '../bairros/bairros.service';
 
@@ -40,10 +38,6 @@ const routes: Routes = [
             {
                 path: 'mesas',
                 component: PedidoMesasComponent
-            },
-            {
-                path: 'clientes',
-                component: PedidosClienteComponent
             }
         ]
     }
@@ -52,7 +46,6 @@ const routes: Routes = [
 @NgModule({
     entryComponents: [
         ModalMotoboyComponent,
-        ModalRegistraClienteComponent
     ],
     imports: [
         CommonModule,
@@ -74,9 +67,7 @@ const routes: Routes = [
         ListarPedidosComponent, 
         PedidoMesasComponent,
         MostraPedidoComponent,
-        ModalMotoboyComponent,
-        PedidosClienteComponent,
-        ModalRegistraClienteComponent
+        ModalMotoboyComponent
     ],
     providers: [PedidosService, MesasService, BairrosService]
 })

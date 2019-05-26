@@ -15,7 +15,7 @@ export class ListagemComponent implements OnInit {
     @ViewChild(MatSort) sort: MatSort;
 
     constructor(
-        private productService: ProdutoService,
+        public productService: ProdutoService,
         private router: Router,
         private alertCtrl: AlertController) { }
 

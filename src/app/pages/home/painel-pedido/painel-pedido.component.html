@@ -47,12 +47,14 @@
                     <td>
                         {{  product.qtd }}
                         <a href="javascript:void(0)" 
+                        *ngIf="!product.old"
                         (click)="homeService.lessProduct(product, $event)"
                         class="float-left btn-order text-danger">
                             <i class="fas fa-minus-circle"></i>
                         </a>
 
-                        <a href="javascript:void(0)"
+                        <a href="javascript:void(0)" 
+                        *ngIf="!product.old"
                          class="float-right btn-order text-primary"
                          (click)="homeService.plusProduct(product, $event)">
                             <i class="fas fa-plus-circle"></i>

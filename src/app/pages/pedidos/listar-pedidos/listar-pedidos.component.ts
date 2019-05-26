@@ -33,7 +33,6 @@ export class ListarPedidosComponent implements OnInit {
             ]
         }).subscribe(pedidos => {
             this.orderService.pedidos = pedidos;
-            console.log(pedidos);
             this.dataSource = new MatTableDataSource<any>(this.orderService.pedidos);
             this.dataSource.sort = this.sort;
 

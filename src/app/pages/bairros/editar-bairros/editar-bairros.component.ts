@@ -13,7 +13,7 @@ export class EditarBairrosComponent implements OnInit {
 
     public form: FormGroup = this.fb.group({
         name: ['', Validators.required],
-        freight: [''],
+        freight: [0, Validators.required],
         city: [''],
         state: [''],
         country: ['Brasil'],

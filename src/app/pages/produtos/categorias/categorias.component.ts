@@ -11,10 +11,9 @@ import { AlertController } from '@ionic/angular';
 })
 export class CategoriasComponent implements OnInit {
 
-    displayedColumns: string[] = ['id', 'created_at', 'name'];
-    dataSource = new MatTableDataSource<any>(this.categoriasService.categories);
+    public displayedColumns: string[] = ['created_at', 'name', 'action'];
+    public dataSource: any;
 
-    @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
 
     constructor(
@@ -24,10 +23,11 @@ export class CategoriasComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-
-
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
+        if (this.categoriasService.categories) {
+            this.dataSource.data = new MatTableDataSource<any>(this.categoriasService.categories);
+            this.dataSource._updateChangeSubscription()
+            this.dataSource.sort = this.sort;
+        }
     }
 
     applyFilter(filterValue: string) {

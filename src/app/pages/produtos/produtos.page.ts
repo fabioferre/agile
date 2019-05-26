@@ -9,9 +9,11 @@ import { ProdutoService } from './produto.service';
 })
 export class ProdutosPage implements OnInit {
 
-    constructor(public productService: ProdutoService,
+    constructor(
+        public productService: ProdutoService,
         public categoriasService :CategoriasService,
-        public helper: HelperService) { }
+        public helper: HelperService
+    ) { }
 
     ngOnInit() {
         if (!this.categoriasService.categories) {

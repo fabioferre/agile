@@ -51,6 +51,6 @@ const routes: Routes = [
     BrMaskerModule,
   ],
   declarations: [BairrosPage, EditarBairrosComponent, ListarBairrosComponent, NovoBairrosComponent],
-  providers:[BairrosService]
+  providers:[]
 })
 export class BairrosPageModule {}

@@ -1,10 +1,3 @@
-<header class="content__title">
-    <h1>Bairros</h1>
-    <button type="button" class="btn btn-success btn-add">
-        <i class="fas fa-print 3x"></i>
-    </button>
-
-</header>
 <div class="card">
     <form [formGroup]="form" (submit)="save()">
         <div class="card-body">
@@ -21,6 +14,7 @@
                         <label>Frete</label>
                         <input type="text" class="form-control" placeholder="0,00"
                             [brmasker]="{form: form.get('freight'), money: true, decimalCaracter: '.'}"
+                            required
                             formControlName="freight">
                         <i class="form-group__bar"></i>
                     </div>
@@ -51,16 +45,21 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label>Cidade</label>
-                        <input type="text" class="form-control" 
-                        placeholder="Ex: SP, RG, MG, BH e etc.. "
-                            [brmasker]="{form: form.get('city'), mask: 'AA', len: 2}" formControlName="city">
+                        <input type="text" 
+                        class="form-control" 
+                        placeholder=""
+                        formControlName="city">
                         <i class="form-group__bar"></i>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label>Estado</label>
-                        <input type="text" class="form-control" placeholder="" formControlName="state">
+                        <input type="text" 
+                        class="form-control" 
+                        placeholder=""
+                        [brmasker]="{form: form.get('state'), mask: 'AA', len: 2}"
+                        formControlName="state">
                         <i class="form-group__bar"></i>
                     </div>
                 </div>

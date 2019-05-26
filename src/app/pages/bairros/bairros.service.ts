@@ -7,7 +7,7 @@ import Model from 'src/app/service/model';
   providedIn: 'root'
 })
 export class BairrosService extends Model {
-  public bairros: any;
+  public bairros = [];
   public bairroToEdit: any;
   protected url = 'neighborhoods'
   constructor(http :HttpClient , helper : HelperService) { super(http, helper)}

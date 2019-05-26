@@ -13,7 +13,7 @@ export class NovoBairrosComponent implements OnInit {
 
     public form: FormGroup = this.fb.group({
         name: ['', Validators.required],
-        freight: [''],
+        freight: [0, Validators.required],
         city: [''],
         state: [''],
         country: ['Brasil'],
@@ -27,13 +27,15 @@ export class NovoBairrosComponent implements OnInit {
         private nbService: BairrosService
     ) { }
 
-    ngOnInit() { }
+    ngOnInit() { 
+        console.log(this.nbService.bairros)
+    }
 
     save() {
         this.nbService.create(this.form.value).subscribe(response => {
             if(response){
                 this.helper.message('Bairro cadastrado com exito');
-                this.nbService.bairros.push(this.form.value);
+                this.nbService.bairros.push(response);
                 this.router.navigate(['/bairros']);
             }
 

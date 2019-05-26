@@ -61,6 +61,6 @@ const routes: Routes = [
     ClienteModalComponent,
     FormRegisterClientComponent
   ],
-  providers: [ ClientesService, BairrosService, Printer]
+  providers: [ ClientesService, Printer]
 })
 export class HomePageModule {}

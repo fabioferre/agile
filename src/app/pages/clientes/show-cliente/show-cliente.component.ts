@@ -10,7 +10,8 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./show-cliente.component.scss'],
 })
 export class ShowClienteComponent implements OnInit {
-  public orders;
+  public orders ;
+  public form = {'type': 0, 'amount': '', 'name': ''};
   constructor(public clientesService: ClientesService,
     private activedRoute: ActivatedRoute,
     private alertCtrl: AlertController) { }
@@ -29,10 +30,22 @@ export class ShowClienteComponent implements OnInit {
 
   }
 
-  async deposit() {
+  async showOption(type) {
+    this.form.type = type;
+    let title = "";
+    let button ="";
+    if (type == 1) {
+      title = "Deposito na conta";
+      button ="Depositar";
+      this.form.name = "pagamento"
+    } else {
+      title = "Retirada de valor";
+      button ="Retirar";
+      this.form.name = "retirada"
+    }
 
     const alert = await this.alertCtrl.create({
-      header: 'Deposito',
+      header: title,
       inputs: [
         {
           name: 'amount',
@@ -48,11 +61,13 @@ export class ShowClienteComponent implements OnInit {
           }
         },
         {
-          text: 'Depositar',
+          text: button,
           cssClass: 'success',
           handler: (option) => {
             if (option) {
-              console.log(this.clientesService.clientToShow)
+              this.form.amount = option.amount;
+              this.movement();
+              console.log(option)
             }
           }
         }
@@ -62,36 +77,13 @@ export class ShowClienteComponent implements OnInit {
     return await alert.present();
   }
 
-  async withdrawal() {
 
-    const alert = await this.alertCtrl.create({
-      header: 'Retirar valor da conta',
-      inputs: [
-        {
-          name: 'amount',
-          type: 'text',
-          label: 'Valor',
-        }
-      ],
-      buttons: [
-        {
-          text: 'cancelar',
-          handler: () => {
+  movement() {
+    this.clientesService.movement(this.clientesService.clientToShow.account.id, this.form).subscribe((response) => {
+      console.log(response)
 
-          }
-        },
-        {
-          text: 'Retirar',
-          cssClass: 'success',
-          handler: (option) => {
-            if (option) {
-              console.log(this.clientesService.clientToShow)
-            }
-          }
-        }
-      ]
     });
-
-    return await alert.present();
   }
+
+
 }

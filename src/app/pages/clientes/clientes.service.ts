@@ -14,29 +14,25 @@ export class ClientesService extends Model {
   public clientToEdit;
   public clientToShow;
   protected url = 'client/partner';
-  
-  constructor(http: HttpClient,  helper: HelperService) { super(http, helper) }
 
-  getSum(id, parans?){
+  constructor(http: HttpClient, helper: HelperService) { super(http, helper) }
+
+  getSum(id, parans?) {
     return this.http.get<any>(`${this.urlApi}/${this.url}/${id}/orders/sum?${parans}`).pipe(
       retry(1),
-      catchError(error => of( this.helper.message(error)))
-  );
+      catchError(error => of(this.helper.message(error)))
+    );
   }
 
-  statement(id, parans?){
-    return this.http.get<any>(`${this.urlApi}/${this.url}/${id}/statement?${parans}`).pipe(
-      retry(1),
-      catchError(error => of( this.helper.message(error)))
-  );
+  statement(id, parans?) {
+    this.url = `client/account/${id}/statement`;
+    return this.get();
   }
 
-  transaction(id, parans?){
-    return this.http.post<any>(`${this.urlApi}/${this.url}/${id}/statement`,parans ).pipe(
-      retry(1),
-      catchError(error => of( this.helper.message(error)))
-  );
+  movement(id, parans?) {
+    this.url = `client/account/${id}/movement`;
+    return this.create(parans);
   }
 
-  
+
 }

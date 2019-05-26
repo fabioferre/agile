@@ -44,7 +44,7 @@ export default class Model {
 
     }
 
-    public getById(id): Observable<any> {
+    public getById(id?): Observable<any> {
         this.load();
         return this.http.get<any>(`${this.urlApi}/${this.url}/${id}`).pipe(
             retry(10),

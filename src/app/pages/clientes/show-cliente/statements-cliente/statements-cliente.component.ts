@@ -23,11 +23,10 @@ export class StatementsClienteComponent implements OnInit {
   ngOnInit() {
 
 
-    this.clientesService.statement(this.clientesService.clientToShow.id).subscribe((statement) => {
+    this.clientesService.statement(this.clientesService.clientToShow.account.id).subscribe((statement) => {
       this.statements = statement;
       this.dataSource = new MatTableDataSource<any>(this.statements);
       this.dataSource.sort = this.sort;
-      console.log(this.statements)
     });
 
   }

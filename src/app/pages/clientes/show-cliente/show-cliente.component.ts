@@ -10,10 +10,11 @@ import { AlertController } from '@ionic/angular';
 	styleUrls: ['./show-cliente.component.scss'],
 })
 export class ShowClienteComponent implements OnInit {
-	public orders;
-	constructor(public clientesService: ClientesService,
-		private activedRoute: ActivatedRoute,
-		private alertCtrl: AlertController) { }
+  public orders ;
+  public form = {'type': 0, 'amount': '', 'name': ''};
+  constructor(public clientesService: ClientesService,
+    private activedRoute: ActivatedRoute,
+    private alertCtrl: AlertController) { }
 
 	ngOnInit() {
 		if (!this.clientesService.clientToShow) {
@@ -29,69 +30,60 @@ export class ShowClienteComponent implements OnInit {
 
 	}
 
-	async deposit() {
+  async showOption(type) {
+    this.form.type = type;
+    let title = "";
+    let button ="";
+    if (type == 1) {
+      title = "Deposito na conta";
+      button ="Depositar";
+      this.form.name = "pagamento"
+    } else {
+      title = "Retirada de valor";
+      button ="Retirar";
+      this.form.name = "retirada"
+    }
 
-		const alert = await this.alertCtrl.create({
-			header: 'Deposito',
-			inputs: [
-				{
-					name: 'amount',
-					type: 'text',
-					label: 'Valor',
-				}
-			],
-			buttons: [
-				{
-					text: 'cancelar',
-					handler: () => {
+    const alert = await this.alertCtrl.create({
+      header: title,
+      inputs: [
+        {
+          name: 'amount',
+          type: 'text',
+          label: 'Valor',
+        }
+      ],
+      buttons: [
+        {
+          text: 'cancelar',
+          handler: () => {
 
-					}
-				},
-				{
-					text: 'Depositar',
-					cssClass: 'success',
-					handler: (option) => {
-						if (option) {
-							console.log(this.clientesService.clientToShow)
-						}
-					}
-				}
-			]
-		});
-
-		return await alert.present();
-	}
-
-	async withdrawal() {
-
-		const alert = await this.alertCtrl.create({
-			header: 'Retirar valor da conta',
-			inputs: [
-				{
-					name: 'amount',
-					type: 'text',
-					label: 'Valor',
-				}
-			],
-			buttons: [
-				{
-					text: 'cancelar',
-					handler: () => {
-
-					}
-				},
-				{
-					text: 'Retirar',
-					cssClass: 'success',
-					handler: (option) => {
-						if (option) {
-							console.log(this.clientesService.clientToShow)
-						}
-					}
-				}
-			]
-		});
+          }
+        },
+        {
+          text: button,
+          cssClass: 'success',
+          handler: (option) => {
+            if (option) {
+              this.form.amount = option.amount;
+              this.movement();
+              console.log(option)
+            }
+          }
+        }
+      ]
+    });
 
 		return await alert.present();
 	}
+
+
+  movement() {
+    this.clientesService.movement(this.clientesService.clientToShow.account.id, this.form).subscribe((response) => {
+      console.log(response)
+
+    });
+  }
+
+
 }

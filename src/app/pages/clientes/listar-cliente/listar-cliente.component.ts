@@ -10,8 +10,9 @@ import { NavController } from '@ionic/angular';
     styleUrls: ['./listar-cliente.component.scss'],
 })
 export class ListarClienteComponent implements OnInit {
-    displayedColumns: string[] = ['name', 'cell_phone', 'address_street', 'amount', 'action'];
-    dataSource = new MatTableDataSource<any>(this.clientService.clientes);
+  public clients= [];
+  displayedColumns: string[] = ['name', 'cell_phone', 'address_street', 'amount', 'action'];
+  dataSource = new MatTableDataSource<any>(this.clients);
 
     @ViewChild(MatSort) sort: MatSort;
 
@@ -19,9 +20,14 @@ export class ListarClienteComponent implements OnInit {
         private router: Router,
         public navCtrl: NavController) { }
 
-    ngOnInit() {
-        this.dataSource.sort = this.sort;
-    }
+  ngOnInit() {
+      this.dataSource.sort = this.sort;
+      this.clientService.get().subscribe(clientes => {
+        this.clients = clientes;
+        this.dataSource.data =  this.clients ;
+        this.dataSource._updateChangeSubscription();
+    });
+  }
 
     applyFilter(filterValue: string) {
         this.dataSource.filter = filterValue.trim().toLowerCase();

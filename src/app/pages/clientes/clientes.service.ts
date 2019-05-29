@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HelperService } from '../../service/helper.service';
 import Model from 'src/app/service/model';
-import { retry, catchError } from 'rxjs/operators';
+import { retry, catchError, finalize } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 @Injectable({
@@ -25,13 +25,26 @@ export class ClientesService extends Model {
   }
 
   statement(id, parans?) {
-    this.url = `client/account/${id}/statement`;
-    return this.get();
+    this.helper.load();
+    return this.http.get<any>(`${this.urlApi}/client/account/${id}/statement?${parans}`).pipe(
+      retry(10),
+      finalize(() => {
+        this.isLoading = false;
+          this.helper.load(false);
+      }),
+      catchError(error =>  of( this.helper.message(error)))
+  );
   }
 
   movement(id, parans?) {
-    this.url = `client/account/${id}/movement`;
-    return this.create(parans);
+    this.helper.load();
+    return this.http.post<any>(`${this.urlApi}/client/account/${id}/movement`, parans).pipe(
+        finalize(() => {
+          this.isLoading = false;
+            this.helper.load(false);
+        }),
+        catchError(error => of( this.helper.message(error)))
+    )
   }
 
 

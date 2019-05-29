@@ -4,6 +4,7 @@ import { MatTableDataSource, MatSort } from '@angular/material';
 import { ClientesService } from '../../clientes.service';
 import { ModalController } from '@ionic/angular';
 import { StatementsModalComponent } from '../statements-modal/statements-modal.component';
+import { ImpressoraService } from 'src/app/pages/sistema/impressora.service';
 
 @Component({
   selector: 'app-statements-cliente',
@@ -18,14 +19,18 @@ export class StatementsClienteComponent implements OnInit {
 
   constructor(public clientesService: ClientesService,
     public pedidosService: PedidosService,
-    public modalCtrl: ModalController) { }
+    public modalCtrl: ModalController,
+    public impressora: ImpressoraService) { }
 
   ngOnInit() {
-
+    this.impressora.getOptions().then(res => {
+      this.impressora.printer_options = res;
+    });
 
     this.clientesService.statement(this.clientesService.clientToShow.account.id).subscribe((statement) => {
       this.statements = statement;
       this.dataSource = new MatTableDataSource<any>(this.statements);
+      console.log( this.statements)
       this.dataSource.sort = this.sort;
     });
 
@@ -45,6 +50,14 @@ export class StatementsClienteComponent implements OnInit {
 
     return await modal.present();
 
+  }
+
+  printer(){
+    
+    this.impressora.printerStatement(this.statements).subscribe(response =>{
+      console.log(response)
+    })
+console.log("imprimiu")
   }
 
 }

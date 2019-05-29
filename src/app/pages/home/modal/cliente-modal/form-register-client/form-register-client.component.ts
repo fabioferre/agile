@@ -32,7 +32,7 @@ export class FormRegisterClientComponent implements OnInit {
         private modalCtrl: ModalController) { }
 
     ngOnInit() {
-        if(!this.bairroService.bairros){
+        if(this.bairroService.bairros.length < 1){
             this.bairroService.get().subscribe((bairros) => {
                 this.bairroService.bairros = bairros;
             });
@@ -41,7 +41,7 @@ export class FormRegisterClientComponent implements OnInit {
 
     public saveClient(): void {
         this.clientService.create(this.form.value).subscribe(client => {
-            this.homeService.selectClient(this.form.value);
+            this.homeService.selectClient(client);
             this.modalCtrl.dismiss();
         })
     }

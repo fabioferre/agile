@@ -3,16 +3,16 @@
     <div class="card profile">
         <div class="profile__info w-100">
             <div class="row quick-stats">
-                <div class="col-sm-6 col-md-4" (click)="deposit()">
+                <div class="col-sm-6 col-md-4" >
                     <div class="quick-stats__item client-amount"
                         [ngClass]="{
                             'bg-success': clientesService.clientToShow.account.amount > 0,
                             'bg-danger': clientesService.clientToShow.account.amount < 0
                         }">
-                        <div class="add-deposit">
+                        <div class="add-deposit" (click)="showOption(1)">
                             <i class="fas fa-plus-circle"></i>
                         </div>
-                        <div class="remove-deposit">
+                        <div class="remove-deposit" (click)="showOption(0)">
                             <i class="fas fa-minus-circle"></i>
                         </div>
                         <div class="quick-stats__info">

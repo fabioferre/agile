@@ -1,46 +1,52 @@
 import { ClientesService } from './../clientes.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 
 
 @Component({
-	selector: 'app-show-cliente',
-	templateUrl: './show-cliente.component.html',
-	styleUrls: ['./show-cliente.component.scss'],
+  selector: 'app-show-cliente',
+  templateUrl: './show-cliente.component.html',
+  styleUrls: ['./show-cliente.component.scss'],
 })
-export class ShowClienteComponent implements OnInit {
-  public orders ;
-  public form = {'type': 0, 'amount': '', 'name': ''};
+export class ShowClienteComponent implements OnInit, OnDestroy {
+
+  public orders;
+  public form = { 'type': 0, 'amount': '', 'name': '' };
   constructor(public clientesService: ClientesService,
     private activedRoute: ActivatedRoute,
     private alertCtrl: AlertController) { }
 
-	ngOnInit() {
-		if (!this.clientesService.clientToShow) {
-			this.clientesService.getById(this.activedRoute.snapshot.paramMap.get('id')).subscribe((client) => {
-				this.clientesService.clientToShow = client;
-			});
-		}
+  ngOnInit() {
 
-		this.clientesService.getSum(this.activedRoute.snapshot.paramMap.get('id')).subscribe((orders) => {
-			this.orders = orders;
+    this.clientesService.getById(this.activedRoute.snapshot.paramMap.get('id')).subscribe((client) => {
+      this.clientesService.clientToShow = client;
+    });
 
-		});
 
-	}
+    this.clientesService.getSum(this.activedRoute.snapshot.paramMap.get('id')).subscribe((orders) => {
+      this.orders = orders;
+
+    });
+
+  }
+
+  ngOnDestroy(): void {
+    this.clientesService.clientToShow = null;
+    this.orders = null; 
+  }
 
   async showOption(type) {
     this.form.type = type;
     let title = "";
-    let button ="";
+    let button = "";
     if (type == 1) {
       title = "Deposito na conta";
-      button ="Depositar";
+      button = "Depositar";
       this.form.name = "pagamento"
     } else {
       title = "Retirada de valor";
-      button ="Retirar";
+      button = "Retirar";
       this.form.name = "retirada"
     }
 
@@ -67,23 +73,24 @@ export class ShowClienteComponent implements OnInit {
             if (option) {
               this.form.amount = option.amount;
               this.movement();
-              console.log(option)
             }
           }
         }
       ]
     });
 
-		return await alert.present();
-	}
+    return await alert.present();
+  }
 
 
   movement() {
     this.clientesService.movement(this.clientesService.clientToShow.account.id, this.form).subscribe((response) => {
-      console.log(response)
 
+      this.clientesService.clientToShow.account.amount = response.amount;
     });
   }
+
+ 
 
 
 }

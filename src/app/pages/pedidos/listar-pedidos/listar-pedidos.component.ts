@@ -28,6 +28,7 @@ export class ListarPedidosComponent implements OnInit {
     ngOnInit() {
         let date = this.helper.date(null, "-1 day")
         this.orderService.get({
+            status:1,
             filter: [
                 ['created_at', '>=', date]
             ]

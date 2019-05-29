@@ -13,11 +13,11 @@ export class ClientesPage implements OnInit {
 
   ngOnInit() {
 
-    if (!this.clietes.clientes) {
-      this.clietes.get().subscribe(clientes => {
-          this.clietes.clientes = clientes;
-      });
-  }
+  
+    this.clietes.get().subscribe(clientes => {
+        this.clietes.clientes = clientes;
+    });
+  
   }
 
 }

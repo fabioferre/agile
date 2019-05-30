@@ -1,5 +1,4 @@
 import { ClientesService } from 'src/app/pages/clientes/clientes.service';
-import { BairrosService } from 'src/app/pages/bairros/bairros.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { HelperService } from 'src/app/service/helper.service';
@@ -22,7 +21,7 @@ export class NovoClienteComponent implements OnInit {
     address_state: [''],
     address_complement: [1],
     reference_point: [''],
-    neighborhood_id: [''],
+    address_neighborhood: [''],
     address_number: [null],
     category: [1]
   });
@@ -30,16 +29,10 @@ export class NovoClienteComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private helper: HelperService,
     private router: Router,
-    public bairroService: BairrosService,
     public clientesService: ClientesService) { }
 
   ngOnInit() {
 
-    if (!this.bairroService.bairros) {
-      this.bairroService.get().subscribe((bairros) => {
-        this.bairroService.bairros = bairros;
-      });
-    }
   }
 
   public submit(): void {

@@ -13,14 +13,14 @@ import { ModalController } from '@ionic/angular';
 export class FormRegisterClientComponent implements OnInit {
     public form: FormGroup = this.fb.group({
         name: ['', Validators.required],
-        cell_phone: ['', Validators.required],
+        cellphone: ['', Validators.required],
         landline: [''],
         address_street: [''],
         address_number: [''],
         address_zipcode: [''],
         address_complement: [''],
         reference_point: [''],
-        neighborhood_id: [''],
+        address_neighborhood: [''],
         category: ['']
     });
     

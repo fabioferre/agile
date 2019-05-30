@@ -54,7 +54,8 @@ export class ImpressoraService extends Model {
     }
 
     console.log(dado)
-    return this.http.post<any>(`${this.urlApi}/${this.url}/statement`, dado)
+    console.log("karaioo")
+    return this.http.post(`http://localhost:3002/printer/statement`, dado)
 
   }
 

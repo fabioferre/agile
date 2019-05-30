@@ -29,18 +29,15 @@
                         <i class="form-group__bar"></i>
                     </div>
                 </div>
-
-                <div class="col-lg-3 pt-4">
-                    <mat-form-field class="w-100">
-                        <mat-label>Bairros</mat-label>
-                        <mat-select formControlName="neighborhood_id">
-                            <mat-option *ngFor="let neighborhood of bairroService.bairros" [value]="neighborhood.id">
-                                {{ neighborhood.name }}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <label>Bairro</label>
+                        <input type="text" class="form-control"  formControlName="address_neighborhood"
+                      >
+                        <i class="form-group__bar"></i>
+                    </div>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-lg-3">
                     <div class="form-group">
                         <label>CEP</label>
                         <input  type="text" class="form-control"

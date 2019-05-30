@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { HelperService } from 'src/app/service/helper.service';
 import { Router } from '@angular/router';
-import { BairrosService } from '../../bairros/bairros.service';
 import { ClientesService } from '../clientes.service';
 
 @Component({
@@ -15,15 +14,15 @@ export class EditarClienteComponent implements OnInit {
     public form: FormGroup = this.fb.group({
         id: [''],
         name: ['', [Validators.required, Validators.minLength(2)]],
-        cell_phone: [''],
-        landline: [''],
+        cellphone: [''],
+        phone: [''],
         address_street: [''],
         address_zipcode: [''],
         address_city: [''],
         address_state: [''],
         address_complement: [''],
         reference_point: [''],
-        neighborhood_id: [''],
+        address_neighborhood: [''],
         address_number: [''],
         category: ['']
     });
@@ -31,7 +30,6 @@ export class EditarClienteComponent implements OnInit {
     constructor(private fb: FormBuilder,
         private helper: HelperService,
         private router: Router,
-        public bairroService: BairrosService,
         public clientesService: ClientesService) { }
 
     ngOnInit() {
@@ -41,11 +39,6 @@ export class EditarClienteComponent implements OnInit {
             this.form.patchValue(this.cliente);
         }
 
-        if (!this.bairroService.bairros) {
-            this.bairroService.get().subscribe((bairros) => {
-                this.bairroService.bairros = bairros;
-            });
-        }
     }
 
     public submit(): void {

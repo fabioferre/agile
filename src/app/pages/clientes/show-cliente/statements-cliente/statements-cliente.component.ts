@@ -1,3 +1,4 @@
+import { HelperService } from './../../../../service/helper.service';
 import { PedidosService } from './../../../pedidos/pedidos.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatSort } from '@angular/material';
@@ -20,7 +21,8 @@ export class StatementsClienteComponent implements OnInit {
   constructor(public clientesService: ClientesService,
     public pedidosService: PedidosService,
     public modalCtrl: ModalController,
-    public impressora: ImpressoraService) { }
+    public impressora: ImpressoraService,
+    public helper: HelperService) { }
 
   ngOnInit() {
     this.impressora.getOptions().then(res => {
@@ -55,9 +57,12 @@ export class StatementsClienteComponent implements OnInit {
   printer(){
     
     this.impressora.printerStatement(this.statements).subscribe(response =>{
-      console.log(response)
+      if(response){
+        this.helper.message("Impressão efetuada !")
+
+      }
     })
-console.log("imprimiu")
+
   }
 
 }

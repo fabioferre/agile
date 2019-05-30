@@ -13,22 +13,20 @@
                     <label>Celular</label>
                     <input type="text" class="form-control"
                      placeholder="(11) 00000-0000" 
-                     formControlName="cell_phone" 
-                     [brmasker]="{form: form.get('cell_phone'), phone: true}">
+                     formControlName="cellphone" 
+                     [brmasker]="{form: form.get('cellphone'), phone: true}">
+                    <i class="form-group__bar"></i>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label>Bairro</label>
+                    <input type="text" class="form-control"
+                     formControlName="address_neighborhood" >
                     <i class="form-group__bar"></i>
                 </div>
             </div>
             
-            <div class="col-lg-6 pt-4">
-                <mat-form-field class="w-100">
-                    <mat-label>Bairros</mat-label>
-                    <mat-select formControlName="neighborhood_id">
-                        <mat-option *ngFor="let neighborhood of bairroService.bairros" [value]="neighborhood.id">
-                            {{ neighborhood.name }}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
             <div class="col-lg-6">
                 <div class="form-group">
                     <label>CEP</label>

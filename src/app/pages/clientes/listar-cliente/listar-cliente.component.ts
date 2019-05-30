@@ -11,7 +11,7 @@ import { NavController } from '@ionic/angular';
 })
 export class ListarClienteComponent implements OnInit {
   public clients= [];
-  displayedColumns: string[] = ['name', 'cell_phone', 'address_street', 'amount', 'action'];
+  displayedColumns: string[] = ['name', 'cellphone', 'address_street', 'amount', 'action'];
   dataSource = new MatTableDataSource<any>(this.clients);
 
     @ViewChild(MatSort) sort: MatSort;

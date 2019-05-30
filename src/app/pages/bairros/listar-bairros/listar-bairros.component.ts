@@ -26,15 +26,6 @@ export class ListarBairrosComponent implements OnInit {
 
     ngOnInit() {
         this.dataSource.sort = this.sort;
-        if (this.nbService.bairros.length < 1 ) {
-            this.nbService.get().subscribe(bairros => {
-                this.nbService.bairros = bairros;
-                this.dataSource.data = this.nbService.bairros;
-                this.dataSource._updateChangeSubscription()
-            });
-        } 
-      
-       
     }
 
     applyFilter(filterValue: string) {

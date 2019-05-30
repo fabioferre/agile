@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { ClientesService } from 'src/app/pages/clientes/clientes.service';
 import { HomeService } from '../../../home.service';
-import { BairrosService } from 'src/app/pages/bairros/bairros.service';
 import { ModalController } from '@ionic/angular';
 
 @Component({
@@ -14,7 +13,7 @@ export class FormRegisterClientComponent implements OnInit {
     public form: FormGroup = this.fb.group({
         name: ['', Validators.required],
         cellphone: ['', Validators.required],
-        landline: [''],
+        phone: [''],
         address_street: [''],
         address_number: [''],
         address_zipcode: [''],
@@ -28,15 +27,10 @@ export class FormRegisterClientComponent implements OnInit {
         private fb: FormBuilder, 
         private clientService: ClientesService,
         public homeService: HomeService,
-        public bairroService: BairrosService,
         private modalCtrl: ModalController) { }
 
     ngOnInit() {
-        if(this.bairroService.bairros.length < 1){
-            this.bairroService.get().subscribe((bairros) => {
-                this.bairroService.bairros = bairros;
-            });
-        } 
+
     }
 
     public saveClient(): void {

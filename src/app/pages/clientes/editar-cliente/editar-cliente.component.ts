@@ -14,8 +14,8 @@ export class EditarClienteComponent implements OnInit {
     public form: FormGroup = this.fb.group({
         id: [''],
         name: ['', [Validators.required, Validators.minLength(2)]],
-        cell_phone: [''],
-        landline: [''],
+        cellphone: [''],
+        phone: [''],
         address_street: [''],
         address_zipcode: [''],
         address_city: [''],

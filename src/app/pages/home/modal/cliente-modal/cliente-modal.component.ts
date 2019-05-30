@@ -14,7 +14,7 @@ import { ProdutoService } from 'src/app/pages/produtos/produto.service';
     styleUrls: ['./cliente-modal.component.scss'],
 })
 export class ClienteModalComponent implements OnInit {
-    displayedColumns: string[] = [ 'name', 'cell_phone', 'action'];
+    displayedColumns: string[] = [ 'name', 'cellphone', 'action'];
     dataSource:any;
     public alertToRegister: boolean;
     public showForm: boolean;

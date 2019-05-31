@@ -30,7 +30,7 @@ export class ImpressoraService extends Model {
   }
 
   printer(request) {
-
+console.log(request)
     let dado = {
       "order": request.id,
       "total": request.total,
@@ -47,6 +47,7 @@ export class ImpressoraService extends Model {
   }
 
   printerStatement(params) {
+
 
     let dado = {
       "data": params,

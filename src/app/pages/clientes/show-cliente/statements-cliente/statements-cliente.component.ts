@@ -58,6 +58,7 @@ export class StatementsClienteComponent implements OnInit {
     
     this.impressora.printerStatement(this.statements).subscribe(response =>{
       if(response){
+        console.log(response)
         this.helper.message("Impressão efetuada !")
 
       }

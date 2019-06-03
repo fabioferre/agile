@@ -15,7 +15,7 @@ export class ImpressoraComponent implements OnInit {
     public form: FormGroup = this.fb.group({
         company_name: ['Teste', [Validators.required, Validators.minLength(2)]],
         rate_service: [null],
-        copy: [null],
+        copy: [1],
         font_size: [null],
         default: [null],
         create: [null],
@@ -34,6 +34,7 @@ export class ImpressoraComponent implements OnInit {
     ngOnInit() {
         this.get();
         this.getOptions();
+        console.log( this.getOptions())
     }
 
     setOptions() {

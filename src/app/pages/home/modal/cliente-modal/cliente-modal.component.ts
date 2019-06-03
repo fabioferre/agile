@@ -30,7 +30,6 @@ export class ClienteModalComponent implements OnInit {
 
     ngOnInit() {
         this.clientService.get().subscribe((clients) => {
-            console.log(clients)
             if(clients.length > 0) {
                 this.dataSource = new MatTableDataSource<any>(clients);
             } else {
@@ -52,7 +51,7 @@ export class ClienteModalComponent implements OnInit {
 
     public selectClient(client_selected) {
         this.homeService.selectClient(client_selected);
-        if(client_selected.status) {
+        if(client_selected.status && this.homeService.loadOrders) {
             this.homeService.productSelected = [];
             this.clientService.getById(client_selected.id).subscribe(client => {
                 let products = JSON.parse(client.products);

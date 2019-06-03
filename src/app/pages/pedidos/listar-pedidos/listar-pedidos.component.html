@@ -6,13 +6,13 @@
 
 </header>
 
-<div class="card  responsive-table" *ngIf="orderService.pedidos">
+<div class="card  responsive-table" >
     <div class="card-body ">
         <mat-form-field class="w-100">
             <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro">
         </mat-form-field>
         <div class="mat-elevation-z8 ">
-            <table mat-table [dataSource]="dataSource" matSort class="w-100 ">
+            <table mat-table [dataSource]="orderService.dataSource" matSort class="w-100 ">
                 <!-- item5 Column -->
                 <ng-container matColumnDef="status">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
@@ -20,7 +20,7 @@
                         <span class="badge" [ngClass]="'badge-'+element.label?.style">
                             {{  element.label?.name }}
                         </span>
-                        <i class="fas fa-motorcycle ml-3" *ngIf="element.label?.in_table == 4"></i>
+                        <i class="fas fa-motorcycle ml-3 animation-left" *ngIf="element.label?.in_table == 4"></i>
                     </td>
                 </ng-container>
                 <!-- item2 Column -->

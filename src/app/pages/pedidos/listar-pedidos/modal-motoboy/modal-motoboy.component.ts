@@ -13,7 +13,7 @@ import { PedidosService } from '../../pedidos.service';
 export class ModalMotoboyComponent implements OnInit {
 
     displayedColumns: string[] = ['name', 'cell_phone', 'action'];
-    dataSource: any;
+    dataSource =  new MatTableDataSource<any>([]);
     public alertToRegister: boolean;
 
     constructor(
@@ -28,13 +28,15 @@ export class ModalMotoboyComponent implements OnInit {
             this.motoboyService.get().subscribe((motoboys) => {
                 this.motoboyService.motoboys = motoboys;
                 if (motoboys.length > 0) {
-                    this.dataSource = new MatTableDataSource<any>(motoboys);
+                    this.dataSource.data = motoboys;
+                    this.dataSource._updateChangeSubscription();
                 } else {
                     this.alertToRegister = true;
                 }
             });
         } else {
-            this.dataSource = new MatTableDataSource<any>(this.motoboyService.motoboys);
+            this.dataSource.data = this.motoboyService.motoboys;
+            this.dataSource._updateChangeSubscription();
         }
     }
 
@@ -53,10 +55,9 @@ export class ModalMotoboyComponent implements OnInit {
         this.orderService.orderToFinalize.motoboy_id = motoboy.id;
         this.modalCrl.dismiss();
         this.orderService.changeStatus( this.orderService.orderToFinalize ).subscribe(response => {
-            let idx = this.orderService.pedidos.indexOf(this.orderService.orderToFinalize);
-            this.orderService.pedidos[idx] = response;
-            console.log(this.orderService.pedidos[idx])
-            console.log(response, 'editada')
+            let idx = this.orderService.dataSource.data.indexOf(this.orderService.orderToFinalize);
+            this.orderService.dataSource.data[idx] = response;
+            this.orderService.dataSource._updateChangeSubscription();
         });
     }
 

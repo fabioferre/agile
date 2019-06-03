@@ -14,7 +14,7 @@ import { ModalMotoboyComponent } from './modal-motoboy/modal-motoboy.component';
 })
 export class ListarPedidosComponent implements OnInit {
     public displayedColumns: string[] = ['status','created_at', 'id', 'type', 'total', 'action'];
-    public dataSource: any;  
+    
     @ViewChild(MatSort) sort: MatSort;
 
     constructor(
@@ -27,24 +27,24 @@ export class ListarPedidosComponent implements OnInit {
 
     ngOnInit() {
         let date = this.helper.date(null, "-1 day")
+
+        this.orderService.dataSource.sort = this.sort;
         this.orderService.get({
             status:1,
             filter: [
                 ['created_at', '>=', date]
             ]
         }).subscribe(pedidos => {
-            this.orderService.pedidos = pedidos;
-            this.dataSource = new MatTableDataSource<any>(this.orderService.pedidos);
-            this.dataSource.sort = this.sort;
-
+            this.orderService.dataSource.data = pedidos;
+            this.orderService.dataSource._updateChangeSubscription();
         })
     }
 
     applyFilter(filterValue: string) {
-        this.dataSource.filter = filterValue.trim().toLowerCase();
+        this.orderService.dataSource.filter = filterValue.trim().toLowerCase();
 
-        if (this.dataSource.paginator) {
-            this.dataSource.paginator.firstPage();
+        if (this.orderService.dataSource.paginator) {
+            this.orderService.dataSource.paginator.firstPage();
         }
     }
 
@@ -68,7 +68,7 @@ export class ListarPedidosComponent implements OnInit {
         this.orderService.orderToFinalize = order;
         const modal = await this.modalCtrl.create({
             component: ModalMotoboyComponent
-        }) ;
+        });
         return await modal.present();
     }
 }

@@ -16,7 +16,7 @@ export class AppComponent {
         private splashScreen: SplashScreen,
         private statusBar: StatusBar,
         private storage: Storage,
-        private auth: AuthService
+        private auth: AuthService                                                                   
     ) {
         this.initializeApp();
     }

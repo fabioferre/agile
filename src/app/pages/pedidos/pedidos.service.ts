@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { HelperService } from 'src/app/service/helper.service';
 import { catchError, retryWhen, finalize } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { MatTableDataSource } from '@angular/material';
 
 @Injectable({
     providedIn: 'root'
@@ -18,6 +19,8 @@ export class PedidosService extends Model {
     public pedidos;
     public orderToFinalize;
     protected url = 'orders'
+    public dataSource = new MatTableDataSource<any>([]);  
+
     constructor(http: HttpClient, helper: HelperService) { super(http, helper) }
 
     public removeOrder(order): void {

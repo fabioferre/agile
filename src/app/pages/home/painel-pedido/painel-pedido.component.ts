@@ -86,7 +86,10 @@ export class PainelPedidoComponent implements OnInit {
     async modalClient(type?) {
         this.homeService.client = null;
         this.homeService.table = null;
-
+        
+        if(type === 3) {
+            this.homeService.loadOrders = true
+        }
         const modal = await this.modalCtrl.create({
             component: ClienteModalComponent,
         });
@@ -157,6 +160,8 @@ export class PainelPedidoComponent implements OnInit {
                         if (form_payment) {
                             this.form.controls.form_payment.setValue(form_payment)
                             this.storeOrder();
+                        } else {
+                            this.helper.message('Selecione um produto!','warning');
                         }
                     }
                 }

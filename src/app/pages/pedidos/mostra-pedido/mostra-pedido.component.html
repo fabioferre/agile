@@ -19,9 +19,13 @@
             </div>
 
             <div class="row bg-theme">
-                <div class="col-lg-3 " *ngIf="order.client !== undefined">
-                    <div  class="text-light text-uppercase is-link">
-                    
+                <div class="col-lg-3 table-light client-info text-theme " *ngIf="order.client !== undefined">
+                    <h2 class="text-center h5 mt-1 text-uppercase">Cliente</h2>
+                    <div class="is-link text-truncate" style="max-width: 55ch">
+                       <strong class="text-dark">nome: &nbsp;</strong> 
+                       <small [routerLink]="['/clientes/show', order.client.id ]">{{ order.client.name }}</small>  <br>
+                       <strong class="text-dark">contato:  &nbsp;</strong> 
+                       <small>{{ order.client.cellphone }}</small> 
                     </div>
                 </div>
                 <div class="col-lg pt-4">

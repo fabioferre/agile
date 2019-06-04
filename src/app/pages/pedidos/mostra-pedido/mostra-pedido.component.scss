@@ -6,6 +6,7 @@ div.painel-item {
     position: absolute;
     left: -33px;
     top: -38px;
+    z-index: 10;
 }
 
 .payment-calcs {
@@ -41,5 +42,11 @@ div.painel-item {
     top: 1%;
     left: 1%;
     font-size: 18px;
-    padding-top: 31px;
+    padding-top: 22px;
+}
+
+.client-info {
+    small {
+        font-size: 12px;
+    }
 }

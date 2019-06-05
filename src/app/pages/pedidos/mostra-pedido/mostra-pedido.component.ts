@@ -54,7 +54,7 @@ export class MostraPedidoComponent implements OnInit, OnDestroy {
             this.helper.message('Pedido finalizado!');
             this.router.navigate(['/pedidos']);
             if(this.impressora.printer_options.close){
-                this.impressora.printer(this.order);
+                this.impressora.printer(order);
             }
         });
     }

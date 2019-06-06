@@ -29,8 +29,6 @@ export class ListaProdutosComponent implements OnInit {
         this.dataSource = new MatTableDataSource<any>(this.products);
         this.dataSource.sort = this.sort;
         this.selection = this.homeService.selection;
-        // this.homeService.productSelected? 
-        //     this.homeService.productSelected.forEach(product => this.selection.select(product) ): null;
     }
 
     /** Whether the number of selected elements matches the total number of rows. */
@@ -65,7 +63,7 @@ export class ListaProdutosComponent implements OnInit {
         if(this.selection.isSelected(product)) {
             this.homeService.removeProductSelected(product)
         } else {
-            if(product.units <= 0) {
+            if(product.units <= 0 && product.stock) {
                 this.helper.message('Produto sem estoque!','warning');
                 this.selection.toggle(product);
             } else {

@@ -11,13 +11,9 @@ import { retry } from 'rxjs/operators';
 export class MesasService extends Model {
     protected url = 'tables';
     public tables: any;
+    public tableToEdit: any;
     constructor(protected http: HttpClient, protected helper: HelperService) {
         super(http, helper);
     }
 
-    public getOrder(table_id): Observable<any> {
-        return this.http.get<any>(`${this.url}/pedidos?id=${table_id}`).pipe(
-            retry(2)
-        )
-    }
 }

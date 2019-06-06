@@ -1,5 +1,5 @@
 <header class="header">
-    <div class="navigation-trigger hidden-xl-up" data-ma-action="aside-open" data-ma-target=".sidebar">
+    <div class="navigation-trigger hidden-lg-up" data-ma-action="aside-open" data-ma-target=".sidebar">
         <div class="navigation-trigger__inner">
             <i class="navigation-trigger__line"></i>
             <i class="navigation-trigger__line"></i>
@@ -8,18 +8,18 @@
     </div>
 
     <div class="header__logo hidden-sm-down">
-        <h1><a href="index-2.html">Agile</a></h1>
+        <h1><a routerLink="/">Tagmus</a></h1>
     </div>
-
+<!-- 
     <form class="search">
         <div class="search__inner">
             <input type="text" class="search__text" placeholder="Search for people, files, documents...">
             <i class="zmdi zmdi-search search__helper" data-ma-action="search-close"></i>
         </div>
-    </form>
+    </form> -->
 
     <ul class="top-nav">
-        <li class="hidden-xl-up"><a href="#" data-ma-action="search-open"><i class="zmdi zmdi-search"></i></a></li>
+        <li class="hidden-lg-up"><a href="#" data-ma-action="search-open"><i class="zmdi zmdi-search"></i></a></li>
 
 
         <li class="dropdown hidden-xs-down">
@@ -27,10 +27,10 @@
 
             <div class="dropdown-menu dropdown-menu-right">
                 <div class="dropdown-item theme-switch">
-                    Theme Switch
+                    Trocar tema
 
                     <div class="btn-group btn-group-toggle btn-group--colors" data-toggle="buttons">
-                        <label class="btn bg-green active"><input type="radio" value="green" autocomplete="off"
+                        <label class="btn bg-green"><input type="radio" value="green" autocomplete="off"
                                 checked></label>
                         <label class="btn bg-blue"><input type="radio" value="blue" autocomplete="off"></label>
                         <label class="btn bg-red"><input type="radio" value="red" autocomplete="off"></label>
@@ -42,13 +42,11 @@
                         <label class="btn bg-cyan"><input type="radio" value="cyan" autocomplete="off"></label>
                         <label class="btn bg-blue-grey"><input type="radio" value="blue-grey"
                                 autocomplete="off"></label>
-                        <label class="btn bg-purple"><input type="radio" value="purple" autocomplete="off"></label>
+                        <label class="btn bg-purple  active"><input type="radio" value="purple" autocomplete="off"></label>
                         <label class="btn bg-indigo"><input type="radio" value="indigo" autocomplete="off"></label>
                         <label class="btn bg-brown"><input type="radio" value="brown" autocomplete="off"></label>
                     </div>
                 </div>
-                <a href="#" class="dropdown-item">Fullscreen</a>
-                <a href="#" class="dropdown-item">Clear Local Storage</a>
             </div>
         </li>
 

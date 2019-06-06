@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
-import { Observable, of, from } from 'rxjs';
+import { Observable, of, from, throwError } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 
@@ -18,8 +18,11 @@ export class InterceptorService implements HttpInterceptor {
         return from(promise).pipe(mergeMap(user => {
 
             let clonedReq = this.addToken(request, user);
-            return next.handle(clonedReq);
+            return next.handle(clonedReq).pipe(
+                
+            )
         }));
+        
     }
 
     private addToken(request: HttpRequest<any>, user: any) {

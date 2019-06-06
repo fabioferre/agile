@@ -15,12 +15,7 @@ export class BairrosPage implements OnInit {
 
   ngOnInit(  ) {
     
-       if(!this.bairrosService.bairros) {
-           this.bairrosService.get().subscribe(bairros => {
-               this.bairrosService.bairros = bairros;
-               this.helper.load(false);
-           })
-       }
+       
    }
 
 }

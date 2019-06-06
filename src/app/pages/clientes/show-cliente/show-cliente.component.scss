@@ -1,0 +1,42 @@
+.client-amount {
+
+    position: relative;
+    &:hover  {
+        .add-deposit, .remove-deposit {
+            opacity: 1;
+            i {
+                cursor: pointer;
+            }
+            width: 50%;
+            transform: scale(1);
+            transform-origin: right;
+            transition: all 300ms;
+        }
+    }   
+
+    .add-deposit, .remove-deposit {
+        position: absolute;
+        top: 0;
+        height: 100%;
+        width: 0%;
+        opacity: 0;
+        z-index: 5;
+        text-align: center;
+        padding-top: 20px;
+        font-size: 29px;
+        transform: scale(0);
+        transform-origin: left;
+        transition: all 500ms;
+    }
+
+    .add-deposit {
+        left: 0;
+        color:var(--white);
+        background-color: #10dc60;
+    }
+    .remove-deposit  {
+        right: 0;
+        color: var(--white);
+        background-color: #f04141;
+    }
+}

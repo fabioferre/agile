@@ -21,14 +21,14 @@
         </div>
         <div class="painel-item " 
         [ngClass]="{'active': types.selling4 }"
-        (click)="modalTable(4); changeActive(4)">
+        (click)="changeActive(4)" [routerLink]="['/pedidos/mesas']">
             <i class="fas fa-concierge-bell"></i>
             <span>Mesa</span>
         </div>
     </div>
 
 
-    <form [formGroup]="form" (submit)="showPayment()" class="painel-body">
+    <form [formGroup]="form"  class="painel-body">
         
         <caption>Pedidos</caption>
         <table class="order-list text-center">
@@ -47,12 +47,14 @@
                     <td>
                         {{  product.qtd }}
                         <a href="javascript:void(0)" 
+                        *ngIf="!product.old"
                         (click)="homeService.lessProduct(product, $event)"
                         class="float-left btn-order text-danger">
                             <i class="fas fa-minus-circle"></i>
                         </a>
 
-                        <a href="javascript:void(0)"
+                        <a href="javascript:void(0)" 
+                        *ngIf="!product.old"
                          class="float-right btn-order text-primary"
                          (click)="homeService.plusProduct(product, $event)">
                             <i class="fas fa-plus-circle"></i>
@@ -100,8 +102,11 @@
                 <div id="order-information" *ngIf="homeService.client || homeService.table">
                     
                     <div class="client-order position-static"  *ngIf="homeService.client">
-                        <div class="wallet negative"  *ngIf="homeService.client">
-                            R$ 545 <i class="fas fa-wallet"></i>
+                        <div class="wallet" [ngClass]="{
+                            'positive': homeService.client.account?.amount > 0,
+                            'negative':homeService.client.account?.amount < 0
+                        }">
+                          {{ homeService.client.account?.amount | currency:'BRL':' R$  ':'1.2-2'  }} <i class="fas fa-wallet"></i>
                         </div>
                         <span class="order-info-item ">
                             <strong>Nome:</strong>
@@ -110,34 +115,42 @@
                         </span>
                         <span class="order-info-item ">
                             <strong>Contato:</strong>
-                            {{ homeService.client.cell_phone? homeService.client.cell_phone: homeService.client.landline }}
+                            {{ homeService.client.cellphone? homeService.client.cellphone: homeService.client.phone }}
                         </span>
                         <span class="order-info-item ">
                             <strong>Endereço:</strong>
                             {{ homeService.client?.address_street  }} &nbsp;
                             {{ homeService.client?.address_number  }} &nbsp;
                             {{ homeService.client?.address_zipcode  }} &nbsp;
-                            
                         </span>
                     </div>
                     <div class="table-order"  *ngIf="homeService.table">
                         <span class="order-info-item ">
                             <strong>Lugares:</strong>
-                            1
+                            {{ homeService.table.places }}
                         </span>
                         <span class="order-info-item ">
                             <strong>Mesa: </strong>
-                            2
+                            {{ homeService.table.name }}
                         </span>
                     </div>
 
                 </div>
             </div>
-            <div class="col-lg-10 mx-auto ">
+            <div class="col-lg-7 mx-auto">
                 <button type="submit" 
-                class="btn btn-outline-success btn-block rounded-pill">
+                class="btn btn-outline-success btn-block"
+                (click)="prepareSale()"
+                *ngIf="!homeService.order_id; else addOrder">
                     Efetuar pedido
                 </button>
+                <ng-template #addOrder>
+                    <button type="submit" 
+                    class="btn btn-outline-info btn-block"
+                    (click)="updateOrder(homeService.order_id)" >
+                        Acrescentar pedido
+                    </button>
+                </ng-template>
             </div>
         </div>
     </form>

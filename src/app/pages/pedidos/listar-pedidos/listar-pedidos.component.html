@@ -6,28 +6,29 @@
 
 </header>
 
-<div class="card  responsive-table" *ngIf="pedidosService.pedidos">
+<div class="card  responsive-table" >
     <div class="card-body ">
         <mat-form-field class="w-100">
             <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro">
         </mat-form-field>
         <div class="mat-elevation-z8 ">
-            <table mat-table [dataSource]="dataSource" matSort class="w-100 ">
+            <table mat-table [dataSource]="orderService.dataSource" matSort class="w-100 ">
                 <!-- item5 Column -->
                 <ng-container matColumnDef="status">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
                     <td mat-cell *matCellDef="let element">
                         <span class="badge" [ngClass]="'badge-'+element.label?.style">
-                            {{element.label?.name}}
-                        </span> 
+                            {{  element.label?.name }}
+                        </span>
+                        <i class="fas fa-motorcycle ml-3 animation-left" *ngIf="element.label?.in_table == 4"></i>
                     </td>
                 </ng-container>
-                 <!-- item2 Column -->
-                 <ng-container matColumnDef="created_at">
+                <!-- item2 Column -->
+                <ng-container matColumnDef="created_at">
                     <th mat-header-cell *matHeaderCellDef> Efetuado em </th>
                     <td mat-cell *matCellDef="let element">{{element.created_at| date:'dd/MM/yyyy HH:mm'}} </td>
                 </ng-container>
-    
+
                 <!-- item1 Column -->
                 <ng-container matColumnDef="id">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Nº. </th>
@@ -37,7 +38,7 @@
                 <!-- item3 Column -->
                 <ng-container matColumnDef="type">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Tipo </th>
-                    <td mat-cell *matCellDef="let element"> {{ typeSelling['type'+element.type] }} </td>
+                    <td mat-cell *matCellDef="let element"> {{ orderService.typeSelling['type'+element.type] }} </td>
                 </ng-container>
 
                 <!-- item4 Column -->
@@ -46,18 +47,35 @@
                     <td mat-cell *matCellDef="let element">R$ {{element.total}} </td>
                 </ng-container>
 
-               
+
 
                 <!-- item6 Column -->
                 <ng-container matColumnDef="action">
                     <th mat-header-cell *matHeaderCellDef> Ações </th>
                     <td mat-cell *matCellDef="let element">
-                        <!-- <button class="btn btn-primary mx-1" (click)="edit(element)">
-                          <i class="zmdi zmdi-edit"></i>
-                      </button> -->
-                        <!-- <button class="btn btn-danger mx-1" (click)="delete()">
-                          <i class="zmdi zmdi-close"></i>
-                      </button> -->
+                        <button class="btn btn-outline-success mx-1" 
+                        data-toggle="tooltip" data-placement="top" 
+                        title="Finalizar pedido"  
+                        (click)="finalize(element)"
+                        [routerLink]="['/pedidos/detalhes', element.id]"
+                        *ngIf="element.label?.in_table == 1 || element.label?.in_table == 4">
+                            <i class="fas fa-dollar-sign"></i>
+                        </button> 
+                        <!-- <button class="btn btn-danger mx-1" *ngIf="element.status < 4"
+                        (click)="delete(element)" 
+                        data-placement="top" 
+                        title="Cancelar pedido">
+                            <i class="zmdi zmdi-close"></i>
+                        </button> -->
+                        <button class="btn btn-outline-primary mx-1" 
+                        data-toggle="tooltip" 
+                        data-placement="top" 
+                        title="Sair pra entrega"  
+                        (click)="outToDeliver(element)"
+                        *ngIf="element.label?.in_table == 3">
+                            <i class="fas fa-motorcycle"></i>
+                        </button> 
+                        
                     </td>
                 </ng-container>
 

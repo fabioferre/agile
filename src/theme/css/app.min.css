@@ -12021,6 +12021,13 @@ textarea {
     z-index: 19
 }
 
+@media (max-width:1199.98px) {
+    .sidebar .user__info {
+        display: none;
+    }
+    
+}
+
 .navigation>li>a,
 .navigation__sub .navigation__active,
 .user {
@@ -12030,14 +12037,15 @@ textarea {
 @media (max-width:1199.98px) {
     .sidebar {
         background-color: #FFF;
+        padding:102px 0 .5rem;
         transition: opacity .3s, -webkit-transform .3s;
         transition: transform .3s, opacity .3s;
-        transition: transform .3s, opacity .3s, -webkit-transform .3s
+        transition: transform .3s, opacity .3s, -webkit-transform .3s;
     }
     .sidebar:not(.toggled) {
-        opacity: 0;
-        -webkit-transform: translate3d(-100%, 0, 0);
-        transform: translate3d(-100%, 0, 0)
+        opacity:1;
+        -webkit-transform: translate3d(-50%, 0, 0);
+        transform: translate3d(-70%, 0, 0)
     }
     .sidebar.toggled {
         box-shadow: 5px 0 10px rgba(0, 0, 0, .08);
@@ -12075,6 +12083,30 @@ textarea {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0)
 }
+
+.sidebar:hover {
+    box-shadow: 5px 0 10px rgba(0, 0, 0, .08);
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    padding:102px 2rem .5rem;
+}
+.sidebar:hover .navigation li a  {
+    width: auto;
+}
+
+.sidebar:hover .navigation li a span {
+    display: inline;
+}
+
+.sidebar:hover .navigation li a span.text-truncate {
+    display: inline;
+}
+
+.sidebar:hover .user__info {
+    display: block;
+}
+
 
 .user {
     margin: 0 0 1.5rem
@@ -12125,7 +12157,26 @@ textarea {
     color: #747a80;
     transition: background-color .3s, color .3s;
     font-weight: 500;
-    display: block
+    display: block;
+}
+
+@media (max-width:1199.98px) {
+    .navigation li a {
+        width: 55px;
+        margin-left: auto;
+    }
+
+    .navigation li a span {
+       display: none;
+    }
+    .navigation li a span.text-truncate {
+        display: inline-block;
+        max-width: 7ch;
+    }
+    .content.content-main {
+        max-width: 94%;
+        margin-left: auto
+    }
 }
 
 .navigation li:not(.navigation__active):not(.navigation__sub--active) a:hover {
@@ -12156,6 +12207,18 @@ textarea {
 .navigation__sub>ul>li>a {
     padding: .6rem 1rem .6rem 2.75rem
 }
+
+.sidebar:hover .navigation__sub>ul>li>a {
+    padding: .6rem 1rem .6rem 2.75rem
+}
+@media (max-width:1199.98px) {
+    .navigation__sub>ul>li>a {
+        padding-top: .6rem;
+        padding-bottom: .6rem;
+        padding-left: 0;
+    } 
+}
+
 
 .navigation__sub>ul>li:last-child {
     padding-bottom: .8rem
@@ -16091,6 +16154,12 @@ span.flatpickr-weekday {
 
 .scrollbar-inner:not(:hover) .scroll-element {
     opacity: 0
+}
+@media (max-width:1199.98px) {
+    .scrollbar-inner:not(:hover) .scroll-element {
+        opacity: 1
+    }
+
 }
 
 .waves-effect {

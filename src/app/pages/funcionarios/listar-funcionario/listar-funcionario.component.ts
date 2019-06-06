@@ -10,8 +10,8 @@ import { Router } from '@angular/router';
 })
 export class ListarFuncionarioComponent implements OnInit {
 
-  displayedColumns: string[] = ['item1', 'item2', 'item3', 'item4', 'item5', 'item6'];
-  dataSource = new MatTableDataSource<any>([]);
+  displayedColumns: string[] = ['name', 'cellphone', 'occupation', 'cpf', 'store', 'action'];
+  dataSource = new MatTableDataSource<any>(this.funcionariosService.funcionarios);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -37,8 +37,8 @@ export class ListarFuncionarioComponent implements OnInit {
   }
 
   public edit(req): void {
-
-      this.router.navigate(['/funcionarios/editar']);
+    this.funcionariosService.funcionarioEdit = req;
+      this.router.navigate(['/funcionarios/editar', req]);
   }
 
 }

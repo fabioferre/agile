@@ -1,5 +1,4 @@
-
-<aside class="sidebar sidebar">
+<aside class="sidebar ">
     <div class="scrollbar-inner">
         <div class="user">
             <div class="user__info" data-toggle="dropdown">
@@ -13,121 +12,110 @@
             <div class="dropdown-menu">
                 <!-- <a class="dropdown-item" href="#">View Profile</a> -->
                 <!-- <a class="dropdown-item" href="#">Settings</a> -->
-                <a class="dropdown-item" (click)="auth.logout()">Logout</a>
+                <a class="dropdown-item" (click)="auth.logout()">Sair</a>
             </div>
         </div>
 
         <ul class="navigation">
             <li [routerLink]="['/home']" routerLinkActive="navigation__active">
-                <a href="javascript:void(0)" >
-                    <i class="fas fa-cash-register"></i> Caixa
+                <a href="javascript:void(0)">
+                    <i class="fas fa-cash-register"></i><span> Caixa </span>
                 </a>
             </li>
-           
+
             <li class="navigation__sub">
-                <a href="#"><i class="fas fa-list-ol"></i>Pedidos</a>
+                <a href="#"><i class="fas fa-list-ol"></i><span>Pedidos</span> </a>
                 <ul>
                     <li [routerLink]="['/pedidos/lista']" routerLinkActive="navigation__active">
-                        <a href="javascript:void(0)" >
-                            lista
+                        <a href="javascript:void(0)">
+                            <span class="text-truncate">lista</span>
                         </a>
                     </li>
                     <li [routerLink]="['/pedidos/mesas']" routerLinkActive="navigation__active">
-                        <a href="javascript:void(0)" >
-                           Mesas
+                        <a href="javascript:void(0)">
+                            <span class="text-truncate">Mesas</span>
                         </a>
                     </li>
+
                 </ul>
             </li>
             <li class="navigation__sub">
-                <a href="#"><i class="zmdi zmdi-archive"></i>Produtos</a>
+                <a href="#"><i class="zmdi zmdi-archive"></i> <span>Produtos</span></a>
                 <ul>
-                    <li [routerLink]="['/produtos']" routerLinkActive="navigation__active">
-                        <a href="javascript:void(0)" >
-                            Lista
-                        </a>
-                    </li>
-                    <li [routerLink]="['/produtos/novo']" routesrLinkActive="navigation__active">
-                        <a href="javascript:void(0)" >
-                            Novo
+                    <li [routerLink]="['/produtos/lista']" routerLinkActive="navigation__active">
+                        <a href="javascript:void(0)">
+                            <span class="text-truncate">Lista</span>
                         </a>
                     </li>
                     <li [routerLink]="['/produtos/categorias']" routerLinkActive="navigation__active">
-                        <a href="javascript:void(0)" >
-                            Categorias
+                        <a href="javascript:void(0)">
+                            <span class="text-truncate">Categorias </span>
                         </a>
                     </li>
                 </ul>
             </li>
-
-
-            <li class="navigation__sub">
-                <a href="#"><i class="fas fa-users"></i>Clientes</a>
-                <ul>
-                    <li [routerLink]="['/clientes']" routerLinkActive="navigation__active">
-                        <a href="javascript:void(0)" >
-                            lista
-                        </a>
-                    </li>
-                    <li [routerLink]="['/produtos/novo']" routesrLinkActive="navigation__active">
-                        <a href="javascript:void(0)" >
-                            Novo
-                        </a>
-                    </li>
-                </ul>
+            <li [routerLink]="['/clientes']" routerLinkActive="navigation__active">
+                <a href="javascript:void(0)">
+                    <i class="fas fa-users"></i> <span>Clientes</span>
+                </a>
             </li>
 
             <li [routerLink]="['/mesas']" routerLinkActive="navigation__active">
-                <a href="javascript:void(0)" >
-                    <i class="fas fa-concierge-bell"></i>Mesas
+                <a href="javascript:void(0)">
+                    <i class="fas fa-concierge-bell"></i> <span>Edição de mesas</span>
                 </a>
             </li>
 
 
-            <li [routerLink]="['/bairros']" routerLinkActive="navigation__active">
-                <a href="javascript:void(0)" >
-                    <i class="fas fa-map-marked-alt"></i>Bairros
+            <li [routerLink]="['/fretes']" routerLinkActive="navigation__active">
+                <a href="javascript:void(0)">
+                    <i class="fas fa-map-marked-alt"></i><span>Fretes</span>
                 </a>
             </li>
 
-           
+
             <li [routerLink]="['/motoboy']" routerLinkActive="navigation__active">
-                <a href="javascript:void(0)" >
-                    <i class="fas fa-motorcycle"></i>Motoboy
+                <a href="javascript:void(0)">
+                    <i class="fas fa-motorcycle"></i><span>Motoboy</span>
                 </a>
             </li>
 
             <li [routerLink]="['/lojas']" routerLinkActive="navigation__active">
-                <a href="javascript:void(0)" >
-                    <i class="fas fa-store"></i>Lojas
+                <a href="javascript:void(0)">
+                    <i class="fas fa-store"></i><span>Lojas</span>
+                </a>
+            </li>
+
+            <li [routerLink]="['/funcionarios']" routerLinkActive="navigation__active">
+                <a href="javascript:void(0)">
+                    <i class="fas fa-user-cog"></i><span>Funcionarios</span>
                 </a>
             </li>
 
             <li class="navigation__sub">
-                <a href="#"><i class="fas fa-cog"></i>Configurações</a>
+                <a href="#"><i class="fas fa-cog"></i><span>Configurações </span></a>
                 <ul>
                     <li [routerLink]="['/sistema/impressora']" routerLinkActive="navigation__active">
-                        <a href="javascript:void(0)" >
-                            impressora
+                        <a href="javascript:void(0)">
+                            <span class="text-truncate">impressora</span>
                         </a>
                     </li>
                     <li [routerLink]="['/produtos/novo']" routesrLinkActive="navigation__active">
-                        <a href="javascript:void(0)" >
-                            sistema
+                        <a href="javascript:void(0)">
+                            <span class="text-truncate"> sistema</span>
                         </a>
                     </li>
                     <li [routerLink]="['/produtos/novo']" routesrLinkActive="navigation__active">
-                        <a href="javascript:void(0)" >
-                            tema
+                        <a href="javascript:void(0)">
+                            <span class="text-truncate">tema</span>
                         </a>
                     </li>
                 </ul>
             </li>
-            
 
-            
+
+
 
         </ul>
     </div>
 </aside>
-

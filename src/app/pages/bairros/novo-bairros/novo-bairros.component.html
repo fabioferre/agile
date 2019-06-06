@@ -1,127 +1,94 @@
-<header class="content__title">
-  <h1>Bairros</h1>
-  <button type="button" class="btn btn-success btn-add"  >
-      <i class="fas fa-print 3x"></i>
-  </button>
-  
-</header>
 <div class="card">
-    <form [formGroup]="form">
+    <form [formGroup]="form" (submit)="save()">
         <div class="card-body">
             <div class="row ">
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <label>Cabeçalho</label>
+                        <label>Nome</label>
                         <input type="text" 
                             class="form-control" 
-                            placeholder="pizza, arroz, frango..."
-                            formControlName="name"
-                            [ngClass]="{'form-control--active': form.value.name !== ''}">
+                            placeholder=""
+                            formControlName="name" >
                         <i class="form-group__bar"></i>
                     </div>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-lg-6">
                     <div class="form-group">
-                        <label>Número</label>
+                        <label>Frete</label>
                         <input type="text" 
                         class="form-control" 
-                        placeholder="nº no cardapio"
-                        formControlName="number"
-                        [ngClass]="{'form-control--active': form.value.number !== ''}">
+                        placeholder="0,00"
+                        required
+                        [brmasker]="{form: form.get('freight'), money: true, decimalCaracter: '.'}"
+                        formControlName="freight">
                         <i class="form-group__bar"></i>
                     </div>
                 </div>
-                <!-- <div class="col-lg-4 pt-3">
-                    <mat-form-field class="w-100">
-                        <mat-label>Categoria</mat-label>
-                        <mat-select formControlName="category_id">
-                            <mat-option *ngFor="let category of categories" [value]="category.id">
-                                {{ category.name }}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div> -->
-
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>País</label>
+                        <input type="text" 
+                        class="form-control" 
+                        placeholder="Brasil"
+                        formControlName="country">
+                        <i class="form-group__bar"></i>
+                    </div>
+                </div>
+                <div class="col-lg-6 pt-3">
+                    <div class="form-group">
+                        <mat-form-field class="w-100">
+                            <mat-label>Região</mat-label>
+                            <mat-select formControlName="region">
+                                <mat-option value="Sul">Sul </mat-option>
+                                <mat-option value="Sudeste">Sudeste </mat-option>
+                                <mat-option value="Leste">Leste </mat-option>
+                                <mat-option value="Oeste">Oeste</mat-option>
+                                <mat-option value="Noreste">Noreste</mat-option>
+                                <mat-option value="Centro">Centro</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
                 
-                <div class="col-lg-4">
+                <div class="col-lg-6">
                     <div class="form-group">
-                        <label>Peso</label>
-                        <input type="text" 
-                            class="form-control" 
-                            placeholder="10g, 10kl, 20lt..."
-                            formControlName="weight">
-                        <i class="form-group__bar"></i>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="form-group">
-                        <label>Preço de custo</label>
-                        <input type="text" 
-                            class="form-control" 
-                            placeholder="30 R$"
-                            formControlName="cost_price">
-                        <i class="form-group__bar"></i>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>Código</label>
-                        <input type="text" 
-                            class="form-control" 
-                            placeholder="0000 000000"
-                            formControlName="code">
-                        <i class="form-group__bar"></i>
-                    </div>
-                </div>
-                <div class="col-lg-6 text-center pt-3">
-                    <mat-slide-toggle 
-                    class="mat-primary" 
-                    formControlName="sale" checked>
-                        Disponível para venda?
-                    </mat-slide-toggle>
-                </div>
-                <div class="col">
-                    <div class="form-group">
-                        <label>Preço de venda</label>
+                        <label>Cidade</label>
                         <input type="text" 
                         class="form-control" 
-                        placeholder="30 R$"
-                        formControlName="sale_price">
+                        placeholder=""
+                        formControlName="city">
                         <i class="form-group__bar"></i>
                     </div>
                 </div>
-                <div class="col-lg-6 text-center pt-3">
-                    <mat-slide-toggle 
-                    class="mat-primary" 
-                    formControlName="stock" checked>
-                        Disponível para estoque?
-                    </mat-slide-toggle>
-                </div>
-                <div class="col">
+                <div class="col-lg-6">
                     <div class="form-group">
-                        <label>Unidades</label>
+                        <label>Estado</label>
                         <input type="text" 
                         class="form-control" 
-                        placeholder="1"
-                        formControlName="units">
+                        placeholder=""
+                        [brmasker]="{form: form.get('state'), mask: 'AA', len: 2}"
+                        formControlName="state">
                         <i class="form-group__bar"></i>
+                    </div>
+                </div>
+                <div class="col-lg-6 mx-auto">
+                    <div class="row">
+                        <div class="col-lg-7 ">
+                            <button type="submit" class="btn btn-primary btn-block" [disabled]="form.invalid">
+                                Salvar
+                            </button>
+                        </div>
+                        <div class="col-lg-5 ">
+                            <a href="javascript:history.go(-1)" class="btn btn-secondary btn-block">
+                                Voltar
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="form-group">
-                <label>Descrição</label>
-                <textarea class="form-control textarea-autosize"></textarea>
-                <i class="form-group__bar"></i>
-            </div>
 
-            <div class="clearfix"></div>
-
-            <div class="mt-5 text-center">
-               <button type="submit" class="btn btn-primary" [disabled]="!form.valid">
-                   Salvar
-                </button>
-            </div>
+           
         </div>
     </form>
 </div>

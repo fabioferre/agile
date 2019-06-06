@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { retry, finalize, catchError } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { HelperService } from './helper.service';
 import * as $ from 'jquery';
 import { LoadingController } from '@ionic/angular';
@@ -8,6 +8,7 @@ import { async } from 'q';
 export default class Model {
     isLoading = false;
     protected url;
+    protected urlApi = 'http://tagmus.com.br/api';
     constructor(
         protected http: HttpClient,
         protected helper: HelperService) {
@@ -22,7 +23,7 @@ export default class Model {
             urlParans = `${urlParans}${e}=${JSON.stringify(i)}&`;
         });
 
-        return this.http.get<any>(`${this.helper.url}/${this.url}?${urlParans}`).pipe(
+        return this.http.get<any>(`${this.urlApi}/${this.url}?${urlParans}`).pipe(
             retry(10),
             finalize(() => {
                 this.isLoading = false;
@@ -36,19 +37,20 @@ export default class Model {
 
     public getNoLoad(parans: any = ''): Observable<any> {
 
-        return this.http.get<any>(`${this.helper.url}/${this.url}?${parans}`).pipe(
+        return this.http.get<any>(`${this.urlApi}/${this.url}?${parans}`).pipe(
             retry(1),
             catchError(error => of( this.helper.message(error)))
         );
 
     }
 
-    public getById(id): Observable<any> {
+    public getById(id?): Observable<any> {
         this.load();
-        return this.http.get<any>(`${this.helper.url}/${this.url}/${id}`).pipe(
+        return this.http.get<any>(`${this.urlApi}/${this.url}/${id}`).pipe(
             retry(10),
             finalize(() => {
                 this.isLoading = false;
+                this.helper.load(false);
             }),
             catchError(error => of( this.helper.message(error)))
         )
@@ -56,7 +58,7 @@ export default class Model {
 
     public updateById(id, params): Observable<any> {
         this.load();
-        return this.http.put<any>(`${this.helper.url}/${this.url}/${id}`, params).pipe(
+        return this.http.put<any>(`${this.urlApi}/${this.url}/${id}`, params).pipe(
             finalize(() => {
                 this.isLoading = false;
                 this.helper.load(false);
@@ -67,7 +69,7 @@ export default class Model {
 
     public create(params): Observable<any>  {
         this.load();
-        return this.http.post<any>(`${this.helper.url}/${this.url}`, params).pipe(
+        return this.http.post<any>(`${this.urlApi}/${this.url}`, params).pipe(
             finalize(() => {
                 this.isLoading = false;
                 this.helper.load(false);
@@ -78,7 +80,7 @@ export default class Model {
 
     public deleteById(id): Observable<any> {
         this.load();
-        return this.http.delete<any>(`${this.helper.url}/${this.url}/${id}`).pipe(
+        return this.http.delete<any>(`${this.urlApi}/${this.url}/${id}`).pipe(
             retry(1),
             finalize(() => {
                 this.isLoading = false;
@@ -86,7 +88,7 @@ export default class Model {
                 this.helper.message("Item excluido", "danger")
               
             }),
-            catchError(error =>  of( this.helper.message(error)))
+            catchError(this.handleError)
         )
     }
 
@@ -102,5 +104,18 @@ export default class Model {
         });
     }
 
+
+    handleError(error) {
+        let errorMessage = '';
+        if (error.error instanceof ErrorEvent) {
+            // client-side error
+            errorMessage = `Error: ${error.error.message}`;
+        } else {
+            // server-side error
+            errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+        }
+        window.alert(errorMessage);
+        return throwError(errorMessage);
+    }
 
 }

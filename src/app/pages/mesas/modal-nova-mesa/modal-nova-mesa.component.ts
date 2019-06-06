@@ -12,7 +12,7 @@ import { HelperService } from 'src/app/service/helper.service';
 export class ModalNovaMesaComponent implements OnInit {
     public form: FormGroup = this.fb.group({
         name: ['', Validators.required],
-        places: [0, Validators.required]
+        places: [1, Validators.required]
     });
     constructor(
         public modalCtrl: ModalController,

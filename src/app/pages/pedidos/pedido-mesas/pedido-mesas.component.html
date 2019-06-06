@@ -3,13 +3,19 @@
         <div class="col-12">
             <div class="card card--inverse widget-signups">
                 <div class="card-body">
+                    <h4 class="card-title">
+                        Status de mesas
+                    </h4>
                     <h6 class="card-subtitle">
                         Número exibido em <span class="text-warning"> amarelo</span> é a
                         quantidade de lugares
                     </h6>
                     <div class="actions actions--inverse">
                         <div class="actions__item">
-                            <a href="javascript:void(0)" class="text-white " (click)="getTables()">
+                            <a href="javascript:void(0)" 
+                            class="text-white " 
+                            (click)="getTables()"
+                            [ngClass]="{'disabled': !tableService.tables}">
                                 <i class="fas fa-sync  " [ngClass]="{'fa-spin': !tableService.tables}"></i>
                             </a>
                         </div>

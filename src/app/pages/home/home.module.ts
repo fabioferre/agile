@@ -27,7 +27,6 @@ import { FormRegisterClientComponent } from './modal/cliente-modal/form-register
 import { ClientesService } from '../clientes/clientes.service';
 import { BairrosService } from '../bairros/bairros.service';
 import { BrMaskerModule } from 'br-mask';
-import { TableModalComponent } from './modal/table-modal/table-modal.component';
 const routes: Routes = [
   {
     path: '',
@@ -38,7 +37,6 @@ const routes: Routes = [
 @NgModule({
   entryComponents: [
     ClienteModalComponent,
-    TableModalComponent
   ],
   imports: [
     CommonModule,
@@ -61,9 +59,8 @@ const routes: Routes = [
     PainelPedidoComponent, 
     ListaProdutosComponent, 
     ClienteModalComponent,
-    TableModalComponent,
     FormRegisterClientComponent
   ],
-  providers: [ ClientesService, BairrosService, Printer]
+  providers: [ ClientesService, Printer]
 })
 export class HomePageModule {}

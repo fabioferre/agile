@@ -32,6 +32,11 @@ const routes: Routes = [
         children: [
             {
                 path: '',
+                pathMatch: 'full',
+                redirectTo: 'lista'
+            },
+            {
+                path: 'lista',
                 component: ListagemComponent
             },
             {

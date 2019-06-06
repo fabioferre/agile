@@ -18,26 +18,36 @@ export class PedidoMesasComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        if (!this.tableService.tables) {
-            this.getTables();
-        }
+        this.getTables();
     }
 
     public getTables(): void {
+        this.tableService.tables = null;
         this.tableService.getNoLoad().subscribe(tables => {
             this.tableService.tables = tables;
         });
     }
 
-    public getOrder(table): void {
-        // this.tableService.getOrder(table.id).subscribe((order => {
-        //     this.homeService.table = {id:9, name: 'oloco'};
-        //     this.homeService.productSelected = [{id: 9, qtd: 1, }]
-        // }));   
+    public getOrder(table_selected): void {
+        this.homeService.table = table_selected;
+        if(table_selected.status > 1) {
+            this.tableService.getById(table_selected.id).subscribe((table => {
+                
+                this.homeService.productSelected = JSON.parse(table.products);
+                this.homeService.order_id = table_selected.order_id;
+
+                this.homeService.productSelected.map(product => {
+                    product.old = true;
+                })
+
+                this.homeService.loadOrders = true;
+                this.router.navigate(['/home']);
+            }));  
+        }  else {
+            this.router.navigate(['/home']);
+        }
         
-        this.homeService.table = {id:9, name: 'oloco'};
-        this.homeService.productSelected = [{id: 9, qtd: 1, sold_price: 2323, units:  12 }];
-        this.router.navigate(['/home']);
+        
     }   
 
 }

@@ -11,6 +11,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { BairrosPage } from './bairros.page';
 import { MatInputModule, MatSelectModule, MatSlideToggleModule, MatFormFieldModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
+import { BrMaskerModule } from 'br-mask';
 
 const routes: Routes = [
   {
@@ -46,9 +47,10 @@ const routes: Routes = [
     MatPaginatorModule,
     MatSortModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    BrMaskerModule,
   ],
   declarations: [BairrosPage, EditarBairrosComponent, ListarBairrosComponent, NovoBairrosComponent],
-  providers:[BairrosService]
+  providers:[]
 })
 export class BairrosPageModule {}

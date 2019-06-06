@@ -2,43 +2,51 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { Router } from '@angular/router';
 import { ClientesService } from '../clientes.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-listar-cliente',
-  templateUrl: './listar-cliente.component.html',
-  styleUrls: ['./listar-cliente.component.scss'],
+    selector: 'app-listar-cliente',
+    templateUrl: './listar-cliente.component.html',
+    styleUrls: ['./listar-cliente.component.scss'],
 })
 export class ListarClienteComponent implements OnInit {
+  public clients= [];
+  displayedColumns: string[] = ['name', 'cellphone', 'address_street', 'amount', 'action'];
+  dataSource = new MatTableDataSource<any>(this.clients);
 
-  displayedColumns: string[] = ['item1', 'item2', 'item3', 'item4', 'item5', 'item6'];
-  dataSource = new MatTableDataSource<any>([]);
+    @ViewChild(MatSort) sort: MatSort;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-
-  constructor(private clientService: ClientesService,
-    private router: Router) { }
+    constructor(private clientService: ClientesService,
+        private router: Router,
+        public navCtrl: NavController) { }
 
   ngOnInit() {
-      this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      this.clientService.get().subscribe(clientes => {
+        this.clients = clientes;
+        this.dataSource.data =  this.clients ;
+        this.dataSource._updateChangeSubscription();
+    });
   }
 
-  applyFilter(filterValue: string) {
-      this.dataSource.filter = filterValue.trim().toLowerCase();
+    applyFilter(filterValue: string) {
+        this.dataSource.filter = filterValue.trim().toLowerCase();
 
-      if (this.dataSource.paginator) {
-          this.dataSource.paginator.firstPage();
-      }
-  }
+    }
 
-  public delete(): void {
+    public delete(): void {
 
-  }
+    }
 
-  public edit(req): void {
+    public edit(req): void {
+        this.clientService.clientToEdit = req;
+        this.router.navigate(['/clientes/editar']);
+    }
 
-      this.router.navigate(['/clientes/editar']);
-  }
+    public show(req): void {
+        this.router.navigate(['/clientes/show', req.id]);
+    }
+
+
 
 }

@@ -10,9 +10,10 @@
                 <div class="row ">
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <label>Nome</label>
+                            <label>Nome *</label>
                             <input type="text" 
                             class="form-control"
+                            required
                             formControlName="name" >
                             <i class="form-group__bar"></i>
                         </div>
@@ -28,7 +29,7 @@
                     <div class="col-lg-4 pt-3">
                         <mat-form-field class="w-100">
                             <mat-label>Categoria</mat-label>
-                            <mat-select formControlName="category_id">
+                            <mat-select formControlName="category_id" required >
                                 <mat-option *ngFor="let category of categories" [value]="category.id">
                                     {{ category.name }}
                                 </mat-option>
@@ -52,7 +53,7 @@
                             <div class="col-lg-4 pt-4">
                                 <mat-form-field class="w-100">
                                     <mat-label>Tipo</mat-label>
-                                    <mat-select formControlName="category_id">
+                                    <mat-select formControlName="weight_type">
                                         <mat-option *ngFor="let weight_tipe of productService.weight_types" 
                                         [value]="weight_tipe.id">
                                             {{ weight_tipe.name }}

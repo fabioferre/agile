@@ -21,8 +21,7 @@ export class MesasPage implements OnInit {
     }
 
     public getTables(): void {
-        this.tableService.tables = null;
-        this.tableService.getNoLoad().subscribe(tables => {
+        this.tableService.get().subscribe(tables => {
             this.tableService.tables = tables;
         });
     }
@@ -37,9 +36,9 @@ export class MesasPage implements OnInit {
     }
 
     async editTable(data: any) {
+        this.tableService.tableToEdit = data;
         const modal = await this.modalCtrl.create({
             component: ModalEditaMesaComponent,
-            componentProps: data,
             cssClass: 'responsive'
         });
         return await modal.present();

@@ -10,14 +10,15 @@ import Model from 'src/app/service/model';
 export class HomeService extends Model {
     protected url = 'orders';
     public productSelected: any = [];
+    public selection = new SelectionModel<any>(true, this.productSelected);
     public client: any;
     public table: any;
-    public selection = new SelectionModel<any>(true, this.productSelected);
-
-
+    public order_id: number;
+    public productAlert: boolean;
+    public loadOrders: boolean;
     constructor(
-        protected http: HttpClient,
-        protected helper: HelperService
+         http: HttpClient,
+         helper: HelperService
     ) { super(http, helper); }
 
     get totalPrice() {
@@ -40,6 +41,7 @@ export class HomeService extends Model {
     public plusProduct(product, event) {
         const idx = this.productSelected.indexOf(product);
         if (product.stock) {
+            
             if (this.productSelected[idx].qtd < product.units) {
                 this.productSelected[idx].qtd++;
             }else{
@@ -65,8 +67,10 @@ export class HomeService extends Model {
 
     public removeProducUnits(listProducts) {
         for (let product of listProducts) {
-            const idx = this.productSelected.indexOf(product);
-            this.productSelected[idx].units -= product.qtd;
+            if(!product.old && product.stock ) {
+                const idx = this.productSelected.indexOf(product);
+                this.productSelected[idx].units -= product.qtd;
+            }
         }
     }
 
@@ -74,6 +78,7 @@ export class HomeService extends Model {
         this.productSelected = [];
         this.client = null;
         this.table = null;
+        this.order_id = null;
         this.selection.clear();
     }
     public  selectClient(client) {

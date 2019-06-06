@@ -1,0 +1,9 @@
+@keyframes animationLeft {
+    from {
+        transform: translateX(-50px);
+    }
+}
+
+.animation-left {
+    animation: animationLeft 1s alternate;
+}

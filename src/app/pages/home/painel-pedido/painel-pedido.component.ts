@@ -39,7 +39,7 @@ export class PainelPedidoComponent implements OnInit {
         private fb: FormBuilder,
         private helper: HelperService,
         private router: Router,
-        private impressora: ImpressoraService
+        private impressora: ImpressoraService,
     ) { }
 
     ngOnInit() {
@@ -86,7 +86,7 @@ export class PainelPedidoComponent implements OnInit {
     async modalClient(type?) {
         this.homeService.client = null;
         this.homeService.table = null;
-        
+        this.homeService.order_id = null;
         if(type === 3) {
             this.homeService.loadOrders = true
         }

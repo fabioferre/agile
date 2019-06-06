@@ -51,6 +51,7 @@ export class ClienteModalComponent implements OnInit {
 
     public selectClient(client_selected) {
         this.homeService.selectClient(client_selected);
+        // console.log(client_selected);
         if(client_selected.status && this.homeService.loadOrders) {
             this.homeService.productSelected = [];
             this.clientService.getById(client_selected.id).subscribe(client => {
@@ -60,10 +61,19 @@ export class ClienteModalComponent implements OnInit {
                     this.homeService.productSelected.push(product);
                 });
                 this.homeService.order_id = client.order_id;
+                this.homeService.loadOrders = false;
                 this.modalCrl.dismiss();
             });
             
         }  else {
+            this.homeService.loadOrders = false;
+            this.homeService.order_id = null;
+            this.homeService.productSelected.forEach(product => {
+                if (product.old) {
+                    let idx = this.homeService.productSelected.indexOf(product);
+                    this.homeService.productSelected.splice(idx, 1);
+                }
+            });
             this.modalCrl.dismiss();
         }
     }

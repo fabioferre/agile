@@ -12207,6 +12207,10 @@ textarea {
 .navigation__sub>ul>li>a {
     padding: .6rem 1rem .6rem 2.75rem
 }
+
+.sidebar:hover .navigation__sub>ul>li>a {
+    padding: .6rem 1rem .6rem 2.75rem
+}
 @media (max-width:1199.98px) {
     .navigation__sub>ul>li>a {
         padding-top: .6rem;

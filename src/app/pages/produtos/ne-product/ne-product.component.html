@@ -1,0 +1,85 @@
+
+<form action="" [formGroup]="form">
+<header class="content__title">
+    <h1>Informações</h1>
+</header>
+<mat-tab-group>
+    <mat-tab label="Basicas">
+        <ng-template matTabContent>
+
+            <mat-card class="p-5">
+                <mat-card-content>
+                    <div class="form-row">
+                        <div class="col-lg-7">
+                            <mat-form-field class="full-width">
+                                <input matInput placeholder="Nome do produto" 
+                                type="text"
+                                formControlName="name"  required>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-lg-5">
+                            <mat-form-field  class="full-width">
+                                <mat-label>CATEGORIA</mat-label>
+                                <mat-select formControlName="category_id"  required>
+                                    <mat-option *ngFor="let category of categories" [value]="category.id">
+                                        {{ category.name }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-lg-6">
+                            <mat-form-field class="full-width">
+                                <input matInput placeholder="Marca do produto" 
+                                type="text"
+                                formControlName="brand"  >
+                            </mat-form-field>
+                        </div>
+                        <div class="col-lg-3">
+                            <mat-form-field class="full-width">
+                                <input matInput placeholder="Peso" 
+                                type="text"
+                                formControlName="weight">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-lg-3">
+                            <mat-form-field class="full-width">
+                                <mat-label>Tipo do peso</mat-label>
+                                <mat-select formControlName="weight_type">
+                                    <mat-option *ngFor="let weight_tipe of productService.weight_types"
+                                        [value]="weight_tipe.id">
+                                        {{ weight_tipe.name }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                       
+                    </div>
+                </mat-card-content>
+            </mat-card>
+
+        </ng-template>
+    </mat-tab>
+
+
+    <mat-tab label="Compra & Venda">
+        <ng-template matTabContent>
+            Content 2 - Loaded: 
+        </ng-template>
+    </mat-tab>
+
+
+    <mat-tab label="Controle & Estoque">
+        <ng-template matTabContent>
+            Content 3 
+        </ng-template>
+    </mat-tab>
+    <mat-tab label="Extras & Adicionais">
+        <ng-template matTabContent>
+            Content 3 
+        </ng-template>
+    </mat-tab>
+</mat-tab-group>
+</form>

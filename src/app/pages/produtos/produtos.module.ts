@@ -9,7 +9,8 @@ import { ProdutosPage } from './produtos.page';
 import { ListagemComponent } from './listagem/listagem.component';
 import { NovoComponent } from './novo/novo.component';
 import { EditarComponent } from './editar/editar.component';
-import { CategoriasComponent } from './categorias/categorias.component'
+import { CategoriasComponent } from './categorias/categorias.component';
+import { NeProductComponent } from './ne-product/ne-product.component';
 
 // materialize
 import { MatTableModule } from '@angular/material/table';
@@ -19,10 +20,13 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatCardModule} from '@angular/material/card';
 
 //service
 import { ProdutoService } from './produto.service';
 import { CategoriasService } from './categorias.service';
+import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material';
 
 
 const routes: Routes = [
@@ -41,7 +45,7 @@ const routes: Routes = [
             },
             {
                 path: 'novo',
-                component: NovoComponent,
+                component: NeProductComponent,
             },
             {
                 path: 'editar/:id',
@@ -70,6 +74,8 @@ const routes: Routes = [
         MatSlideToggleModule,
         MatSelectModule,
         MatFormFieldModule,
+        MatTabsModule,
+        MatCardModule,
         BrMaskerModule
     ],
     declarations: [
@@ -77,8 +83,11 @@ const routes: Routes = [
         NovoComponent,
         EditarComponent,
         ListagemComponent,
-        CategoriasComponent
+        CategoriasComponent,
+        NeProductComponent
     ],
-    providers: [ CategoriasService]
+    providers: [ CategoriasService,
+        {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher}
+    ]
 })
 export class ProdutosPageModule { }

@@ -10,7 +10,7 @@ import { IonicModule } from '@ionic/angular';
 import { BrMaskerModule } from 'br-mask';
 
 import { FuncionariosPage } from './funcionarios.page';
-import { MatInputModule, MatSlideToggleModule, MatSelectModule, MatFormFieldModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
+import { MatInputModule, MatSlideToggleModule, MatSelectModule, MatFormFieldModule, MatTableModule, MatPaginatorModule, MatSortModule, MatTabsModule, MatCardModule } from '@angular/material';
 import { PermissionsComponent } from './permissions/permissions.component';
 
 const routes: Routes = [
@@ -52,6 +52,8 @@ const routes: Routes = [
     MatPaginatorModule,
     MatSortModule,
     BrMaskerModule,
+    MatTabsModule,
+    MatCardModule,
     RouterModule.forChild(routes)
   ],
   declarations: [

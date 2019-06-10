@@ -15,7 +15,6 @@ const routes: Routes = [
   { path: 'clientes', canActivate: [AuthService], loadChildren: './pages/clientes/clientes.module#ClientesPageModule' },
   { path: 'sistema', canActivate: [AuthService], loadChildren: './pages/sistema/sistema.module#SistemaPageModule' },
   { path: 'fretes', loadChildren: './pages/fretes/fretes.module#FretesPageModule' },
-  { path: 'reports', loadChildren: './pages/reports/reports.module#ReportsPageModule' },
   { path: 'cash-flow', loadChildren: './pages/cash-flow/cash-flow.module#CashFlowPageModule' }
 
 ];

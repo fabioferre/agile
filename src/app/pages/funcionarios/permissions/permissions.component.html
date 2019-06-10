@@ -1,144 +1,154 @@
-<header class="content__title">
-  <h1>Adicionar permissões</h1>
-</header>
+<form action="" [formGroup]="form" class="px-5">
+  <header class="content__title">
+      <h1>Informações</h1>
+      
 
-<ion-card>
+      <div class="actions position-absolute" style="right: 10px; top:0">
+          <button type="button" class="btn btn-info  px-4 " >
+              Atualizar
+          </button>
+          <button type="button" class="btn btn-secondary  px-4 ml-4" >
+              Cancelar
+          </button>
+      </div>
+  </header>
+  <mat-tab-group>
+      <mat-tab label="Permissão no PDV">
+          <ng-template matTabContent>
+              <div class="pt-5">
+                  <mat-card class="p-5">
+                      <mat-card-content>
+                          <div class="form-row ">
+                              <div class="col-md-5 content-photo disponible-warning msg-warning"  
+                                  data-warning="Em breve dispońivel :)">
+                                  <div class="content-photo-header">
+                                      <img src="./assets/no-product.png" alt="">
+                                  </div>
+                                  <div class="actions text-center">
+                                      <button type="button" class="btn btn-secondary mr-3" hidden>
+                                          cancelar
+                                      </button>
+                                      <label for="" class="btn btn-primary btn-add-photo my-0" hidden>
+                                          adicionar
+                                      </label>
+                                  </div>
+                              </div>
+                              <div class="col-md-6 ml-auto">
+                                  <div class="row">
+             
+                                      <div class="col-lg-12">
+                                          <mat-form-field class="full-width">
+                                              <input matInput placeholder="Nome do produto" type="text"
+                                                  formControlName="name" required>
+                                          </mat-form-field>
+                                      </div>
 
-  <div class="card">
-      <form [formGroup]="form" (submit)="submit()">
-          <div class="card-body">
-              <div class="row ">
-                  <div class="col-lg-6">
-                      <div class="form-group">
-                          <label>Nome *</label>
-                          <input type="text" 
-                          class="form-control"
-                          required
-                          formControlName="name" >
-                          <i class="form-group__bar"></i>
-                      </div>
-                  </div>
-                  <div class="col-lg-2">
-                      <div class="form-group">
-                          <label>Número</label>
-                          <input type="text" class="form-control" placeholder="nº no cardapio"
-                              formControlName="number" >
-                          <i class="form-group__bar"></i>
-                      </div>
-                  </div>
-                  <div class="col-lg-4">
-                      <div class="row">
-                          <div class="col-lg-8">
-                              <div class="form-group">
-                                  <label>Peso</label>
-                                  <input type="text" 
-                                      class="form-control" 
-                                      placeholder="Ex: 0,02, 0,30"
-                                      formControlName="weight"
-                                      [brmasker]="{form: form.get('weight'), money: true, decimal: 3}">
-                                  <i class="form-group__bar"></i>
+                                      <div class="col-lg-12">
+                                          <mat-form-field class="full-width">
+                                              <input matInput placeholder="Marca do produto" type="text"
+                                                  formControlName="brand">
+                                          </mat-form-field>
+                                      </div>
+                                      <div class="col-md-8">
+                                          <mat-form-field class="full-width">
+                                              <input matInput 
+                                              placeholder="Peso do produto" 
+                                              type="text"
+                                              formControlName="weight">
+                                          </mat-form-field>
+                                      </div>
+                                      <div class="col-md-4">
+                                          <mat-form-field class="full-width">
+                                              <mat-label>Peso</mat-label>
+                                              <mat-select formControlName="weight_type">
+                                                  <mat-option *ngFor="let weight_tipe of productService.weight_types" 
+                                                  [value]="weight_tipe.id">
+                                                      {{ weight_tipe.name }}
+                                                  </mat-option>
+                                              </mat-select>
+                                          </mat-form-field>
+                                      </div>
+                                  </div>
                               </div>
                           </div>
-                      </div>
-                  </div>
-                  <div class="col-md-4">
-                      <div class="form-group">
-                          <label>Marca</label>
-                          <input type="text" 
-                          class="form-control" 
-                          placeholder=""
-                          formControlName="brand">
-                          <i class="form-group__bar"></i>
-                      </div>
-                  </div>
-                  <div class="col-md-4">
-                      <div class="form-group">
-                          <label>Código</label>
-                          <input type="text"
-                          class="form-control" 
-                          placeholder="0000000000000"
-                          maxlength="13"
-                          formControlName="code"
-                          [brmasker]="{form: form.get('code'), type:'num'}">
-                          <i class="form-group__bar"></i>
-                      </div>
-                  </div>
-                  <div class="col-lg-4 text-center pt-3">
-                      <mat-slide-toggle class="mat-primary" 
-                          (change)="alter('sale_price');alter('cost_price');" 
-                          formControlName="sale"
-                          checked>
-                          Disponível para venda?
-                      </mat-slide-toggle>
-                  </div>
-                  <div class="col-4">
-                      <div class="form-group">
-                          <label>Preço de venda</label>
-                          <input type="text" 
-                          class="form-control money" 
-                          placeholder="R$" 
-                          formControlName="sale_price"
-                          [brmasker]="{form: form.get('sale_price'), money: true, decimalCaracter: '.'}">
-                          <i class="form-group__bar"></i>
-                      </div>
-                  </div>
-                  <div class="col-4">
-                      <div class="form-group">
-                          <label>Preço de custo</label>
-                          <input type="text" 
-                          class="form-control money" 
-                          placeholder="R$" 
-                          [brmasker]="{form: form.get('cost_price'), money: true, decimalCaracter: '.'}"
-                          formControlName="cost_price">
-                          <i class="form-group__bar"></i>
-                      </div>
-                      
-                  </div>
-                  <div class="col-lg-4 text-center pt-3">
-                      <mat-slide-toggle class="mat-primary" 
-                      (change)="alter('units');alter('minimum_units')" 
-                      formControlName="stock" 
-                      checked>
-                          Disponível para estoque?
-                      </mat-slide-toggle>
-                  </div>
-                  <div class="col-4">
-                      <div class="form-group">
-                          <label>Unidades</label>
-                          <input type="number" 
-                          class="form-control" 
-                          placeholder="0" 
-                          min="0" 
-                          formControlName="units">
-                          <i class="form-group__bar"></i>
-                      </div>
-                  </div>
-                  <div class="col-4">
-                      <div class="form-group">
-                          <label>Unidade minima</label>
-                          <input type="number" class="form-control" placeholder="0" min="0" formControlName="minimum_units">
-                          <i class="form-group__bar"></i>
-                      </div>
-                  </div>
+                      </mat-card-content>
+                  </mat-card>
               </div>
+          </ng-template>
+      </mat-tab>
 
-              <div class="form-group">
-                  <label>Descrição</label>
-                  <textarea class="form-control textarea-autosize"></textarea>
-                  <i class="form-group__bar"></i>
+
+      <mat-tab label="Permissões no dashboard">
+          <ng-template matTabContent>
+              <div class="pt-5 "   >
+                  <mat-card class="toggle-disponible p-5" >
+                      <mat-card-content>
+                          <div class="toggle-button">
+                              <mat-slide-toggle formControlName="sale" color="primary">
+                                  <span *ngIf="!toSale" class="text-primary">
+                                      habilitar
+                                  </span>
+                              </mat-slide-toggle>
+                          </div>
+                          
+                          <div class="form-row msg-warning " 
+                              [ngClass]="{'disponible-warning': !toSale}" 
+                              data-warning="Controle de venda desabilitado! :(">
+
+                              <div class="col-lg-5">
+                                  <mat-form-field  class="full-width">
+                                      <input matInput
+                                       placeholder="Preço de venda" 
+                                      formControlName="sale_price" 
+                                      [brmasker]="{form: form.get('sale_price'), money: true, decimalCaracter: '.'}">
+                                      <span matPrefix>$&nbsp;</span>
+                                      <mat-hint>
+                                          preço do produto disponibilizado em sua loja
+                                      </mat-hint>
+                                  </mat-form-field>
+                              </div>
+                              <div class="col-lg-5 ml-auto">
+                                  <mat-form-field  class="full-width">
+                                      <input matInput
+                                      placeholder="Preço de custo" 
+                                      formControlName="cost_price" 
+                                      [brmasker]="{form: form.get('cost_price'), money: true, decimalCaracter: '.'}">
+                                      <span matPrefix>$&nbsp;</span>
+                                      <mat-hint>
+                                          preço do produto adquirido no seu fornecedor
+                                      </mat-hint>
+                                  </mat-form-field>
+                              </div>
+                          </div>
+                      </mat-card-content>
+                  </mat-card>
               </div>
+          </ng-template>
+      </mat-tab>
 
-              <div class="clearfix"></div>
+      <mat-tab label="Acesso">
+          <ng-template matTabContent>
+              <div class="pt-5 "   >
+                  <mat-card class=" p-5" >
+                      <mat-card-content>
+                          <div class="form-row msg-warning " >
+                              <div class="col-lg-6">
+                                  <mat-form-field class="full-width" >
+                                      <input matInput
+                                      placeholder="Código de barras" 
+                                      formControlName="code">
+                                      <mat-hint>
+                                          Código de barras informado no seu produtos
+                                      </mat-hint>
+                                  </mat-form-field>
+                              </div>
 
-              <div class="mt-5 text-center">
-                  <button type="submit" class="btn btn-primary" [disabled]="!form.valid">
-                      Salvar
-                  </button>
-                  <a href="javascript:history.go(-1)" class="btn btn-secondary ml-4">
-                      Voltar
-                  </a>
+                          </div>
+                      </mat-card-content>
+                  </mat-card>
               </div>
-          </div>
-      </form>
-  </div>
-</ion-card>
+          </ng-template>
+      </mat-tab>
+  </mat-tab-group>
+
+</form>

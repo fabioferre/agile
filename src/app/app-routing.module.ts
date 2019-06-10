@@ -14,7 +14,8 @@ const routes: Routes = [
   { path: 'lojas', canActivate: [AuthService], loadChildren: './pages/lojas/lojas.module#LojasPageModule' },
   { path: 'clientes', canActivate: [AuthService], loadChildren: './pages/clientes/clientes.module#ClientesPageModule' },
   { path: 'sistema', canActivate: [AuthService], loadChildren: './pages/sistema/sistema.module#SistemaPageModule' },
-  { path: 'fretes', loadChildren: './pages/fretes/fretes.module#FretesPageModule' }
+  { path: 'fretes', loadChildren: './pages/fretes/fretes.module#FretesPageModule' },  { path: 'reports', loadChildren: './pages/reports/reports.module#ReportsPageModule' }
+
 
 
 ];

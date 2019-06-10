@@ -11,6 +11,7 @@ import { BrMaskerModule } from 'br-mask';
 
 import { FuncionariosPage } from './funcionarios.page';
 import { MatInputModule, MatSlideToggleModule, MatSelectModule, MatFormFieldModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
+import { PermissionsComponent } from './permissions/permissions.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,10 @@ const routes: Routes = [
       {
         path: 'editar',
         component: EditarFuncionarioComponent 
+      },
+      {
+        path: 'permissao/:id',
+        component: PermissionsComponent
       }
     ]
   }
@@ -49,7 +54,13 @@ const routes: Routes = [
     BrMaskerModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [FuncionariosPage, ListarFuncionarioComponent, NovoFuncionarioComponent, EditarFuncionarioComponent],
+  declarations: [
+    FuncionariosPage, 
+    ListarFuncionarioComponent, 
+    NovoFuncionarioComponent, 
+    EditarFuncionarioComponent,
+    PermissionsComponent
+  ],
   providers:[FuncionariosService]
 })
 export class FuncionariosPageModule {}

@@ -32,13 +32,18 @@ export class ListarFuncionarioComponent implements OnInit {
       }
   }
 
-  public delete(): void {
+  public delete(element): void {
 
   }
 
   public edit(req): void {
     this.funcionariosService.funcionarioEdit = req;
       this.router.navigate(['/funcionarios/editar', req]);
+  }
+
+  public permissions(req): void {
+    this.funcionariosService.funcionarioEdit = req;
+      this.router.navigate(['/funcionarios/permissao', req.id]);
   }
 
 }

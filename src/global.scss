@@ -157,3 +157,41 @@ ion-modal.lg{
 .full-width {
     width: 100%;
 }
+
+
+.disponible-warning {
+    pointer-events: none;
+    position: relative;
+    padding-top: 25px;
+    opacity: 0.4;
+    
+    &::after {
+        content:'';
+        position: absolute;
+        top: 15px;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    &.msg-warning[data-warning]::after {
+        content: attr(data-warning);
+    }
+}
+
+.toggle-disponible {
+    position: relative;
+    .toggle-button {
+        position: absolute;
+        top: -12px;
+        left: 0;
+        padding-left: 5px;
+        padding-right: 5px;
+        line-height:10px; 
+        z-index: 555;
+        background-color: #fff;
+    }
+   
+}

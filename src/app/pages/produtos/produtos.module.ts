@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { BrMaskerModule } from 'br-mask';
 import { IonicModule } from '@ionic/angular';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 import { ProdutosPage } from './produtos.page';
 import { ListagemComponent } from './listagem/listagem.component';
@@ -76,7 +77,8 @@ const routes: Routes = [
         MatFormFieldModule,
         MatTabsModule,
         MatCardModule,
-        BrMaskerModule
+        BrMaskerModule,
+        CKEditorModule
     ],
     declarations: [
         ProdutosPage,

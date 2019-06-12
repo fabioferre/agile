@@ -4,7 +4,7 @@
         
 
         <div class="actions position-absolute" style="right: 10px; top:0">
-            <button type="button" class="btn btn-info  px-4 " 
+            <button type="button" class="btn btn-info  px-4 " (click)="update()"
             *ngIf="productService.productToEdit">
                 Atualizar
             </button>
@@ -12,9 +12,9 @@
             *ngIf="!productService.productToEdit">
                 Salvar
             </button>
-            <button type="button" class="btn btn-secondary  px-4 ml-4" >
+            <a href="javascript:history.go(-1)" class="btn btn-secondary  px-4 ml-4" >
                 Cancelar
-            </button>
+            </a>
         </div>
     </header>
     <mat-tab-group>
@@ -44,7 +44,7 @@
                                             <mat-form-field class="full-width">
                                                 <mat-label>Categoria</mat-label>
                                                 <mat-select formControlName="category_id" required>
-                                                    <mat-option *ngFor="let category of categories" [value]="category.id">
+                                                    <mat-option *ngFor="let category of categoriasService.categories" [value]="category.id">
                                                         {{ category.name }}
                                                     </mat-option>
                                                 </mat-select>
@@ -73,7 +73,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <mat-form-field class="full-width">
-                                                <mat-label>Peso</mat-label>
+                                                <mat-label>Tipo</mat-label>
                                                 <mat-select formControlName="weight_type">
                                                     <mat-option *ngFor="let weight_tipe of productService.weight_types" 
                                                     [value]="weight_tipe.id">
@@ -146,6 +146,69 @@
                                         </mat-hint>
                                     </mat-form-field>
                                 </div>
+                             
+                                <div class="col-lg-12 mt-5 mb-4">
+                                    <div class="toggle-button">
+                                        <mat-slide-toggle formControlName="fractioned" color="primary">
+                                            <span class="text-primary" *ngIf="!isFractioned">
+                                                habilitar venda fracionada
+                                            </span>
+                                        </mat-slide-toggle>
+                                    </div>
+                                    
+                                    <div class="form-row mt-3"  *ngIf="isFractioned" >
+                                        <div class="col">
+                                            <mat-form-field  class="full-width">
+                                                <input matInput
+                                                placeholder="Peso" 
+                                                formControlName="weight_sale" >
+                                                <mat-hint>
+                                                    Peso para venda fracionada
+                                                </mat-hint>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-3">
+                                            <mat-form-field class="full-width">
+                                                <mat-label>Tipo</mat-label>
+                                                <mat-select formControlName="weight_type_sale">
+                                                    <mat-option *ngFor="let weight_tipe of productService.weight_types" 
+                                                    [value]="weight_tipe.id">
+                                                        {{ weight_tipe.name }}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col">
+                                            <mat-form-field  class="full-width">
+                                                <input matInput
+                                                placeholder="Preço do peso" 
+                                                formControlName="weight_value_sale" >
+                                                <mat-hint>
+                                                    Preço para venda fracionada 
+                                                </mat-hint>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12 my-4">
+                                    <mat-slide-toggle formControlName="collection" color="primary">
+                                        <span class="text-primary" *ngIf="!isCollectionable">
+                                            Adicionar itens ao produto 
+                                        </span>
+                                    </mat-slide-toggle>
+                                    <div class="form-row mt-3" *ngIf="isCollectionable">
+                                        <div class="col-lg-4">
+                                           <button class="btn btn-block btn-primary">
+                                               adicionar lista 
+                                           </button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                               
                             </div>
                         </mat-card-content>
                     </mat-card>
@@ -160,15 +223,18 @@
                     <mat-card class="toggle-disponible p-5" >
                         <mat-card-content>
                             <div class="toggle-button">
-                                <mat-slide-toggle formControlName="stock" color="primary">
+                                <mat-slide-toggle formControlName="stock" color="primary" [disabled]="true">
                                     <span *ngIf="!toStock" class="text-primary">
-                                        habilitar
+                                        habilitar 
+                                    </span>
+                                    <span class="alert alert-warning" *ngIf="!isCollectionable">
+                                        Está função está desabilitada se tiver itens cadastrados no produto
                                     </span>
                                 </mat-slide-toggle>
                             </div>
                             
                             <div class="form-row msg-warning " 
-                                [ngClass]="{'disponible-warning': !toStock}" 
+                                [ngClass]="{'disponible-warning': !toStock || isCollectionable }" 
                                 data-warning="Controle de estoque desabilitado! :(">
 
                                 <div class="col-lg-6">
@@ -191,7 +257,7 @@
                                         </mat-hint>
                                     </mat-form-field>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-6 mt-3">
                                     <mat-form-field  class="full-width">
                                         <input matInput
                                         placeholder="Unidade máxima" 
@@ -221,7 +287,7 @@
                                         placeholder="Código de barras" 
                                         formControlName="code">
                                         <mat-hint>
-                                            Código de barras informado no seu produtos
+                                            Código de barras informado no seu produto
                                         </mat-hint>
                                     </mat-form-field>
                                 </div>

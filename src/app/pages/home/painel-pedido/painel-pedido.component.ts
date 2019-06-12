@@ -174,6 +174,7 @@ export class PainelPedidoComponent implements OnInit {
 
     public storeOrder() {
         this.homeService.create(this.form.value).subscribe((response) => {
+            console.log(response)
             this.homeService.removeProducUnits(this.form.value.products);
             this.homeService.clearPainel();
             this.changeActive(1);

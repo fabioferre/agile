@@ -9,7 +9,7 @@ import { async } from 'q';
 export default class Model {
     isLoading = false;
     protected url;
-    protected urlApi = 'http://tagmus.com.br/api';
+    protected urlApi = 'http://tagmus/api';
     constructor(
         protected http: HttpClient,
         protected helper: HelperService) {

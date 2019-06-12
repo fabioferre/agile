@@ -30,7 +30,6 @@ export class NeProductComponent implements OnInit {
         brand: [''],
         fractioned: [null],
         weight_sale: [null],
-        weight_type_sale: [null],
         weight_value_sale: [null],
         collection: [null],
         items: [null]
@@ -53,7 +52,13 @@ export class NeProductComponent implements OnInit {
             this.form.patchValue(this.productService.productToEdit);
         }
         
-    }
+        
+        if(this.isFractioned) {
+            this.form.controls.collection.disable()
+        } else {
+            this.form.controls.collection.enable()
+        }
+    }   
 
     get toStock() {
         return this.form.controls.stock.value;
@@ -67,9 +72,14 @@ export class NeProductComponent implements OnInit {
         return this.form.controls.fractioned.value;
     }
 
-    get isCollectionable() {
+    get hasCollection() {
         return this.form.controls.collection.value;
     }
+
+    get weightType() {
+        return this.form.controls.weight_type.value;
+    }
+
     public onReady(editor) {
         editor.ui.getEditableElement().parentElement.insertBefore(
             editor.ui.view.toolbar.element,
@@ -77,6 +87,21 @@ export class NeProductComponent implements OnInit {
         );
     }
 
+    public toggleSaleOption() {
+        if(this.isFractioned) {
+            this.form.controls.collection.disable()
+            this.form.controls.collection.setValue(false)
+        } else {
+            this.form.controls.collection.enable()
+        }
+
+        if(this.hasCollection) {
+            this.form.controls.fractioned.disable()
+            this.form.controls.fractioned.setValue(false)
+        } else {
+            this.form.controls.fractioned.enable()
+        }
+    }
 
     public save() {
         this.productService.create(this.form.value)
@@ -102,6 +127,7 @@ export class NeProductComponent implements OnInit {
                 }
             });
     }
+
 
     ngOnDestroy(): void {
         this.productService.productToEdit = null;

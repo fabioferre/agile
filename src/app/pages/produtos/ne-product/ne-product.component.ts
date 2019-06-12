@@ -28,24 +28,31 @@ export class NeProductComponent implements OnInit {
         code: [''],
         description: [''],
         brand: [''],
+        fractioned: [null],
+        weight_sale: [null],
+        weight_type_sale: [null],
+        weight_value_sale: [null],
+        collection: [null],
+        items: [null]
         
     });
 
     public editor = ClassicEditor;
 
-
     constructor(
         private fb: FormBuilder,
-        private categoriasService :CategoriasService,
+        public categoriasService :CategoriasService,
         public productService: ProdutoService,
         private helper: HelperService,
         private router: Router
     ) { }
 
     ngOnInit() { 
-        if(this.productService.productToEdit) {
+        this.productService.checkNE();
+        if(this.productService.productToEdit ) {
             this.form.patchValue(this.productService.productToEdit);
         }
+        
     }
 
     get toStock() {
@@ -56,6 +63,13 @@ export class NeProductComponent implements OnInit {
         return this.form.controls.sale.value;
     }
 
+    get isFractioned() {
+        return this.form.controls.fractioned.value;
+    }
+
+    get isCollectionable() {
+        return this.form.controls.collection.value;
+    }
     public onReady(editor) {
         editor.ui.getEditableElement().parentElement.insertBefore(
             editor.ui.view.toolbar.element,
@@ -67,13 +81,31 @@ export class NeProductComponent implements OnInit {
     public save() {
         this.productService.create(this.form.value)
         .subscribe((product)=> {
-            this.helper.message('produto cadastrado')
-            this.productService.products.push(product)
-            this.router.navigate(['/produtos']);
+            if(product){
+                this.helper.message('produto cadastrado')
+                this.productService.products.push(product)
+                this.router.navigate(['/produtos']);
+            }
         }, error => this.helper.message(error) );
+        
     }
 
     public update() {
-        
+        this.productService.updateById(this.productService.productToEdit.id, this.form.value)
+            .subscribe((product) => {
+                if(product){
+                    const idx = this.productService.products.indexOf(this.productService.productToEdit);
+                    this.productService.products[idx] = product;
+                    
+                    this.helper.message('Edição efetuada com exito')
+                    this.router.navigate(['/produtos']);
+                }
+            });
     }
+
+    ngOnDestroy(): void {
+        this.productService.productToEdit = null;
+        this.productService.ne = false;
+    }
+
 }

@@ -5,6 +5,7 @@ import { HelperService } from './helper.service';
 import * as $ from 'jquery';
 import { LoadingController } from '@ionic/angular';
 import { async } from 'q';
+
 export default class Model {
     isLoading = false;
     protected url;

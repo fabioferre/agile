@@ -14,6 +14,8 @@ export class ProdutoService extends Model{
     public products;
     public productToEdit;
     public categories;
+
+    public ne = false;
     
     public weight_types = [
         {
@@ -39,5 +41,18 @@ export class ProdutoService extends Model{
     ];
     constructor(http :HttpClient , helper : HelperService) { super(http, helper)}
 
-    
+    public checkNE(): void {
+        if(!this.ne) {
+            window.history.go(-1);
+        }
+    }
+
+    public activeNE(productToEdit?): void {
+        this.ne = true;
+        if(productToEdit !== undefined) {
+            this.productToEdit = productToEdit;
+        } 
+    }
+
+   
 } 

@@ -8,8 +8,6 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 import { ProdutosPage } from './produtos.page';
 import { ListagemComponent } from './listagem/listagem.component';
-import { NovoComponent } from './novo/novo.component';
-import { EditarComponent } from './editar/editar.component';
 import { CategoriasComponent } from './categorias/categorias.component';
 import { NeProductComponent } from './ne-product/ne-product.component';
 
@@ -50,7 +48,7 @@ const routes: Routes = [
             },
             {
                 path: 'editar/:id',
-                component: EditarComponent
+                component: NeProductComponent,
             },
             {
                 path: 'categorias',
@@ -82,8 +80,6 @@ const routes: Routes = [
     ],
     declarations: [
         ProdutosPage,
-        NovoComponent,
-        EditarComponent,
         ListagemComponent,
         CategoriasComponent,
         NeProductComponent

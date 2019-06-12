@@ -6,13 +6,14 @@ import { Router } from '@angular/router';
 import { HelperService } from 'src/app/service/helper.service';
 import { AlertController, ModalController } from '@ionic/angular';
 import { ModalMotoboyComponent } from './modal-motoboy/modal-motoboy.component';
+import { Controller } from 'src/app/service/controller';
 
 @Component({
     selector: 'app-listar-pedidos',
     templateUrl: './listar-pedidos.component.html',
     styleUrls: ['./listar-pedidos.component.scss'],
 })
-export class ListarPedidosComponent implements OnInit {
+export class ListarPedidosComponent extends Controller implements OnInit {
     public displayedColumns: string[] = ['status','created_at', 'id', 'type', 'total', 'action'];
     
     @ViewChild(MatSort) sort: MatSort;
@@ -23,7 +24,7 @@ export class ListarPedidosComponent implements OnInit {
         private helper: HelperService,
         public alertCtrl: AlertController,
         public modalCtrl: ModalController
-    ) { }
+    ) { super() }
 
     ngOnInit() {
         let date = this.helper.date(null, "-1 day")
@@ -38,14 +39,6 @@ export class ListarPedidosComponent implements OnInit {
             this.orderService.dataSource.data = pedidos;
             this.orderService.dataSource._updateChangeSubscription();
         })
-    }
-
-    applyFilter(filterValue: string) {
-        this.orderService.dataSource.filter = filterValue.trim().toLowerCase();
-
-        if (this.orderService.dataSource.paginator) {
-            this.orderService.dataSource.paginator.firstPage();
-        }
     }
 
     public delete(order): void {

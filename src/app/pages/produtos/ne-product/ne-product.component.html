@@ -223,14 +223,14 @@
                     <mat-card class="toggle-disponible p-5" >
                         <mat-card-content>
                             <div class="toggle-button">
-                                <mat-slide-toggle formControlName="stock" color="primary" [disabled]="true">
+                                <mat-slide-toggle formControlName="stock" color="primary" [ngClass]="{'disabled':isCollectionable }">
                                     <span *ngIf="!toStock" class="text-primary">
                                         habilitar 
                                     </span>
-                                    <span class="alert alert-warning" *ngIf="!isCollectionable">
-                                        Está função está desabilitada se tiver itens cadastrados no produto
-                                    </span>
                                 </mat-slide-toggle>
+                                <span class="alert alert-warning" *ngIf="isCollectionable">
+                                    Está função está desabilitada se tiver itens cadastrados no produto
+                                </span>
                             </div>
                             
                             <div class="form-row msg-warning " 

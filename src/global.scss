@@ -32,7 +32,10 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
     color: var(--danger);
 }
 
-
+.disabled {
+    pointer-events: none;
+    opacity: 0.4;
+}
 
 .ng-invalid.ng-touched ~ .form-group__bar {
     &::after,

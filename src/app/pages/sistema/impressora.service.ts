@@ -30,7 +30,6 @@ export class ImpressoraService extends Model {
   }
 
   printer(request) {
-console.log(request)
     let dado = {
       "order": request.id,
       "total": request.total,
@@ -54,8 +53,6 @@ console.log(request)
       "printer_options": this.printer_options,
     }
 
-    console.log(dado)
-    console.log("karaioo")
     return this.http.post(`http://localhost:3002/printer/statement`, dado)
 
   }

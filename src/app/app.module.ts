@@ -20,15 +20,13 @@ import { InterceptorService } from './service/interceptor.service';
 import { HelperService } from './service/helper.service';
 import { ProdutoService } from './pages/produtos/produto.service';
 import { HomeService } from './pages/home/home.service';
-import { MostraPedidoComponent } from './pages/pedidos/mostra-pedido/mostra-pedido.component';
-import { BairrosService } from './pages/bairros/bairros.service';
 
 
 @NgModule({
   declarations: [
     AppComponent, 
     SidebarComponent,
-    HeaderComponent,
+    HeaderComponent
   ],
   entryComponents: [],
   imports: [
@@ -46,7 +44,6 @@ import { BairrosService } from './pages/bairros/bairros.service';
     HelperService,
     ProdutoService,
     HomeService,
-    BairrosService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
     {

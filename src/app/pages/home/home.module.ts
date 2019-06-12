@@ -25,7 +25,6 @@ import {  MatCheckboxModule } from '@angular/material';
 import { Printer } from '@ionic-native/printer/ngx';
 import { FormRegisterClientComponent } from './modal/cliente-modal/form-register-client/form-register-client.component';
 import { ClientesService } from '../clientes/clientes.service';
-import { BairrosService } from '../bairros/bairros.service';
 import { BrMaskerModule } from 'br-mask';
 const routes: Routes = [
   {

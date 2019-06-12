@@ -17,7 +17,6 @@ const routes: Routes = [
   { path: 'fretes', loadChildren: './pages/fretes/fretes.module#FretesPageModule' },
   { path: 'cash-flow', loadChildren: './pages/cash-flow/cash-flow.module#CashFlowPageModule' }
 
-
 ];
 
 @NgModule({

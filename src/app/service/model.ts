@@ -9,7 +9,7 @@ import { async } from 'q';
 export default class Model {
     isLoading = false;
     protected url;
-    protected urlApi = 'http://tagmus/api';
+    protected urlApi = 'http://tagmus.com.br//api';
     constructor(
         protected http: HttpClient,
         protected helper: HelperService) {
@@ -21,7 +21,7 @@ export default class Model {
      
         let urlParans = '';
         $.each(parans, function(e,i){
-            urlParans = `${urlParans}${e}=${JSON.stringify(i)}&`;
+            urlParans = `${urlParans}${e}=&${JSON.stringify(i)}`;
         });
 
         return this.http.get<any>(`${this.urlApi}/${this.url}?${urlParans}`).pipe(

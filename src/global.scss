@@ -137,13 +137,13 @@ ion-modal.lg{
 @include media-breakpoint-down(md) { 
     ion-modal.md.responsive {
         --width: 95% !important;
-        --height: 80% !important
+        --height: 200px !important
     }
 }
 @include media-breakpoint-up(md) { 
     ion-modal.md.responsive {
-        --width: 70% !important;
-        --height: 50% !important
+        --width: 400px !important;
+        --height: 180px !important
     }
 }
 @include media-breakpoint-up(xl) { 
@@ -171,9 +171,10 @@ ion-modal.lg{
     &::after {
         content:'';
         position: absolute;
-        top: 15px;
+        top: 5px;
         left: 0;
         width: 100%;
+        opacity: 1;
         text-align: center;
         text-transform: uppercase;
         font-weight: bold;
@@ -184,17 +185,3 @@ ion-modal.lg{
     }
 }
 
-.toggle-disponible {
-    position: relative;
-    .toggle-button {
-        position: absolute;
-        top: -12px;
-        left: 0;
-        padding-left: 5px;
-        padding-right: 5px;
-        line-height:10px; 
-        z-index: 555;
-        background-color: #fff;
-    }
-   
-}

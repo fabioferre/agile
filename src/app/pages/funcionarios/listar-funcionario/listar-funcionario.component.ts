@@ -2,6 +2,7 @@ import { FuncionariosService } from './../funcionarios.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-listar-funcionario',
@@ -16,20 +17,22 @@ export class ListarFuncionarioComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private funcionariosService: FuncionariosService ,
+  constructor(
+    private alertCtrl : AlertController,
+    private funcionariosService: FuncionariosService,
     private router: Router) { }
 
   ngOnInit() {
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   applyFilter(filterValue: string) {
-      this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.dataSource.filter = filterValue.trim().toLowerCase();
 
-      if (this.dataSource.paginator) {
-          this.dataSource.paginator.firstPage();
-      }
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   public delete(element): void {
@@ -38,12 +41,52 @@ export class ListarFuncionarioComponent implements OnInit {
 
   public edit(req): void {
     this.funcionariosService.funcionarioEdit = req;
-      this.router.navigate(['/funcionarios/editar', req]);
+    this.router.navigate(['/funcionarios/editar', req]);
   }
 
-  public permissions(req): void {
-    this.funcionariosService.funcionarioEdit = req;
-      this.router.navigate(['/funcionarios/permissao', req.id]);
+  async permissions(req) {
+
+
+    const alert = await this.alertCtrl.create({
+      header: 'Nivel de acesso',
+      inputs: [
+        {
+          name: 'role',
+          type: 'radio',
+          label: 'nivel 1',
+          value: '1'
+        },
+        {
+          name: 'role',
+          type: 'radio',
+          label: 'Nivel 2',
+          value: '2'
+        },
+
+      ],
+      buttons: [
+        {
+          text: 'cancelar',
+          handler: () => {
+
+          }
+        },
+        {
+          text: 'Alterar',
+          cssClass: 'success',
+          handler: (role) => {
+            if (role) {
+
+            } else {
+
+            }
+          }
+        }
+      ]
+    });
+
+    return await alert.present();
   }
+
 
 }

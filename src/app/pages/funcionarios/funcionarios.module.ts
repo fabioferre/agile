@@ -10,14 +10,21 @@ import { IonicModule } from '@ionic/angular';
 import { BrMaskerModule } from 'br-mask';
 
 import { FuncionariosPage } from './funcionarios.page';
-import { MatInputModule, MatSlideToggleModule, MatSelectModule, MatFormFieldModule, MatTableModule, MatPaginatorModule, MatSortModule, MatTabsModule, MatCardModule } from '@angular/material';
+import {
+  MatInputModule,
+  MatSelectModule,
+  MatFormFieldModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatSortModule
+}from '@angular/material';
 import { PermissionsComponent } from './permissions/permissions.component';
 
 const routes: Routes = [
   {
     path: '',
     component: FuncionariosPage,
-    children:[
+    children: [
       {
         path: '',
         component: ListarFuncionarioComponent
@@ -28,7 +35,7 @@ const routes: Routes = [
       },
       {
         path: 'editar',
-        component: EditarFuncionarioComponent 
+        component: EditarFuncionarioComponent
       },
       {
         path: 'permissao/:id',
@@ -45,24 +52,21 @@ const routes: Routes = [
     IonicModule,
     ReactiveFormsModule,
     MatInputModule,
-    MatSlideToggleModule,
     MatSelectModule,
     MatFormFieldModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
     BrMaskerModule,
-    MatTabsModule,
-    MatCardModule,
     RouterModule.forChild(routes)
   ],
   declarations: [
-    FuncionariosPage, 
-    ListarFuncionarioComponent, 
-    NovoFuncionarioComponent, 
+    FuncionariosPage,
+    ListarFuncionarioComponent,
+    NovoFuncionarioComponent,
     EditarFuncionarioComponent,
     PermissionsComponent
   ],
-  providers:[FuncionariosService]
+  providers: [FuncionariosService]
 })
-export class FuncionariosPageModule {}
+export class FuncionariosPageModule { }

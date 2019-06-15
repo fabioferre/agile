@@ -20,6 +20,7 @@ export class HomePage implements OnInit, OnDestroy {
         private homeService: HomeService) { }
 
     ngOnInit() {
+        
         this.helper.load();
         this.homeService.productAlert = false;
         this.productService.get({

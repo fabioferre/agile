@@ -1,6 +1,7 @@
 import { SistemaService } from './../sistema.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormArray, FormControl } from '@angular/forms';
+import { HelperService } from 'src/app/service/helper.service';
 
 @Component({
     selector: 'app-security',
@@ -36,7 +37,8 @@ export class SecurityComponent implements OnInit {
     });
 
     constructor(private fb: FormBuilder,
-        private sistemaService: SistemaService) { }
+        private sistemaService: SistemaService,
+        private helper: HelperService) { }
 
     ngOnInit() {
         this.getPermissions()
@@ -53,23 +55,23 @@ export class SecurityComponent implements OnInit {
         this.formToSend.controls.permissions.setValue(ids);
 
         this.sistemaService.updateRoles(this.formToSend.value.nivel, { permissions: this.formToSend.value.permissions }).subscribe(response => {
-   
+            this.helper.message("Alteração efetuada !")
         })
 
     }
 
-   getPermissions() {
+    getPermissions() {
         this.sistemaService.getRole(this.formToSend.value.nivel).subscribe(permisions => {
             permisions.forEach(element => {
-                this.form.value[element.permission_id]  =  true
+                this.form.value[element.permission_id] = true
                 this.form.updateOn
             });
-      
+            this.helper.message("Permissões carregas!")
             console.log(this.form.value)
 
         })
-        
-        
+
+
 
     }
 

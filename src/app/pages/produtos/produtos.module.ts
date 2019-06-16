@@ -8,6 +8,11 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 import { ProdutosPage } from './produtos.page';
 import { ListagemComponent } from './listagem/listagem.component';
+<<<<<<< Updated upstream
+=======
+import { NovoComponent } from './novo/novo.component';
+import { EditarComponent } from './editar/editar.component';
+>>>>>>> Stashed changes
 import { CategoriasComponent } from './categorias/categorias.component';
 import { NeProductComponent } from './ne-product/ne-product.component';
 
@@ -75,8 +80,12 @@ const routes: Routes = [
         MatFormFieldModule,
         MatTabsModule,
         MatCardModule,
+<<<<<<< Updated upstream
         BrMaskerModule,
         CKEditorModule
+=======
+        BrMaskerModule
+>>>>>>> Stashed changes
     ],
     declarations: [
         ProdutosPage,

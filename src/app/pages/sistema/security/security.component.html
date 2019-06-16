@@ -23,9 +23,9 @@
                                     <div class="form-row">
                                         <div class="col-6 mx-auto text-center">
                                             <h5 class="text-info">Nivel</h5>
-                                            <mat-form-field class="full-width">
+                                            <mat-form-field class="full-width"> 
                                                 <mat-select formControlName="nivel" required>
-                                                    <mat-option *ngFor="let nivel of niveis" [value]="nivel.id"
+                                                    <mat-option *ngFor="let nivel of sistemaService.niveis" [value]="nivel.id"
                                                         (click)="getPermissions()">
                                                         {{ nivel.name }}
                                                     </mat-option>

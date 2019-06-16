@@ -24,7 +24,7 @@ export class ListarPedidosComponent extends Controller implements OnInit {
         private helper: HelperService,
         public alertCtrl: AlertController,
         public modalCtrl: ModalController
-    ) { super() }
+    ) { super(alertCtrl) }
 
     ngOnInit() {
         let date = this.helper.date(null, "-1 day")
@@ -40,13 +40,12 @@ export class ListarPedidosComponent extends Controller implements OnInit {
         })
     }
 
-    public cancel(order): void {
+    public delete(order): void {
         let orderToChange = order;
         orderToChange.status = 0;
         this.orderService.changeStatus( orderToChange ).subscribe(response => {
             let idx = this.orderService.dataSource.data.indexOf(order);
             this.orderService.dataSource.data[idx] = response;
-            console.log(idx);
             this.orderService.dataSource._updateChangeSubscription();
             this.helper.message(`Pedido ${order.number} cancelado`);
         });

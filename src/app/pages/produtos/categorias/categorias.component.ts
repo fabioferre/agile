@@ -20,7 +20,7 @@ export class CategoriasComponent extends Controller implements OnInit {
         private router: Router,
         public alertCtrl: AlertController,
         public helper: HelperService
-    ) { super() }
+    ) { super(alertCtrl) }
 
     ngOnInit() {
         this.dataSource.sort = this.sort;

@@ -9,15 +9,14 @@ import { HelperService } from 'src/app/service/helper.service';
     styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent implements OnInit {
-    public permissions: any;
+
     constructor(
         public auth: AuthService, 
         public helper: HelperService
     ) { }
     ngOnInit() {
         this.getUser().then((user) => {
-            this.permissions = user;
-            console.log(user)
+            this.auth.permissions = user.permissions;
         });
     }
 
@@ -25,6 +24,7 @@ export class SidebarComponent implements OnInit {
         await this.auth.canActivate()
         return await this.auth.user
     }
+
 
 
 }

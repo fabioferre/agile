@@ -86,7 +86,7 @@ export default class Model {
             finalize(() => {
                 this.isLoading = false;
                 this.helper.load(false);
-                this.helper.message("Item excluido", "danger")
+                this.helper.message("Efetuado com sucesso")
               
             }),
             catchError(this.handleError)

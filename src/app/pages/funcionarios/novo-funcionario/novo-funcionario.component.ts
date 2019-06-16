@@ -25,6 +25,7 @@ export class NovoFuncionarioComponent implements OnInit {
     address_complement: [''],
     address_neighborhood: [''],
     address_state: [""],
+    nivel: [""],
     cpf: ['', [Validators.required, Validators.minLength(14)]],
 });
 

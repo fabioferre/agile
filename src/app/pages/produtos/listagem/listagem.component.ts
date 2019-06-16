@@ -12,14 +12,13 @@ import { Controller } from '../../../service/controller';
 })
 export class ListagemComponent  extends Controller implements OnInit {
     public displayedColumns = ['id', 'image', 'name', 'brand', 'category', 'unity', 'action'];
-    // public dataSource = new MatTableDataSource<any>([]);
 
     @ViewChild(MatSort) sort: MatSort;
 
     constructor(
         public productService: ProdutoService,
         private router: Router,
-        private alertCtrl: AlertController ) { super()}
+        public alertCtrl: AlertController ) { super(alertCtrl)}
 
     ngOnInit() {
         this.dataSource.sort = this.sort;
@@ -43,35 +42,17 @@ export class ListagemComponent  extends Controller implements OnInit {
     }
 
 
-    async delete(product) {
-        const alert = await this.alertCtrl.create({
-            header: 'Tem certeza?',
-            buttons: [
-                {
-                    text: 'Cancelar',
-                    handler: () => {
 
-                    }
-                },
-                {
-                    text: 'Deletar',
-                    cssClass: 'danger',
-                    handler: () => {
-                       
-                        this.productService.deleteById(product.id).subscribe(response => {
-                            const idx = this.productService.products.indexOf(product)
-                            this.productService.products.splice(idx , 1);
-                            this.dataSource.data  = this.productService.products;
-                            this.dataSource._updateChangeSubscription();
+    delete(product) {
 
-                        });
-                        
-                    }
-                }
-            ]
-        })
+        this.productService.deleteById(product.id).subscribe(response => {
+            const idx = this.productService.products.indexOf(product)
+            this.productService.products.splice(idx , 1);
+            this.dataSource.data  = this.productService.products;
+            this.dataSource._updateChangeSubscription();
 
-        return await alert.present();
+        });
+
     }
 
 }

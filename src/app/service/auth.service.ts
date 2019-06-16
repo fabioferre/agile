@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
-import { Observable } from 'rxjs';
-import { retry } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { retry, catchError, finalize } from 'rxjs/operators';
 import { CanActivate, Router } from '@angular/router';
 import { HelperService } from './helper.service';
 @Injectable({
@@ -22,6 +22,16 @@ export class AuthService implements CanActivate {
     public authenticate(credentials: string[]): Observable<any> {
         return this.http.post(`${this.helper.url}/auth/login`, credentials).pipe(
             retry(2)
+        );
+    }
+    public updatePassword(parans: string[]): Observable<any> {
+        this.helper.load();
+        return this.http.patch(`${this.helper.url}/auth/password`, parans).pipe(
+            finalize(() => {
+                this.helper.load(false);
+            }),
+            retry(2),
+            catchError(error => of(this.helper.message(error)))
         );
     }
 
@@ -47,5 +57,5 @@ export class AuthService implements CanActivate {
     }
 
 
-    
+
 }

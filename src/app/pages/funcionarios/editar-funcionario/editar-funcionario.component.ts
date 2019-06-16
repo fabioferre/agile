@@ -1,3 +1,4 @@
+import { SistemaService } from './../../sistema/sistema.service';
 import { FuncionariosService } from './../funcionarios.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
@@ -14,6 +15,7 @@ export class EditarFuncionarioComponent implements OnInit {
   public funcionario = this.funcionariosService.funcionarioEdit;
   public form: FormGroup = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(2)]],
+    email: ['', [Validators.required, Validators.minLength(6)]],
     occupation: [''],
     store_id: [''],
     cellphone: [''],
@@ -25,10 +27,13 @@ export class EditarFuncionarioComponent implements OnInit {
     address_complement: [''],
     address_neighborhood: [''],
     address_state: [""],
+    role_id: [""],
     cpf: ['', [Validators.required, Validators.minLength(14)]],
   });
 
-  constructor(public funcionariosService: FuncionariosService,
+  constructor(
+    public sistemaService:SistemaService,
+    public funcionariosService: FuncionariosService,
     private fb: FormBuilder,
     private helper: HelperService,
     private router: Router,

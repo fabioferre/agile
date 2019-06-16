@@ -20,6 +20,7 @@ import { InterceptorService } from './service/interceptor.service';
 import { HelperService } from './service/helper.service';
 import { ProdutoService } from './pages/produtos/produto.service';
 import { HomeService } from './pages/home/home.service';
+import { MatProgressBarModule } from '@angular/material';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { HomeService } from './pages/home/home.service';
     BrowserAnimationsModule, 
     IonicStorageModule.forRoot({name: '_agile'}),
     IonicModule.forRoot(), 
-    AppRoutingModule
+    AppRoutingModule,
+    MatProgressBarModule,
   ],
   providers: [
     StatusBar,

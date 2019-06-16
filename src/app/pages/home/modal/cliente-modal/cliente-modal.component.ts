@@ -52,6 +52,7 @@ export class ClienteModalComponent implements OnInit {
     public selectClient(client_selected) {
         this.homeService.selectClient(client_selected);
         // console.log(client_selected);
+        console.log(client_selected);
         if(client_selected.status && this.homeService.loadOrders) {
             this.homeService.productSelected = [];
             this.clientService.getById(client_selected.id).subscribe(client => {

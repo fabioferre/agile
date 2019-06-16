@@ -56,19 +56,21 @@ export class SecurityComponent implements OnInit {
 
         this.sistemaService.updateRoles(this.formToSend.value.nivel, { permissions: this.formToSend.value.permissions }).subscribe(response => {
             this.helper.message("Alteração efetuada !")
-        })
+        });
 
     }
 
     getPermissions() {
+        this.form.reset();
+        this.helper.load();
         this.sistemaService.getRole(this.formToSend.value.nivel).subscribe(permisions => {
             permisions.forEach(element => {
-                this.form.value[element.permission_id] = true
+                this.form.controls[element.permission_id].setValue(true);
             });
-            this.helper.message("Permissões carregas!")
-            console.log(this.form.value)
 
-        })
+            this.helper.message("Permissões carregas!");
+            this.helper.loadDismiss();
+        });
 
 
 

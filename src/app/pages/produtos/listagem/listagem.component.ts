@@ -25,16 +25,16 @@ export class ListagemComponent  extends Controller implements OnInit {
         this.dataSource.sort = this.sort;
     
         if (!this.productService.products) {
-            this.productService.get().subscribe(products => {
-                this.productService.products = products;
-                this.dataSource.data = products;
-                this.dataSource._updateChangeSubscription();
-              
-            });
+            this.productService.get().subscribe(products => this.setProducts(products));
         } else {
-            this.dataSource.data = this.productService.products;
-            this.dataSource._updateChangeSubscription();
+            this.setProducts(this.productService.products)
         }
+    }
+
+    public setProducts(products) {
+        this.productService.products = products;
+        this.dataSource.data = this.productService.products;
+        this.dataSource._updateChangeSubscription();
     }
 
     public edit(product): void {
@@ -59,11 +59,11 @@ export class ListagemComponent  extends Controller implements OnInit {
                     handler: () => {
                        
                         this.productService.deleteById(product.id).subscribe(response => {
-                            // this.productService.products
-                            // .slice( this.productService.products.indexOf(product), 1);
-                            console.log(this.productService.products.indexOf(product));
-                            this.dataSource.data = this.productService.products;
+                            const idx = this.productService.products.indexOf(product)
+                            this.productService.products.splice(idx , 1);
+                            this.dataSource.data  = this.productService.products;
                             this.dataSource._updateChangeSubscription();
+
                         });
                         
                     }

@@ -17,7 +17,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { SecurityComponent } from './security/security.component';
 import { MatCardModule, MatTabsModule } from '@angular/material';
-
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 const routes: Routes = [
   {

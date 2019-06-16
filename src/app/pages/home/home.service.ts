@@ -16,6 +16,8 @@ export class HomeService extends Model {
     public order_id: number;
     public productAlert: boolean;
     public loadOrders: boolean;
+    public freight: number;
+
     constructor(
          http: HttpClient,
          helper: HelperService
@@ -29,9 +31,7 @@ export class HomeService extends Model {
         return total;
     }
 
-    get frete() {
-        return 0;
-    }
+  
 
     public removeProductSelected(product): void {
         this.productSelected.splice(this.productSelected.indexOf(product), 1)
@@ -74,15 +74,23 @@ export class HomeService extends Model {
         }
     }
 
-    public clearPainel(): void {
-        this.productSelected = [];
+    public clearPainel(removeProducts = true): void {
+        
         this.client = null;
         this.table = null;
         this.order_id = null;
-        this.selection.clear();
+        this.freight = 0;
+
+        
+        if(removeProducts) { this.productSelected = [];  }
+         
     }
     public  selectClient(client) {
         this.client = client;
+  
+        if(client.freight) {
+            this.freight = client.freight.freight;
+        }
     }
     
 

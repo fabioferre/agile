@@ -1,22 +1,23 @@
 <a href="javascript:void(0)" (click)="modalCrl.dismiss()" class="close mt-3 mr-3 text-right">
     &times;
 </a>
-<div class="container scrollbar-inner">
+<div class="container scrollbar-inner beauty-scroll">
 
     <div class="row">
         <div class="col-md-12 pt-2">
             <span *ngIf="showForm" class="ml-2 mt-2 text-theme">
                 Formulario de cadastro
             </span>
-            
         </div>
         <div class="col-md-12" *ngIf="!showForm; else formTemplate">
 
             <div class="">
-                <mat-form-field class="w-100">
-                    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
-                </mat-form-field>
-                <div class="mat-elevation-z8 table-hover link-table responsive-table ">
+                <div class="search-stycky-top">
+                    <mat-form-field class="w-100">
+                        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
+                    </mat-form-field>
+                </div>
+                <div class="table-hover link-table responsive-table ">
                     <table mat-table [dataSource]="dataSource" class="w-100 ">
                         <!-- Thumb Column -->
                         <ng-container matColumnDef="name">

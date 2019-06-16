@@ -17,7 +17,7 @@ export class SidebarComponent implements OnInit {
     ngOnInit() {
         this.getUser().then((user) => {
             this.permissions = user;
-            // console.log(user)
+            console.log(user)
         });
     }
 

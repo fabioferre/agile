@@ -22,6 +22,7 @@
                         </span>
                         <i class="fas fa-motorcycle ml-3 animation-left" *ngIf="element.label?.in_table == 4"></i>
                         <i class="fas fa-frown ml-3" *ngIf="element.label?.in_table == 0"></i>
+                        <i class="fas laugh-beam ml-3" *ngIf="element.label?.in_table == 2"></i>
                     </td>
                 </ng-container>
                 <!-- item2 Column -->
@@ -72,8 +73,9 @@
                             <i class="fas fa-motorcycle"></i>
                         </button> 
 
-                        <button class="btn btn-danger mx-1" *ngIf="element.label?.in_table != 2 && element.status != 0"
-                        (click)="cancel(element)" 
+                        <button class="btn btn-danger mx-1" 
+                        *ngIf="element.label?.in_table != 2 && element.status != 0"
+                        (click)="alertDelete(element)" 
                         data-placement="top" 
                         title="Cancelar pedido">
                             <i class="fas fa-minus"></i>

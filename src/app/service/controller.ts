@@ -19,13 +19,13 @@ export class Controller {
             header: 'Tem certeza?',
             buttons: [
                 {
-                    text: 'Cancelar',
+                    text: 'Não',
                     handler: () => {
 
                     }
                 },
                 {
-                    text: 'Deletar',
+                    text: 'Sim',
                     cssClass: 'danger',
                     handler: () => {
 

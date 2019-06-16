@@ -12,6 +12,7 @@ export class AuthService implements CanActivate {
     public user: any;
     public system: any;
     public store: any;
+    public permissions: any;
     constructor(
         private http: HttpClient,
         private router: Router,
@@ -54,6 +55,22 @@ export class AuthService implements CanActivate {
 
     public configSystem(user): void {
         this.user = user;
+    }
+
+
+    public canDo(permissionName: string): boolean {
+        let can = false;
+       
+        this.permissions.forEach((permission) => {
+            if (permission.name === permissionName) {
+                can = true;
+            }
+        });
+
+        if(this.user.master > 0) {
+            can  = true;
+        }
+        return can;
     }
 
 

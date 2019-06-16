@@ -18,7 +18,7 @@ import {
   MatPaginatorModule,
   MatSortModule
 }from '@angular/material';
-import { PermissionsComponent } from './permissions/permissions.component';
+
 
 const routes: Routes = [
   {
@@ -36,10 +36,6 @@ const routes: Routes = [
       {
         path: 'editar',
         component: EditarFuncionarioComponent
-      },
-      {
-        path: 'permissao/:id',
-        component: PermissionsComponent
       }
     ]
   }
@@ -64,8 +60,7 @@ const routes: Routes = [
     FuncionariosPage,
     ListarFuncionarioComponent,
     NovoFuncionarioComponent,
-    EditarFuncionarioComponent,
-    PermissionsComponent
+    EditarFuncionarioComponent
   ],
   providers: [FuncionariosService]
 })

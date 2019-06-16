@@ -64,7 +64,6 @@ export class SecurityComponent implements OnInit {
         this.sistemaService.getRole(this.formToSend.value.nivel).subscribe(permisions => {
             permisions.forEach(element => {
                 this.form.value[element.permission_id] = true
-                this.form.updateOn
             });
             this.helper.message("Permissões carregas!")
             console.log(this.form.value)

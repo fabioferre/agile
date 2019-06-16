@@ -48,19 +48,18 @@ export class ListarFuncionarioComponent implements OnInit {
 
 
     const alert = await this.alertCtrl.create({
-      header: 'Nivel de acesso',
+      header: 'Nova senha',
       inputs: [
         {
-          name: 'role',
-          type: 'radio',
-          label: 'nivel 1',
-          value: '1'
+          name: 'password',
+          type: 'password',
+          placeholder: 'Senha'
+         
         },
         {
-          name: 'role',
-          type: 'radio',
-          label: 'Nivel 2',
-          value: '2'
+          name: 'password_confirmed',
+          type: 'password',
+          placeholder: 'Confirme a senha'
         },
 
       ],

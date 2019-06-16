@@ -15,8 +15,7 @@ export class SistemaService extends Model {
     { name: "nivel 2", id: 6 },
     { name: "nivel 3", id: 7 },
     { name: "nivel 4", id: 8 },
-    { name: "nivel 5", id: 9 },
-    { name: "admin", id: 10 }]
+    { name: "nivel 5", id: 9 }]
     
   protected url = 'auth/roles'
   constructor(http :HttpClient , helper : HelperService) { super(http, helper)}

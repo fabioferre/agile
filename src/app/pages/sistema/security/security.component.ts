@@ -9,12 +9,6 @@ import { HelperService } from 'src/app/service/helper.service';
     styleUrls: ['./security.component.scss'],
 })
 export class SecurityComponent implements OnInit {
-    public niveis = [
-        { name: "nivel 1", id: 5 },
-        { name: "nivel 2", id: 6 },
-        { name: "nivel 3", id: 7 },
-        { name: "nivel 4", id: 8 },
-        { name: "nivel 5", id: 9 }]
 
     public formToSend: FormGroup = this.fb.group({
         nivel: [5, [Validators.required, Validators.minLength(2)]],
@@ -37,7 +31,7 @@ export class SecurityComponent implements OnInit {
     });
 
     constructor(private fb: FormBuilder,
-        private sistemaService: SistemaService,
+        public sistemaService: SistemaService,
         private helper: HelperService) { }
 
     ngOnInit() {

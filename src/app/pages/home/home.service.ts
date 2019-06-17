@@ -70,6 +70,7 @@ export class HomeService extends Model {
             if(!product.old && product.stock ) {
                 const idx = this.productSelected.indexOf(product);
                 this.productSelected[idx].units -= product.qtd;
+                this.selection.deselect(this.productSelected[idx]);
             }
         }
     }

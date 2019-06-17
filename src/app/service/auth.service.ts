@@ -12,7 +12,7 @@ export class AuthService implements CanActivate {
     public user: any;
     public system: any;
     public store: any;
-    public permissions: any;
+    public permissions = [];
     constructor(
         private http: HttpClient,
         private router: Router,
@@ -39,6 +39,7 @@ export class AuthService implements CanActivate {
     public logout(): void {
         this.storage.remove('user');
         this.router.navigate(['/auth']);
+        window.location.reload(false);
     }
 
     canActivate() {

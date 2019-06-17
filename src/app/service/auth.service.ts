@@ -55,6 +55,7 @@ export class AuthService implements CanActivate {
 
     public configSystem(user): void {
         this.user = user;
+        this.permissions = user.permissions;
     }
 
 

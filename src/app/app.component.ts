@@ -27,9 +27,6 @@ export class AppComponent {
             this.splashScreen.hide();
             this.auth.canActivate();
 
-            if (this.auth.user !== undefined) {
-                
-            }
         });
     }
 }

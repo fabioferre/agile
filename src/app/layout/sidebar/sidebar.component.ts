@@ -15,9 +15,7 @@ export class SidebarComponent implements OnInit {
         public helper: HelperService
     ) { }
     ngOnInit() {
-        this.getUser().then((user) => {
-            this.auth.permissions = user.permissions;
-        });
+        this.getUser();
     }
 
     async getUser() {

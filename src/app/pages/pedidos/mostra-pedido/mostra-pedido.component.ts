@@ -29,12 +29,10 @@ export class MostraPedidoComponent implements OnInit, OnDestroy {
             this.impressora.printer_options = res;
         });
         
-        
         if(!this.orderService.orderToFinalize ){
             this.routerActive.params.subscribe(parans => {
                 this.orderService.getById(parans.id).subscribe(order => {
                     this.order = order;
-                    console.log(order);
                 })
             })
         } else {

@@ -16,7 +16,7 @@
             </div>
         </div>
 
-        <ul class="navigation"  *ngIf="auth.permissions.length > 0">
+        <ul class="navigation" *ngIf="auth.permissions">
             <li [routerLink]="['/home']" 
             routerLinkActive="navigation__active" 
             *ngIf="auth.canDo('app_menu_caixa')">

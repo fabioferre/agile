@@ -5,10 +5,11 @@ import { HelperService } from './helper.service';
 import * as $ from 'jquery';
 import { LoadingController } from '@ionic/angular';
 import { async } from 'q';
+
 export default class Model {
     isLoading = false;
     protected url;
-    protected urlApi = 'http://tagmus.com.br/api';
+    protected urlApi = 'http://tagmus.com.br//api';
     constructor(
         protected http: HttpClient,
         protected helper: HelperService) {
@@ -20,7 +21,7 @@ export default class Model {
      
         let urlParans = '';
         $.each(parans, function(e,i){
-            urlParans = `${urlParans}${e}=${JSON.stringify(i)}&`;
+            urlParans = `${urlParans}${e}=&${JSON.stringify(i)}`;
         });
 
         return this.http.get<any>(`${this.urlApi}/${this.url}?${urlParans}`).pipe(
@@ -85,7 +86,7 @@ export default class Model {
             finalize(() => {
                 this.isLoading = false;
                 this.helper.load(false);
-                this.helper.message("Item excluido", "danger")
+                this.helper.message("Efetuado com sucesso")
               
             }),
             catchError(this.handleError)

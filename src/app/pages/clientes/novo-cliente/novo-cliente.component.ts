@@ -13,7 +13,7 @@ export class NovoClienteComponent implements OnInit {
 
   public form: FormGroup = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(2)]],
-    cell_phone: [''],
+    cellphone: [''],
     phone: [''],
     address_street: [''],
     address_zipcode: [''],

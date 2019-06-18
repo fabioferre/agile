@@ -44,11 +44,18 @@ export class PainelPedidoComponent implements OnInit {
 
     ngOnInit() {
         this.checkSelling();
-
         this.impressora.getOptions().then(res => {
             this.impressora.printer_options = res;
         });
 
+    }
+
+    get type() {
+        return this.form.controls.type.value;
+    }
+
+    set setTypeSelling(type) {
+        this.form.controls.type.setValue(type);
     }
 
     public changeActive(typeToActive): void {
@@ -56,12 +63,9 @@ export class PainelPedidoComponent implements OnInit {
             this.types[type] = false;
         }
         this.setTypeSelling = typeToActive;
-        this.types[`selling${typeToActive}`] = true
+        this.types[`selling${typeToActive}`] = true;
+
     }
-
-
-
-
 
     public checkSelling() {
         if ((this.types.selling2 || this.types.selling3) && this.homeService.client) {
@@ -75,18 +79,13 @@ export class PainelPedidoComponent implements OnInit {
             this.changeActive(4);
         } else {
             this.changeActive(1);
+            this.homeService.clearPainel(false);
         }
 
     }
-
-    set setTypeSelling(type) {
-        this.form.controls.type.setValue(type);
-    }
-
+    
     async modalClient(type?) {
-        this.homeService.client = null;
-        this.homeService.table = null;
-        this.homeService.order_id = null;
+        this.homeService.clearPainel(false);
         if(type === 3) {
             this.homeService.loadOrders = true
         }
@@ -174,6 +173,7 @@ export class PainelPedidoComponent implements OnInit {
 
     public storeOrder() {
         this.homeService.create(this.form.value).subscribe((response) => {
+            console.log(response)
             this.homeService.removeProducUnits(this.form.value.products);
             this.homeService.clearPainel();
             this.changeActive(1);

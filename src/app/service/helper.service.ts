@@ -11,6 +11,7 @@ export class HelperService {
     public hours: string;
     public format: string;
     public order: any;
+    public isLoading: boolean;
     constructor(
         private toastCtrl: ToastController,
         private loading: LoadingController,
@@ -24,7 +25,7 @@ export class HelperService {
 
     message(message?, style?) {
         if (style) {
-            this.toast(style,  message);
+            this.toast(style, message);
         } else {
             if (message.error) {
                 for (let i in message.error.errors) {
@@ -57,21 +58,23 @@ export class HelperService {
     async load(status?) {
         if (status === false) {
             this.loading.dismiss();
+            this.isLoading = false;
         } else {
+            this.isLoading = true;
             let loading = await this.loading.create({
                 duration: 5000,
             });
-           
+
             return await loading;
-             
+
         }
 
 
     }
 
     async  loadDismiss() {
-
-       await this.loading.dismiss();
+        this.isLoading = false;
+        await this.loading.dismiss();
     }
 
     async modalDismiss(status?, then?) {

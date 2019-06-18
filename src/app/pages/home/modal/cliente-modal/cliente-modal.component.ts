@@ -22,10 +22,8 @@ export class ClienteModalComponent implements OnInit {
 
     constructor(
         public modalCrl: ModalController,
-        private fb: FormBuilder,
         public homeService: HomeService,
-        private clientService: ClientesService,
-        private router: Router
+        private clientService: ClientesService
     ) { }
 
     ngOnInit() {
@@ -51,7 +49,7 @@ export class ClienteModalComponent implements OnInit {
 
     public selectClient(client_selected) {
         this.homeService.selectClient(client_selected);
-        // console.log(client_selected);
+        
         if(client_selected.status && this.homeService.loadOrders) {
             this.homeService.productSelected = [];
             this.clientService.getById(client_selected.id).subscribe(client => {

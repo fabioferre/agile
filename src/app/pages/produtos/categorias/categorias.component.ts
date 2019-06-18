@@ -4,17 +4,15 @@ import { MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { HelperService } from 'src/app/service/helper.service';
+import { Controller } from 'src/app/service/controller';
 
 @Component({
     selector: 'app-categorias',
     templateUrl: './categorias.component.html',
     styleUrls: ['./categorias.component.scss'],
 })
-export class CategoriasComponent implements OnInit {
-
+export class CategoriasComponent extends Controller implements OnInit {
     public displayedColumns: string[] = ['created_at', 'name', 'action'];
-    public dataSource = new MatTableDataSource<any>(this.categoriasService.categories);
-
     @ViewChild(MatSort) sort: MatSort;
 
     constructor(
@@ -22,7 +20,7 @@ export class CategoriasComponent implements OnInit {
         private router: Router,
         public alertCtrl: AlertController,
         public helper: HelperService
-    ) { }
+    ) { super(alertCtrl) }
 
     ngOnInit() {
         this.dataSource.sort = this.sort;
@@ -32,14 +30,9 @@ export class CategoriasComponent implements OnInit {
                 this.dataSource.data = categories;
                 this.dataSource._updateChangeSubscription();
             });
-        }
-    }
-
-    applyFilter(filterValue: string) {
-        this.dataSource.filter = filterValue.trim().toLowerCase();
-
-        if (this.dataSource.paginator) {
-            this.dataSource.paginator.firstPage();
+        }else {
+            this.dataSource.data = this.categoriasService.categories;
+            this.dataSource._updateChangeSubscription();
         }
     }
 
@@ -50,6 +43,7 @@ export class CategoriasComponent implements OnInit {
             this.dataSource._updateChangeSubscription();
         });
     }
+
     async alertDelete(category) {
         const alert = await this.alertCtrl.create({
             header: 'Tem certeza?',

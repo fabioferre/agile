@@ -51,7 +51,10 @@
                         <button class="btn btn-primary mx-1" (click)="edit(element)">
                             <i class="zmdi zmdi-edit"></i>
                         </button>
-                        <button class="btn btn-danger mx-1" (click)="delete()">
+                        <button class="btn btn-warning mx-1" (click)="permissions(element.person_id)">
+                            <i class="fas fa-user-lock"></i>
+                        </button>
+                        <button class="btn btn-danger mx-1" (click)="alertDelete(element)">
                             <i class="zmdi zmdi-close"></i>
                         </button>
                     </td>

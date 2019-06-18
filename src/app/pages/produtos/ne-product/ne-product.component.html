@@ -1,0 +1,294 @@
+<form action="" [formGroup]="form" class="px-5">
+    <header class="content__title">
+        <h1>Informações</h1>
+        
+
+        <div class="actions position-absolute" style="right: 10px; top:0">
+            <button type="button" class="btn btn-info  px-4 " (click)="update()"
+            *ngIf="productService.productToEdit">
+                Atualizar
+            </button>
+            <button type="button" class="btn btn-primary  px-4 " (click)="save()"
+            *ngIf="!productService.productToEdit">
+                Salvar
+            </button>
+            <a href="javascript:history.go(-1)" class="btn btn-secondary  px-4 ml-4" >
+                Cancelar
+            </a>
+        </div>
+    </header>
+    <mat-tab-group>
+        <mat-tab label="Basicas">
+            <ng-template matTabContent>
+                <div class="pt-5">
+                    <mat-card class="p-5">
+                        <mat-card-content>
+                            <div class="form-row ">
+                                <div class="col-md-5 content-photo disponible-warning msg-warning"  
+                                    data-warning="Em breve dispońivel :)">
+                                    <div class="content-photo-header">
+                                        <img src="./assets/no-product.png" alt="">
+                                    </div>
+                                    <div class="actions text-center">
+                                        <button type="button" class="btn btn-secondary mr-3" hidden>
+                                            cancelar
+                                        </button>
+                                        <label for="" class="btn btn-primary btn-add-photo my-0" hidden>
+                                            adicionar
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 ml-auto">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <mat-form-field class="full-width">
+                                                <mat-label>Categoria</mat-label>
+                                                <mat-select formControlName="category_id" required>
+                                                    <mat-option *ngFor="let category of categoriasService.categories" [value]="category.id">
+                                                        {{ category.name }}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <mat-form-field class="full-width">
+                                                <input matInput placeholder="Nome do produto" type="text"
+                                                    formControlName="name" required>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-lg-12">
+                                            <mat-form-field class="full-width">
+                                                <input matInput placeholder="Marca do produto" type="text"
+                                                    formControlName="brand">
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <mat-form-field class="full-width">
+                                                <input matInput 
+                                                placeholder="Peso do produto" 
+                                                type="text"
+                                                formControlName="weight">
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <mat-form-field class="full-width">
+                                                <mat-label>Tipo</mat-label>
+                                                <mat-select formControlName="weight_type">
+                                                    <mat-option *ngFor="let weight_tipe of productService.weight_types" 
+                                                    [value]="weight_tipe.name">
+                                                        {{ weight_tipe.name }}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 my-3">
+                                    <h5 class="text-info">Configurações do produto</h5>
+                                    <div class="form-row ">
+                                        <div class="col-lg text-center">
+                                            <mat-slide-toggle formControlName="sale" color="primary">
+                                                Disponível para venda?
+                                            </mat-slide-toggle>
+                                            <hr>
+                                            <div class="form-row text-left border-left">
+                                                
+                                                <div class="col-lg-12">
+                                                    <mat-slide-toggle formControlName="fractioned" 
+                                                    (change)="toggleSaleOption()" color="primary">
+                                                        Venda fracionado?
+                                                    </mat-slide-toggle>
+                                                    <br>
+                                                    <small  *ngIf="hasCollection ">
+                                                        Desativado enquanto 
+                                                        *<strong>Produto possuí itens</strong>* estiver ativado
+                                                    </small>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="col-lg text-center">
+                                            <mat-slide-toggle formControlName="stock" color="primary">
+                                                Possuí controle de estoque?
+                                            </mat-slide-toggle>
+                                            <hr>
+                                            <div class="form-row text-left border-left">
+                                                <div class="col-lg-12">
+                                                    <mat-slide-toggle formControlName="collection" 
+                                                    (change)="toggleSaleOption()" color="primary">
+                                                        Produto possuí itens ?
+                                                    </mat-slide-toggle>
+                                                    <br>
+                                                    <small  *ngIf="isFractioned">
+                                                        Desativado enquanto 
+                                                        *<strong>Venda fracionado</strong>* estiver ativado
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <ckeditor 
+                                    [config]="{ toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ] }"
+                                    [editor]="editor"  
+                                    tagName="textarea"
+                                    formControlName="description"
+                                    [data]="form.value.description"></ckeditor>
+                                </div>
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </ng-template>
+        </mat-tab>
+
+
+        <mat-tab label="Controle de venda">
+            <ng-template matTabContent>
+                <div class="pt-5 "   >
+                    <mat-card class="toggle-disponible p-5" >
+                        <mat-card-content>
+                            
+                            <div class="form-row msg-warning " 
+                                [ngClass]="{'disponible-warning': !toSale}" 
+                                data-warning="Controle de venda desabilitado! :(">
+
+                                <div class="col-lg-5">
+                                    <mat-form-field  class="full-width">
+                                        <input matInput
+                                         placeholder="Preço de venda" 
+                                        formControlName="sale_price" 
+                                        [brmasker]="{form: form.get('sale_price'), money: true, decimalCaracter: '.'}">
+                                        <span matPrefix>$&nbsp;</span>
+                                        <mat-hint>
+                                            preço do produto disponibilizado em sua loja
+                                        </mat-hint>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-lg-5 ml-auto">
+                                    <mat-form-field  class="full-width">
+                                        <input matInput
+                                        placeholder="Preço de custo" 
+                                        formControlName="cost_price" 
+                                        [brmasker]="{form: form.get('cost_price'), money: true, decimalCaracter: '.'}">
+                                        <span matPrefix>$&nbsp;</span>
+                                        <mat-hint>
+                                            preço do produto adquirido no seu fornecedor
+                                        </mat-hint>
+                                    </mat-form-field>
+                                </div>
+                             
+                                <div class="col-lg-12 mt-5 mb-4">
+                                    
+                                    <div class="form-row mt-3"  *ngIf="isFractioned" >
+                                        <div class="col-lg-4">
+                                            <mat-form-field  class="full-width">
+                                                <input matInput
+                                                [placeholder]="'Peso em ' + weightType" 
+                                                formControlName="weight_sale" >
+                                                <mat-hint>
+                                                    Peso para venda fracionada
+                                                </mat-hint>
+                                            </mat-form-field>
+                                        </div>2
+                                        <div class="col-lg-4">
+                                            <mat-form-field  class="full-width">
+                                                <input matInput
+                                                placeholder="Preço do peso" 
+                                                formControlName="weight_value_sale" >
+                                                <mat-hint>
+                                                    Preço para venda fracionada 
+                                                </mat-hint>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </ng-template>
+        </mat-tab>
+
+
+        <mat-tab label="Controle de estoque">
+            <ng-template matTabContent>
+                <div class="pt-5 "   >
+                    <mat-card class="toggle-disponible p-5" >
+                        <mat-card-content>
+                            <div class="toggle-button">
+                                <span class="alert alert-warning py-1" *ngIf="isCollectionable">
+                                    Está função está desabilitada enquanto *adicionar produtos" estiver ativado.
+                                </span>
+                            </div>
+                            
+                            <div class="form-row msg-warning " 
+                                [ngClass]="{'disponible-warning': !toStock || isCollectionable }" 
+                                data-warning="Controle de estoque desabilitado! :(">
+
+                                <div class="col-lg-6">
+                                    <mat-form-field class="full-width" >
+                                        <input matInput
+                                        placeholder="Unidades disponíveis" 
+                                        formControlName="units">
+                                        <mat-hint>
+                                            Quantidade desse produto no seu estabelecimento
+                                        </mat-hint>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-lg-6 ">
+                                    <mat-form-field  class="full-width">
+                                        <input matInput
+                                        placeholder="Unidade mínima" 
+                                        formControlName="minimum_units">
+                                        <mat-hint>
+                                            Quantidade minima que este produto pode chegar.
+                                        </mat-hint>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-lg-6 mt-3">
+                                    <mat-form-field  class="full-width">
+                                        <input matInput
+                                        placeholder="Unidade máxima" 
+                                        formControlName="maximum_units">
+                                        <mat-hint>
+                                            Quantidade maxima que este produto pode chegar.
+                                        </mat-hint>
+                                    </mat-form-field>
+                                </div>
+                                
+
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </ng-template>
+        </mat-tab>
+        <mat-tab label="Extras & Adicionais">
+            <ng-template matTabContent>
+                <div class="pt-5 "   >
+                    <mat-card class=" p-5" >
+                        <mat-card-content>
+                            <div class="form-row msg-warning " >
+                                <div class="col-lg-6">
+                                    <mat-form-field class="full-width" >
+                                        <input matInput
+                                        placeholder="Código de barras" 
+                                        formControlName="code">
+                                        <mat-hint>
+                                            Código de barras informado no seu produto
+                                        </mat-hint>
+                                    </mat-form-field>
+                                </div>
+
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </ng-template>
+        </mat-tab>
+    </mat-tab-group>
+
+</form>

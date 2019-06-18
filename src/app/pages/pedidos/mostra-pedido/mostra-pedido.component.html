@@ -1,19 +1,19 @@
 <div class="container-fluid content-page scrollbar-inner pt-5">
     <div class="row">
         <div class="col-md-10 mx-auto shadow-lg mt-4 " *ngIf="order">
-            <div class="painel-item active disabled" *ngIf="order.type == 1">
+            <div class="painel-item active disabled-events" *ngIf="order.type == 1">
                 <i class="fas fa-cash-register"></i>
                 <span>Balcão</span>
             </div>
-            <div class="painel-item active disabled" *ngIf="order.type == 2">
+            <div class="painel-item active disabled-events" *ngIf="order.type == 2">
                 <i class="fas fa-motorcycle"></i>
                 <span>Deliver</span>
             </div>
-            <div class="painel-item active disabled" *ngIf="order.type == 3">
+            <div class="painel-item active disabled-events" *ngIf="order.type == 3">
                 <i class="fas fa-user"></i>
                 <span>Cliente</span>
             </div>
-            <div class="painel-item active disabled" *ngIf="order.type == 4">
+            <div class="painel-item active disabled-events" *ngIf="order.type == 4">
                 <i class="fas fa-concierge-bell"></i>
                 <span>Mesa</span>
             </div>
@@ -23,7 +23,7 @@
                     <h2 class="text-center h5 mt-1 text-uppercase">Cliente</h2>
                     <div class="is-link text-truncate" style="max-width: 55ch">
                        <strong class="text-dark">nome: &nbsp;</strong> 
-                       <small [routerLink]="['/clientes/show', order.client.id ]">{{ order.client.name }}</small>  <br>
+                       <small >{{ order.client.name }}</small>  <br>
                        <strong class="text-dark">contato:  &nbsp;</strong> 
                        <small>{{ order.client.cellphone }}</small> 
                     </div>

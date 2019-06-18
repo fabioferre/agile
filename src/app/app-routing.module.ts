@@ -13,16 +13,15 @@ const routes: Routes = [
   { path: 'funcionarios', canActivate: [AuthService], loadChildren: './pages/funcionarios/funcionarios.module#FuncionariosPageModule' },
   { path: 'lojas', canActivate: [AuthService], loadChildren: './pages/lojas/lojas.module#LojasPageModule' },
   { path: 'clientes', canActivate: [AuthService], loadChildren: './pages/clientes/clientes.module#ClientesPageModule' },
-  { path: 'bairros', canActivate: [AuthService], loadChildren: './pages/bairros/bairros.module#BairrosPageModule' },
-  { path: 'sistema', canActivate: [AuthService], loadChildren: './pages/sistema/sistema.module#SistemaPageModule' },  { path: 'categorias', loadChildren: './pages/categorias/categorias.module#CategoriasPageModule' },
-  { path: 'fretes', loadChildren: './pages/fretes/fretes.module#FretesPageModule' }
-
+  { path: 'sistema', canActivate: [AuthService], loadChildren: './pages/sistema/sistema.module#SistemaPageModule' },
+  { path: 'fretes',canActivate: [AuthService], loadChildren: './pages/fretes/fretes.module#FretesPageModule' },
+  { path: 'cash-flow',canActivate: [AuthService], loadChildren: './pages/cash-flow/cash-flow.module#CashFlowPageModule' }
 
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, {useHash: true, preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, {useHash: true })
   ],
   exports: [RouterModule]
 })

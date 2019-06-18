@@ -1,16 +1,19 @@
+<!-- <mat-progress-bar mode="indeterminate" style="z-index: 10000" *ngIf="helper.isLoading"></mat-progress-bar> -->
 <header class="header">
-    <div class="navigation-trigger hidden-lg-up" data-ma-action="aside-open" data-ma-target=".sidebar">
+    <!-- <div class="navigation-trigger hidden-lg-up" data-ma-action="aside-open" data-ma-target=".sidebar">
         <div class="navigation-trigger__inner">
             <i class="navigation-trigger__line"></i>
             <i class="navigation-trigger__line"></i>
             <i class="navigation-trigger__line"></i>
         </div>
-    </div>
+    </div> -->
 
     <div class="header__logo hidden-sm-down">
-        <h1><a routerLink="/">Tagmus</a></h1>
+        <a routerLink="/">
+            <img src="./assets/icon.png" alt="">
+        </a>
     </div>
-<!-- 
+    <!-- 
     <form class="search">
         <div class="search__inner">
             <input type="text" class="search__text" placeholder="Search for people, files, documents...">
@@ -42,14 +45,15 @@
                         <label class="btn bg-cyan"><input type="radio" value="cyan" autocomplete="off"></label>
                         <label class="btn bg-blue-grey"><input type="radio" value="blue-grey"
                                 autocomplete="off"></label>
-                        <label class="btn bg-purple  active"><input type="radio" value="purple" autocomplete="off"></label>
-                        <label class="btn bg-indigo"><input type="radio" value="indigo" autocomplete="off"></label>
+                        <label class="btn bg-purple  "><input type="radio" value="purple" autocomplete="off"></label>
+                        <label class="btn bg-indigo active"><input type="radio" value="indigo"
+                                autocomplete="off"></label>
                         <label class="btn bg-brown"><input type="radio" value="brown" autocomplete="off"></label>
                     </div>
                 </div>
             </div>
         </li>
 
-      
+
     </ul>
 </header>

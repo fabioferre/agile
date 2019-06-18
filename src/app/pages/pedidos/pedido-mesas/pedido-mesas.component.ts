@@ -38,7 +38,7 @@ export class PedidoMesasComponent implements OnInit {
 
                 this.homeService.productSelected.map(product => {
                     product.old = true;
-                })
+                });
 
                 this.homeService.loadOrders = true;
                 this.router.navigate(['/home']);

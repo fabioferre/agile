@@ -3,7 +3,7 @@
         <h4 class="painel-title">venda</h4>
         <div class="painel-item " 
         [ngClass]="{'active': types.selling1 }"
-        (click)="changeActive(1); ">
+        (click)="changeActive(1); checkSelling() ">
             <i class="fas fa-cash-register"></i>
             <span>Caixa</span>
         </div>
@@ -79,12 +79,12 @@
                 {{ homeService.totalPrice | currency:'BRL':'R$':'1.2-2'}} 
             </div>
         </div>
-        <div class="row mx-0  price-content">
+        <div class="row mx-0  price-content" *ngIf="homeService.freight && type == 2">
             <div class="col-lg-6 ">
                 Frete
             </div>
             <div class="col-lg-6">
-                {{ homeService.frete | currency:'BRL':'R$':'1.2-2' }}
+                {{ homeService.freight | currency:'BRL':'R$':'1.2-2' }}
             </div>
         </div>
         <div class="row mx-0  price-content">
@@ -92,7 +92,7 @@
                 Total
             </div>
             <div class="col-lg-6">
-                {{ homeService.totalPrice - homeService.frete | currency:'BRL':'R$':'1.2-2' }}
+                {{ homeService.totalPrice - homeService.freight | currency:'BRL':'R$':'1.2-2' }}
             </div>
         </div>
 
@@ -103,10 +103,10 @@
                     
                     <div class="client-order position-static"  *ngIf="homeService.client">
                         <div class="wallet" [ngClass]="{
-                            'positive': homeService.client.account?.amount > 0,
-                            'negative':homeService.client.account?.amount < 0
+                            'positive': homeService.client.amount > 0,
+                            'negative':homeService.client.amount < 0
                         }">
-                          {{ homeService.client.account?.amount | currency:'BRL':' R$  ':'1.2-2'  }} <i class="fas fa-wallet"></i>
+                          {{ homeService.client.amount | currency:'BRL':' R$  ':'1.2-2'  }} <i class="fas fa-wallet"></i>
                         </div>
                         <span class="order-info-item ">
                             <strong>Nome:</strong>
@@ -137,7 +137,8 @@
 
                 </div>
             </div>
-            <div class="col-lg-7 mx-auto">
+            <div class="col-lg-7 mx-auto"
+            [ngClass]="{'mt-2': !homeService.freight }">
                 <button type="submit" 
                 class="btn btn-outline-success btn-block"
                 (click)="prepareSale()"

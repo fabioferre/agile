@@ -10,13 +10,21 @@ import { IonicModule } from '@ionic/angular';
 import { BrMaskerModule } from 'br-mask';
 
 import { FuncionariosPage } from './funcionarios.page';
-import { MatInputModule, MatSlideToggleModule, MatSelectModule, MatFormFieldModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
+import {
+  MatInputModule,
+  MatSelectModule,
+  MatFormFieldModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatSortModule
+}from '@angular/material';
+
 
 const routes: Routes = [
   {
     path: '',
     component: FuncionariosPage,
-    children:[
+    children: [
       {
         path: '',
         component: ListarFuncionarioComponent
@@ -27,7 +35,7 @@ const routes: Routes = [
       },
       {
         path: 'editar',
-        component: EditarFuncionarioComponent 
+        component: EditarFuncionarioComponent
       }
     ]
   }
@@ -40,7 +48,6 @@ const routes: Routes = [
     IonicModule,
     ReactiveFormsModule,
     MatInputModule,
-    MatSlideToggleModule,
     MatSelectModule,
     MatFormFieldModule,
     MatTableModule,
@@ -49,7 +56,12 @@ const routes: Routes = [
     BrMaskerModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [FuncionariosPage, ListarFuncionarioComponent, NovoFuncionarioComponent, EditarFuncionarioComponent],
-  providers:[FuncionariosService]
+  declarations: [
+    FuncionariosPage,
+    ListarFuncionarioComponent,
+    NovoFuncionarioComponent,
+    EditarFuncionarioComponent
+  ],
+  providers: [FuncionariosService]
 })
-export class FuncionariosPageModule {}
+export class FuncionariosPageModule { }

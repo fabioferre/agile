@@ -1,5 +1,5 @@
 <aside class="sidebar ">
-    <div class="scrollbar-inner">
+    <div class="scrollbar-inner" >
         <div class="user">
             <div class="user__info" data-toggle="dropdown">
                 <!-- <img class="user__img" src="demo/img/profile-pics/8.jpg" alt=""> -->
@@ -16,14 +16,17 @@
             </div>
         </div>
 
-        <ul class="navigation">
-            <li [routerLink]="['/home']" routerLinkActive="navigation__active">
+        <ul class="navigation" *ngIf="auth.permissions">
+            <li [routerLink]="['/home']" 
+            routerLinkActive="navigation__active" 
+            *ngIf="auth.canDo('app_menu_caixa')">
                 <a href="javascript:void(0)">
                     <i class="fas fa-cash-register"></i><span> Caixa </span>
                 </a>
             </li>
 
-            <li class="navigation__sub">
+            <li class="navigation__sub"  
+            *ngIf="auth.canDo('app_menu_pedidos')">
                 <a href="#"><i class="fas fa-list-ol"></i><span>Pedidos</span> </a>
                 <ul>
                     <li [routerLink]="['/pedidos/lista']" routerLinkActive="navigation__active">
@@ -39,7 +42,8 @@
 
                 </ul>
             </li>
-            <li class="navigation__sub">
+            <li class="navigation__sub" 
+            *ngIf="auth.canDo('app_menu_produtos')">
                 <a href="#"><i class="zmdi zmdi-archive"></i> <span>Produtos</span></a>
                 <ul>
                     <li [routerLink]="['/produtos/lista']" routerLinkActive="navigation__active">
@@ -54,62 +58,80 @@
                     </li>
                 </ul>
             </li>
-            <li [routerLink]="['/clientes']" routerLinkActive="navigation__active">
+            <li [routerLink]="['/clientes']" routerLinkActive="navigation__active"
+            *ngIf="auth.canDo('app_menu_clientes')">
                 <a href="javascript:void(0)">
                     <i class="fas fa-users"></i> <span>Clientes</span>
                 </a>
             </li>
 
-            <li [routerLink]="['/mesas']" routerLinkActive="navigation__active">
+            <li [routerLink]="['/mesas']" routerLinkActive="navigation__active"
+            *ngIf="auth.canDo('app_menu_mesas')">
                 <a href="javascript:void(0)">
                     <i class="fas fa-concierge-bell"></i> <span>Edição de mesas</span>
                 </a>
             </li>
 
 
-            <li [routerLink]="['/fretes']" routerLinkActive="navigation__active">
+            <li [routerLink]="['/fretes']" routerLinkActive="navigation__active"
+            *ngIf="auth.canDo('app_menu_fretes')">
                 <a href="javascript:void(0)">
                     <i class="fas fa-map-marked-alt"></i><span>Fretes</span>
                 </a>
             </li>
 
 
-            <li [routerLink]="['/motoboy']" routerLinkActive="navigation__active">
+            <li [routerLink]="['/motoboy']" routerLinkActive="navigation__active"
+            *ngIf="auth.canDo('app_menu_motoboy')">
                 <a href="javascript:void(0)">
                     <i class="fas fa-motorcycle"></i><span>Motoboy</span>
                 </a>
             </li>
 
-            <li [routerLink]="['/lojas']" routerLinkActive="navigation__active">
+            <li [routerLink]="['/lojas']" routerLinkActive="navigation__active"
+            *ngIf="auth.canDo('app_menu_lojas')">
                 <a href="javascript:void(0)">
                     <i class="fas fa-store"></i><span>Lojas</span>
                 </a>
             </li>
 
-            <li [routerLink]="['/funcionarios']" routerLinkActive="navigation__active">
+            <li [routerLink]="['/funcionarios']" routerLinkActive="navigation__active"
+            *ngIf="auth.canDo('app_menu_funcionarios')">
                 <a href="javascript:void(0)">
                     <i class="fas fa-user-cog"></i><span>Funcionarios</span>
+                </a>
+            </li>
+            <li  *ngIf="auth.canDo('app_menu_fluxo_caixa')">
+                <a href="http://www.tagmus.com.br/admin">
+                    <i class="fas fa-chart-line"></i><span>Fluxo de Caixa</span>
                 </a>
             </li>
 
             <li class="navigation__sub">
                 <a href="#"><i class="fas fa-cog"></i><span>Configurações </span></a>
                 <ul>
-                    <li [routerLink]="['/sistema/impressora']" routerLinkActive="navigation__active">
+                    <li [routerLink]="['/sistema/impressora']" routerLinkActive="navigation__active"
+                    *ngIf="auth.canDo('app_menu_impressora')">
                         <a href="javascript:void(0)">
-                            <span class="text-truncate">impressora</span>
+                            <span class="text-truncate">Impressora</span>
                         </a>
                     </li>
-                    <li [routerLink]="['/produtos/novo']" routesrLinkActive="navigation__active">
+                    <li [routerLink]="['/sistema/security']" routesrLinkActive="navigation__active"
+                    *ngIf="auth.canDo('app_menu_seguranca')">
+                        <a href="javascript:void(0)">
+                            <span class="text-truncate">Segurança</span>
+                        </a>
+                    </li>
+                    <!-- <li [routerLink]="['/produtos/novo']" routesrLinkActive="navigation__active">
                         <a href="javascript:void(0)">
                             <span class="text-truncate"> sistema</span>
                         </a>
-                    </li>
-                    <li [routerLink]="['/produtos/novo']" routesrLinkActive="navigation__active">
+                    </li> -->
+                    <!-- <li [routerLink]="['/produtos/novo']" routesrLinkActive="navigation__active">
                         <a href="javascript:void(0)">
                             <span class="text-truncate">tema</span>
                         </a>
-                    </li>
+                    </li> -->
                 </ul>
             </li>
 

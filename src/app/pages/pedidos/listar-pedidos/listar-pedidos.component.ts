@@ -6,13 +6,14 @@ import { Router } from '@angular/router';
 import { HelperService } from 'src/app/service/helper.service';
 import { AlertController, ModalController } from '@ionic/angular';
 import { ModalMotoboyComponent } from './modal-motoboy/modal-motoboy.component';
+import { Controller } from 'src/app/service/controller';
 
 @Component({
     selector: 'app-listar-pedidos',
     templateUrl: './listar-pedidos.component.html',
     styleUrls: ['./listar-pedidos.component.scss'],
 })
-export class ListarPedidosComponent implements OnInit {
+export class ListarPedidosComponent extends Controller implements OnInit {
     public displayedColumns: string[] = ['status','created_at', 'id', 'type', 'total', 'action'];
     
     @ViewChild(MatSort) sort: MatSort;
@@ -23,11 +24,11 @@ export class ListarPedidosComponent implements OnInit {
         private helper: HelperService,
         public alertCtrl: AlertController,
         public modalCtrl: ModalController
-    ) { }
+    ) { super(alertCtrl) }
 
     ngOnInit() {
         let date = this.helper.date(null, "-1 day")
-
+        console.log(date)
         this.orderService.dataSource.sort = this.sort;
         this.orderService.get({
             status:1,
@@ -40,18 +41,14 @@ export class ListarPedidosComponent implements OnInit {
         })
     }
 
-    applyFilter(filterValue: string) {
-        this.orderService.dataSource.filter = filterValue.trim().toLowerCase();
-
-        if (this.orderService.dataSource.paginator) {
-            this.orderService.dataSource.paginator.firstPage();
-        }
-    }
-
     public delete(order): void {
-        this.orderService.deleteById(order.id).subscribe(response => {
-            this.helper.message(`Pedido ${order.number} removido`);
-            this.orderService.removeOrder(order);
+        let orderToChange = order;
+        orderToChange.status = 0;
+        this.orderService.changeStatus( orderToChange ).subscribe(response => {
+            let idx = this.orderService.dataSource.data.indexOf(order);
+            this.orderService.dataSource.data[idx] = response;
+            this.orderService.dataSource._updateChangeSubscription();
+            this.helper.message(`Pedido ${order.number} cancelado`);
         });
     }
 

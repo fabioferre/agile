@@ -15,7 +15,6 @@ import { MesasService } from '../mesas/mesas.service';
 import { MostraPedidoComponent } from './mostra-pedido/mostra-pedido.component';
 
 import { BrMaskerModule } from 'br-mask';
-import { BairrosService } from '../bairros/bairros.service';
 
 const routes: Routes = [
     {
@@ -69,6 +68,6 @@ const routes: Routes = [
         MostraPedidoComponent,
         ModalMotoboyComponent
     ],
-    providers: [PedidosService, MesasService, BairrosService]
+    providers: [PedidosService, MesasService]
 })
 export class PedidosPageModule { }

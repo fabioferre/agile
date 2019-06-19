@@ -18,6 +18,9 @@ export class HomeService extends Model {
     public loadOrders: boolean;
     public freight: number;
 
+    public buildingProduct: boolean;
+    public buildedProducts: any = [];
+
     constructor(
          http: HttpClient,
          helper: HelperService
@@ -72,6 +75,10 @@ export class HomeService extends Model {
                 this.productSelected[idx].units -= product.qtd;
             }
         }
+
+        this.productSelected.map((product) => {
+            this.selection.deselect(product);
+        });
     }
 
     public clearPainel(removeProducts = true): void {
@@ -94,5 +101,28 @@ export class HomeService extends Model {
     }
     
 
+
+    public toggleBuild() {
+        if(this.buildingProduct) {
+            this.buildingProduct = false;
+            this.buildedProducts = [];
+            this.productSelected.forEach((product) => this.selection.select(product));
+        } else {
+            this.buildingProduct = true;
+            this.productSelected.forEach((product) => this.selection.deselect(product));
+        }
+    }
+
+  
+    public toggleProductBuilded(product) {
+        const idx = this.buildedProducts.indexOf(product);
+        if(idx < 0) {
+            this.buildedProducts.push(product);
+        } else {
+            this.buildedProducts.slice(idx, 1);
+        }
+        console.log(this.buildedProducts)
+    }
+    
 
 }

@@ -1,3 +1,5 @@
+import { AlertController, ModalController } from '@ionic/angular';
+import { Controller } from './../../../service/controller';
 import { HomeService } from './../home.service';
 import { Component, OnInit, ViewChild, Input, ChangeDetectorRef } from '@angular/core';
 import { ProdutoService } from '../../produtos/produto.service';
@@ -12,21 +14,20 @@ import { HelperService } from 'src/app/service/helper.service';
     templateUrl: './lista-produtos.component.html',
     styleUrls: ['./lista-produtos.component.scss'],
 })
-export class ListaProdutosComponent implements OnInit {
+export class ListaProdutosComponent extends Controller implements OnInit {
     @Input() public products: any;
     public displayedColumns: string[] = ['select','id', 'image', 'name', 'unity', 'sale_price'];
-    public dataSource: any;
-    public selection:any
+    public selection:any;
     @ViewChild(MatSort) sort: MatSort;
     constructor(
-        private productService: ProdutoService, 
         public homeService: HomeService,
-        private router: Router,
-        private helper: HelperService
-    ) { }
+        private helper: HelperService,
+        public alertCtrl: AlertController,
+        public modalCtrl: ModalController
+    ) { super(alertCtrl) }
 
     ngOnInit() {
-        this.dataSource = new MatTableDataSource<any>(this.products);
+        this.updateDataTable(this.products);
         this.dataSource.sort = this.sort;
         this.selection = this.homeService.selection;
     }
@@ -54,24 +55,29 @@ export class ListaProdutosComponent implements OnInit {
         return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
     }
 
-    applyFilter(filterValue: string) {
-        this.dataSource.filter = filterValue.trim().toLowerCase();
-    }
-
+  
 
     putOrder(product): void {
-        if(this.selection.isSelected(product)) {
-            this.homeService.removeProductSelected(product)
-        } else {
-            if(product.units <= 0 && product.stock) {
-                this.helper.message('Produto sem estoque!','warning');
-                this.selection.toggle(product);
+        if(!this.homeService.buildingProduct) {
+            if(this.selection.isSelected(product)) {
+                this.homeService.removeProductSelected(product)
             } else {
-                this.homeService.productSelected.push(product)
+                if(product.units <= 0 && product.stock) {
+                    this.helper.message('Produto sem estoque!','warning');
+                    this.selection.toggle(product);
+                } else {
+                    this.homeService.productSelected.push(product)
+                }
             }
+        } else{
+            this.buildProduct(product);
         }
     }
     
+
+    public buildProduct(product) {
+        this.homeService.toggleProductBuilded(product);
+    }
 
 
 }

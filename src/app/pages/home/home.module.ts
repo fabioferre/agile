@@ -20,8 +20,14 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import { ClienteModalComponent } from './modal/cliente-modal/cliente-modal.component';
 import {  MatCheckboxModule } from '@angular/material';
+import {MatButtonModule} from '@angular/material/button';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatListModule} from '@angular/material/list';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatIconModule} from '@angular/material/icon';
+
+import { ClienteModalComponent } from './modal/cliente-modal/cliente-modal.component';
 import { Printer } from '@ionic-native/printer/ngx';
 import { FormRegisterClientComponent } from './modal/cliente-modal/form-register-client/form-register-client.component';
 import { ClientesService } from '../clientes/clientes.service';
@@ -51,6 +57,10 @@ const routes: Routes = [
     MatSelectModule,
     MatFormFieldModule,
     MatCheckboxModule,
+    MatButtonModule,
+    MatTooltipModule,
+    MatChipsModule,
+    MatIconModule,
     BrMaskerModule
   ],
   declarations: [

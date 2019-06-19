@@ -23,15 +23,22 @@
               <div class="col-lg-6 mx-auto">
                   <div class="row">
                       <div class="col-lg-7 ">
-                          <button type="submit" class="btn btn-primary btn-block" [disabled]="form.invalid">
-                              Atualizar
-                          </button>
+                        <button type="button" class="btn btn-info  px-4 " (click)="update()"
+                        *ngIf="fretesService.elementToedit">
+                            Atualizar
+                        </button>
+                        <button type="button" class="btn btn-primary  px-4 " (click)="save()"
+                        *ngIf="!fretesService.elementToedit">
+                            Salvar
+                        </button>
                       </div>
                       <div class="col-lg-5 ">
                           <a href="javascript:history.go(-1)" class="btn btn-secondary btn-block">
                               Voltar
                           </a>
                       </div>
+                    
+   
                   </div>
               </div>
           </div>

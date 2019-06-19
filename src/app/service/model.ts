@@ -21,8 +21,9 @@ export default class Model {
      
         let urlParans = '';
         $.each(parans, function(e,i){
-            urlParans = `${urlParans}${e}=&${JSON.stringify(i)}`;
+            urlParans = `${urlParans}&${e}=${JSON.stringify(i)}`;
         });
+        console.log(`${this.urlApi}/${this.url}?${urlParans}`)
 
         return this.http.get<any>(`${this.urlApi}/${this.url}?${urlParans}`).pipe(
             retry(10),

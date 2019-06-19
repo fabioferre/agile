@@ -62,10 +62,7 @@ export class ListaProdutosComponent extends Controller implements OnInit {
             if(this.selection.isSelected(product)) {
                 this.homeService.removeProductSelected(product)
             } else {
-                if(product.units <= 0 && product.stock) {
-                    this.helper.message('Produto sem estoque!','warning');
-                    this.selection.toggle(product);
-                } else {
+                if(this.verifyStock(product)) {
                     this.homeService.productSelected.push(product)
                 }
             }
@@ -76,8 +73,21 @@ export class ListaProdutosComponent extends Controller implements OnInit {
     
 
     public buildProduct(product) {
-        this.homeService.toggleProductBuilded(product);
+        if(this.verifyStock(product)) {
+            this.homeService.toggleProductBuilded(product);
+        }
     }
 
+
+    public verifyStock(product) {
+        
+        if(product.units <= 0 && product.stock) {
+            this.helper.message('Produto sem estoque!','warning');
+            this.selection.toggle(product);
+            return false;
+        } else {
+            return true;
+        }
+    }
 
 }

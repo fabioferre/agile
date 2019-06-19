@@ -20,7 +20,7 @@ export class HomeService extends Model {
 
     public buildingProduct: boolean;
     public buildedProducts: any = [];
-
+    public finalProductBuilded: any;
     constructor(
          http: HttpClient,
          helper: HelperService
@@ -103,13 +103,14 @@ export class HomeService extends Model {
 
 
     public toggleBuild() {
+        this.buildedProducts.forEach((product) => this.selection.deselect(product));
+        this.productSelected.forEach((product) => this.selection.deselect(product));
         if(this.buildingProduct) {
             this.buildingProduct = false;
             this.buildedProducts = [];
             this.productSelected.forEach((product) => this.selection.select(product));
         } else {
             this.buildingProduct = true;
-            this.productSelected.forEach((product) => this.selection.deselect(product));
         }
     }
 
@@ -119,10 +120,28 @@ export class HomeService extends Model {
         if(idx < 0) {
             this.buildedProducts.push(product);
         } else {
-            this.buildedProducts.slice(idx, 1);
+            this.buildedProducts.splice(idx, 1);
         }
-        console.log(this.buildedProducts)
     }
+
+
+    public finalizeBuild() {
+        let productToSend = { sale_price: 0, name: '', custom: true, qtd: 1, stock: false };
+     
+        for(const product of this.buildedProducts) {
+            productToSend.name += product.name + '/';
+            
+            if(product.sale_price > productToSend.sale_price) {
+                
+                productToSend.sale_price = product.sale_price;
+            }
+           
+        }
+       
+        this.productSelected.push( productToSend);
+        this.toggleBuild();
+    }
+
     
 
 }

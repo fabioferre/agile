@@ -28,7 +28,6 @@ export class ListarPedidosComponent extends Controller implements OnInit {
 
     ngOnInit() {
         let date = this.helper.date(null, "-2 day")
-        console.log(date)
         this.orderService.dataSource.sort = this.sort;
         this.orderService.get({
             status:1,
@@ -57,6 +56,7 @@ export class ListarPedidosComponent extends Controller implements OnInit {
     }
 
     public finalize(order) {
+    
         this.orderService.orderToFinalize = order;
     }
 
@@ -66,6 +66,7 @@ export class ListarPedidosComponent extends Controller implements OnInit {
         const modal = await this.modalCtrl.create({
             component: ModalMotoboyComponent
         });
+     
         return await modal.present();
     }
 }

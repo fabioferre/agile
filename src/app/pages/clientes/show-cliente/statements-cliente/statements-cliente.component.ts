@@ -21,8 +21,8 @@ export class StatementsClienteComponent extends Controller implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   public form: FormGroup = this.fb.group({
-    start: [this.helper.date(null, "-3 month")],
-    end: [this.helper.date(), [Validators.required, Validators.minLength(2)]],
+    start: [this.helper.date(this.helper.date(null, "-3 month"), null, "/"), [Validators.required, Validators.minLength(2)]],
+    end: [this.helper.date(this.helper.date(), null, "/"), [Validators.required, Validators.minLength(2)]]
 
   });
 
@@ -37,7 +37,6 @@ export class StatementsClienteComponent extends Controller implements OnInit {
     public helper: HelperService) { super(alertCtrl) }
 
   ngOnInit() {
-    console.log(this.helper.date(null, "30 day"))
     this.dataSource.sort = this.sort;
     this.impressora.getOptions().then(res => {
       this.impressora.printer_options = res;
@@ -52,12 +51,14 @@ export class StatementsClienteComponent extends Controller implements OnInit {
 
     this.clientesService.statement(this.clientesService.clientToShow.id, {
       filter: [
-        ['created_at', '>=', this.form.value.start],
-        ['created_at', '<=', this.form.value.end]
+        ['created_at', '>=', this.helper.date(this.form.value.start, null, "-")],
+        ['created_at', '<=', this.helper.date(this.form.value.end, null, "-")]
       ]
     }).subscribe((statement) => {
+     
+      this.statements = statement
       this.updateDataTable(statement)
-
+      this.helper.message("Extrato carregado!")
     });
 
   }
@@ -73,10 +74,10 @@ export class StatementsClienteComponent extends Controller implements OnInit {
   }
 
   printer() {
-
+console.log(this.statements)
     this.impressora.printerStatement(this.statements).subscribe(response => {
       if (response) {
-        console.log(response)
+    
         this.helper.message("Impressão efetuada !")
 
       }

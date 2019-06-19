@@ -8,12 +8,28 @@ import { async } from 'q';
 
 export default class Model {
     isLoading = false;
+    public elementToedit;
+    public ne = false;
     protected url;
     protected urlApi = 'http://tagmus.com.br/api';
     constructor(
         protected http: HttpClient,
         protected helper: HelperService) {
 
+    }
+
+    public checkNE(): void {
+        if(!this.ne) {
+            window.history.go(-1);
+        }
+    }
+
+    public activeNE(elementToedit?): void {
+        this.ne= true;
+        if(elementToedit !== undefined) {
+            this.elementToedit = elementToedit;
+           
+        }
     }
 
     public get(parans: any = ''): Observable<any> {

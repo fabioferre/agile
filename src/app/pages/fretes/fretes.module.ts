@@ -7,10 +7,10 @@ import { IonicModule } from '@ionic/angular';
 
 import { FretesPage } from './fretes.page';
 import { ListarFretesComponent } from './listar-fretes/listar-fretes.component';
-import { EditarFretesComponent } from './editar-fretes/editar-fretes.component';
 import { FretesService } from './fretes.service';
 import { MatInputModule, MatSlideToggleModule, MatSelectModule, MatFormFieldModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 import { BrMaskerModule } from 'br-mask';
+import { NeFretesComponent } from './ne-fretes/ne-fretes.component';
 
 const routes: Routes = [
   {
@@ -22,8 +22,8 @@ const routes: Routes = [
         component: ListarFretesComponent
       },
       {
-        path: 'editar',
-        component: EditarFretesComponent
+        path: 'ne',
+        component: NeFretesComponent
       }
     ]
   }
@@ -45,7 +45,7 @@ const routes: Routes = [
     BrMaskerModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [FretesPage, EditarFretesComponent,  ListarFretesComponent],
+  declarations: [FretesPage, NeFretesComponent,  ListarFretesComponent],
   providers:[FretesService]
 })
 export class FretesPageModule {}

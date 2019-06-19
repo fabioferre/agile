@@ -1,9 +1,9 @@
 <header class="content__title">
   <h1>Listagem de fretes</h1>
-  <button type="button" class="btn bg-theme btn-add text-white" [routerLink]="['novo']">
+  <button type="button" class="btn bg-theme btn-add text-white" (click)="fretesService.activeNE()" [routerLink]="['ne']">
     <i class="fas fa-plus fa-2x"></i>
   </button>
-</header>
+</header> 
 
 <div class="card  responsive-table">
   <div class="card-body ">

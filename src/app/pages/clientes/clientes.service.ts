@@ -4,6 +4,7 @@ import { HelperService } from '../../service/helper.service';
 import Model from 'src/app/service/model';
 import { retry, catchError, finalize } from 'rxjs/operators';
 import { of } from 'rxjs';
+import * as $ from 'jquery';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,11 @@ export class ClientesService extends Model {
 
   statement(id, parans?) {
     this.helper.load();
-    return this.http.get<any>(`${this.urlApi}/client/account/${id}/statement?${parans}`).pipe(
+    let urlParans = '';
+    $.each(parans, function(e,i){
+        urlParans = `${urlParans}&${e}=${JSON.stringify(i)}`;
+    });
+    return this.http.get<any>(`${this.urlApi}/client/account/${id}/statement?${urlParans}`).pipe(
       retry(10),
       finalize(() => {
         this.isLoading = false;

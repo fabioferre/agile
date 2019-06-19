@@ -74,8 +74,8 @@ export class ListarFretesComponent implements OnInit {
   }
 
   public edit(element): void {
-      this.fretesService.freteToEdit = element;
-      this.router.navigate(['/fretes/editar']);
+      this.fretesService.activeNE(element) ;
+      this.router.navigate(['/fretes/ne']);
   }
 
 }

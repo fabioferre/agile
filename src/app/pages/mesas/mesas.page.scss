@@ -1,0 +1,80 @@
+.table-place {
+    width: 100px;
+    height: 80px;
+    display: inline-block;
+    border-radius: 20%;
+    background-color: rgba(30, 255, 0, 0.26);
+    text-align: center;
+    position: relative;
+    margin: 10px 20px 0;
+    text-transform: uppercase;
+    span {
+        position: relative;
+        top: 15px;
+        font-weight: bold;
+    }
+    p {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        color: var(--warning);
+    }
+    .btn-close {
+        top: 0;
+        right: 5px;
+    }
+    &.ready-only {
+        &.busy {
+            background-color: rgba(255, 255, 255, .1);
+        }
+        background-color: rgba(255, 255, 255, .1);
+        &.busy:hover::after, &:hover::after,&.busy::after  {
+            content: none;
+        }
+        &:hover::before,  &.busy:hover::before {
+            content: 'Editar';
+            background-color: var(--info);
+        }
+    }
+    &.busy {
+        background-color: transparent;
+        &::after {
+            content: 'Ocupada';
+            height: 100%;
+            background-color: rgba(235, 2, 2, 0.26);
+            font-size: 12px;
+        }
+
+        &:hover::after {
+            content: 'Abrir';
+            background-color: rgba(1, 15, 22, 0.63);
+        }
+
+        &:hover::before {
+            content: none;
+        } 
+    }
+    &::before, &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 0;
+        border-radius: 20%;
+        padding-top: 31px;
+        font-weight: bold;
+        transition: all 300ms;
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
+    &:hover::before {
+        height: 100%;
+        background-color: rgba(0, 16, 241, 0.63);
+        z-index: 10;
+        transition: all 300ms;
+    }
+}

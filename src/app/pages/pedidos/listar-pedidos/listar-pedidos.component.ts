@@ -3,43 +3,69 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProdutoService } from '../../produtos/produto.service';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { Router } from '@angular/router';
+import { HelperService } from 'src/app/service/helper.service';
+import { AlertController, ModalController } from '@ionic/angular';
+import { ModalMotoboyComponent } from './modal-motoboy/modal-motoboy.component';
+import { Controller } from 'src/app/service/controller';
 
 @Component({
-  selector: 'app-listar-pedidos',
-  templateUrl: './listar-pedidos.component.html',
-  styleUrls: ['./listar-pedidos.component.scss'],
+    selector: 'app-listar-pedidos',
+    templateUrl: './listar-pedidos.component.html',
+    styleUrls: ['./listar-pedidos.component.scss'],
 })
-export class ListarPedidosComponent implements OnInit {
+export class ListarPedidosComponent extends Controller implements OnInit {
+    public displayedColumns: string[] = ['status','created_at', 'id', 'type', 'total', 'action'];
+    
+    @ViewChild(MatSort) sort: MatSort;
 
-  displayedColumns: string[] = ['id', 'created_at', 'type', 'total', 'status', 'action'];
-  dataSource = new MatTableDataSource<any>(this.pedidosService.pedidos);
+    constructor(
+        public orderService: PedidosService,
+        private router: Router,
+        private helper: HelperService,
+        public alertCtrl: AlertController,
+        public modalCtrl: ModalController
+    ) { super(alertCtrl) }
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+    ngOnInit() {
+        let date = this.helper.date(null, "-1 day")
+        console.log(date)
+        this.orderService.dataSource.sort = this.sort;
+        this.orderService.get({
+            status:1,
+            filter: [
+                ['created_at', '>=', date]
+            ]
+        }).subscribe(pedidos => {
+            this.orderService.dataSource.data = pedidos;
+            this.orderService.dataSource._updateChangeSubscription();
+        })
+    }
 
-  constructor(private pedidosService:PedidosService,
-    private router: Router) { }
+    public delete(order): void {
+        let orderToChange = order;
+        orderToChange.status = 0;
+        this.orderService.changeStatus( orderToChange ).subscribe(response => {
+            let idx = this.orderService.dataSource.data.indexOf(order);
+            this.orderService.dataSource.data[idx] = response;
+            this.orderService.dataSource._updateChangeSubscription();
+            this.helper.message(`Pedido ${order.number} cancelado`);
+        });
+    }
 
-  ngOnInit() {
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-  }
+    public edit(req): void {
+        this.router.navigate(['/motoboy/editar']);
+    }
 
-  applyFilter(filterValue: string) {
-      this.dataSource.filter = filterValue.trim().toLowerCase();
+    public finalize(order) {
+        this.orderService.orderToFinalize = order;
+    }
 
-      if (this.dataSource.paginator) {
-          this.dataSource.paginator.firstPage();
-      }
-  }
 
-  public delete(): void {
-
-  }
-
-  public edit(req): void {
-
-      this.router.navigate(['/motoboy/editar']);
-  }
-
+    async outToDeliver(order) {
+        this.orderService.orderToFinalize = order;
+        const modal = await this.modalCtrl.create({
+            component: ModalMotoboyComponent
+        });
+        return await modal.present();
+    }
 }

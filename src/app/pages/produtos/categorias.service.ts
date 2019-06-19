@@ -7,7 +7,7 @@ import Model from 'src/app/service/model';
   providedIn: 'root'
 })
 export class CategoriasService extends Model{
-  public categories;
+  public categories = [];
   
   protected url = 'categories'
   constructor(http :HttpClient , helper : HelperService) { super(http, helper)}

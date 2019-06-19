@@ -9,26 +9,18 @@ import { ProdutoService } from './produto.service';
 })
 export class ProdutosPage implements OnInit {
 
-    constructor(public productService: ProdutoService,
+    constructor(
+        public productService: ProdutoService,
         public categoriasService :CategoriasService,
-        public helper: HelperService) { }
+        public helper: HelperService
+    ) { }
 
     ngOnInit() {
-       
-        if (!this.productService.products) {
-            this.productService.get().subscribe(products => {
-                this.productService.products = products;
+        if (this.categoriasService.categories.length < 1) {
+            this.categoriasService.getNoLoad().subscribe(categories => {
+                this.categoriasService.categories = categories;
             });
         }
-
-        if (!this.categoriasService.categories) {
-            this.categoriasService.getNoLoad().subscribe(categories => {
-              this.categoriasService.categories = categories;
-      
-            })
-          }
-
-
     }
 
 

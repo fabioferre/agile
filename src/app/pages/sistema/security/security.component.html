@@ -1,0 +1,183 @@
+<header class="content__title">
+    <h1>Informações</h1>
+
+
+    <div class="actions position-absolute" style="right: 10px; top:0">
+        <button type="button" class="btn btn-info  px-4 " (click)="submit()">
+            Atualizar
+        </button>
+        <button type="button" class="btn btn-secondary  px-4 ml-4">
+            Cancelar
+        </button>
+    </div>
+</header>
+<mat-tab-group>
+    <mat-tab label="Permissão no PDV">
+        <ng-template matTabContent>
+            <div class="pt-5">
+                <mat-card class="p-5">
+                    <mat-card-content>
+                        <div class="form-row ">
+                            <div class="col-lg-12 ">
+                                <form action="" [formGroup]="formToSend" class="px-5">
+                                    <div class="form-row">
+                                        <div class="col-6 mx-auto text-center">
+                                            <h5 class="text-info">Nivel</h5>
+                                            <mat-form-field class="full-width"> 
+                                                <mat-select formControlName="nivel" required>
+                                                    <mat-option *ngFor="let nivel of sistemaService.niveis" [value]="nivel.id"
+                                                        (click)="getPermissions()">
+                                                        {{ nivel.name }}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </form>
+                                <form action="" [formGroup]="form" class="px-5">
+                                    <div class="form-row" formArr>
+                                        <div class="col-lg text-center">
+                                            <hr>
+                                            <div class="form-row text-left border-left">
+                                                <div class="col-lg-12">
+                                                    <mat-slide-toggle formControlName="5" color="primary">
+                                                        Caixa
+                                                    </mat-slide-toggle>
+                                                    <br>
+                                                    <br>
+                                                    <mat-slide-toggle formControlName="6" color="primary">
+                                                        Pedidos
+                                                    </mat-slide-toggle>
+                                                    <br>
+                                                    <br>
+                                                    <mat-slide-toggle formControlName="7" color="primary">
+                                                        Produtos
+                                                    </mat-slide-toggle>
+                                                    <br>
+                                                    <br>
+                                                    <mat-slide-toggle formControlName="8" color="primary">
+                                                        Clientes
+                                                    </mat-slide-toggle>
+                                                    <br>
+                                                    <br>
+                                                    <mat-slide-toggle formControlName="9" color="primary">
+                                                        Edição de mesas
+                                                    </mat-slide-toggle>
+                                                    <br>
+                                                    <br>
+                                                    <mat-slide-toggle formControlName="10" color="primary">
+                                                        Impressora
+                                                    </mat-slide-toggle>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg text-center">
+                                            <hr>
+                                            <div class="form-row text-left border-left">
+                                                <div class="col-lg-12">
+                                                    <mat-slide-toggle formControlName="11" color="primary">
+                                                        Fretes
+                                                    </mat-slide-toggle>
+                                                    <br>
+                                                    <br>
+                                                    <mat-slide-toggle formControlName="12" color="primary">
+                                                        Motoboy
+                                                    </mat-slide-toggle>
+                                                    <br>
+                                                    <br>
+                                                    <mat-slide-toggle formControlName="13" color="primary">
+                                                        Lojas
+                                                    </mat-slide-toggle>
+                                                    <br>
+                                                    <br>
+                                                    <mat-slide-toggle formControlName="14" color="primary">
+                                                        Funcionarios
+                                                    </mat-slide-toggle>
+                                                    <br>
+                                                    <br>
+                                                    <mat-slide-toggle formControlName="15" color="primary">
+                                                        Fluxo de caixa
+                                                    </mat-slide-toggle>
+                                                    <br>
+                                                    <br>
+                                                    <mat-slide-toggle formControlName="16" color="primary">
+                                                        Segurança
+                                                    </mat-slide-toggle>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </ng-template>
+    </mat-tab>
+
+
+    <mat-tab label="Permissões no dashboard">
+        <ng-template matTabContent>
+            <div class="pt-5 ">
+                <mat-card class="toggle-disponible p-5">
+                    <mat-card-content>
+                        <div class="toggle-button">
+                            <mat-slide-toggle formControlName="sale" color="primary">
+                                <span *ngIf="!toSale" class="text-primary">
+                                    habilitar
+                                </span>
+                            </mat-slide-toggle>
+                        </div>
+
+                        <div class="form-row msg-warning " [ngClass]="{'disponible-warning': !toSale}"
+                            data-warning="Controle de venda desabilitado! :(">
+
+                            <div class="col-lg-5">
+                                <mat-form-field class="full-width">
+                                    <input matInput placeholder="Preço de venda" formControlName="sale_price">
+                                    <span matPrefix>$&nbsp;</span>
+                                    <mat-hint>
+                                        preço do produto disponibilizado em sua loja
+                                    </mat-hint>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-lg-5 ml-auto">
+                                <mat-form-field class="full-width">
+                                    <input matInput placeholder="Preço de custo" formControlName="cost_price">
+                                    <span matPrefix>$&nbsp;</span>
+                                    <mat-hint>
+                                        preço do produto adquirido no seu fornecedor
+                                    </mat-hint>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </ng-template>
+    </mat-tab>
+
+    <mat-tab label="Acesso">
+        <ng-template matTabContent>
+            <div class="pt-5 ">
+                <mat-card class=" p-5">
+                    <mat-card-content>
+                        <div class="form-row msg-warning ">
+                            <div class="col-lg-6">
+                                <mat-form-field class="full-width">
+                                    <input matInput placeholder="Código de barras" formControlName="code">
+                                    <mat-hint>
+                                        Código de barras informado no seu produtos
+                                    </mat-hint>
+                                </mat-form-field>
+                            </div>
+
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </ng-template>
+    </mat-tab>
+</mat-tab-group>

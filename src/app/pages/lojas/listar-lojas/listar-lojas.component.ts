@@ -20,16 +20,16 @@ export class ListarLojasComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   applyFilter(filterValue: string) {
-      this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.dataSource.filter = filterValue.trim().toLowerCase();
 
-      if (this.dataSource.paginator) {
-          this.dataSource.paginator.firstPage();
-      }
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   public delete(): void {
@@ -37,8 +37,8 @@ export class ListarLojasComponent implements OnInit {
   }
 
   public edit(req): void {
-
-      this.router.navigate(['/lojas/editar']);
+    this.lojasService.lojaEdit = req;
+    this.router.navigate(['/lojas/editar']);
   }
 
 }

@@ -7,15 +7,24 @@ import { EditarFuncionarioComponent } from './editar-funcionario/editar-funciona
 import { ListarFuncionarioComponent } from './listar-funcionario/listar-funcionario.component';
 import { NovoFuncionarioComponent } from './novo-funcionario/novo-funcionario.component';
 import { IonicModule } from '@ionic/angular';
+import { BrMaskerModule } from 'br-mask';
 
 import { FuncionariosPage } from './funcionarios.page';
-import { MatInputModule, MatSlideToggleModule, MatSelectModule, MatFormFieldModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
+import {
+  MatInputModule,
+  MatSelectModule,
+  MatFormFieldModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatSortModule
+}from '@angular/material';
+
 
 const routes: Routes = [
   {
     path: '',
     component: FuncionariosPage,
-    children:[
+    children: [
       {
         path: '',
         component: ListarFuncionarioComponent
@@ -26,7 +35,7 @@ const routes: Routes = [
       },
       {
         path: 'editar',
-        component: EditarFuncionarioComponent 
+        component: EditarFuncionarioComponent
       }
     ]
   }
@@ -39,15 +48,20 @@ const routes: Routes = [
     IonicModule,
     ReactiveFormsModule,
     MatInputModule,
-    MatSlideToggleModule,
     MatSelectModule,
     MatFormFieldModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    BrMaskerModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [FuncionariosPage, ListarFuncionarioComponent, NovoFuncionarioComponent, EditarFuncionarioComponent],
-  providers:[FuncionariosService]
+  declarations: [
+    FuncionariosPage,
+    ListarFuncionarioComponent,
+    NovoFuncionarioComponent,
+    EditarFuncionarioComponent
+  ],
+  providers: [FuncionariosService]
 })
-export class FuncionariosPageModule {}
+export class FuncionariosPageModule { }

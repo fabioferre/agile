@@ -1,0 +1,88 @@
+<div class="container-fluid content-page scrollbar-inner pt-5">
+    <div class="row">
+        <div class="col-md-10 mx-auto shadow-lg mt-4 " *ngIf="order">
+            <div class="painel-item active disabled-events" *ngIf="order.type == 1">
+                <i class="fas fa-cash-register"></i>
+                <span>Balcão</span>
+            </div>
+            <div class="painel-item active disabled-events" *ngIf="order.type == 2">
+                <i class="fas fa-motorcycle"></i>
+                <span>Deliver</span>
+            </div>
+            <div class="painel-item active disabled-events" *ngIf="order.type == 3">
+                <i class="fas fa-user"></i>
+                <span>Cliente</span>
+            </div>
+            <div class="painel-item active disabled-events" *ngIf="order.type == 4">
+                <i class="fas fa-concierge-bell"></i>
+                <span>Mesa</span>
+            </div>
+
+            <div class="row bg-theme">
+                <div class="col-lg-3 table-light client-info text-theme " *ngIf="order.client !== undefined">
+                    <h2 class="text-center h5 mt-1 text-uppercase">Cliente</h2>
+                    <div class="is-link text-truncate" style="max-width: 55ch">
+                       <strong class="text-dark">nome: &nbsp;</strong> 
+                       <small >{{ order.client.name }}</small>  <br>
+                       <strong class="text-dark">contato:  &nbsp;</strong> 
+                       <small>{{ order.client.cellphone }}</small> 
+                    </div>
+                </div>
+                <div class="col-lg pt-4">
+                    <div class="payment-calcs">
+                        <h2>SUBTOTAL</h2>
+                        <small>{{ order.subtotal | currency:'BRL':'R$ ':'1.2-2' }}</small>
+                    </div>
+                    <div class="payment-calcs" *ngIf="order.type == 2">
+                        <h2>Frete</h2>
+                        <small>{{ order.freight | currency:'BRL':'R$ ':'1.2-2' }}</small>
+                    </div>
+                    <div class="payment-calcs" >
+                        <h2>Total</h2>
+                        <small>{{ order.total | currency:'BRL':'R$ ':'1.2-2' }}</small>
+                    </div>
+
+                    
+                </div>
+                <div class="col-lg-3 ml-auto" [ngClass]="{'bg-light': order.status != 2}">
+                    <div class="btn-finalize btn btn-outline-success is-link "
+                    (click)="prepareTofinalize()" *ngIf="order.status != 2">
+                            <i class="fas fa-dollar-sign"></i> Fechar pedido
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row product-list">
+                <div class="col-lg-12 px-0">
+                    <table class="table text-center table-light m-0">
+                        <thead>
+                            <tr>
+                                <th>Produto</th>
+                                <th>Preço</th>
+                                <th>Quantidade</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-theme text-uppercase ">
+                            <tr  *ngFor="let product of order.current_products">
+                                <td>
+                                    {{ product.product_name }} 
+                                </td>
+                                <td>
+                                    {{ product.price  | currency:'BRL':'R$ ':'1.2-2' }}
+                                </td>
+                                <td >
+                                    {{ product.quantity }}
+                                </td>
+                                <td>
+                                    {{ product.quantity * product.price  | currency:'BRL':'R$ ':'1.2-2' }} 
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

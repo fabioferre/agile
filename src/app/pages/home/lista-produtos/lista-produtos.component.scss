@@ -1,0 +1,29 @@
+@keyframes alertUser {
+    from {
+        transform: rotateZ(0deg)
+    }
+
+    10% {
+        transform: rotateZ(-10deg)
+    }
+    20% {
+        transform: rotateZ(10deg)
+    }
+    30% {
+        transform: rotateZ(-10deg)
+    }
+    40% {
+        transform: rotateZ(10deg)
+    }
+    50% {
+        transform: rotateZ(-10deg)
+    }
+    60% {
+        transform: rotateZ(10deg)
+    }
+    
+}
+
+.alertUser {
+    animation: alertUser 500ms ;
+}

@@ -1,7 +1,8 @@
 <mat-form-field class="w-100">
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar por Nº, Nome, QTD e/ou Preço">
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar por Nº, Nome, Estoque e/ou Preço">
 </mat-form-field>
-<div class="mat-elevation-z8 table-hover link-table responsive-table " >
+<div class="mat-elevation-z8 table-hover link-table responsive-table "
+ [ngClass]="{'alertUser': homeService.productAlert}" >
     <table mat-table [dataSource]="dataSource" matSort class="w-100 ">
             
         <ng-container matColumnDef="select">
@@ -40,8 +41,11 @@
         <!-- units Column -->
         <ng-container matColumnDef="unity">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Estoque </th>
-            <td mat-cell *matCellDef="let element"  > 
-                {{element.units}} 
+            <td mat-cell *matCellDef="let element" class="pl-3" > 
+                <span *ngIf="!element.stock; else stock">
+                    <i class="fas fa-infinity"></i>
+                </span>
+                <ng-template #stock> {{element.units}} </ng-template>
             </td>
         </ng-container>
 

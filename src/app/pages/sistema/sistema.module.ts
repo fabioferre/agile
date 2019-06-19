@@ -15,7 +15,9 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
-
+import { SecurityComponent } from './security/security.component';
+import { MatCardModule, MatTabsModule } from '@angular/material';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 const routes: Routes = [
   {
@@ -25,7 +27,11 @@ const routes: Routes = [
       {
           path: 'impressora',
           component: ImpressoraComponent
-      }
+      },
+      {
+        path: 'security',
+        component: SecurityComponent
+    }
   ]
   }
 ];
@@ -36,13 +42,16 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
+    MatSlideToggleModule,
     MatInputModule,
     MatSlideToggleModule,
     MatSelectModule,
     MatFormFieldModule,
+    MatCardModule,
+    MatTabsModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [SistemaPage, ImpressoraComponent],
+  declarations: [SistemaPage, ImpressoraComponent, SecurityComponent],
   providers:[SistemaService, Printer]
 })
 export class SistemaPageModule {}

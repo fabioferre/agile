@@ -1,15 +1,46 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { ModalNovaMesaComponent } from './modal-nova-mesa/modal-nova-mesa.component';
+import { ModalEditaMesaComponent } from './modal-edita-mesa/modal-edita-mesa.component';
+import { MesasService } from './mesas.service';
 
 @Component({
-  selector: 'app-mesas',
-  templateUrl: './mesas.page.html',
-  styleUrls: ['./mesas.page.scss'],
+    selector: 'app-mesas',
+    templateUrl: './mesas.page.html',
+    styleUrls: ['./mesas.page.scss'],
 })
 export class MesasPage implements OnInit {
+    constructor(
+        private modalCtrl: ModalController, 
+        public tableService: MesasService) { }
 
-  constructor() { }
+    ngOnInit() { 
+        if(!this.tableService.tables){
+            this.getTables();
+        }
+    }
 
-  ngOnInit() {
-  }
+    public getTables(): void {
+        this.tableService.get().subscribe(tables => {
+            this.tableService.tables = tables;
+        });
+    }
+    
+    async registerTable() {
+        const modal = await this.modalCtrl.create({
+            component: ModalNovaMesaComponent,
+            cssClass: 'responsive'
+        });
 
+        return await modal.present();
+    }
+
+    async editTable(data: any) {
+        this.tableService.tableToEdit = data;
+        const modal = await this.modalCtrl.create({
+            component: ModalEditaMesaComponent,
+            cssClass: 'responsive'
+        });
+        return await modal.present();
+    }
 }

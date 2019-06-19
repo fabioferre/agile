@@ -21,6 +21,8 @@ export class HomePage implements OnInit, OnDestroy {
 
     ngOnInit() {
         
+        this.helper.load();
+        this.homeService.productAlert = false;
         this.productService.get({
             filter: [ 
                 ["sale", "1"]
@@ -33,16 +35,11 @@ export class HomePage implements OnInit, OnDestroy {
             this.helper.load(false);
         });
        
-
-        if(!this.homeService.productSelected) {
-            this.homeService.productSelected = [];
-        }
     }
 
 
     ngOnDestroy(): void {
-        this.homeService.productSelected = [];
-        this.homeService.selection.clear();
+        this.homeService.clearPainel()
         
     }
 

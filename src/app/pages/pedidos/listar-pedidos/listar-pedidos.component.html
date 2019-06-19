@@ -1,70 +1,94 @@
-
-
 <header class="content__title">
-  <h1>Listagem de pedidos</h1>
-  <button type="button" class="btn bg-theme btn-add text-white" [routerLink]="['/home']" >
-    <i class="fas fa-plus fa-2x" ></i>
-  </button>
-  
+    <h1>Listagem de pedidos</h1>
+    <button type="button" class="btn bg-theme btn-add text-white" [routerLink]="['/home']">
+        <i class="fas fa-plus fa-2x"></i>
+    </button>
+
 </header>
-  
-<div class="card  responsive-table">
-  <div class="card-body ">
-      <mat-form-field class="w-100">
-          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro">
-      </mat-form-field>
-      <div class="mat-elevation-z8 " >
-          <table mat-table [dataSource]="dataSource" matSort class="w-100 ">
 
-              <!-- item1 Column -->
-              <ng-container matColumnDef="id">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
-                  <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-              </ng-container>
+<div class="card  responsive-table" >
+    <div class="card-body ">
+        <mat-form-field class="w-100">
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro">
+        </mat-form-field>
+        <div class="mat-elevation-z8 ">
+            <table mat-table [dataSource]="orderService.dataSource" matSort class="w-100 ">
+                <!-- item5 Column -->
+                <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+                    <td mat-cell *matCellDef="let element">
+                        <span class="badge" [ngClass]="'badge-'+element.label?.style">
+                            {{  element.label?.name }}
+                        </span>
+                        <i class="fas fa-motorcycle ml-3 animation-left" *ngIf="element.label?.in_table == 4"></i>
+                        <i class="fas fa-frown ml-3" *ngIf="element.label?.in_table == 0"></i>
+                        <i class="fas laugh-beam ml-3" *ngIf="element.label?.in_table == 2"></i>
+                    </td>
+                </ng-container>
+                <!-- item2 Column -->
+                <ng-container matColumnDef="created_at">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Efetuado em </th>
+                    <td mat-cell *matCellDef="let element">{{element.created_at| date:'dd/MM/yyyy HH:mm'}} </td>
+                </ng-container>
 
-                  <!-- item2 Column -->
-              <ng-container matColumnDef="created_at">
-                  <th mat-header-cell *matHeaderCellDef > Criado </th>
-                  <td mat-cell *matCellDef="let element">{{element.created_at| date:'dd/MM/yyyy HH:mm'}} </td>
-              </ng-container>
+                <!-- item1 Column -->
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Nº. </th>
+                    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                </ng-container>
 
-              <!-- item3 Column -->
-              <ng-container matColumnDef="type">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Tipo </th>
-                  <td mat-cell *matCellDef="let element"> Balcão </td>
-              </ng-container>
+                <!-- item3 Column -->
+                <ng-container matColumnDef="type">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Tipo </th>
+                    <td mat-cell *matCellDef="let element"> {{ orderService.typeSelling['type'+element.type] }} </td>
+                </ng-container>
 
-              <!-- item4 Column -->
-              <ng-container matColumnDef="total">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Total </th>
-                  <td mat-cell *matCellDef="let element">R$ {{element.total}} </td>
-              </ng-container>
+                <!-- item4 Column -->
+                <ng-container matColumnDef="total">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Total </th>
+                    <td mat-cell *matCellDef="let element">R$ {{element.total}} </td>
+                </ng-container>
 
-              <!-- item5 Column -->
-              <ng-container matColumnDef="status">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
-                  <td mat-cell *matCellDef="let element" ><span class="badge badge-{{element.label?.style}}"> {{element.label?.name}}</span> </td>
-              </ng-container>
 
-              <!-- item6 Column -->
-              <ng-container matColumnDef="action">
-                  <th mat-header-cell *matHeaderCellDef > Ações </th>
-                  <td mat-cell *matCellDef="let element"> 
-                      <!-- <button class="btn btn-primary mx-1" (click)="edit(element)">
-                          <i class="zmdi zmdi-edit"></i>
-                      </button> -->
-                      <!-- <button class="btn btn-danger mx-1" (click)="delete()">
-                          <i class="zmdi zmdi-close"></i>
-                      </button> -->
-                  </td>
-              </ng-container>
 
-              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          </table>
+                <!-- item6 Column -->
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef> Ações </th>
+                    <td mat-cell *matCellDef="let element">
+                        <button class="btn btn-outline-success mx-1" 
+                        data-toggle="tooltip" data-placement="top" 
+                        title="Finalizar pedido"  
+                        (click)="finalize(element)"
+                        [routerLink]="['/pedidos/detalhes', element.id]"
+                        *ngIf="element.label?.in_table == 1 || element.label?.in_table == 4">
+                            <i class="fas fa-dollar-sign"></i>
+                        </button> 
+                        
+                        <button class="btn btn-outline-primary mx-1" 
+                        data-toggle="tooltip" 
+                        data-placement="top" 
+                        title="Sair pra entrega"  
+                        (click)="outToDeliver(element)"
+                        *ngIf="element.label?.in_table == 3">
+                            <i class="fas fa-motorcycle"></i>
+                        </button> 
 
-          <mat-paginator [pageSizeOptions]="[50, 100, 150, 200, 250]" showFirstLastButtons></mat-paginator>
-      </div>
-  </div>
+                        <button class="btn btn-danger mx-1" 
+                        *ngIf="element.label?.in_table != 2 && element.status != 0"
+                        (click)="alertDelete(element)" 
+                        data-placement="top" 
+                        title="Cancelar pedido">
+                            <i class="fas fa-minus"></i>
+                        </button>
+            
+                        
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+        </div>
+    </div>
 </div>
-  

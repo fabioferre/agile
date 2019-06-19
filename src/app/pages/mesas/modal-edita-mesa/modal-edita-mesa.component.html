@@ -1,0 +1,46 @@
+<div class="container-fluid mt-4">
+    <div class="row">
+        <div class="col-12 text-uppercase py-3">
+            <a href="javascript:void(0)" (click)="modalCtrl.dismiss()" class="close mr-2 ">
+                &times;
+            </a>
+            Editar mesa
+        </div>
+        <div class="col-12">
+            <form [formGroup]="form" (submit)="update()">
+                <div class="row">
+                    <div class="form-group col-9">
+                        <input type="text" 
+                        placeholder="Nome"
+                        class="form-control" 
+                        maxnlength="7"
+                        formControlName="name">
+                    </div>
+                    <div class="form-group col-3">
+                        <input type="text" 
+                        placeholder="Lugares"
+                        class="form-control" 
+                        formControlName="places"
+                        min="0" max="50">
+                        <i class="form-group__bar"></i>
+                    </div>
+                    <div class="col-lg-7 mx-auto">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <button class="btn btn-primary btn-block" [disabled]="form.invalid">
+                                    Atualizar
+                                </button>
+                            </div>
+                            <div class="col-lg-4">
+                                <button type="button" (click)="delete()"
+                                class="btn btn-danger ">
+                                    Deletar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

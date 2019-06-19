@@ -1,85 +1,88 @@
-<div ><table class="printer-ticket text-black">
-    <thead>
-       <tr>
-           <th class="title" colspan="3">Tagmus Sistemas</th>
-       </tr>
-       <tr>
-           <th colspan="3">17/11/2015 - 11:57:52</th>
-       </tr>
-       <tr>
-           <th colspan="3">
-               Nome do cliente <br />
-               000.000.000-00
-           </th>
-       </tr>
-       <tr>
-           <th class="ttu" colspan="3">
-               <b>Cupom não fiscal</b>
-           </th>
-       </tr>
-   </thead>
-   <tbody>
-       <tr class="top">
-           <td colspan="3">Doce de brigadeiro</td>
-       </tr>
-       <tr>
-           <td>R$7,99</td>
-           <td>2.0</td>
-           <td>R$15,98</td>
-       </tr>
-       <tr>
-           <td colspan="3">Opcional Adicicional: grande</td>
-       </tr>
-       <tr>
-           <td>R$0,33</td>
-           <td>2.0</td>
-           <td>R$0,66</td>
-       </tr>
-   </tbody>
-   <tfoot>
-       <tr class="sup ttu p--0">
-           <td colspan="3">
-               <b>Totais</b>
-           </td>
-       </tr>
-       <tr class="ttu">
-           <td colspan="2">Sub-total</td>
-           <td align="right">R$43,60</td>
-       </tr>
-       <tr class="ttu">
-           <td colspan="2">Taxa de serviço</td>
-           <td align="right">R$0,00</td>
-       </tr>
-       <tr class="ttu">
-           <td colspan="2">Desconto</td>
-           <td align="right">0,00%</td>
-       </tr>
-       <tr class="ttu">
-           <td colspan="2">Total</td>
-           <td align="right">R$45,56</td>
-       </tr>
-       <tr class="sup ttu p--0">
-           <td colspan="3">
-               <b>Pagamentos</b>
-           </td>
-       </tr>
-       <tr class="ttu">
-           <td colspan="2">Total pago</td>
-           <td align="right">R$10,00</td>
-       </tr>
-       <tr class="ttu">
-           <td colspan="2">Troco</td>
-           <td align="right">R$0,44</td>
-       </tr>
-       <tr class="sup">
-           <td colspan="3" align="center">
-               <b>Pedido:</b>
-           </td>
-       </tr>
-       <tr class="sup">
-           <td colspan="3" align="center">
-               www.site.com
-           </td>
-       </tr>
-   </tfoot>
-</table></div>
+<header class="content__title">
+    <h1>Configurar impressora</h1>
+    <button type="button" class="btn btn-success btn-add" (click)="printer()">
+        <i class="fas fa-print fa-2x"></i>
+    </button>
+</header>
+
+
+<div class="row mx-0">
+    <div class="col-lg-8 mx-auto">
+        <div class="card">
+            <form [formGroup]="form" (submit)="setOptions()">
+                <div class="card-body">
+                    <div class="row ">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label>Nome da Loja</label>
+                                <input type="text" class="form-control" formControlName="company_name">
+                                <i class="form-group__bar"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Taxa de serviço</label>
+                                <input type="text" class="form-control" placeholder="R$ 1.00"
+                                    formControlName="rate_service">
+                                <i class="form-group__bar"></i>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Copias</label>
+                                <input type="text" class="form-control" placeholder="Ex: 1, 2" formControlName="copy">
+                                <i class="form-group__bar"></i>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 pt-4">
+                            <mat-form-field class="w-100">
+                                <mat-label>Impressora</mat-label>
+                                <mat-select formControlName="default">
+                                    <mat-option *ngFor="let printer of impressora.printers" [value]="printer.name">
+                                        {{ printer.name }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Tamanho da fonte</label>
+                                <input type="text" class="form-control" placeholder="12" maxlength="3"
+                                    formControlName="font_size">
+                                <i class="form-group__bar"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 text-center pt-3">
+                            <mat-slide-toggle class="mat-primary" formControlName="create">
+                               criação do pedido ? 
+                            </mat-slide-toggle>
+                        </div>
+                        <div class="col-lg-4 text-center pt-3">
+                            <mat-slide-toggle class="mat-primary" formControlName="update">
+                               atualização do pedido ?
+                            </mat-slide-toggle>
+                        </div>
+                        <div class="col-lg-4 text-center pt-3">
+                            <mat-slide-toggle class="mat-primary" formControlName="close">
+                                fechamento do pedido ?
+                            </mat-slide-toggle>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="mt-5 text-center">
+                        <button type="submit" class="btn btn-primary" [disabled]="!form.valid">
+                            Salvar
+                        </button>
+                        <a href="javascript:history.go(-1)" class="btn btn-secondary ml-4">
+                            Voltar
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

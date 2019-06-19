@@ -12,21 +12,13 @@ export class PedidosPage implements OnInit {
 
 
 
-    constructor(public pedidosService: PedidosService,
+    constructor(
+        public pedidosService: PedidosService,
         public helper: HelperService) { }
 
     ngOnInit() {
-        let date = this.helper.date(null, "-1 day")
- 
-        this.pedidosService.get({
-            filter: [
-                ['created_at', '>=', date]
-            ]
-        }).subscribe(pedidos => {
-            this.pedidosService.pedidos = pedidos;
-            // console.log(pedidos);
-
-        })
+       
+       
 
     }
 

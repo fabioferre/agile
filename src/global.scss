@@ -28,9 +28,18 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 @import '~bootstrap/scss/variables';
 @import '~bootstrap/scss/mixins';
 
+.alert-button.ion-focusable.ion-activatable.danger {
+    color: var(--danger);
+}
 
+.disabled {
+    pointer-events: none;
+    opacity: 0.4;
+}
 
-
+.disabled-events {
+    pointer-events: none;
+}
 
 .ng-invalid.ng-touched ~ .form-group__bar {
     &::after,
@@ -42,7 +51,7 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 .btn-add.btn {
     
     
-    
+    color: var(--white);
     
     border-radius: 50%;
     @include media-breakpoint-down(md) { 
@@ -120,7 +129,7 @@ ion-modal.sm{
 
 ion-modal.md{
     --width: 55% !important;
-    --height: 86% !important
+    // --height: 86% !important
 }
 
 ion-modal.lg{
@@ -129,54 +138,73 @@ ion-modal.lg{
 }
 
 
-$color-gray: #BCBCBC;
-.text {
-	&-center { text-align: center; }
+@include media-breakpoint-down(md) { 
+    ion-modal.md.responsive {
+        --width: 95% !important;
+        --height: 200px !important
+    }
 }
-.ttu { text-transform: uppercase; }
+@include media-breakpoint-up(md) { 
+    ion-modal.md.responsive {
+        --width: 400px !important;
+        --height: 180px !important
+    }
+}
+@include media-breakpoint-up(xl) { 
+    ion-modal.md.responsive {
+        --width: 400px !important;
+        --height: 180px !important
+    }
+}
 
-.printer-ticket {
-	display: table !important;
-	width: 100%;
-	max-width: 150px;
-	font-weight: light;
-	line-height: 1.3em;
-	$printer-padding-base: 10px;
-	&, & * { 
-		font-family: Tahoma, Geneva, sans-serif; 
-		font-size: 10px; 
-	}
+.is-link:hover {
+    cursor: pointer;
+}
 
-	th:nth-child(2),
-	td:nth-child(2) {
-		width: 50px;
-	}
-	
-	th:nth-child(3) ,
-	td:nth-child(3) { 
-		width: 40px; text-align: right; 
-	}
-	
-	th { 
-		font-weight: inherit;
-		padding: $printer-padding-base 0;
-		text-align: center;
-		border-bottom: 1px dashed $color-gray;
-	}
-	tbody {
-		tr:last-child td { padding-bottom: $printer-padding-base; }
-	}
-	tfoot {
-		.sup td {
-			padding: $printer-padding-base 0;
-			border-top: 1px dashed $color-gray;
-		}
-		.sup.p--0 td { padding-bottom: 0; }
-	}
-	
-	.title { font-size: 1.5em; padding: $printer-padding-base*1.5 0; }
-	.top {
-		td { padding-top: $printer-padding-base; }
-	}
-	.last td { padding-bottom: $printer-padding-base; }
+.full-width {
+    width: 100%;
+}
+
+
+.disponible-warning {
+    pointer-events: none;
+    position: relative;
+    padding-top: 25px;
+    opacity: 0.4;
+    
+    &::after {
+        content:'';
+        position: absolute;
+        top: 5px;
+        left: 0;
+        width: 100%;
+        opacity: 1;
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    &.msg-warning[data-warning]::after {
+        content: attr(data-warning);
+    }
+}
+
+.search-stycky-top {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    left: 0;
+    background-color: #FFF;
+}
+
+
+.beauty-scroll::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+.beauty-scroll::-webkit-scrollbar {
+    width: 4px;
+    background: transparent;
+}
+.beauty-scroll::-webkit-scrollbar-thumb {
+    background: var(--primary);
 }

@@ -1,0 +1,68 @@
+<div class="content__inner content__inner--sm" *ngIf="clientesService.clientToShow && orders">
+
+    <div class="card profile">
+        <div class="profile__info w-100">
+            <div class="row quick-stats">
+                <div class="col-sm-6 col-md-4" >
+                    <div class="quick-stats__item client-amount"
+                        [ngClass]="{
+                            'bg-success': clientesService.clientToShow.amount  > 0,
+                            'bg-danger': clientesService.clientToShow.amount  < 0
+                        }">
+                        <div class="add-deposit" (click)="showOption(1)">
+                            <i class="fas fa-plus-circle"></i>
+                        </div>
+                        <div class="remove-deposit" (click)="showOption(0)">
+                            <i class="fas fa-minus-circle"></i>
+                        </div>
+                        <div class="quick-stats__info">
+                            <h2>R$ {{  clientesService.clientToShow.amount }}</h2>
+                            <small>Saldo</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4">
+                    <div class="quick-stats__item bg-info">
+                        <div class="quick-stats__info">
+                            <h2>{{orders.count}}</h2>
+                            <small>Pedidos</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4">
+                    <div class="quick-stats__item bg-brown">
+                        <div class="quick-stats__info">
+                            <h2>R$ {{orders.sum}}</h2>
+                            <small>Compras</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="toolbar">
+        <nav class="toolbar__nav">
+            <a [routerLink]="['perfil']" routerLinkActive="active" >Perfil</a>
+            <a [routerLink]="['extrato']" routerLinkActive="active" >Extrato</a>
+            <a [routerLink]="['historico']" routerLinkActive="active" >Historico</a>
+        </nav>
+
+        <div class="actions">
+            <i class="actions__item zmdi zmdi-search" data-ma-action="toolbar-search-open"></i>
+        </div>
+
+        <div class="toolbar__search">
+            <input type="text" placeholder="Search...">
+
+            <i class="toolbar__search__close zmdi zmdi-long-arrow-left" data-ma-action="toolbar-search-close"></i>
+        </div>
+    </div>
+
+    <div class="card">
+        <router-outlet></router-outlet>
+    </div>
+</div>

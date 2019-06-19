@@ -1,0 +1,19 @@
+.content-photo {
+
+    .content-photo-header {
+        padding-top: 20px;
+    }
+   
+    img {
+        width: 225px;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+        margin: 0 auto; 
+    }
+
+    .actions {
+        padding: 20px 0;
+    }
+
+}

@@ -9,17 +9,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./listar-motoboy.component.scss'],
 })
 export class ListarMotoboyComponent implements OnInit {
-  displayedColumns: string[] = ['item1', 'item2', 'item3', 'item4', 'item5', 'item6'];
-  dataSource = new MatTableDataSource<any>([]);
+  displayedColumns: string[] = ['name', 'cellphone', 'phone', 'cpf', 'address_neighborhood', 'action'];
+  dataSource = new MatTableDataSource<any>(this.motoboyService.motoboy);
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private motoboyService:MotoboyService,
     private router: Router) { }
 
   ngOnInit() {
-      this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
   }
 
@@ -36,8 +34,8 @@ export class ListarMotoboyComponent implements OnInit {
   }
 
   public edit(req): void {
-
-      this.router.navigate(['/motoboy/editar']);
+    this.motoboyService.motoboyEdit = req;
+      this.router.navigate(['/motoboy/editar',req]);
   }
 
 }

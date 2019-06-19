@@ -1,1 +1,30 @@
-<router-outlet></router-outlet>
+<header class="content__title">
+    <h1>Edição de mesas</h1>
+    <button type="button" class="btn bg-theme btn-add bg-theme" (click)="registerTable()">
+        <i class="fas fa-plus fa-2x"></i>
+    </button>
+</header>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card card--inverse widget-signups">
+                <div class="card-body">
+                    <h6 class="card-subtitle">
+                        Número exibido em <span class="text-warning"> amarelo</span> é a
+                        quantidade de lugares
+                    </h6>
+                    
+                    <div class="widget-signups__list">
+                        <div class="table-place ready-only" *ngFor="let table of tableService.tables"
+                            [ngClass]="{'busy': table.status == 2}" (click)="editTable(table)">
+                           
+                            <span>{{ table.name }}</span>
+                            <p>{{ table.places }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

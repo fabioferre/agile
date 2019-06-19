@@ -4,8 +4,7 @@ import { ProdutoService } from '../../produtos/produto.service';
 import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import {SelectionModel} from '@angular/cdk/collections';
 import { Router } from '@angular/router';
-
-
+import { HelperService } from 'src/app/service/helper.service';
 
 
 @Component({
@@ -22,7 +21,8 @@ export class ListaProdutosComponent implements OnInit {
     constructor(
         private productService: ProdutoService, 
         public homeService: HomeService,
-        private router: Router
+        private router: Router,
+        private helper: HelperService
     ) { }
 
     ngOnInit() {
@@ -63,8 +63,12 @@ export class ListaProdutosComponent implements OnInit {
         if(this.selection.isSelected(product)) {
             this.homeService.removeProductSelected(product)
         } else {
-            this.homeService.productSelected.push(product)
-            
+            if(product.units <= 0 && product.stock) {
+                this.helper.message('Produto sem estoque!','warning');
+                this.selection.toggle(product);
+            } else {
+                this.homeService.productSelected.push(product)
+            }
         }
     }
     

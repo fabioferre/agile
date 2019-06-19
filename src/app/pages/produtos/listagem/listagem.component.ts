@@ -3,69 +3,56 @@ import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { ProdutoService } from '../produto.service';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { Controller } from '../../../service/controller';
+
 @Component({
     selector: 'app-listagem',
     templateUrl: './listagem.component.html',
     styleUrls: ['./listagem.component.scss'],
 })
-export class ListagemComponent implements OnInit {
-    displayedColumns: string[] = ['id', 'image', 'name', 'brand', 'category', 'unity', 'action'];
-    dataSource = new MatTableDataSource<any>(this.productService.products);
+export class ListagemComponent  extends Controller implements OnInit {
+    public displayedColumns = ['id', 'image', 'name', 'sale_price', 'category', 'unity', 'action'];
 
-    @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
 
     constructor(
-        private productService: ProdutoService,
+        public productService: ProdutoService,
         private router: Router,
-        private alertCtrl: AlertController) { }
+        public alertCtrl: AlertController ) { super(alertCtrl)}
 
     ngOnInit() {
-        this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-    }
-
-    applyFilter(filterValue: string) {
-        this.dataSource.filter = filterValue.trim().toLowerCase();
-
-        if (this.dataSource.paginator) {
-            this.dataSource.paginator.firstPage();
+    
+        if (!this.productService.products) {
+            this.productService.get().subscribe(products => this.setProducts(products));
+        } else {
+            this.setProducts(this.productService.products)
         }
     }
 
+    public setProducts(products) {
+        this.productService.products = products;
+        this.dataSource.data = this.productService.products;
+        this.dataSource._updateChangeSubscription();
+    }
+
     public edit(product): void {
-        this.productService.productToEdit = product;
+        this.productService.activeNE( product );
         this.router.navigate(['/produtos/editar', product.id]);
     }
 
-    get product() {
-        return this.productService;
-    }
 
 
-    async delete(id) {
-        const alert = await this.alertCtrl.create({
-            header: "Deseja excluir ?",
-            message: 'Esta ação vai remover este item',
+    delete(product) {
 
-            buttons: [
-                {
-                    text: "Sim",
-                    handler: () => {
-                        this.productService.deleteById(id).subscribe(product => {
-                
-                        });
-                    }
-                },
-                {
-                    text: 'Cancelar',
-                    role: 'cancel',
-                    cssClass: 'secondary',
-                },
-            ]
-        })
+        this.productService.deleteById(product.id).subscribe(response => {
+            const idx = this.productService.products.indexOf(product)
+            this.productService.products.splice(idx , 1);
+            this.dataSource.data  = this.productService.products;
+            this.dataSource._updateChangeSubscription();
 
-        return await alert.present();
+        });
+
     }
 
 }

@@ -14,6 +14,9 @@ export class ImpressoraComponent implements OnInit {
     public printer_options;
     public form: FormGroup = this.fb.group({
         company_name: ['Teste', [Validators.required, Validators.minLength(2)]],
+        company_cnpj: ['Teste', [Validators.required, Validators.minLength(2)]],
+        company_phone: ['Teste', [Validators.required, Validators.minLength(2)]],
+        company_: ['Teste', [Validators.required, Validators.minLength(2)]],
         rate_service: [null],
         copy: [1],
         font_size: [null],
@@ -21,6 +24,9 @@ export class ImpressoraComponent implements OnInit {
         create: [null],
         update: [null],
         close: [null],
+        delivery: [null],
+        prepare: [null],
+        client: [null],
     });
 
     constructor(
@@ -36,8 +42,23 @@ export class ImpressoraComponent implements OnInit {
         this.getOptions();
         console.log( this.getOptions())
     }
+    public toggleOption() {
+        if(this.form.controls.client.value) {
+            this.form.controls.collection.disable()
+            this.form.controls.collection.setValue(false)
+        } else {
+            this.form.controls.collection.enable()
+        }
 
-    setOptions() {
+        if(this.form.controls.delivery.value) {
+            this.form.controls.fractioned.disable()
+            this.form.controls.fractioned.setValue(false)
+        } else {
+            this.form.controls.fractioned.enable()
+        }
+    }
+
+    save() {
         this.impressora.printer_options = this.form.value;
         this.impressora.setOptions();
         this.helper.message("Alteração efetuada !")

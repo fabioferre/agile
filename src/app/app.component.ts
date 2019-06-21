@@ -26,7 +26,7 @@ export class AppComponent {
             this.statusBar.styleDefault();
             this.splashScreen.hide();
             this.auth.canActivate();
-
+            // this.auth.configSystem(this.auth.user);
         });
     }
 }

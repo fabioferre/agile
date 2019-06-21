@@ -55,9 +55,9 @@ export class ImpressoraComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.get();
-        this.getOptions();
-        console.log( this.getOptions())
+        // this.get();
+        // this.getOptions();
+        // console.log( this.getOptions())
         this.requestUsb();
     }
 

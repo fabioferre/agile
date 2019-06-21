@@ -37,7 +37,8 @@ export class HomeService extends Model {
   
 
     public removeProductSelected(product): void {
-        this.productSelected.splice(this.productSelected.indexOf(product), 1)
+        this.productSelected.splice(this.productSelected.indexOf(product), 1);
+ 
     }
 
 

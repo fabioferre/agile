@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HelperService } from 'src/app/service/helper.service';
 import { Router } from '@angular/router';
 import { ImpressoraService } from '../impressora.service';
+import { PrintService, UsbDriver, WebPrintDriver } from 'ng-thermal-print';
+import { PrintDriver } from 'ng-thermal-print/lib/drivers/PrintDriver';
 
 @Component({
     selector: 'app-impressora',
@@ -11,6 +13,10 @@ import { ImpressoraService } from '../impressora.service';
     styleUrls: ['./impressora.component.scss'],
 })
 export class ImpressoraComponent implements OnInit {
+    status: boolean = false;
+    usbPrintDriver: UsbDriver;
+    webPrintDriver: WebPrintDriver;
+    ip: string = '';
     public printer_options;
     public form: FormGroup = this.fb.group({
         company_name: ['Teste', [Validators.required, Validators.minLength(2)]],
@@ -30,18 +36,53 @@ export class ImpressoraComponent implements OnInit {
     });
 
     constructor(
+        private printService: PrintService,
         private fb: FormBuilder,
         private helper: HelperService,
         private router: Router,
         public impressora: ImpressoraService
 
-    ) { }
+    ) { 
+        this.usbPrintDriver = new UsbDriver();
+        this.printService.isConnected.subscribe(result => {
+            this.status = result;
+            if (result) {
+                console.log('Connected to printer!!!');
+            } else {
+            console.log('Not connected to printer.');
+            }
+        });
+    }
 
     ngOnInit() {
         this.get();
         this.getOptions();
         console.log( this.getOptions())
+        this.requestUsb();
     }
+
+    requestUsb() {
+        this.usbPrintDriver.requestUsb().subscribe(result => {
+            console.log(result)
+            this.printService.setDriver(this.usbPrintDriver, 'ESC/POS');
+        });
+    }
+
+    connectToWebPrint() {
+        this.webPrintDriver = new WebPrintDriver(this.ip);
+        this.printService.setDriver(this.webPrintDriver, 'WebPRNT');
+    }
+
+    print(driver: PrintDriver) {
+        this.printService.init()
+            .setBold(true)
+            .writeLine('Hello World!')
+            .setBold(false)
+            .feed(4)
+            .cut('full')
+            .flush();
+    }
+
     public toggleOption() {
         if(this.form.controls.client.value) {
             this.form.controls.collection.disable()

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { ImpressoraComponent } from './impressora/impressora.component'
-import { Printer } from '@ionic-native/printer/ngx';
+import { ThermalPrintModule } from 'ng-thermal-print';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -51,9 +51,10 @@ const routes: Routes = [
     MatCardModule,
     MatTabsModule,
     BrMaskerModule,
+    ThermalPrintModule,
     RouterModule.forChild(routes)
   ],
   declarations: [SistemaPage, ImpressoraComponent, SecurityComponent],
-  providers:[SistemaService, Printer]
+  providers:[SistemaService]
 })
 export class SistemaPageModule {}

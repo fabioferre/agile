@@ -4,8 +4,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HelperService } from 'src/app/service/helper.service';
 import { Router } from '@angular/router';
 import { ImpressoraService } from '../impressora.service';
-import { PrintService, UsbDriver, WebPrintDriver } from 'ng-thermal-print';
-import { PrintDriver } from 'ng-thermal-print/lib/drivers/PrintDriver';
 
 @Component({
     selector: 'app-impressora',
@@ -14,73 +12,51 @@ import { PrintDriver } from 'ng-thermal-print/lib/drivers/PrintDriver';
 })
 export class ImpressoraComponent implements OnInit {
     status: boolean = false;
-    usbPrintDriver: UsbDriver;
-    webPrintDriver: WebPrintDriver;
     ip: string = '';
     public printer_options;
     public form: FormGroup = this.fb.group({
-        company_name: ['Teste', [Validators.required, Validators.minLength(2)]],
-        company_cnpj: ['Teste', [Validators.required, Validators.minLength(2)]],
-        company_phone: ['Teste', [Validators.required, Validators.minLength(2)]],
-        company_: ['Teste', [Validators.required, Validators.minLength(2)]],
-        rate_service: [null],
-        copy: [1],
-        font_size: [null],
-        default: [null],
+        company_name: ['', [Validators.required, Validators.minLength(2)]],
+        company_cnpj: ['', [Validators.required, Validators.minLength(2)]],
+        company_phone: ['', [Validators.required, Validators.minLength(2)]],
         create: [null],
-        update: [null],
         close: [null],
-        delivery: [null],
-        prepare: [null],
-        client: [null],
-    });
+        printer_options:  this.fb.group({
+            default: [null],
+            copy: [1],
+            copy_delivery: [1],
+            copy_prepare: [1],
+            font_size: [10],
+            rate_service: [null],
+            master: [true],
+            prepare: [true],
+            delivery: [null],
+        })
+    }); 
+    
 
     constructor(
-        private printService: PrintService,
         private fb: FormBuilder,
         private helper: HelperService,
         private router: Router,
         public impressora: ImpressoraService
-
-    ) { 
-        this.usbPrintDriver = new UsbDriver();
-        this.printService.isConnected.subscribe(result => {
-            this.status = result;
-            if (result) {
-                console.log('Connected to printer!!!');
-            } else {
-            console.log('Not connected to printer.');
-            }
-        });
-    }
+    ) {    }
 
     ngOnInit() {
         // this.get();
         // this.getOptions();
         // console.log( this.getOptions())
-        this.requestUsb();
     }
 
-    requestUsb() {
-        this.usbPrintDriver.requestUsb().subscribe(result => {
-            console.log(result)
-            this.printService.setDriver(this.usbPrintDriver, 'ESC/POS');
-        });
+    get delivery() {
+        return this.form.value.printer_options.delivery;
     }
 
-    connectToWebPrint() {
-        this.webPrintDriver = new WebPrintDriver(this.ip);
-        this.printService.setDriver(this.webPrintDriver, 'WebPRNT');
+    get prepare() {
+        return this.form.value.printer_options.prepare;
     }
 
-    print(driver: PrintDriver) {
-        this.printService.init()
-            .setBold(true)
-            .writeLine('Hello World!')
-            .setBold(false)
-            .feed(4)
-            .cut('full')
-            .flush();
+    get master() {
+        return this.form.value.printer_options.master;
     }
 
     public toggleOption() {

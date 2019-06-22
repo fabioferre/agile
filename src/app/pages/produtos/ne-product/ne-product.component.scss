@@ -17,3 +17,16 @@
     }
 
 }
+
+.collection{
+    position: relative;
+    .item {
+        position: relative;
+    }
+
+    .remove-item {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+}

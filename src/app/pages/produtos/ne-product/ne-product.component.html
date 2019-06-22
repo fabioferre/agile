@@ -84,56 +84,14 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-12 my-3">
-                                    <h5 class="text-info">Configurações do produto</h5>
-                                    <div class="form-row ">
-                                        <div class="col-lg text-center">
-                                            <mat-slide-toggle formControlName="sale" color="primary">
-                                                Disponível para venda?
-                                            </mat-slide-toggle>
-                                            <hr>
-                                            <div class="form-row text-left border-left">
-                                                
-                                                <div class="col-lg-12">
-                                                    <mat-slide-toggle formControlName="fractioned" 
-                                                    (change)="toggleSaleOption()" color="primary">
-                                                        Venda fracionado?
-                                                    </mat-slide-toggle>
-                                                    <br>
-                                                    <small  *ngIf="hasCollection ">
-                                                        Desativado enquanto 
-                                                        *<strong>Produto possuí itens</strong>* estiver ativado
-                                                    </small>
-                                                </div>
-                                                
-                                            </div>
-                                        </div>
-                                        <div class="col-lg text-center">
-                                            <mat-slide-toggle formControlName="stock" color="primary">
-                                                Possuí controle de estoque?
-                                            </mat-slide-toggle>
-                                            <hr>
-                                            <div class="form-row text-left border-left">
-                                                <div class="col-lg-12">
-                                                    <mat-slide-toggle formControlName="collection" 
-                                                    (change)="toggleSaleOption()" color="primary">
-                                                        Produto possuí itens ?
-                                                    </mat-slide-toggle>
-                                                    <br>
-                                                    <small  *ngIf="isFractioned">
-                                                        Desativado enquanto 
-                                                        *<strong>Venda fracionado</strong>* estiver ativado
-                                                    </small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12">
+                                
+                                <div class="col-lg-12 pt-3">
+                                    <label for="product-decription">Descrição do produto</label>
                                     <ckeditor 
                                     [config]="{ toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ] }"
                                     [editor]="editor"  
                                     tagName="textarea"
+                                    id="product-decription"
                                     formControlName="description"
                                     [data]="form.value.description"></ckeditor>
                                 </div>
@@ -258,8 +216,35 @@
                                         </mat-hint>
                                     </mat-form-field>
                                 </div>
-                                
+                            </div>
 
+                            <div class="form-row mt-3">
+                                <div class="col-lg">
+                                    <mat-chip-list aria-label="Fish selection" class="collection">
+                                        <mat-chip color="primary" class="item" selected>
+                                            Fanta <i class="fas fa-close remove-item"></i>
+                                        </mat-chip>
+                                    </mat-chip-list>
+                                </div>
+                                <div class="col-lg-12 my-5">
+                                    <mat-form-field class="full-width">
+                                        <input matInput 
+                                        placeholder="Pesquisar item (digite o nome de seu produto)" 
+                                        aria-label="State" 
+                                        [matAutocomplete]="auto" 
+                                        formControlName="productsCtrl">
+                                        <mat-autocomplete #auto="matAutocomplete">
+                                            <mat-option *ngFor="let product of filteredProduct | async" 
+                                            [value]="product.name" (click)="selectItem(product)">
+                                                <!-- <img class="example-option-img" aria-hidden [src]="state.flag" height="25"> -->
+                                                <span>{{ product.name }}</span> 
+                                            </mat-option>
+                                        </mat-autocomplete>
+                                        <mat-hint class="text-danger" *ngIf="productsCtrl.errors?.not_found">
+                                            Produto não encontrado : (
+                                        </mat-hint>
+                                    </mat-form-field>
+                                </div>
                             </div>
                         </mat-card-content>
                     </mat-card>
@@ -284,6 +269,60 @@
                                 </div>
 
                             </div>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </ng-template>
+        </mat-tab>
+        <mat-tab label="Configurações">
+            <ng-template matTabContent>
+                <div class="pt-5 "   >
+                    <mat-card class=" p-5" >
+                        <mat-card-content>
+                            <h5 class="text-info mb-5">Configurações do produto</h5>
+                            <div class="form-row ">
+                                <div class="col-lg text-center">
+                                    <mat-slide-toggle formControlName="sale" color="primary">
+                                        Disponível para venda?
+                                    </mat-slide-toggle>
+                                    <hr>
+                                    <div class="form-row text-left border-left">
+                                        
+                                        <div class="col-lg-12">
+                                            <mat-slide-toggle formControlName="fractioned" 
+                                            (change)="toggleSaleOption()" color="primary">
+                                                Venda fracionado?
+                                            </mat-slide-toggle>
+                                            <br>
+                                            <small  *ngIf="hasCollection ">
+                                                Desativado enquanto 
+                                                *<strong>Produto possuí itens</strong>* estiver ativado
+                                            </small>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-lg text-center">
+                                    <mat-slide-toggle formControlName="stock" color="primary">
+                                        Possuí controle de estoque?
+                                    </mat-slide-toggle>
+                                    <hr>
+                                    <div class="form-row text-left border-left">
+                                        <div class="col-lg-12">
+                                            <mat-slide-toggle formControlName="collection" 
+                                            (change)="toggleSaleOption()" color="primary">
+                                                Produto possuí itens ?
+                                            </mat-slide-toggle>
+                                            <br>
+                                            <small  *ngIf="isFractioned">
+                                                Desativado enquanto 
+                                                *<strong>Venda fracionado</strong>* estiver ativado
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </mat-card-content>
                     </mat-card>
                 </div>

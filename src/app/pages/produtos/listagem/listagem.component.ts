@@ -42,6 +42,8 @@ export class ListagemComponent  extends Controller implements OnInit {
     }
 
 
+    
+
 
     delete(product) {
 

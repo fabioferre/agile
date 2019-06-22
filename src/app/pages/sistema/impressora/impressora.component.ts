@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HelperService } from 'src/app/service/helper.service';
 import { Router } from '@angular/router';
 import { ImpressoraService } from '../impressora.service';
+import { async } from '@angular/core/testing';
 
 @Component({
     selector: 'app-impressora',
@@ -20,17 +21,16 @@ export class ImpressoraComponent implements OnInit {
         company_phone: ['', [Validators.required, Validators.minLength(2)]],
         create: [null],
         close: [null],
-        printer_options:  this.fb.group({
-            default: [null],
-            copy: [1],
-            copy_delivery: [1],
-            copy_prepare: [1],
-            font_size: [10],
-            rate_service: [null],
-            master: [true],
-            prepare: [true],
-            delivery: [null],
-        })
+        default: [null],
+        copy_master: [1],
+        copy_delivery: [1],
+        copy_prepare: [1],
+        font_size: [2],
+        rate_service: [null],
+        master: [true],
+        prepare: [true],
+        delivery: [true]
+     
     }); 
     
 
@@ -42,21 +42,21 @@ export class ImpressoraComponent implements OnInit {
     ) {    }
 
     ngOnInit() {
-        // this.get();
-        // this.getOptions();
-        // console.log( this.getOptions())
+        this.get();
+        this.getOptions();
+       
     }
 
     get delivery() {
-        return this.form.value.printer_options.delivery;
+        return this.form.value.delivery;
     }
 
     get prepare() {
-        return this.form.value.printer_options.prepare;
+        return this.form.value.prepare;
     }
 
     get master() {
-        return this.form.value.printer_options.master;
+        return this.form.value.master;
     }
 
     public toggleOption() {
@@ -88,12 +88,15 @@ export class ImpressoraComponent implements OnInit {
     }
 
 
-    getOptions() {
-        this.impressora.getOptions().then(res => {
-            this.printer_options = res;
-            this.form.patchValue(res)
-
+  async getOptions() {
+      return await  this.impressora.getOptions().then( async res => {
+            this.printer_options = await res;
+            this.form.patchValue(res) 
+            console.log( this.printer_options)
+                return await res
         })
+
+    
     }
 
     printer() {

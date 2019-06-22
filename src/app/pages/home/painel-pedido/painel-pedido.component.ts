@@ -192,9 +192,6 @@ export class PainelPedidoComponent implements OnInit {
             this.homeService.clearPainel();
             this.changeActive(1);
             this.helper.message("Pedido acrescentado");
-            if(this.impressora.printer_options.update){
-                this.impressora.printer(response);
-            }
         });
     }
 

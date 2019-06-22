@@ -18,15 +18,22 @@
 
 }
 
-.collection{
+.collection-list {
     position: relative;
+    border: 1px solid var(--secondary);
     .item {
         position: relative;
+        border-bottom: 1px solid var(--secondary);
+    }
+
+    .item-name {
+        width: 100px
     }
 
     .remove-item {
         position: absolute;
-        right: 0;
+        right: 15px;
         top: 0;
+        font-size: 24px;
     }
 }

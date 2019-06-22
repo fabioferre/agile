@@ -44,6 +44,7 @@ export class NeProductComponent implements OnInit {
 
     public editor = ClassicEditor;
     public filteredProduct: Observable<any>;
+    public items = [];
 
     constructor(
         private fb: FormBuilder,
@@ -63,6 +64,7 @@ export class NeProductComponent implements OnInit {
         this.productService.checkNE();
         if (this.productService.productToEdit) {
             this.form.patchValue(this.productService.productToEdit);
+            console.log(this.form)
         }
 
         if (this.isFractioned) {
@@ -96,9 +98,7 @@ export class NeProductComponent implements OnInit {
         return this.form.controls.weight_type.value;
     }
 
-    get items() {
-        return this.form.controls.items.value;
-    }
+    
 
     public onReady(editor) {
         editor.ui.getEditableElement().parentElement.insertBefore(
@@ -124,6 +124,10 @@ export class NeProductComponent implements OnInit {
     }
 
     public save() {
+        if(this.hasCollection > 0)
+        {
+            this.form.controls.items.setValue(this.items);
+        }
         this.productService.create(this.form.value)
             .subscribe((product) => {
                 if (product) {
@@ -165,11 +169,40 @@ export class NeProductComponent implements OnInit {
         return productFiltered;
     }
 
-
-    public selectItem(product) {
-        console.log(product)
-        
+    public toggleItem(item: any, remove = false) {
+        item.qtd = 1;
+        const idx = this.items.indexOf(item);
+        if(idx < 0 && !remove) {
+            if( this.productService.verifyStock(item) ) {
+                this.items.push(item);
+            }
+            this.productsCtrl.reset();
+            
+        } else {
+            this.items.splice(idx, 1);
+        }
     }
+
+    public lessItem(item: any) {
+        const idx = this.items.indexOf(item);
+        if(this.items[idx].qtd > 1) {
+            this.items[idx].qtd--;
+        } 
+    }
+
+    public plusItem(item: any) {
+        const idx = this.items.indexOf(item);
+        if (item.stock) {
+            if (this.items[idx].qtd < item.units) {
+                this.items[idx].qtd++;
+            }else{
+                this.helper.message("Item sem estoque!", "secondary")
+            }
+        } else {
+            this.items[idx].qtd++;
+        }
+    }
+
     ngOnDestroy(): void {
         this.productService.productToEdit = null;
         this.productService.ne = false;

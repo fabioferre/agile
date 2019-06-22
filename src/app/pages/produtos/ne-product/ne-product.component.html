@@ -218,17 +218,20 @@
                                 </div>
                             </div>
 
-                            <div class="form-row mt-3">
-                                <div class="col-lg-12 my-5">
+                            <div class="form-row mt-5" *ngIf="hasCollection > 0">
+                                <div class="col-lg-12">
+                                     <h4>Coleção de produtos</h4>
+                                </div>
+                                <div class="col-lg-6 pt-4">
                                     <mat-form-field class="full-width">
                                         <input matInput 
-                                        placeholder="Pesquisar item (digite o nome de seu produto)" 
-                                        aria-label="State" 
+                                        placeholder="Pesquisar item (digite o nome de um produto)" 
+                                        aria-label="products" 
                                         [matAutocomplete]="auto" 
                                         formControlName="productsCtrl">
                                         <mat-autocomplete #auto="matAutocomplete">
                                             <mat-option *ngFor="let product of filteredProduct | async" 
-                                            [value]="product.name" (click)="selectItem(product)">
+                                            [value]="product.name" (click)="toggleItem(product)">
                                                 <!-- <img class="example-option-img" aria-hidden [src]="state.flag" height="25"> -->
                                                 <span>{{ product.name }}</span> 
                                             </mat-option>
@@ -239,12 +242,29 @@
                                     </mat-form-field>
                                 </div>
 
-                                <div class="col-lg">
-                                    <mat-list role="list">
-                                        <mat-list-item role="listitem">
-                                            Item 1
-                                            <span>
-                                                i
+                                <div class="col-lg-6" >
+                                    <mat-list role="list" class="collection-list">
+                                        <mat-list-item role="listitem" class="item text-center" *ngIf="items.length < 1" >
+                                            Lista de itens
+                                        </mat-list-item>
+                                        <mat-list-item role="listitem" class="item" *ngFor="let item of items">
+                                            <div class="d-inline-block text-truncate item-name">
+                                                {{ item.name }}
+                                            </div>
+                                            <div class="control-item mx-auto">
+                                                <a href="javascript:void(0)" class="float-left text-danger" (click)="lessItem(item)">
+                                                   <i class="fas fa-minus-circle"></i>
+                                                </a>
+                                                <span class="badge badge-primary mx-5">
+                                                   {{ item.qtd }}
+                                                </span>
+                                                <a href="javascript:void(0)" class="float-tight" (click)="plusItem(item)">
+                                                    <i class="fas fa-plus-circle"></i>
+                                                </a>
+                                            </div>
+                                            <span class="remove-item link-element" 
+                                            (click)="toggleItem(item, true)">
+                                                &times;
                                             </span>
                                         </mat-list-item>
                                     </mat-list>

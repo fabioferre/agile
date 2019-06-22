@@ -65,6 +65,8 @@ export class HomeService extends Model {
         }
     }
 
+   
+
     public getTotalSale(product) {
         return product.sale_price * product.qtd;
     }

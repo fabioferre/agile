@@ -132,7 +132,7 @@ export class HomeService extends Model {
         let productToSend = {id:null, sale_price: 0, name: '', custom: true, qtd: 1, stock: false, fractioned: null, collection:null };
      
         for(const product of this.buildedProducts) {
-            productToSend.name += product.name + ' ½ ';
+            productToSend.name += product.name + ' 1/2 ';
             
             if(product.sale_price > productToSend.sale_price) {
                 productToSend.id = product.id;

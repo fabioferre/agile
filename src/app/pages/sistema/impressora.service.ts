@@ -31,7 +31,7 @@ export class ImpressoraService extends Model {
 
   printer(request) {
     let dado = {
-      "order": request.id,
+      "order": request.number,
       "total": request.total,
       "type": request.type,
       "freight": request.freight,

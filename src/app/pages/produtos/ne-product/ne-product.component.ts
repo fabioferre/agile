@@ -24,13 +24,13 @@ export class NeProductComponent implements OnInit {
         category_id: [''],
         weight: [''],
         weight_type: [''],
-        sale: [''],
+        sale: [false],
         cost_price: [''],
         sale_price: [''],
-        stock: [''],
-        units: [''],
-        minimum_units: [''],
-        maximum_units: [''],
+        stock: [false],
+        units: [1],
+        minimum_units: [1],
+        maximum_units: [1],
         code: [''],
         description: [''],
         brand: [''],
@@ -63,10 +63,11 @@ export class NeProductComponent implements OnInit {
     ngOnInit() {
         this.productService.checkNE();
         if (this.productService.productToEdit) {
+            this.items = JSON.parse(this.productService.productToEdit.items)
             this.form.patchValue(this.productService.productToEdit);
-            console.log(this.form)
         }
 
+        
         if (this.isFractioned) {
             this.form.controls.collection.disable()
         } else {
@@ -126,8 +127,10 @@ export class NeProductComponent implements OnInit {
     public save() {
         if(this.hasCollection > 0)
         {
-            this.form.controls.items.setValue(this.items);
+            this.form.controls.items.setValue(JSON.stringify(this.items));
         }
+
+        
         this.productService.create(this.form.value)
             .subscribe((product) => {
                 if (product) {
@@ -140,6 +143,10 @@ export class NeProductComponent implements OnInit {
     }
 
     public update() {
+        if(this.hasCollection > 0)
+        {
+            this.form.controls.items.setValue(JSON.stringify(this.items));
+        }
         this.productService.updateById(this.productService.productToEdit.id, this.form.value)
         .subscribe((product) => {
             if (product) {

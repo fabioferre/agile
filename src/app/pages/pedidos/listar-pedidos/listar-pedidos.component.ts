@@ -14,7 +14,7 @@ import { Controller } from 'src/app/service/controller';
     styleUrls: ['./listar-pedidos.component.scss'],
 })
 export class ListarPedidosComponent extends Controller implements OnInit {
-    public displayedColumns: string[] = ['status','created_at', 'id', 'type', 'total', 'action'];
+    public displayedColumns: string[] = ['status','created_at', 'number', 'type', 'total', 'action'];
     
     @ViewChild(MatSort) sort: MatSort;
 

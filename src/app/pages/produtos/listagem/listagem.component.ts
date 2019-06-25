@@ -11,7 +11,7 @@ import { Controller } from '../../../service/controller';
     styleUrls: ['./listagem.component.scss'],
 })
 export class ListagemComponent  extends Controller implements OnInit {
-    public displayedColumns = ['id', 'image', 'name', 'sale_price', 'category', 'unity', 'action'];
+    public displayedColumns = ['number', 'image', 'name', 'sale_price', 'category', 'unity', 'action'];
 
     @ViewChild(MatSort) sort: MatSort;
 

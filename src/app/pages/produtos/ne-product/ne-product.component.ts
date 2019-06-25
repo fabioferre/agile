@@ -63,7 +63,9 @@ export class NeProductComponent implements OnInit {
     ngOnInit() {
         this.productService.checkNE();
         if (this.productService.productToEdit) {
-            this.items = JSON.parse(this.productService.productToEdit.items)
+            if(this.productService.productToEdit.items) {
+                this.items = JSON.parse(this.productService.productToEdit.items)
+            }
             this.form.patchValue(this.productService.productToEdit);
         }
 

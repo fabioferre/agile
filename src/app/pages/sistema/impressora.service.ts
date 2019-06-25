@@ -42,7 +42,7 @@ export class ImpressoraService extends Model {
     }
 
 
-    this.create(dado).subscribe();
+    this.createNoLoad(dado).subscribe();
   }
 
   printerStatement(params) {

@@ -96,6 +96,13 @@ export default class Model {
         )
     }
 
+    public createNoLoad(params): Observable<any>  {
+
+        return this.http.post<any>(`${this.urlApi}/${this.url}`, params).pipe(
+            catchError(error => of( this.helper.message(error)))
+        )
+    }
+
     public deleteById(id): Observable<any> {
         this.load();
         return this.http.delete<any>(`${this.urlApi}/${this.url}/${id}`).pipe(

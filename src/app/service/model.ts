@@ -108,7 +108,6 @@ export default class Model {
         return this.http.delete<any>(`${this.urlApi}/${this.url}/${id}`).pipe(
             retry(1),
             finalize(() => {
-                this.isLoading = false;
                 this.helper.load(false);
                 this.helper.message("Efetuado com sucesso")
               
@@ -119,14 +118,15 @@ export default class Model {
 
     private load(){
         this.isLoading = true;
-        const load =  this.helper.load().then();
-        load.then(a => {
-          a.present().then(() => {
-            if (!this.isLoading) {
-              a.dismiss().then();
-            }
-          });
-        });
+        this.helper.load()
+        // const load =  this.helper.load().then();
+        // load.then(a => {
+        //   a.present().then(() => {
+        //     if (!this.isLoading) {
+        //       a.dismiss().then();
+        //     }
+        //   });
+        // });
     }
 
 

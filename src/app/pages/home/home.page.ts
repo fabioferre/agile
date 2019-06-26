@@ -21,7 +21,7 @@ export class HomePage implements OnInit, OnDestroy {
 
     ngOnInit() {
         
-        this.helper.load(true);
+        this.helper.load();
         this.homeService.productAlert = false;
         this.productService.get({
             filter: [ 
@@ -32,7 +32,7 @@ export class HomePage implements OnInit, OnDestroy {
             this.products.map(product => {
                 product.qtd = 1;
             })
-            this.helper.loadDismiss();
+            this.helper.load(false);
         });
        
     }

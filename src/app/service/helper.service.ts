@@ -55,26 +55,26 @@ export class HelperService {
 
     }
 
-   load(status?) {
+    async load(status?) {
         if (status === false) {
-            // this.loading.dismiss();
+            this.loading.dismiss();
             this.isLoading = false;
         } else {
             this.isLoading = true;
-            // let loading = await this.loading.create({
-            //     duration: 5000,
-            // });
+            let loading = await this.loading.create({
+                duration: 5000,
+            });
 
-            // return await loading;
+            return await loading;
 
         }
 
 
     }
 
-    loadDismiss() {
+    async  loadDismiss() {
         this.isLoading = false;
-        // await this.loading.dismiss();
+        await this.loading.dismiss();
     }
 
     async modalDismiss(status?, then?) {

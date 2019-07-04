@@ -41,11 +41,7 @@ export class MostraPedidoComponent implements OnInit, OnDestroy {
     }
 
     public prepareTofinalize() {
-        if(this.order.form_payment) {
-            this.finalize();
-        } else {
-            this.showPayment();
-        }
+        this.showPayment();
     }
 
     finalize() {

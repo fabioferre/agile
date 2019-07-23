@@ -33,19 +33,15 @@ export class MostraPedidoComponent implements OnInit, OnDestroy {
             this.routerActive.params.subscribe(parans => {
                 this.orderService.getById(parans.id).subscribe(order => {
                     this.order = order;
-                })
-            })
+                });
+            });
         } else {
             this.order = this.orderService.orderToFinalize;
         }
     }
 
     public prepareTofinalize() {
-        if(this.order.form_payment) {
-            this.finalize();
-        } else {
-            this.showPayment();
-        }
+        this.showPayment();
     }
 
     finalize() {

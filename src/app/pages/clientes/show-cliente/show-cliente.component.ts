@@ -84,9 +84,9 @@ export class ShowClienteComponent implements OnInit, OnDestroy {
 
 
   movement() {
-    this.clientesService.movement(this.clientesService.clientToShow.account.id, this.form).subscribe((response) => {
+    this.clientesService.movement(this.clientesService.clientToShow.id, this.form).subscribe((response) => {
 
-      this.clientesService.clientToShow.account.amount = response.amount;
+      this.clientesService.clientToShow.amount = response.amount;
     });
   }
 

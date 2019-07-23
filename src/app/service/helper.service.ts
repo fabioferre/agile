@@ -87,16 +87,29 @@ export class HelperService {
 
     }
 
-    date(data?, more?) {
+    date(data?, more?, formatter?) {
+ 
+
         let date = new Date()
         let format;
-        if (data) {
+        if ((data) && (!formatter)){
+          
             format = new Date(data).toISOString();
             this.format = format.split("T")[0];
             let hours = date.getHours() + data;
             let min = (date.getMinutes() < 10 ? '0' : '') + date.getMinutes();
             this.hours = hours + ":" + min;
+         
         } else {
+            if(formatter == "/"){
+                data =  data.split("-");
+                return data = data[2]+"/"+ data[1]+"/"+ data[0]
+               
+             }
+             if(formatter == "-"){
+                 data =  data.split("/");
+                 return data = data[2]+"-"+ data[1]+"-"+ data[0]
+             }
             format = new Date().toISOString();
 
             if (more) {
@@ -127,6 +140,8 @@ export class HelperService {
 
 
         }
+
+ 
 
         return this;
     }

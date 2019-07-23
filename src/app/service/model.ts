@@ -8,12 +8,29 @@ import { async } from 'q';
 
 export default class Model {
     isLoading = false;
+    public elementToedit;
+    public ne = false;
     protected url;
-    protected urlApi = 'http://tagmus.com.br//api';
+    // protected urlApi = 'http://tagmus/api';
+    protected urlApi = 'http://www.tagmus.com.br/api';
     constructor(
         protected http: HttpClient,
         protected helper: HelperService) {
 
+    }
+
+    public checkNE(): void {
+        if(!this.ne) {
+            window.history.go(-1);
+        }
+    }
+
+    public activeNE(elementToedit?): void {
+        this.ne= true;
+        if(elementToedit !== undefined) {
+            this.elementToedit = elementToedit;
+           
+        }
     }
 
     public get(parans: any = ''): Observable<any> {
@@ -21,7 +38,7 @@ export default class Model {
      
         let urlParans = '';
         $.each(parans, function(e,i){
-            urlParans = `${urlParans}${e}=&${JSON.stringify(i)}`;
+            urlParans = `${urlParans}&${e}=${JSON.stringify(i)}`;
         });
 
         return this.http.get<any>(`${this.urlApi}/${this.url}?${urlParans}`).pipe(
@@ -75,6 +92,13 @@ export default class Model {
                 this.isLoading = false;
                 this.helper.load(false);
             }),
+            catchError(error => of( this.helper.message(error)))
+        )
+    }
+
+    public createNoLoad(params): Observable<any>  {
+
+        return this.http.post<any>(`${this.urlApi}/${this.url}`, params).pipe(
             catchError(error => of( this.helper.message(error)))
         )
     }

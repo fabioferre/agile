@@ -20,7 +20,6 @@ export class PainelPedidoComponent implements OnInit {
         products: [[], Validators.required],
         client_id: [null],
         table_id: [null],
-        form_payment: [''],
         description: [''],
         type: [1]
     });
@@ -109,78 +108,31 @@ export class PainelPedidoComponent implements OnInit {
             }, 100);
 
         } else if (this.form.value.type === 1 || this.form.value.type === 2) {
-            this.showPayment();
+                this.storeOrder();
+    
             this.homeService.productAlert = false;
         } else {
             this.storeOrder();
         }
     }
-    async showPayment() {
 
-        const alert = await this.alertCtrl.create({
-            header: 'Forma de pagamento',
-            inputs: [
-                {
-                    name: 'form_payment',
-                    type: 'radio',
-                    label: 'Dinheiro',
-                    value: 'dinheiro'
-                },
-                {
-                    name: 'form_payment',
-                    type: 'radio',
-                    label: 'Credito',
-                    value: 'credito'
-                },
-                {
-                    name: 'form_payment',
-                    type: 'radio',
-                    label: 'Debito',
-                    value: 'debito'
-                },
-                {
-                    name: 'form_payment',
-                    type: 'radio',
-                    label: 'Conta cliente',
-                    value: 'wallet'
-                },
-            ],
-            buttons: [
-                {
-                    text: 'cancelar',
-                    handler: () => {
-
-                    }
-                },
-                {
-                    text: 'Pagar',
-                    cssClass: 'success',
-                    handler: (form_payment) => {
-                        if (form_payment) {
-                            this.form.controls.form_payment.setValue(form_payment)
-                            this.storeOrder();
-                        } else {
-                            this.helper.message('Selecione um produto!','warning');
-                        }
-                    }
-                }
-            ]
-        });
-
-        return await alert.present();
-    }
 
 
     public storeOrder() {
         this.homeService.create(this.form.value).subscribe((response) => {
-            console.log(response)
-            this.homeService.removeProducUnits(this.form.value.products);
-            this.homeService.clearPainel();
-            this.changeActive(1);
-            this.helper.message("Pedido efetuado");
-            if(this.impressora.printer_options.create){
-                this.impressora.printer(response);
+            if(response){
+                this.msgOrder(response.warning);
+                this.homeService.removeProducUnits(this.form.value.products);
+                this.homeService.clearPainel();
+                this.changeActive(1);
+                this.helper.message("Pedido efetuado");
+                console.log(response)
+
+                if(this.impressora.printer_options.create){
+                    this.impressora.printer(response);
+                }
             }
+
           
         });
     }
@@ -192,13 +144,31 @@ export class PainelPedidoComponent implements OnInit {
             this.homeService.clearPainel();
             this.changeActive(1);
             this.helper.message("Pedido acrescentado");
-            if(this.impressora.printer_options.update){
-                this.impressora.printer(response);
-            }
         });
     }
 
+   async msgOrder(response){
+        if(response){
+            
+            response.forEach(async (element) => {
+                const alert = await this.alertCtrl.create({
+                    header: 'Aviso',
+                    message: element,
+                    buttons: [
+                        {
+                            text: 'Ok',
+                            cssClass: 'success',
+                        }
+                    ]
+                });
+        
+                return await alert.present();
 
+            });
+
+        }
+
+    }
 
 }
 

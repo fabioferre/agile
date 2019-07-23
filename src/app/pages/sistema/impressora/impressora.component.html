@@ -1,88 +1,158 @@
-<header class="content__title">
-    <h1>Configurar impressora</h1>
-    <button type="button" class="btn btn-success btn-add" (click)="printer()">
-        <i class="fas fa-print fa-2x"></i>
-    </button>
-</header>
-
-
-<div class="row mx-0">
-    <div class="col-lg-8 mx-auto">
-        <div class="card">
-            <form [formGroup]="form" (submit)="setOptions()">
-                <div class="card-body">
-                    <div class="row ">
-                        <div class="col-lg-12">
-                            <div class="form-group">
-                                <label>Nome da Loja</label>
-                                <input type="text" class="form-control" formControlName="company_name">
-                                <i class="form-group__bar"></i>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label>Taxa de serviço</label>
-                                <input type="text" class="form-control" placeholder="R$ 1.00"
-                                    formControlName="rate_service">
-                                <i class="form-group__bar"></i>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label>Copias</label>
-                                <input type="text" class="form-control" placeholder="Ex: 1, 2" formControlName="copy">
-                                <i class="form-group__bar"></i>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6 pt-4">
-                            <mat-form-field class="w-100">
-                                <mat-label>Impressora</mat-label>
-                                <mat-select formControlName="default">
-                                    <mat-option *ngFor="let printer of impressora.printers" [value]="printer.name">
-                                        {{ printer.name }}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>Tamanho da fonte</label>
-                                <input type="text" class="form-control" placeholder="12" maxlength="3"
-                                    formControlName="font_size">
-                                <i class="form-group__bar"></i>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 text-center pt-3">
-                            <mat-slide-toggle class="mat-primary" formControlName="create">
-                               criação do pedido ? 
-                            </mat-slide-toggle>
-                        </div>
-                        <div class="col-lg-4 text-center pt-3">
-                            <mat-slide-toggle class="mat-primary" formControlName="update">
-                               atualização do pedido ?
-                            </mat-slide-toggle>
-                        </div>
-                        <div class="col-lg-4 text-center pt-3">
-                            <mat-slide-toggle class="mat-primary" formControlName="close">
-                                fechamento do pedido ?
-                            </mat-slide-toggle>
-                        </div>
-                    </div>
-
-                    <div class="clearfix"></div>
-
-                    <div class="mt-5 text-center">
-                        <button type="submit" class="btn btn-primary" [disabled]="!form.valid">
-                            Salvar
-                        </button>
-                        <a href="javascript:history.go(-1)" class="btn btn-secondary ml-4">
-                            Voltar
-                        </a>
-                    </div>
-                </div>
-            </form>
+<form action="" [formGroup]="form" class="px-5">
+    <header class="content__title">
+        <h1>Configurações</h1>
+        <div class="actions position-absolute" style="right: 10px; top:0">
+            <button type="button" class="btn btn-primary  px-4 " (click)="save()">
+                Salvar
+            </button>
+            <a href="javascript:history.go(-1)" class="btn btn-secondary  px-4 ml-4">
+                Cancelar
+            </a>
         </div>
-    </div>
-</div>
+    </header>
+    <mat-tab-group>
+        <mat-tab label="Gerais">
+            <ng-template matTabContent>
+                <div class="pt-5">
+                    <mat-card class="p-5">
+                        <mat-card-content>
+                            <div class="form-row">
+                                <div class="col-lg-12 py-4">
+                                    <h4>Quando Imprimir</h4>
+                                    <br>
+                                    <mat-slide-toggle formControlName="create" color="primary" class="mr-3">
+                                        Criação do pedido
+                                    </mat-slide-toggle>
+
+                                    <mat-slide-toggle formControlName="close" color="primary">
+                                        Fechamento de pedido
+                                    </mat-slide-toggle>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <mat-form-field class="full-width">
+                                                <mat-label>Impressora</mat-label>
+                                                <mat-select formControlName="default" required>
+                                                    <mat-option *ngFor="let printer of  impressora.printers"
+                                                        [value]="printer.name">
+                                                        {{ printer.name }}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <mat-form-field class="full-width">
+                                                <mat-label>Tamanho da Fonte</mat-label>
+                                                <mat-select formControlName="font_size">
+                                                    <mat-option [value]="1">01</mat-option>
+                                                    <mat-option [value]="2">02</mat-option>
+                                                    <mat-option [value]="3">03</mat-option>
+                                                    <mat-option [value]="4">04</mat-option>
+                                                    <mat-option [value]="5">05</mat-option>
+                                                    <mat-option [value]="6">06</mat-option>
+                                                    <mat-option [value]="7">07</mat-option>
+                                                    <mat-option [value]="10">10</mat-option>
+                                                    <mat-option [value]="12">12</mat-option>
+                                                    <mat-option [value]="14">14</mat-option>
+                                                    <mat-option [value]="14">14</mat-option>
+                                                    <mat-option [value]="16">16</mat-option>
+                                                    <mat-option [value]="18">18</mat-option>
+                                                    <mat-option [value]="20">20</mat-option>
+                                                    <mat-option [value]="30">30</mat-option>
+                                                    <mat-option [value]="38">38</mat-option>
+
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-lg-12">
+                                                <mat-form-field class="full-width">
+                                                    <input matInput placeholder="taxa de serviço"
+                                                        formControlName="rate_service" >
+                                                </mat-form-field>
+                                            </div>
+    
+                                    </div>
+                                </div>
+                                <div class="col-md-6 ml-auto">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <mat-form-field class="full-width">
+                                                <input matInput placeholder="Nome da loja"
+                                                    formControlName="company_name" required>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-lg-12">
+                                            <mat-form-field class="full-width">
+                                                <input matInput placeholder="CNPJ" type="text"
+                                                    formControlName="company_cnpj">
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-lg-12">
+                                            <mat-form-field class="full-width">
+                                                <input matInput placeholder="Contato" type="text"
+                                                    formControlName="company_phone">
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </ng-template>
+        </mat-tab>
+
+        <mat-tab label="Opcionais">
+            <ng-template matTabContent>
+                <div class="pt-5">
+                    <mat-card class="p-5">
+                        <mat-card-content>
+                            <div class="form-row ">
+                                <div class="col-lg-6">
+                                    <mat-slide-toggle formControlName="master" color="primary">
+                                        Primeira via?
+                                    </mat-slide-toggle>
+                                </div>
+                                <div class="col-lg-6" [ngClass]="{'disabled': !master}">
+                                    <mat-form-field class="full-width">
+                                        <input matInput placeholder="Copias de primeira via" type="text"
+                                            formControlName="copy_master">
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <mat-slide-toggle formControlName="delivery" color="primary">
+                                        Impressão para entrega?
+                                    </mat-slide-toggle>
+                                </div>
+                                <div class="col-lg-6" [ngClass]="{'disabled': !delivery}">
+                                    <mat-form-field class="full-width">
+                                        <input matInput placeholder="Copias de entrega" type="text"
+                                            formControlName="copy_delivery">
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <mat-slide-toggle formControlName="prepare" color="primary">
+                                        Impressão para preparo?
+                                    </mat-slide-toggle>
+                                </div>
+                                <div class="col-lg-6" [ngClass]="{'disabled': !prepare}">
+                                    <mat-form-field class="full-width">
+                                        <input matInput placeholder="Copias para preparo" type="text"
+                                            formControlName="copy_prepare">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </ng-template>
+        </mat-tab>
+    </mat-tab-group>
+
+</form>

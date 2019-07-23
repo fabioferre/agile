@@ -43,7 +43,7 @@
 
             <tbody>
                 <tr *ngFor="let product of homeService.productSelected">
-                    <td>{{ product.name }}</td>
+                    <td class="text-truncate d-inline-block" style="max-width: 66px;">{{ product.name }}</td>
                     <td>
                         {{  product.qtd }}
                         <a href="javascript:void(0)" 
@@ -63,7 +63,8 @@
                     <td> {{ homeService.getTotalSale(product ) | currency:'BRL':'R$':'1.2-2'}} </td>
                     <td>
                         <a href="javascript:void(0)" 
-                        (click)="homeService.removeProductSelected(product); homeService.selection.toggle(product) " 
+                        *ngIf="!homeService.buildingProduct"
+                        (click)="homeService.removeProductSelected(product); homeService.selection.deselect(product) " 
                         class="d-block text-center text-dark">
                             <i class="fas fa-times"></i>
                         </a>

@@ -14,7 +14,7 @@ import { Controller } from 'src/app/service/controller';
     styleUrls: ['./listar-pedidos.component.scss'],
 })
 export class ListarPedidosComponent extends Controller implements OnInit {
-    public displayedColumns: string[] = ['status','created_at', 'id', 'type', 'total', 'action'];
+    public displayedColumns: string[] = ['status','created_at', 'number', 'type', 'total', 'action'];
     
     @ViewChild(MatSort) sort: MatSort;
 
@@ -27,8 +27,7 @@ export class ListarPedidosComponent extends Controller implements OnInit {
     ) { super(alertCtrl) }
 
     ngOnInit() {
-        let date = this.helper.date(null, "-1 day")
-        console.log(date)
+        let date = this.helper.date(null, "-2 day")
         this.orderService.dataSource.sort = this.sort;
         this.orderService.get({
             status:1,
@@ -57,6 +56,7 @@ export class ListarPedidosComponent extends Controller implements OnInit {
     }
 
     public finalize(order) {
+    
         this.orderService.orderToFinalize = order;
     }
 
@@ -66,6 +66,7 @@ export class ListarPedidosComponent extends Controller implements OnInit {
         const modal = await this.modalCtrl.create({
             component: ModalMotoboyComponent
         });
+     
         return await modal.present();
     }
 }

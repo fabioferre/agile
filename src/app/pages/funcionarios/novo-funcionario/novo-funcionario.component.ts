@@ -50,6 +50,7 @@ export class NovoFuncionarioComponent implements OnInit {
  
   public submit(): void {
     if (this.form.valid) {
+      console.log(this.form.value)
       this.funcionariosService.create(this.form.value)
         .subscribe(( funcionarios) => {
           if(funcionarios){

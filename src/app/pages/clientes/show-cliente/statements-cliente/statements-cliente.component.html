@@ -1,12 +1,44 @@
-<div class="card  responsive-table" *ngIf="statements">
+<form [formGroup]="form" (submit)="getStatement()">
+<div class="card">
+    <div class="row m-1">
+                  <div class="col-5">
+                  <div class="form-group">
+                      <label>Inicio</label>
+                      <input type="text" class="form-control" placeholder="00/00/0000" formControlName="start"
+                          [brmasker]="{form: form.get('start'), mask:'00/00/0000'}">
+                      <i class="form-group__bar"></i>
+                  </div>
+              </div>
+                <div class="col-5">
+                  <div class="form-group">
+                      <label>Termino</label>
+                      <input type="text" class="form-control" placeholder="00/00/0000" formControlName="end" 
+                          [brmasker]="{form: form.get('end'), mask:'00/00/0000'}">
+                      <i class="form-group__bar"></i>
+                  </div>
+              </div>
+        
+        <div class="col-2 pt-3">
+            <button type="submit" class="btn btn-success btn-default" [disabled]="form.invalid">
+                <i class="fas fa-search fa-1x"></i> Filtrar
+            </button>
+
+        </div>
+
+
+    </div>
+
+</div>
+</form>
+<div class="card  responsive-table" >
     <div class="card-body ">
-            <div class="actions">
-                    <button type="button" class="btn btn-success bg-theme" (click)="printer()">
-                        <i class="fas fa-print fa-1x"></i>
-                    </button>
-                </div>
+        <div class="actions">
+            <button type="button" class="btn btn-success bg-theme" (click)="printer()">
+                <i class="fas fa-print fa-1x"></i>
+            </button>
+        </div>
         <mat-form-field class="w-100">
- 
+
             <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro">
         </mat-form-field>
         <div class="mat-elevation-z8 ">

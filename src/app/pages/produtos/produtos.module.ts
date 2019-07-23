@@ -21,11 +21,12 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatCardModule} from '@angular/material/card';
-
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatListModule} from '@angular/material/list';
 //service
 import { ProdutoService } from './produto.service';
 import { CategoriasService } from './categorias.service';
-import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material';
+import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher, MatChipsModule, MatIconModule } from '@angular/material';
 
 
 const routes: Routes = [
@@ -76,7 +77,10 @@ const routes: Routes = [
         MatTabsModule,
         MatCardModule,
         BrMaskerModule,
-        CKEditorModule
+        CKEditorModule,
+        MatIconModule,
+        MatAutocompleteModule,
+        MatListModule
     ],
     declarations: [
         ProdutosPage,

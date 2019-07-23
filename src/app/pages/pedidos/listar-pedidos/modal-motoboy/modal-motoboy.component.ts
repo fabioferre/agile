@@ -54,6 +54,7 @@ export class ModalMotoboyComponent implements OnInit {
     public selectMotoboy(motoboy) {
         this.orderService.orderToFinalize.motoboy_id = motoboy.id;
         this.modalCrl.dismiss();
+    
         this.orderService.changeStatus( this.orderService.orderToFinalize ).subscribe(response => {
             let idx = this.orderService.dataSource.data.indexOf(this.orderService.orderToFinalize);
             this.orderService.dataSource.data[idx] = response;

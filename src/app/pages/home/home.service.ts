@@ -18,6 +18,9 @@ export class HomeService extends Model {
     public loadOrders: boolean;
     public freight: number;
 
+    public buildingProduct: boolean;
+    public buildedProducts: any = [];
+    public finalProductBuilded: any;
     constructor(
          http: HttpClient,
          helper: HelperService
@@ -34,7 +37,8 @@ export class HomeService extends Model {
   
 
     public removeProductSelected(product): void {
-        this.productSelected.splice(this.productSelected.indexOf(product), 1)
+        this.productSelected.splice(this.productSelected.indexOf(product), 1);
+ 
     }
 
 
@@ -61,6 +65,8 @@ export class HomeService extends Model {
         }
     }
 
+   
+
     public getTotalSale(product) {
         return product.sale_price * product.qtd;
     }
@@ -72,6 +78,10 @@ export class HomeService extends Model {
                 this.productSelected[idx].units -= product.qtd;
             }
         }
+
+        this.productSelected.map((product) => {
+            this.selection.deselect(product);
+        });
     }
 
     public clearPainel(removeProducts = true): void {
@@ -94,5 +104,47 @@ export class HomeService extends Model {
     }
     
 
+
+    public toggleBuild() {
+        this.buildedProducts.forEach((product) => this.selection.deselect(product));
+        this.productSelected.forEach((product) => this.selection.deselect(product));
+        if(this.buildingProduct) {
+            this.buildingProduct = false;
+            this.buildedProducts = [];
+            this.productSelected.forEach((product) => this.selection.select(product));
+        } else {
+            this.buildingProduct = true;
+        }
+    }
+
+  
+    public toggleProductBuilded(product) {
+        const idx = this.buildedProducts.indexOf(product);
+        if(idx < 0) {
+            this.buildedProducts.push(product);
+        } else {
+            this.buildedProducts.splice(idx, 1);
+        }
+    }
+
+
+    public finalizeBuild() {
+        let productToSend = {id:null, sale_price: 0, name: '', custom: true, qtd: 1, stock: false, fractioned: null, collection:null };
+     
+        for(const product of this.buildedProducts) {
+            productToSend.name += product.name + ' 1/2 ';
+            
+            if(product.sale_price > productToSend.sale_price) {
+                productToSend.id = product.id;
+                productToSend.sale_price = product.sale_price;
+            }
+           
+        }
+       
+        this.productSelected.push( productToSend);
+        this.toggleBuild();
+    }
+
+    
 
 }

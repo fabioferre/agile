@@ -14,6 +14,12 @@ export class Controller {
             this.dataSource.paginator.firstPage();
         }
     }
+
+
+    public updateDataTable(data) {
+        this.dataSource.data = data;
+        this.dataSource._updateChangeSubscription();
+    }
     async alertDelete(element) {
         const alert = await this.alertCtrl.create({
             header: 'Tem certeza?',

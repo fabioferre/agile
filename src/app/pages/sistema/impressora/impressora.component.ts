@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HelperService } from 'src/app/service/helper.service';
 import { Router } from '@angular/router';
 import { ImpressoraService } from '../impressora.service';
+import { async } from '@angular/core/testing';
 
 @Component({
     selector: 'app-impressora',
@@ -11,33 +12,70 @@ import { ImpressoraService } from '../impressora.service';
     styleUrls: ['./impressora.component.scss'],
 })
 export class ImpressoraComponent implements OnInit {
+    status: boolean = false;
+    ip: string = '';
     public printer_options;
     public form: FormGroup = this.fb.group({
-        company_name: ['Teste', [Validators.required, Validators.minLength(2)]],
-        rate_service: [null],
-        copy: [1],
-        font_size: [null],
-        default: [null],
+        company_name: ['', [Validators.required, Validators.minLength(2)]],
+        company_cnpj: ['', [Validators.required, Validators.minLength(2)]],
+        company_phone: ['', [Validators.required, Validators.minLength(2)]],
         create: [null],
-        update: [null],
         close: [null],
-    });
+        default: [null],
+        copy_master: [1],
+        copy_delivery: [1],
+        copy_prepare: [1],
+        font_size: [2],
+        rate_service: [null],
+        master: [true],
+        prepare: [true],
+        delivery: [true]
+     
+    }); 
+    
 
     constructor(
         private fb: FormBuilder,
         private helper: HelperService,
         private router: Router,
         public impressora: ImpressoraService
-
-    ) { }
+    ) {    }
 
     ngOnInit() {
         this.get();
         this.getOptions();
-        console.log( this.getOptions())
+       
     }
 
-    setOptions() {
+    get delivery() {
+        return this.form.value.delivery;
+    }
+
+    get prepare() {
+        return this.form.value.prepare;
+    }
+
+    get master() {
+        return this.form.value.master;
+    }
+
+    public toggleOption() {
+        if(this.form.controls.client.value) {
+            this.form.controls.collection.disable()
+            this.form.controls.collection.setValue(false)
+        } else {
+            this.form.controls.collection.enable()
+        }
+
+        if(this.form.controls.delivery.value) {
+            this.form.controls.fractioned.disable()
+            this.form.controls.fractioned.setValue(false)
+        } else {
+            this.form.controls.fractioned.enable()
+        }
+    }
+
+    save() {
         this.impressora.printer_options = this.form.value;
         this.impressora.setOptions();
         this.helper.message("Alteração efetuada !")
@@ -50,12 +88,15 @@ export class ImpressoraComponent implements OnInit {
     }
 
 
-    getOptions() {
-        this.impressora.getOptions().then(res => {
-            this.printer_options = res;
-            this.form.patchValue(res)
-
+  async getOptions() {
+      return await  this.impressora.getOptions().then( async res => {
+            this.printer_options = await res;
+            this.form.patchValue(res) 
+            console.log( this.printer_options)
+                return await res
         })
+
+    
     }
 
     printer() {

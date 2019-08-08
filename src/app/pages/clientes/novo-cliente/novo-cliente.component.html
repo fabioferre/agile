@@ -16,7 +16,7 @@
                 <div class="col-lg-3">
                     <div class="form-group">
                         <label>Celular</label>
-                        <input type="text" class="form-control" placeholder="(11) 00000-0000" formControlName="cell_phone"
+                        <input type="text" class="form-control" placeholder="(11) 00000-0000" formControlName="cellphone"   [brmasker]="{form: form.get('cellphone'), phone: true}"
                             [brmasker]="{form: form.get('cell_phone'), phone: true}">
                         <i class="form-group__bar"></i>
                     </div>

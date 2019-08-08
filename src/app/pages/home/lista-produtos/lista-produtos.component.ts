@@ -16,7 +16,7 @@ import { HelperService } from 'src/app/service/helper.service';
 })
 export class ListaProdutosComponent extends Controller implements OnInit {
     @Input() public products: any;
-    public displayedColumns: string[] = ['select','id', 'image', 'name', 'unity', 'sale_price'];
+    public displayedColumns: string[] = ['select','id', 'image', 'name', 'unity', 'sale_price', 'category'];
     public selection:any;
     @ViewChild(MatSort) sort: MatSort;
     constructor(

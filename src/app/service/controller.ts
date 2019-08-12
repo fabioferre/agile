@@ -9,6 +9,7 @@ export class Controller {
     }
 
     public applyFilter(filterValue: string) {
+        // console.log(this.dataSource)
         this.dataSource.filter = filterValue.trim().toLowerCase();
         if (this.dataSource.paginator) {
             this.dataSource.paginator.firstPage();
@@ -20,6 +21,7 @@ export class Controller {
         this.dataSource.data = data;
         this.dataSource._updateChangeSubscription();
     }
+
     async alertDelete(element) {
         const alert = await this.alertCtrl.create({
             header: 'Tem certeza?',

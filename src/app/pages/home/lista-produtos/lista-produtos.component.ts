@@ -27,9 +27,9 @@ export class ListaProdutosComponent extends Controller implements OnInit {
     ) { super(alertCtrl); }
 
     ngOnInit() {
-        this.updateDataTable(this.products);
         this.dataSource.sort = this.sort;
         this.selection = this.homeService.selection;
+        this.updateDataTable(this.products);
     }
 
     /** Whether the number of selected elements matches the total number of rows. */

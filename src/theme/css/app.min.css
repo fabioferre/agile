@@ -12028,6 +12028,13 @@ textarea {
     
 }
 
+@media (max-width:994px) {
+    .sidebar .user__info {
+        display: block;
+    }
+    
+}
+
 .navigation>li>a,
 .navigation__sub .navigation__active,
 .user {

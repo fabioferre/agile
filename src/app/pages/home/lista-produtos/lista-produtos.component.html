@@ -63,19 +63,23 @@
             <td mat-cell *matCellDef="let element"> {{element.thumb }} </td>
         </ng-container>
 
-        <!-- Name Column -->
+        
+            <!-- Name Column -->
         <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>
             <td mat-cell *matCellDef="let element">
-                {{element.name}}
+                {{ element.name }}
             </td>
         </ng-container>
 
-                <!-- Thumb Column -->
-                <ng-container matColumnDef="category">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Categoria </th>
-                    <td mat-cell *matCellDef="let element"> {{element.category.name }} </td>
-                </ng-container>
+         <!-- Category Column -->
+         <ng-container matColumnDef="category">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Categoria </th>
+            <td mat-cell *matCellDef="let element" class="text-lowercase">
+                {{ element.category.name  }}
+            </td>
+        </ng-container>
+  
 
         <!-- units Column -->
         <ng-container matColumnDef="unity">

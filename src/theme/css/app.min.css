@@ -12044,8 +12044,29 @@ textarea {
     }
     .sidebar:not(.toggled) {
         opacity:1;
-        -webkit-transform: translate3d(-50%, 0, 0);
+        -webkit-transform: translate3d(-70%, 0, 0);
         transform: translate3d(-70%, 0, 0)
+    }
+    .sidebar.toggled {
+        box-shadow: 5px 0 10px rgba(0, 0, 0, .08);
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0)
+    }
+}
+
+@media (max-width:994px) {
+    .sidebar {
+        background-color: #FFF;
+        padding:102px 0 .5rem;
+        transition: opacity .3s, -webkit-transform .3s;
+        transition: transform .3s, opacity .3s;
+        transition: transform .3s, opacity .3s, -webkit-transform .3s;
+    }
+    .sidebar:not(.toggled) {
+        opacity:0;
+        -webkit-transform: translate3d(-100%, 0, 0);
+        transform: translate3d(-100%, 0, 0)
     }
     .sidebar.toggled {
         box-shadow: 5px 0 10px rgba(0, 0, 0, .08);
@@ -12168,6 +12189,24 @@ textarea {
 
     .navigation li a span {
        display: none;
+    }
+    .navigation li a span.text-truncate {
+        display: inline-block;
+        max-width: 7ch;
+    }
+    .content.content-main {
+        max-width: 94%;
+        margin-left: auto
+    }
+}
+@media (max-width:994px) {
+    .navigation li a {
+        width: 90%;
+        margin-left: auto;
+    }
+
+    .navigation li a span {
+       display: inline-block;
     }
     .navigation li a span.text-truncate {
         display: inline-block;

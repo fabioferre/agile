@@ -4,7 +4,7 @@ import { HomeService } from './../home.service';
 import { Component, OnInit, ViewChild, Input, ChangeDetectorRef } from '@angular/core';
 import { ProdutoService } from '../../produtos/produto.service';
 import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
-import {SelectionModel} from '@angular/cdk/collections';
+import { SelectionModel } from '@angular/cdk/collections';
 import { Router } from '@angular/router';
 import { HelperService } from 'src/app/service/helper.service';
 
@@ -16,15 +16,15 @@ import { HelperService } from 'src/app/service/helper.service';
 })
 export class ListaProdutosComponent extends Controller implements OnInit {
     @Input() public products: any;
-    public displayedColumns: string[] = ['select','id', 'image', 'name', 'unity', 'sale_price', 'category'];
-    public selection:any;
+    public displayedColumns: string[] = ['select', 'id', 'image', 'name', 'category', 'unity', 'sale_price'];
+    public selection: any;
     @ViewChild(MatSort) sort: MatSort;
     constructor(
         public homeService: HomeService,
         private helper: HelperService,
         public alertCtrl: AlertController,
         public modalCtrl: ModalController
-    ) { super(alertCtrl) }
+    ) { super(alertCtrl); }
 
     ngOnInit() {
         this.updateDataTable(this.products);
@@ -36,7 +36,7 @@ export class ListaProdutosComponent extends Controller implements OnInit {
     isAllSelected() {
         const numSelected = this.selection.selected.length;
         const numRows = this.dataSource.data.length;
-     
+
         return numSelected === numRows;
     }
 
@@ -55,34 +55,34 @@ export class ListaProdutosComponent extends Controller implements OnInit {
         return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
     }
 
-  
+
 
     putOrder(product): void {
-        if(!this.homeService.buildingProduct) {
-            if(this.selection.isSelected(product)) {
-                this.homeService.removeProductSelected(product)
+        if (!this.homeService.buildingProduct) {
+            if (this.selection.isSelected(product)) {
+                this.homeService.removeProductSelected(product);
             } else {
-                if(this.verifyStock(product)) {
-                    this.homeService.productSelected.push(product)
+                if (this.verifyStock(product)) {
+                    this.homeService.productSelected.push(product);
                 }
             }
-        } else{
+        } else {
             this.buildProduct(product);
         }
     }
-    
+
 
     public buildProduct(product) {
-        if(this.verifyStock(product)) {
+        if (this.verifyStock(product)) {
             this.homeService.toggleProductBuilded(product);
         }
     }
 
 
     public verifyStock(product) {
-        
-        if(product.units <= 0 && product.stock) {
-            this.helper.message('Produto sem estoque!','warning');
+
+        if (product.units <= 0 && product.stock) {
+            this.helper.message('Produto sem estoque!', 'warning');
             this.selection.toggle(product);
             return false;
         } else {

@@ -22,7 +22,7 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 
 
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
-
+@import '~@angular/cdk/overlay-prebuilt.css';
 
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';
@@ -214,4 +214,16 @@ ion-modal.lg{
 }
 .beauty-scroll::-webkit-scrollbar-thumb {
     background: var(--primary);
+}
+
+
+.loading-overlay {
+    position: fixed;
+    z-index: 10000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba( #000000, 0.2);
+    pointer-events: none;
 }

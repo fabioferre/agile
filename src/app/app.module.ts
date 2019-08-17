@@ -21,23 +21,24 @@ import { HelperService } from './service/helper.service';
 import { ProdutoService } from './pages/produtos/produto.service';
 import { HomeService } from './pages/home/home.service';
 import { MatProgressBarModule } from '@angular/material';
-
+import { OverlayModule } from '@angular/cdk/overlay';
 
 @NgModule({
   declarations: [
-    AppComponent, 
+    AppComponent,
     SidebarComponent,
     HeaderComponent
   ],
   entryComponents: [],
   imports: [
-    BrowserModule, 
+    BrowserModule,
     HttpClientModule,
-    BrowserAnimationsModule, 
-    IonicStorageModule.forRoot({name: '_agile'}),
-    IonicModule.forRoot(), 
+    BrowserAnimationsModule,
+    IonicStorageModule.forRoot({ name: '_agile' }),
+    IonicModule.forRoot(),
     AppRoutingModule,
     MatProgressBarModule,
+    OverlayModule
   ],
   providers: [
     StatusBar,
@@ -50,9 +51,9 @@ import { MatProgressBarModule } from '@angular/material';
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
     {
       provide: LOCALE_ID,
-      useValue: "en-US"
+      useValue: 'en-US'
     }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

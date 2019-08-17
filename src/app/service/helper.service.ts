@@ -28,12 +28,13 @@ export class HelperService {
             this.toast(style, message);
         } else {
             if (message.error) {
-                for (let i in message.error.errors) {
-
-                    this.toast("danger", "Atenção: " + message.error.errors[i]);
+                for ( const i in message.error.errors) {
+                    if (i) {
+                        this.toast('danger', 'Atenção: ' + message.error.errors[i]);
+                    }
                 }
             } else {
-                this.toast("success", message);
+                this.toast('success', message);
             }
 
         }
@@ -41,11 +42,11 @@ export class HelperService {
 
     }
 
-    async toast(status, message) {
+    async toast(status, messageReceived) {
         const toast = await this.toastCtrl.create(
             {
-                message: message,
-                position: "top",
+                message: messageReceived,
+                position: 'top',
                 color: status,
                 duration: 3000,
                 showCloseButton: true
@@ -57,15 +58,18 @@ export class HelperService {
 
     async load(status?) {
         if (status === false) {
-            this.loading.dismiss();
+            // this.loading.dismiss();
             this.isLoading = false;
         } else {
             this.isLoading = true;
-            let loading = await this.loading.create({
-                duration: 5000,
-            });
+            setTimeout(() => {
+                this.isLoading = false;
+            }, 50000);
+            // let loading = await this.loading.create({
+            //     duration: 5000,
+            // });
 
-            return await loading;
+            // return await loading;
 
         }
 
@@ -74,32 +78,31 @@ export class HelperService {
 
     async  loadDismiss() {
         this.isLoading = false;
-        await this.loading.dismiss();
+        // await this.loading.dismiss();
     }
 
     async modalDismiss(status?, then?) {
         if (status) {
             return await this.modalCtrl.dismiss(status);
         } else if (then) {
-            this.modalCtrl.dismiss().then(() => { then });
+            this.modalCtrl.dismiss().then(() => {
+                console.log(then);
+            });
         }
         return await this.modalCtrl.dismiss();
 
     }
 
-    date(data?, more?, formatter?) {
  
-
-        let date = new Date()
+        const date = new Date();
         let format;
         if ((data) && (!formatter)){
           
             format = new Date(data).toISOString();
-            this.format = format.split("T")[0];
-            let hours = date.getHours() + data;
-            let min = (date.getMinutes() < 10 ? '0' : '') + date.getMinutes();
-            this.hours = hours + ":" + min;
-         
+            this.format = format.split('T')[0];
+            const min = (date.getMinutes() < 10 ? '0' : '') + date.getMinutes();
+            const hours = date.getHours() + data;
+            this.hours = hours + ':' + min;
         } else {
             if(formatter == "/"){
                 data =  data.split("-");
@@ -113,30 +116,30 @@ export class HelperService {
             format = new Date().toISOString();
 
             if (more) {
-                let som = format.split("T")[0].split('-');
-                more = more.split(" ")
+                const som = format.split('T')[0].split('-');
+                more = more.split(' ');
 
                 switch (more[1]) {
-                    case "month":
-                        som[1] = parseInt(som[1]) + parseInt(more[0])
+                    case 'month':
+                        som[1] = parseInt(som[1], 11) + parseInt(more[0], 11);
                         som[1] = (som[1] < 10 ? '0' : '') + som[1];
                         break;
 
-                    case "day":
-                        som[2] = parseInt(som[2]) + parseInt(more[0])
+                    case 'day':
+                        som[2] = parseInt(som[2], 11) + parseInt(more[0], 11);
                         som[2] = (som[2] < 10 ? '0' : '') + som[2];
                         break;
 
                     case 'year':
-                        som[0] = parseInt(som[0]) + parseInt(more[0])
+                        som[0] = parseInt(som[0], 11) + parseInt(more[0], 11);
                         som[0] = (som[0] < 10 ? '0' : '') + som[0];
                         break;
                 }
-                return som[0] + "-" + som[1] + "-" + som[2];
+                return som[0] + '-' + som[1] + '-' + som[2];
             }
-            let min = (date.getMinutes() < 10 ? '0' : '') + date.getMinutes();
-            this.hours = new Date().getHours() + ":" + min;
-            return this.today = format.split("T")[0];
+            const min = (date.getMinutes() < 10 ? '0' : '') + date.getMinutes();
+            this.hours = new Date().getHours() + ':' + min;
+            return this.today = format.split('T')[0];
 
 
         }

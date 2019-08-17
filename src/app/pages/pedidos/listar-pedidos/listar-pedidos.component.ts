@@ -14,8 +14,7 @@ import { Controller } from 'src/app/service/controller';
     styleUrls: ['./listar-pedidos.component.scss'],
 })
 export class ListarPedidosComponent extends Controller implements OnInit {
-    public displayedColumns: string[] = ['status','created_at', 'number', 'type', 'total', 'action'];
-    
+    public displayedColumns: string[] = ['status', 'created_at', 'id', 'type', 'total', 'action'];
     @ViewChild(MatSort) sort: MatSort;
 
     constructor(
@@ -24,27 +23,27 @@ export class ListarPedidosComponent extends Controller implements OnInit {
         private helper: HelperService,
         public alertCtrl: AlertController,
         public modalCtrl: ModalController
-    ) { super(alertCtrl) }
+    ) { super(alertCtrl); }
 
     ngOnInit() {
-        let date = this.helper.date(null, "-2 day")
+        const date = this.helper.date(null, '-1 day');
         this.orderService.dataSource.sort = this.sort;
         this.orderService.get({
-            status:1,
+            status: 1,
             filter: [
                 ['created_at', '>=', date]
             ]
         }).subscribe(pedidos => {
             this.orderService.dataSource.data = pedidos;
             this.orderService.dataSource._updateChangeSubscription();
-        })
+        });
     }
 
     public delete(order): void {
-        let orderToChange = order;
+        const orderToChange = order;
         orderToChange.status = 0;
-        this.orderService.changeStatus( orderToChange ).subscribe(response => {
-            let idx = this.orderService.dataSource.data.indexOf(order);
+        this.orderService.changeStatus(orderToChange).subscribe(response => {
+            const idx = this.orderService.dataSource.data.indexOf(order);
             this.orderService.dataSource.data[idx] = response;
             this.orderService.dataSource._updateChangeSubscription();
             this.helper.message(`Pedido ${order.number} cancelado`);

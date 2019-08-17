@@ -11,7 +11,6 @@ export default class Model {
     public elementToedit;
     public ne = false;
     protected url;
-    protected urlApi = 'http://tagmus/api';
     // protected urlApi = 'http://www.tagmus.com.br/api';
     constructor(
         protected http: HttpClient,
@@ -34,22 +33,27 @@ export default class Model {
     }
 
     public get(parans: any = ''): Observable<any> {
-      this.load();
-     
+        this.load();
         let urlParans = '';
-        $.each(parans, function(e,i){
-            urlParans = `${urlParans}&${e}=${JSON.stringify(i)}`;
-        });
+        // $.each(parans, function (e, i) {
+        //     urlParans = `${urlParans}${e}=&${JSON.stringify(i)}`;
+        // });
 
+        for (const i in parans) {
+            if (i) {
+                // console.log(i)
+                urlParans = `${urlParans}&${i}=${JSON.stringify(parans[i])}`;
+            }
+        }
+        console.log(urlParans )
         return this.http.get<any>(`${this.urlApi}/${this.url}?${urlParans}`).pipe(
             retry(10),
             finalize(() => {
                 this.isLoading = false;
                 this.helper.load(false);
             }),
-            catchError(error =>  of( this.helper.message(error)))
+            catchError(error => of(this.helper.message(error)))
         );
-        
 
     }
 
@@ -57,7 +61,7 @@ export default class Model {
 
         return this.http.get<any>(`${this.urlApi}/${this.url}?${parans}`).pipe(
             retry(1),
-            catchError(error => of( this.helper.message(error)))
+            catchError(error => of(this.helper.message(error)))
         );
 
     }
@@ -70,8 +74,8 @@ export default class Model {
                 this.isLoading = false;
                 this.helper.load(false);
             }),
-            catchError(error => of( this.helper.message(error)))
-        )
+            catchError(error => of(this.helper.message(error)))
+        );
     }
 
     public updateById(id, params): Observable<any> {
@@ -81,19 +85,19 @@ export default class Model {
                 this.isLoading = false;
                 this.helper.load(false);
             }),
-            catchError(error => of( this.helper.message(error)))
-        )
+            catchError(error => of(this.helper.message(error)))
+        );
     }
 
-    public create(params): Observable<any>  {
+    public create(params): Observable<any> {
         this.load();
         return this.http.post<any>(`${this.urlApi}/${this.url}`, params).pipe(
             finalize(() => {
                 this.isLoading = false;
                 this.helper.load(false);
             }),
-            catchError(error => of( this.helper.message(error)))
-        )
+            catchError(error =>  of(this.helper.message(error)))
+        );
     }
 
     public createNoLoad(params): Observable<any>  {
@@ -110,23 +114,23 @@ export default class Model {
             finalize(() => {
                 this.isLoading = false;
                 this.helper.load(false);
-                this.helper.message("Efetuado com sucesso")
-              
+                this.helper.message('Efetuado com sucesso');
+
             }),
             catchError(this.handleError)
-        )
+        );
     }
 
-    private load(){
+    private load() {
         this.isLoading = true;
-        const load =  this.helper.load().then();
-        load.then(a => {
-          a.present().then(() => {
-            if (!this.isLoading) {
-              a.dismiss().then();
-            }
-          });
-        });
+        // const load =  this.helper.load().then();
+        // load.then(a => {
+        //   a.present().then(() => {
+        //     if (!this.isLoading) {
+        //       a.dismiss().then();
+        //     }
+        //   });
+        // });
     }
 
 

@@ -103,6 +103,7 @@ const routes: Routes = [
         ListagemComponent,
         CategoriasComponent,
         NeProductComponent,
+        ModalNecategoryComponent,
         InputComponent,
         FluxoComponent
     ],

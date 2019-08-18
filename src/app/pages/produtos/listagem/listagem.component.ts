@@ -22,13 +22,11 @@ export class ListagemComponent  extends Controller implements OnInit {
 
     ngOnInit() {
         this.dataSource.sort = this.sort;
-    
         if (!this.productService.products) {
             this.productService.get().subscribe(products => this.setProducts(products));
         } else {
             this.setProducts(this.productService.products)
         }
-      
     }
 
     public setProducts(products) {
@@ -43,7 +41,6 @@ export class ListagemComponent  extends Controller implements OnInit {
     }
 
 
-    
 
 
     delete(product) {

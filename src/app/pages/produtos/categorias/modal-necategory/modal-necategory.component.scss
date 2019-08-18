@@ -11,6 +11,10 @@
     min-height: 300px;
 }
 
+.complement-list {
+    max-height: 200px;
+    overflow: auto;
+}
 form {
     position: absolute;
     top: 0;

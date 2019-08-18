@@ -39,7 +39,14 @@ export class ListaProdutosComponent extends Controller implements OnInit {
             component: ComplementsModalComponent,
             cssClass: 'sm responsive'
         });
-        modal.dismiss(() => this.homeService.productModal = null);
+        modal.onDidDismiss().then(() => {
+            if (this.homeService.productModal.canAdd) {
+                this.homeService.productSelected.push(this.homeService.productModal);
+            } else {
+                this.homeService.selection.deselect(this.homeService.productModal);
+            }
+            this.homeService.productModal = null;
+        });
         return  await modal.present();
     }
 
@@ -48,8 +55,7 @@ export class ListaProdutosComponent extends Controller implements OnInit {
             if (this.selection.isSelected(product)) {
                 this.homeService.removeProductSelected(product);
             } else {
-                if (this.verifyStock(product)) {
-                    this.verifyComplements(product);
+                if (this.verifyStock(product) && !this.verifyComplements(product)) {
                     this.homeService.productSelected.push(product);
                 }
 
@@ -78,13 +84,14 @@ export class ListaProdutosComponent extends Controller implements OnInit {
         }
     }
 
-    public verifyComplements(product) {
-        if (true) {
+    public verifyComplements( product) {
+        console.log(product);
+        if (product.complements.length > 0) {
             this.homeService.productModal = product;
-            return this.modalComplement();
-            
+            this.modalComplement();
+            return true;
         } else {
-            
+            return false;
         }
     }
 

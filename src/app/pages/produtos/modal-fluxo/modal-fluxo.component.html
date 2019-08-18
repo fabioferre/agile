@@ -7,8 +7,22 @@
       <div class="col-lg-12 form-area">
         <div class="form-row">
           <div class="col-lg-12 text-center">
-            <h4>Pizza</h4>
-            <h6>Atual - 0</h6>
+            <div class="form-row">
+                <div class="col-lg-12">
+                    <h4>Localize um produto</h4>
+                </div>
+              <div class="col-lg-6">
+                <button mat-raised-button color="primary" class="btn-block w-100" (click)="showAlert()">
+                  Digitar
+                </button>
+              </div>
+              <div class="col-lg-6">
+                <button mat-raised-button color="primary" class="btn-block w-100">
+                  Scannear
+                </button>
+              </div>
+            </div>
+ 
           </div>
           <div class="col-lg-12 mt-3">
             <div class="col-lg-12  beauty-scroll">
@@ -17,7 +31,7 @@
                   <tr>
                     <td>
                       <mat-form-field>
-                        <input matInput class="font-lg" formControlName="qtd">
+                        <input matInput class="font-lg" formControlName="quantity">
                       </mat-form-field>
 
                       <a href="javascript:void(0)" (click)="less()" class="float-left btn-order text-danger">
@@ -39,14 +53,19 @@
                 </tbody>
               </table>
             </div>
+            <div class="text-center"  *ngIf="productsFiltered">
+                <h4>{{ productsFiltered[0].name }}</h4>
+                <h6>Atual -  {{productsFiltered[0].units }}</h6>
+              </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
+
   <div class="button-area">
-    <button mat-raised-button color="primary" class="btn-block w-100">
+    <button mat-raised-button color="primary" class="btn-block w-100" (click)="save()">
       Salvar
     </button>
   </div>

@@ -30,7 +30,10 @@ export class FluxoComponent extends Controller implements OnInit {
 
     if (!this.stockService.flows) {
 
-      this.stockService.get().subscribe(data => this.updateDataTable(data));
+      this.stockService.get().subscribe(data => {
+        this.stockService.flows = data;
+        this.updateDataTable(data)
+      });
     } else {
       this.updateDataTable(this.stockService.flows)
     }
@@ -40,13 +43,7 @@ export class FluxoComponent extends Controller implements OnInit {
     }
 
   }
-  inputProduct() {
 
-  }
-
-  outProduct() {
-
-  }
 
   delete(data) {
 
@@ -58,74 +55,19 @@ export class FluxoComponent extends Controller implements OnInit {
 
   }
 
-  async modalFound(data) {
+  async modalFound() {
 
     const modal = await this.modalCtrl.create({
         component: ModalFluxoComponent,
-        cssClass: 'sm responsive',
-        componentProps: {
-          'product_id': data.id,
-          'current_cost_price': data.cost_price,
-          'name': data.name,
-          'units': data.units
-  
-        }
+        cssClass: 'sm responsive'
     });
+    modal.onDidDismiss().then(()=>{
 
+      this.updateDataTable(this.stockService.flows)
+    })
     return await modal.present();
 }
 
-
-  async showAlert() {
-    const alert = await this.alertCtrl.create({
-      header: 'Buscar produto',
-      inputs: [
-        {
-          name: 'text',
-          type: 'text',
-          placeholder: 'Nome ou codigo'
-        }],
-      buttons: [
-        {
-          text: 'Buscar',
-          handler: (data) => {
-        
-            this.search(data.text)
-
-          }
-        },
-        {
-          text: 'Saida',
-          cssClass: 'danger',
-          handler: () => {
-
-          }
-        }
-      ]
-    });
-
-    return await alert.present();
-  }
-
-  search(text: string) {
-  
-    
-    text = text.toLowerCase().trim();
-     this.productsFiltered = this.produtoService.products.filter((product: any) => {
-      product.code =  product.code ? product.code : "";
-      if(product.name.toLowerCase().includes(text) || product.code.toLowerCase().includes(text)) {
-        return product;
-      }  
-  
-    });
-
-    if(this.productsFiltered ){
-      this.modalFound(this.productsFiltered)
-    }
-    
-
-
-  }
 
   
 

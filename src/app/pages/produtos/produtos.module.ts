@@ -12,7 +12,6 @@ import { ProdutosPage } from './produtos.page';
 import { ListagemComponent } from './listagem/listagem.component';
 import { CategoriasComponent } from './categorias/categorias.component';
 import { NeProductComponent } from './ne-product/ne-product.component';
-import { InputComponent } from './input/input.component';
 import { FluxoComponent } from './fluxo/fluxo.component';
 
 
@@ -63,10 +62,6 @@ const routes: Routes = [
                 component: CategoriasComponent
             },
             {
-                path: 'entrada',
-                component: InputComponent
-            },
-            {
                 path: 'fluxo',
                 component: FluxoComponent
             }
@@ -108,7 +103,6 @@ const routes: Routes = [
         CategoriasComponent,
         NeProductComponent,
         ModalNecategoryComponent,
-        InputComponent,
         FluxoComponent,
         ModalNecategoryComponent,
         ModalFluxoComponent

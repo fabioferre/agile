@@ -1,35 +1,28 @@
 <div class="painel  border pb-4">
     <div class="painel-header  text-center">
         <h4 class="painel-title">venda</h4>
-        <div class="painel-item " 
-        [ngClass]="{'active': types.selling1 }"
-        (click)="changeActive(1); checkSelling() ">
+        <div class="painel-item " [ngClass]="{'active': types.selling1 }" (click)="changeActive(1); checkSelling() ">
             <i class="fas fa-cash-register"></i>
             <span>Caixa</span>
         </div>
-        <div class="painel-item " 
-        [ngClass]="{'active': types.selling2 }" 
-        (click)="modalClient(2); changeActive(2)">
+        <div class="painel-item " [ngClass]="{'active': types.selling2 }" (click)="modalClient(2); changeActive(2)">
             <i class="fas fa-motorcycle"></i>
             <span>Deliver</span>
         </div>
-        <div class="painel-item" 
-        [ngClass]="{'active': types.selling3 }" 
-        (click)="modalClient(3); changeActive(3)">
+        <div class="painel-item" [ngClass]="{'active': types.selling3 }" (click)="modalClient(3); changeActive(3)">
             <i class="fas fa-user"></i>
             <span>Cliente</span>
         </div>
-        <div class="painel-item " 
-        [ngClass]="{'active': types.selling4 }"
-        (click)="changeActive(4)" [routerLink]="['/pedidos/mesas']">
+        <div class="painel-item " [ngClass]="{'active': types.selling4 }" (click)="changeActive(4)"
+            [routerLink]="['/pedidos/mesas']">
             <i class="fas fa-concierge-bell"></i>
             <span>Mesa</span>
         </div>
     </div>
 
 
-    <form [formGroup]="form"  class="painel-body">
-        
+    <form [formGroup]="form" class="painel-body">
+
         <caption>Pedidos</caption>
         <table class="order-list text-center">
             <thead>
@@ -46,26 +39,21 @@
                     <td class="text-truncate d-inline-block" style="max-width: 66px;">{{ product.name }}</td>
                     <td>
                         {{  product.qtd }}
-                        <a href="javascript:void(0)" 
-                        *ngIf="!product.old"
-                        (click)="homeService.lessProduct(product, $event)"
-                        class="float-left btn-order text-danger">
+                        <a href="javascript:void(0)" *ngIf="!product.old"
+                            (click)="homeService.lessProduct(product, $event)" class="float-left btn-order text-danger">
                             <i class="fas fa-minus-circle"></i>
                         </a>
 
-                        <a href="javascript:void(0)" 
-                        *ngIf="!product.old"
-                         class="float-right btn-order text-primary"
-                         (click)="homeService.plusProduct(product, $event)">
+                        <a href="javascript:void(0)" *ngIf="!product.old" class="float-right btn-order text-primary"
+                            (click)="homeService.plusProduct(product, $event)">
                             <i class="fas fa-plus-circle"></i>
                         </a>
                     </td>
                     <td> {{ homeService.getTotalSale(product ) | currency:'BRL':'R$':'1.2-2'}} </td>
                     <td>
-                        <a href="javascript:void(0)" 
-                        *ngIf="!homeService.buildingProduct"
-                        (click)="homeService.removeProductSelected(product); homeService.selection.deselect(product) " 
-                        class="d-block text-center text-dark">
+                        <a href="javascript:void(0)" *ngIf="!homeService.buildingProduct"
+                            (click)="homeService.removeProductSelected(product); homeService.selection.deselect(product) "
+                            class="d-block text-center text-dark">
                             <i class="fas fa-times"></i>
                         </a>
                     </td>
@@ -77,7 +65,7 @@
                 Subtotal
             </div>
             <div class="col-lg-6">
-                {{ homeService.totalPrice | currency:'BRL':'R$':'1.2-2'}} 
+                {{ homeService.totalPrice | currency:'BRL':'R$':'1.2-2'}}
             </div>
         </div>
         <div class="row mx-0  price-content" *ngIf="homeService.freight && type == 2">
@@ -101,18 +89,19 @@
         <div class="row ">
             <div class="col-lg-12 ">
                 <div id="order-information" *ngIf="homeService.client || homeService.table">
-                    
-                    <div class="client-order position-static"  *ngIf="homeService.client">
+
+                    <div class="client-order position-static" *ngIf="homeService.client">
                         <div class="wallet" [ngClass]="{
                             'positive': homeService.client.amount > 0,
                             'negative':homeService.client.amount < 0
                         }">
-                          {{ homeService.client.amount | currency:'BRL':' R$  ':'1.2-2'  }} <i class="fas fa-wallet"></i>
+                            {{ homeService.client.amount | currency:'BRL':' R$  ':'1.2-2'  }} <i
+                                class="fas fa-wallet"></i>
                         </div>
                         <span class="order-info-item ">
                             <strong>Nome:</strong>
                             {{ homeService.client.name }}
-                            
+
                         </span>
                         <span class="order-info-item ">
                             <strong>Contato:</strong>
@@ -125,7 +114,7 @@
                             {{ homeService.client?.address_zipcode  }} &nbsp;
                         </span>
                     </div>
-                    <div class="table-order"  *ngIf="homeService.table">
+                    <div class="table-order" *ngIf="homeService.table">
                         <span class="order-info-item ">
                             <strong>Lugares:</strong>
                             {{ homeService.table.places }}
@@ -138,18 +127,14 @@
 
                 </div>
             </div>
-            <div class="col-lg-7 mx-auto"
-            [ngClass]="{'mt-2': !homeService.freight }">
-                <button type="submit" 
-                class="btn btn-outline-success btn-block"
-                (click)="prepareSale()"
-                *ngIf="!homeService.order_id; else addOrder">
+            <div class="col-lg-7 mx-auto" [ngClass]="{'mt-2': !homeService.freight }">
+                <button type="submit" class="btn btn-outline-success btn-block" (click)="prepareSale()"
+                    *ngIf="!homeService.order_id; else addOrder">
                     Efetuar pedido
                 </button>
                 <ng-template #addOrder>
-                    <button type="submit" 
-                    class="btn btn-outline-info btn-block"
-                    (click)="updateOrder(homeService.order_id)" >
+                    <button type="submit" class="btn btn-outline-info btn-block"
+                        (click)="updateOrder(homeService.order_id)">
                         Acrescentar pedido
                     </button>
                 </ng-template>

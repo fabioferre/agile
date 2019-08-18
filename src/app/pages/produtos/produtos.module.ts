@@ -1,3 +1,4 @@
+import { ModalFluxoComponent } from './modal-fluxo/modal-fluxo.component';
 import { StockService } from './stock.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -13,6 +14,7 @@ import { CategoriasComponent } from './categorias/categorias.component';
 import { NeProductComponent } from './ne-product/ne-product.component';
 import { InputComponent } from './input/input.component';
 import { FluxoComponent } from './fluxo/fluxo.component';
+
 
 // materialize
 import { MatTableModule } from '@angular/material/table';
@@ -75,7 +77,8 @@ const routes: Routes = [
 
 @NgModule({
     entryComponents: [
-        ModalNecategoryComponent
+        ModalNecategoryComponent,
+        ModalFluxoComponent
     ],
     imports: [
         CommonModule,
@@ -107,7 +110,8 @@ const routes: Routes = [
         ModalNecategoryComponent,
         InputComponent,
         FluxoComponent,
-        ModalNecategoryComponent
+        ModalNecategoryComponent,
+        ModalFluxoComponent
     ],
     providers: [CategoriasService, StockService,
         { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }

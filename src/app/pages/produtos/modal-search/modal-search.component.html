@@ -1,0 +1,64 @@
+<a href="javascript:void(0)" (click)="modalCtrl.dismiss()" class="close mt-3 mr-3 text-right">
+    &times;
+  </a>
+  <form [formGroup]="form">
+    <div class="container-fluid beauty-scroll pt-5">
+      <div class="row">
+        <div class="col-lg-12 form-area">
+          <div class="form-row">
+            <div class="col-lg-12">
+              <mat-form-field class="full-width">
+                <input matInput placeholder="nome ou codigo" formControlName="name">
+              </mat-form-field>
+            </div>
+            <div class="col-lg-12 mt-3">
+              <div class="col-lg-12  beauty-scroll">
+                <table class="table text-center">
+                  <thead>
+                    <tr>
+                      <th>
+                        <h4>Pizza</h4>
+                        <h6>Atual - 0</h6>
+                      </th>
+                    </tr>
+                  </thead>
+  
+                  <tbody>
+                    <tr>
+  
+                      <td>
+                        <mat-form-field>
+                          <input matInput  class="font-lg" formControlName="qtd">
+                        </mat-form-field>
+  
+                        <a href="javascript:void(0)" (click)="less()" class="float-left btn-order text-danger">
+                          <i class="fas fa-minus-circle fa-3x"></i>
+                        </a>
+  
+                        <a href="javascript:void(0)" (click)="plus()" class="float-right btn-order text-primary">
+                          <i class="fas fa-plus-circle fa-3x"></i>
+                        </a>
+                      </td>
+  
+                    </tr>
+                    <tr>
+                      <mat-form-field>
+                        <input matInput placeholder="Preço de custo" formControlName="cost_price">
+                      </mat-form-field>
+                    </tr>
+               
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="button-area">
+      <button mat-raised-button color="primary" class="btn-block w-100">
+        Salvar
+      </button>
+    </div>
+  </form>

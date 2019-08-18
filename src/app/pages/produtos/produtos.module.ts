@@ -10,6 +10,8 @@ import { ProdutosPage } from './produtos.page';
 import { ListagemComponent } from './listagem/listagem.component';
 import { CategoriasComponent } from './categorias/categorias.component';
 import { NeProductComponent } from './ne-product/ne-product.component';
+import { InputComponent } from './input/input.component';
+import { FluxoComponent } from './fluxo/fluxo.component';
 
 // materialize
 import { MatTableModule } from '@angular/material/table';
@@ -56,6 +58,14 @@ const routes: Routes = [
             {
                 path: 'categorias',
                 component: CategoriasComponent
+            },
+            {
+                path: 'entrada',
+                component: InputComponent
+            },
+            {
+                path: 'fluxo',
+                component: FluxoComponent
             }
         ]
 
@@ -93,7 +103,8 @@ const routes: Routes = [
         ListagemComponent,
         CategoriasComponent,
         NeProductComponent,
-        ModalNecategoryComponent
+        InputComponent,
+        FluxoComponent
     ],
     providers: [CategoriasService,
         { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }

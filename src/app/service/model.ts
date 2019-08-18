@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { retry, finalize, catchError } from 'rxjs/operators';
 import { Observable, of, throwError } from 'rxjs';
 import { HelperService } from './helper.service';
-import * as $ from 'jquery';
 import { LoadingController } from '@ionic/angular';
 import { async } from 'q';
 
@@ -11,7 +10,7 @@ export default class Model {
     public elementToedit;
     public ne = false;
     protected url;
-    // protected urlApi = 'http://www.tagmus.com.br/api';
+    protected urlApi = 'http://www.tagmus.com.br/api';
     constructor(
         protected http: HttpClient,
         protected helper: HelperService) {
@@ -19,25 +18,21 @@ export default class Model {
     }
 
     public checkNE(): void {
-        if(!this.ne) {
+        if (!this.ne) {
             window.history.go(-1);
         }
     }
 
     public activeNE(elementToedit?): void {
-        this.ne= true;
-        if(elementToedit !== undefined) {
+        this.ne = true;
+        if (elementToedit !== undefined) {
             this.elementToedit = elementToedit;
-           
         }
     }
 
     public get(parans: any = ''): Observable<any> {
         this.load();
         let urlParans = '';
-        // $.each(parans, function (e, i) {
-        //     urlParans = `${urlParans}${e}=&${JSON.stringify(i)}`;
-        // });
 
         for (const i in parans) {
             if (i) {
@@ -45,7 +40,7 @@ export default class Model {
                 urlParans = `${urlParans}&${i}=${JSON.stringify(parans[i])}`;
             }
         }
-        console.log(urlParans )
+        // console.log(urlParans)
         return this.http.get<any>(`${this.urlApi}/${this.url}?${urlParans}`).pipe(
             retry(10),
             finalize(() => {
@@ -96,14 +91,14 @@ export default class Model {
                 this.isLoading = false;
                 this.helper.load(false);
             }),
-            catchError(error =>  of(this.helper.message(error)))
+            catchError(error => of(this.helper.message(error)))
         );
     }
 
-    public createNoLoad(params): Observable<any>  {
+    public createNoLoad(params): Observable<any> {
 
         return this.http.post<any>(`${this.urlApi}/${this.url}`, params).pipe(
-            catchError(error => of( this.helper.message(error)))
+            catchError(error => of(this.helper.message(error)))
         )
     }
 

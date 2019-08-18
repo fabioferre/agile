@@ -14,7 +14,7 @@ import { Controller } from 'src/app/service/controller';
     styleUrls: ['./listar-pedidos.component.scss'],
 })
 export class ListarPedidosComponent extends Controller implements OnInit {
-    public displayedColumns: string[] = ['status', 'created_at', 'id', 'type', 'total', 'action'];
+    public displayedColumns: string[] = ['status', 'created_at', 'number', 'type', 'total', 'action'];
     @ViewChild(MatSort) sort: MatSort;
 
     constructor(
@@ -55,7 +55,7 @@ export class ListarPedidosComponent extends Controller implements OnInit {
     }
 
     public finalize(order) {
-    
+
         this.orderService.orderToFinalize = order;
     }
 
@@ -65,7 +65,7 @@ export class ListarPedidosComponent extends Controller implements OnInit {
         const modal = await this.modalCtrl.create({
             component: ModalMotoboyComponent
         });
-     
+
         return await modal.present();
     }
 }

@@ -7,6 +7,7 @@ import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Router } from '@angular/router';
 import { HelperService } from 'src/app/service/helper.service';
+import { ComplementsModalComponent } from '../modal/complements-modal/complements-modal.component';
 
 
 @Component({
@@ -23,7 +24,7 @@ export class ListaProdutosComponent extends Controller implements OnInit {
         public homeService: HomeService,
         private helper: HelperService,
         public alertCtrl: AlertController,
-        public modalCtrl: ModalController
+        public modalCtrl: ModalController,
     ) { super(alertCtrl); }
 
     ngOnInit() {
@@ -32,30 +33,15 @@ export class ListaProdutosComponent extends Controller implements OnInit {
         this.updateDataTable(this.products);
     }
 
-    /** Whether the number of selected elements matches the total number of rows. */
-    isAllSelected() {
-        const numSelected = this.selection.selected.length;
-        const numRows = this.dataSource.data.length;
 
-        return numSelected === numRows;
+    async modalComplement() {
+        const modal = await this.modalCtrl.create({
+            component: ComplementsModalComponent,
+            cssClass: 'sm responsive'
+        });
+        modal.dismiss(() => this.homeService.productModal = null);
+        return  await modal.present();
     }
-
-    /** Selects all rows if they are not all selected; otherwise clear selection. */
-    masterToggle() {
-        this.isAllSelected() ?
-            this.selection.clear() :
-            this.dataSource.data.forEach(row => this.selection.select(row));
-    }
-
-    /** The label for the checkbox on the passed row */
-    checkboxLabel(row?: any): string {
-        if (!row) {
-            return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
-        }
-        return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
-    }
-
-
 
     putOrder(product): void {
         if (!this.homeService.buildingProduct) {
@@ -63,8 +49,10 @@ export class ListaProdutosComponent extends Controller implements OnInit {
                 this.homeService.removeProductSelected(product);
             } else {
                 if (this.verifyStock(product)) {
+                    this.verifyComplements(product);
                     this.homeService.productSelected.push(product);
                 }
+
             }
         } else {
             this.buildProduct(product);
@@ -87,6 +75,16 @@ export class ListaProdutosComponent extends Controller implements OnInit {
             return false;
         } else {
             return true;
+        }
+    }
+
+    public verifyComplements(product) {
+        if (true) {
+            this.homeService.productModal = product;
+            return this.modalComplement();
+            
+        } else {
+            
         }
     }
 

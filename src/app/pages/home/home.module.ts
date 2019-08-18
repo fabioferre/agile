@@ -14,24 +14,25 @@ import { ProdutoService } from '../produtos/produto.service';
 
 // materialize
 import { MatTableModule } from '@angular/material/table';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatSortModule} from '@angular/material/sort';
-import {MatInputModule} from '@angular/material/input';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import {MatSelectModule} from '@angular/material/select';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {  MatCheckboxModule } from '@angular/material';
-import {MatButtonModule} from '@angular/material/button';
-import {MatTooltipModule} from '@angular/material/tooltip';
-import {MatListModule} from '@angular/material/list';
-import {MatChipsModule} from '@angular/material/chips';
-import {MatIconModule} from '@angular/material/icon';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatInputModule } from '@angular/material/input';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCheckboxModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatListModule } from '@angular/material/list';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatIconModule } from '@angular/material/icon';
 
 import { ClienteModalComponent } from './modal/cliente-modal/cliente-modal.component';
 import { Printer } from '@ionic-native/printer/ngx';
 import { FormRegisterClientComponent } from './modal/cliente-modal/form-register-client/form-register-client.component';
 import { ClientesService } from '../clientes/clientes.service';
 import { BrMaskerModule } from 'br-mask';
+import { ComplementsModalComponent } from './modal/complements-modal/complements-modal.component';
 const routes: Routes = [
   {
     path: '',
@@ -42,6 +43,7 @@ const routes: Routes = [
 @NgModule({
   entryComponents: [
     ClienteModalComponent,
+    ComplementsModalComponent
   ],
   imports: [
     CommonModule,
@@ -61,15 +63,17 @@ const routes: Routes = [
     MatTooltipModule,
     MatChipsModule,
     MatIconModule,
+    MatListModule,
     BrMaskerModule
   ],
   declarations: [
-    HomePage, 
-    PainelPedidoComponent, 
-    ListaProdutosComponent, 
+    HomePage,
+    PainelPedidoComponent,
+    ListaProdutosComponent,
     ClienteModalComponent,
+    ComplementsModalComponent,
     FormRegisterClientComponent
   ],
-  providers: [ ClientesService, Printer]
+  providers: [ClientesService, Printer]
 })
-export class HomePageModule {}
+export class HomePageModule { }

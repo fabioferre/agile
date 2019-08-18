@@ -28,7 +28,7 @@ export class HelperService {
             this.toast(style, message);
         } else {
             if (message.error) {
-                for ( const i in message.error.errors) {
+                for (const i in message.error.errors) {
                     if (i) {
                         this.toast('danger', 'Atenção: ' + message.error.errors[i]);
                     }
@@ -93,26 +93,25 @@ export class HelperService {
 
     }
 
- 
+    date(data?, more?, formatter?) {
+
         const date = new Date();
         let format;
-        if ((data) && (!formatter)){
-          
+        if ((data) && (!formatter)) {
             format = new Date(data).toISOString();
             this.format = format.split('T')[0];
-            const min = (date.getMinutes() < 10 ? '0' : '') + date.getMinutes();
             const hours = date.getHours() + data;
+            const min = (date.getMinutes() < 10 ? '0' : '') + date.getMinutes();
             this.hours = hours + ':' + min;
         } else {
-            if(formatter == "/"){
-                data =  data.split("-");
-                return data = data[2]+"/"+ data[1]+"/"+ data[0]
-               
-             }
-             if(formatter == "-"){
-                 data =  data.split("/");
-                 return data = data[2]+"-"+ data[1]+"-"+ data[0]
-             }
+            if (formatter === '/') {
+                data = data.split('-');
+                return data = data[2] + '/' + data[1] + '/' + data[0]
+            }
+            if (formatter === '-') {
+                data = data.split('/');
+                return data = data[2] + '-' + data[1] + '-' + data[0]
+            }
             format = new Date().toISOString();
 
             if (more) {
@@ -144,7 +143,7 @@ export class HelperService {
 
         }
 
- 
+
 
         return this;
     }

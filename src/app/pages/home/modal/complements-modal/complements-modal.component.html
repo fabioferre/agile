@@ -1,0 +1,25 @@
+<a href="javascript:void(0)" (click)="modalCtr.dismiss()" class="close mt-3 mr-3 text-right">
+  &times;
+</a>
+<div class="container scrollbar-inner beauty-scroll">
+    <div class="row">
+        <div class="col-lg-12">
+            <h4 class="text-center text-theme">{{ product.name }}</h4>
+            <img src="./assets/no-product.png" alt="no-product" class="img-product">
+        </div>
+
+        <div class="col-lg-12">
+            <h3 class="bg-theme py-2 text-center text-light">Complementos</h3>
+            <mat-selection-list #complementsList>
+                <mat-list-option *ngFor="let complement of product.complements">
+                   {{ complement.name }}
+                </mat-list-option>
+            </mat-selection-list>
+            
+            <p>
+            Options selected: {{ complementsList.selectedOptions.selected.length}}
+            </p>
+        </div>
+       
+    </div>
+</div>

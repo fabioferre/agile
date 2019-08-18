@@ -150,17 +150,32 @@ ion-modal.lg{
         --width: 95% !important;
         --height: 200px !important
     }
+
+    ion-modal.sm.responsive {
+        --width: 95% !important;
+        --height: 100% !important;
+    }
 }
 @include media-breakpoint-up(md) { 
     ion-modal.md.responsive {
         --width: 400px !important;
         --height: 180px !important
     }
+
+    ion-modal.sm.responsive {
+        --width:  400px !important;
+        --height: 65% !important;
+    }
 }
 @include media-breakpoint-up(xl) { 
     ion-modal.md.responsive {
         --width: 400px !important;
         --height: 180px !important
+    }
+
+    ion-modal.sm.responsive {
+        --width:  500px !important;
+        --height: 65% !important;
     }
 }
 

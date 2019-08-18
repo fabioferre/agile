@@ -10,6 +10,8 @@ import { ProdutosPage } from './produtos.page';
 import { ListagemComponent } from './listagem/listagem.component';
 import { CategoriasComponent } from './categorias/categorias.component';
 import { NeProductComponent } from './ne-product/ne-product.component';
+import { InputComponent } from './input/input.component';
+import { FluxoComponent } from './fluxo/fluxo.component';
 
 // materialize
 import { MatTableModule } from '@angular/material/table';
@@ -27,8 +29,12 @@ import {MatButtonModule} from '@angular/material/button';
 
 // service
 import { CategoriasService } from './categorias.service';
+<<<<<<< HEAD
 import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher, MatChipsModule, MatIconModule } from '@angular/material';
 import { ModalNecategoryComponent } from './categorias/modal-necategory/modal-necategory.component';
+=======
+import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher,  MatIconModule,  } from '@angular/material';
+>>>>>>> beta
 
 
 const routes: Routes = [
@@ -56,6 +62,14 @@ const routes: Routes = [
             {
                 path: 'categorias',
                 component: CategoriasComponent
+            },
+            {
+                path: 'entrada',
+                component: InputComponent
+            },
+            {
+                path: 'fluxo',
+                component: FluxoComponent
             }
         ]
 
@@ -93,7 +107,12 @@ const routes: Routes = [
         ListagemComponent,
         CategoriasComponent,
         NeProductComponent,
+<<<<<<< HEAD
         ModalNecategoryComponent
+=======
+        InputComponent,
+        FluxoComponent
+>>>>>>> beta
     ],
     providers: [CategoriasService,
         { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }

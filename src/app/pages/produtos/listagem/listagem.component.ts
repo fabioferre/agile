@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
+import { MatSort } from '@angular/material';
 import { ProdutoService } from '../produto.service';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
@@ -28,6 +28,7 @@ export class ListagemComponent  extends Controller implements OnInit {
         } else {
             this.setProducts(this.productService.products)
         }
+      
     }
 
     public setProducts(products) {

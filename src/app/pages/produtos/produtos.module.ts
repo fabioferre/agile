@@ -13,20 +13,22 @@ import { NeProductComponent } from './ne-product/ne-product.component';
 
 // materialize
 import { MatTableModule } from '@angular/material/table';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatSortModule} from '@angular/material/sort';
-import {MatInputModule} from '@angular/material/input';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import {MatSelectModule} from '@angular/material/select';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatTabsModule} from '@angular/material/tabs';
-import {MatCardModule} from '@angular/material/card';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import {MatListModule} from '@angular/material/list';
-//service
-import { ProdutoService } from './produto.service';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatInputModule } from '@angular/material/input';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatCardModule } from '@angular/material/card';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatListModule } from '@angular/material/list';
+import {MatButtonModule} from '@angular/material/button';
+
+// service
 import { CategoriasService } from './categorias.service';
 import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher, MatChipsModule, MatIconModule } from '@angular/material';
+import { ModalNecategoryComponent } from './categorias/modal-necategory/modal-necategory.component';
 
 
 const routes: Routes = [
@@ -56,11 +58,14 @@ const routes: Routes = [
                 component: CategoriasComponent
             }
         ]
-      
+
     }
 ];
 
 @NgModule({
+    entryComponents: [
+        ModalNecategoryComponent
+    ],
     imports: [
         CommonModule,
         FormsModule,
@@ -80,16 +85,18 @@ const routes: Routes = [
         CKEditorModule,
         MatIconModule,
         MatAutocompleteModule,
+        MatButtonModule,
         MatListModule
     ],
     declarations: [
         ProdutosPage,
         ListagemComponent,
         CategoriasComponent,
-        NeProductComponent
+        NeProductComponent,
+        ModalNecategoryComponent
     ],
-    providers: [ CategoriasService,
-        {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher}
+    providers: [CategoriasService,
+        { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }
     ]
 })
 export class ProdutosPageModule { }

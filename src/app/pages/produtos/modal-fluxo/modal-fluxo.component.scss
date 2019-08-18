@@ -1,0 +1,28 @@
+.button-area {
+    position: absolute;
+    bottom: 15px;
+    left: 2.5%;
+    text-align: center;
+    width: 95%;
+
+}
+
+.form-area {
+    min-height: 300px;
+}
+
+
+form {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+.font-lg{
+    font-size: 20px;
+    text-align: center;
+    &::-webkit-input-placeholder {
+        text-align: center;
+     }
+}

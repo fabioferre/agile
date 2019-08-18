@@ -37,6 +37,9 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
     opacity: 0.4;
 }
 
+.close {
+    z-index: 10;
+}
 .disabled-events {
     pointer-events: none;
 }

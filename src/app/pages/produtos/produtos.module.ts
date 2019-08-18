@@ -1,3 +1,4 @@
+import { StockService } from './stock.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -104,9 +105,10 @@ const routes: Routes = [
         CategoriasComponent,
         NeProductComponent,
         InputComponent,
-        FluxoComponent
+        FluxoComponent,
+        ModalNecategoryComponent
     ],
-    providers: [CategoriasService,
+    providers: [CategoriasService, StockService,
         { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }
     ]
 })

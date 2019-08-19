@@ -39,15 +39,15 @@ export class CategoriasComponent extends Controller implements OnInit {
 
     async modalNe(category?) {
 
-        if (category) {
-            this.categoriasService.activeNE(category);
-        } else {
-            this.categoriasService.activeNE();
-        }
+        this.categoriasService.activeNE(category);
 
         const modal = await this.modalCtrl.create({
             component: ModalNecategoryComponent,
             cssClass: 'sm responsive'
+        });
+
+        modal.onDidDismiss().then( () => {
+            this.updateDataTable(this.categoriasService.categories);
         });
 
         return await modal.present();
@@ -91,40 +91,5 @@ export class CategoriasComponent extends Controller implements OnInit {
 
         return await alert.present();
     }
-
-    private edit(category): void {
-        this.categoriasService.updateById(category.id, category).subscribe(response => {
-            const idx = this.categoriasService.categories.indexOf(category);
-            this.categoriasService.categories[idx] = response;
-            this.helper.message('Categoria atualizada!');
-            this.dataSource._updateChangeSubscription();
-        });
-    }
-    async alertEditar(category) {
-        const alert = await this.alertCtrl.create({
-            header: 'Editar categoria',
-            inputs: [{
-                name: 'name', type: 'text', placeholder: 'Nome da categoria', value: category.name
-            }],
-            buttons: [{
-                text: 'Atualizar',
-                cssClass: 'secondary',
-                handler: (data) => {
-                    if (!data) {
-                        return false;
-                    } else {
-                        console.log(data);
-                        category.name = data.name;
-                        this.edit(category);
-                    }
-                }
-            }]
-        });
-
-        return await alert.present();
-    }
-
-
-
 
 }

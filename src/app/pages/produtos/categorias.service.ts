@@ -19,4 +19,6 @@ export class CategoriasService extends Model {
     public deleteComplement(categoryID, id) {
         return this.http.delete(`${this.urlApi}/${this.url}/${categoryID}/complements/${id}`);
     }
+
+    
 }

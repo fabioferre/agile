@@ -31,7 +31,6 @@ export class HomePage implements OnInit, OnDestroy {
             this.products = products;
             this.products.map(product => {
                 product.qtd = 1;
-                product.category = product.category.name;
             });
             this.helper.load(false);
         });

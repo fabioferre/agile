@@ -1,11 +1,8 @@
-.button-area {
-    position: absolute;
-    bottom: 15px;
-    left: 2.5%;
-    text-align: center;
-    width: 95%;
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
 
-}
+
 
 .form-area {
     min-height: 300px;
@@ -15,10 +12,20 @@
     max-height: 200px;
     overflow: auto;
 }
-form {
+.form {
     position: absolute;
+    
     top: 0;
     left: 0;
     height: 100%;
     width: 100%;
+
+    @include media-breakpoint-down(md) { 
+        overflow: auto;
+    }
+    &.create {
+        height: auto;
+    }
+
+  
 }

@@ -173,7 +173,7 @@ ion-modal.lg{
 
     ion-modal.sm.responsive {
         --width: 95% !important;
-        --height: 300px !important;
+        --height: 60% !important;
     }
 }
 @include media-breakpoint-up(md) { 

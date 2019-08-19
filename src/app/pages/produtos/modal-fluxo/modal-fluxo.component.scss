@@ -19,10 +19,16 @@ form {
     height: 100%;
     width: 100%;
 }
-.font-lg{
+.font-size-20{
     font-size: 20px;
     text-align: center;
-    &::-webkit-input-placeholder {
-        text-align: center;
-     }
+
+}
+.font-size-10{
+    font-size: 15px;
+    text-align: center;
+
+}
+.btn-order{
+    font-size: 30px;
 }

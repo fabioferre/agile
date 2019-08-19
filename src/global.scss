@@ -58,7 +58,7 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
     
     border-radius: 50%;
     @include media-breakpoint-down(md) { 
-        width:40px;
+     
         height: 40px;
         bottom: 4%;
         right: 5%;
@@ -66,14 +66,14 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
         z-index: 10;
     }
     @include media-breakpoint-up(md) { 
-        width: 45px;
+   
         height: 45px;
         bottom: 5%;
         right: 4%;
         position: absolute;
     }
     @include media-breakpoint-up(xl) { 
-        width: 55px;
+    
         height: 55px;
         bottom: 5%;
         right: 4%;
@@ -156,7 +156,7 @@ ion-modal.lg{
 
     ion-modal.sm.responsive {
         --width: 95% !important;
-        --height: 100% !important;
+        --height: 60% !important;
     }
 }
 @include media-breakpoint-up(md) { 

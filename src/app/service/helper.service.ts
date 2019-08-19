@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ToastController, LoadingController, ModalController } from '@ionic/angular';
+import { ToastController,  ModalController } from '@ionic/angular';
 
 @Injectable({
     providedIn: 'root'
@@ -14,7 +14,6 @@ export class HelperService {
     public isLoading: boolean;
     constructor(
         private toastCtrl: ToastController,
-        private loading: LoadingController,
         private modalCtrl: ModalController,
     ) { }
 
@@ -58,21 +57,14 @@ export class HelperService {
 
     async load(status?) {
         if (status === false) {
-            // this.loading.dismiss();
             this.isLoading = false;
         } else {
             this.isLoading = true;
             setTimeout(() => {
                 this.isLoading = false;
-            }, 50000);
-            // let loading = await this.loading.create({
-            //     duration: 5000,
-            // });
-
-            // return await loading;
+            }, 100000);
 
         }
-
 
     }
 

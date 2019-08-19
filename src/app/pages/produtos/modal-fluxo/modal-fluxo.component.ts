@@ -58,6 +58,9 @@ export class ModalFluxoComponent implements OnInit {
     });
   
   }
+  scanner(){
+    
+  }
 
   async showAlert() {
     const alert = await this.alertCtrl.create({

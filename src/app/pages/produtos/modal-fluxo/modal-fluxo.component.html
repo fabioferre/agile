@@ -11,14 +11,15 @@
                 <div class="col-lg-12">
                     <h4>Localize um produto</h4>
                 </div>
-              <div class="col-lg-6">
+              <div class="col-lg-6 col-sm-6 pt-3">
                 <button mat-raised-button color="primary" class="btn-block w-100" (click)="showAlert()">
                   Digitar
                 </button>
               </div>
-              <div class="col-lg-6">
-                <button mat-raised-button color="primary" class="btn-block w-100">
-                  Scannear
+              
+              <div class="col-lg-6 col-sm-6 pt-3">
+                <button mat-raised-button color="primary" class="btn-block w-100" (click)="scanner()">
+                  Ler código
                 </button>
               </div>
             </div>
@@ -31,22 +32,22 @@
                   <tr>
                     <td>
                       <mat-form-field>
-                        <input matInput class="font-lg" formControlName="quantity">
+                        <input matInput class="font-size-20" formControlName="quantity">
                       </mat-form-field>
 
                       <a href="javascript:void(0)" (click)="less()" class="float-left btn-order text-danger">
-                        <i class="fas fa-minus-circle fa-3x"></i>
+                        <i class="fas fa-minus-circle"></i>
                       </a>
 
                       <a href="javascript:void(0)" (click)="plus()" class="float-right btn-order text-primary">
-                        <i class="fas fa-plus-circle fa-3x"></i>
+                        <i class="fas fa-plus-circle "></i>
                       </a>
                     </td>
 
                   </tr>
                   <tr>
                     <mat-form-field>
-                      <input matInput placeholder="Preço de custo" formControlName="current_cost_price">
+                      <input matInput class="font-size-10" placeholder="Preço de custo" formControlName="current_cost_price">
                     </mat-form-field>
                   </tr>
 
@@ -66,7 +67,7 @@
 
   <div class="button-area">
     <button mat-raised-button color="primary" class="btn-block w-100" (click)="save()">
-      Salvar
+     Lançar
     </button>
   </div>
 </form>

@@ -72,7 +72,7 @@ export class ProdutoService extends Model{
           return this.http.get<any>(`${this.urlApi}/stock/flow`).pipe(
               retry(10),
               finalize(() => {
-                  this.isLoading = false;
+                  this.helper.isLoading = false;
                   this.helper.load(false);
               }),
               catchError(error =>  of( this.helper.message(error)))

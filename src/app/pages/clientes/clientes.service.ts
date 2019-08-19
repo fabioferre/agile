@@ -34,7 +34,7 @@ export class ClientesService extends Model {
     return this.http.get<any>(`${this.urlApi}/client/account/${id}/statement?${urlParans}`).pipe(
       retry(10),
       finalize(() => {
-        this.isLoading = false;
+        this.helper.isLoading = false;
           this.helper.load(false);
       }),
       catchError(error =>  of( this.helper.message(error)))
@@ -45,7 +45,7 @@ export class ClientesService extends Model {
     this.helper.load();
     return this.http.post<any>(`${this.urlApi}/client/account/${id}/movement`, parans).pipe(
         finalize(() => {
-          this.isLoading = false;
+          this.helper.isLoading = false;
             this.helper.load(false);
         }),
         catchError(error => of( this.helper.message(error)))

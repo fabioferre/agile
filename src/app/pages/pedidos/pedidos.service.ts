@@ -32,7 +32,7 @@ export class PedidosService extends Model {
         return this.http.patch(`${this.urlApi}/${this.url}/${order.id}/close`, order).pipe(
             catchError((error: any) => of( this.helper.message(error) )),
             finalize(() => {
-                this.isLoading = false;
+                this.helper.isLoading = false;
                 this.helper.load(false);
             })
         );

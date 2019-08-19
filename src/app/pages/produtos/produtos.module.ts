@@ -34,6 +34,9 @@ import { CategoriasService } from './categorias.service';
 import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher, MatChipsModule, MatIconModule } from '@angular/material';
 import { ModalNecategoryComponent } from './categorias/modal-necategory/modal-necategory.component';
 
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { NativeAudio } from '@ionic-native/native-audio/ngx';
+
 
 const routes: Routes = [
     {
@@ -107,7 +110,7 @@ const routes: Routes = [
         ModalNecategoryComponent,
         ModalFluxoComponent
     ],
-    providers: [CategoriasService, StockService,
+    providers: [CategoriasService, StockService, BarcodeScanner,NativeAudio,
         { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }
     ]
 })

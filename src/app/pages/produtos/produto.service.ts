@@ -60,7 +60,7 @@ export class ProdutoService extends Model{
 
     public verifyStock(product) {
         if(product.units <= 0 && product.stock) {
-            this.helper.message('Produto sem estoque!','warning');
+            this.helper.toast('Produto sem estoque!', {color :'warning'});
             return false;
         } else {
             return true;

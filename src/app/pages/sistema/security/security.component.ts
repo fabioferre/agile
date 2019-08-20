@@ -49,7 +49,7 @@ export class SecurityComponent implements OnInit {
         this.formToSend.controls.permissions.setValue(ids);
 
         this.sistemaService.updateRoles(this.formToSend.value.nivel, { permissions: this.formToSend.value.permissions }).subscribe(response => {
-            this.helper.message("Alteração efetuada !")
+            this.helper.toast("Alteração efetuada !")
         });
 
     }
@@ -62,7 +62,7 @@ export class SecurityComponent implements OnInit {
                 this.form.controls[element.permission_id].setValue(true);
             });
 
-            this.helper.message("Permissões carregas!");
+            this.helper.toast("Permissões carregas!");
             this.helper.loadDismiss();
         });
 

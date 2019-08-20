@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
             this.helper.load();
             this.auth.authenticate(this.form.value).subscribe(user => {
                 if(user){
-                    this.helper.message("Seja bem vindo !")
+                    this.helper.toast("Seja bem vindo !")
                     this.storage.set('user', user)
                     this.auth.configSystem(user);
                     this.router.navigate(['/home']);

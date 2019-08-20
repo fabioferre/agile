@@ -24,7 +24,7 @@ export class ModalNovaMesaComponent implements OnInit {
 
     public save(): void {
         this.tableService.create(this.form.value).subscribe((response)=> {
-            this.helper.message(`mesa ${response.name} salva com sucesso!`);
+            this.helper.toast(`mesa ${response.name} salva com sucesso!`);
             this.modalCtrl.dismiss();
             this.tableService.tables.push(response);
           

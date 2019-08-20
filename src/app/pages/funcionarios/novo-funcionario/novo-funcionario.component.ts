@@ -54,7 +54,7 @@ export class NovoFuncionarioComponent implements OnInit {
       this.funcionariosService.create(this.form.value)
         .subscribe(( funcionarios) => {
           if(funcionarios){
-            this.helper.message('Funcionarios cadastrado !')
+            this.helper.toast('Funcionarios cadastrado !')
             this.funcionariosService.funcionarios.push(funcionarios)
             this.router.navigate(['/funcionarios']);
           }

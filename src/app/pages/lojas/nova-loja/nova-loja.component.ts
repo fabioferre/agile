@@ -38,7 +38,7 @@ export class NovaLojaComponent implements OnInit {
     if (this.form.valid) {
       this.lojasService.create(this.form.value)
         .subscribe(( lojas) => {
-          this.helper.message('loja cadastrada !')
+          this.helper.toast('loja cadastrada !')
           this.lojasService.lojas.push(lojas)
           this.router.navigate(['/lojas']);
         });

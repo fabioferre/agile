@@ -38,7 +38,7 @@ export class NeFretesComponent implements OnInit {
     this.fretesService.create(this.form.value)
       .subscribe((frete) => {
         if (frete) {
-          this.helper.message('Frete cadastrado')
+          this.helper.toast('Frete cadastrado')
           this.fretesService.fretes.push(frete)
           this.router.navigate(['/fretes']);
         }
@@ -52,7 +52,7 @@ export class NeFretesComponent implements OnInit {
         if (frete) {
           const idx = this.fretesService.fretes.indexOf(this.fretesService.elementToedit);
           this.fretesService.fretes[idx] =frete;
-          this.helper.message('Edição efetuada com exito')
+          this.helper.toast('Edição efetuada com exito')
           this.router.navigate(['/fretes']);
         }
       });

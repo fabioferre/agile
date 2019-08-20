@@ -44,7 +44,7 @@ public loja = this.lojasService.lojaEdit;
         .subscribe((loja) => {
           const idx = this.lojasService.lojas.indexOf(this.loja);
           this.lojasService.lojas[idx] = loja;
-          this.helper.message('Edição efetuada ')
+          this.helper.toast('Edição efetuada ')
           this.router.navigate(['/lojas']);
 
         }, error => this.helper.message(error));

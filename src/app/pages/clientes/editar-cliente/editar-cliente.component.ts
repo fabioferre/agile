@@ -48,7 +48,7 @@ export class EditarClienteComponent implements OnInit {
                     console.log(this.form.value)
                     const idx = this.clientesService.clientes.indexOf(this.cliente);
                     this.clientesService.clientes[idx] = client;
-                    this.helper.message('Edição efetuada ')
+                    this.helper.toast('Edição efetuada ')
                     this.router.navigate(['/clientes']);
 
                 }, error => this.helper.message(error));

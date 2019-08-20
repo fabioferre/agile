@@ -32,7 +32,7 @@
                   <tr>
                     <td>
                       <mat-form-field>
-                        <input matInput class="font-size-20" formControlName="quantity">
+                        <input matInput class="font-size-20"   formControlName="quantity">
                       </mat-form-field>
 
                       <a href="javascript:void(0)" (click)="less()" class="float-left btn-order text-danger">
@@ -47,7 +47,7 @@
                   </tr>
                   <tr>
                     <mat-form-field>
-                      <input matInput class="font-size-10" placeholder="Preço de custo" formControlName="current_cost_price">
+                      <input matInput class="font-size-10" [brmasker]="{form: form.get('current_cost_price'), money: true, decimalCaracter: '.'}" placeholder="Preço de custo" formControlName="current_cost_price">
                     </mat-form-field>
                   </tr>
 
@@ -55,8 +55,8 @@
               </table>
             </div>
             <div class="text-center"  *ngIf="productsFiltered">
-                <h4>{{ productsFiltered[0].name }}</h4>
-                <h6>Atual -  {{productsFiltered[0].units }}</h6>
+                <h4>{{ productsFiltered.name }}</h4>
+                <h6>Quantidade atual:  {{productsFiltered.units }}</h6>
               </div>
           </div>
         </div>
@@ -66,7 +66,7 @@
 
 
   <div class="button-area">
-    <button mat-raised-button color="primary" class="btn-block w-100" (click)="save()">
+    <button mat-raised-button color="primary" [disabled]="form.invalid"  class="btn-block w-100" (click)="save()">
      Lançar
     </button>
   </div>

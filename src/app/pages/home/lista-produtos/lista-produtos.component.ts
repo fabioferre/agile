@@ -76,7 +76,7 @@ export class ListaProdutosComponent extends Controller implements OnInit {
     public verifyStock(product) {
 
         if (product.units <= 0 && product.stock) {
-            this.helper.message('Produto sem estoque!', 'warning');
+            this.helper.toast('Produto sem estoque!', {color : 'warning'});
             this.selection.toggle(product);
             return false;
         } else {

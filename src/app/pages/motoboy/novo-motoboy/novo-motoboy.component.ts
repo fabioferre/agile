@@ -37,7 +37,7 @@ export class NovoMotoboyComponent implements OnInit {
       this.motoboyService.create(this.form.value)
         .subscribe((motoboy) => {
           if(motoboy){
-            this.helper.message('motoboy cadastrado !')
+            this.helper.toast('motoboy cadastrado !')
             this.motoboyService.motoboy.push(motoboy)
             this.router.navigate(['/motoboy']);
           }

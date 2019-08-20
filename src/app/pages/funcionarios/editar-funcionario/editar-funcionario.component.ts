@@ -59,7 +59,7 @@ export class EditarFuncionarioComponent implements OnInit {
           if(funcionario){
             const idx = this.funcionariosService.funcionarios.indexOf(this.funcionario);
             this.funcionariosService.funcionarios[idx] = funcionario;
-            this.helper.message('Edição efetuada ')
+            this.helper.toast('Edição efetuada ')
             this.router.navigate(['/funcionarios']);
           }
         });

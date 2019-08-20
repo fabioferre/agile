@@ -136,7 +136,8 @@ export class ModalFluxoComponent implements OnInit {
     };
 
     this.barcodeScanner.scan(this.barcodeOptions).then(barcodeData => {
-      let dados = this.search(this.encode(barcodeData))[0]
+      
+      let dados = this.search(barcodeData.text)[0]
       if(dados){
         this.product.setValue(dados) ;
       }

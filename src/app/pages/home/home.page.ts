@@ -17,7 +17,7 @@ export class HomePage implements OnInit, OnDestroy {
         private auth: AuthService,
         public productService: ProdutoService,
         private helper: HelperService,
-        private homeService: HomeService) { }
+        public homeService: HomeService) { }
 
     ngOnInit() {
 
@@ -31,6 +31,7 @@ export class HomePage implements OnInit, OnDestroy {
             this.products = products;
             this.products.map(product => {
                 product.qtd = 1;
+                product.sale_price = parseFloat(product.sale_price);
             });
             this.helper.load(false);
         });

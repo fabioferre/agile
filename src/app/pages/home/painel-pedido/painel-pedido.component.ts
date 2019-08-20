@@ -82,11 +82,11 @@ export class PainelPedidoComponent implements OnInit {
         }
 
     }
-    
+
     async modalClient(type?) {
         this.homeService.clearPainel(false);
-        if(type === 3) {
-            this.homeService.loadOrders = true
+        if (type === 3) {
+            this.homeService.loadOrders = true;
         }
         const modal = await this.modalCtrl.create({
             component: ClienteModalComponent,
@@ -108,8 +108,8 @@ export class PainelPedidoComponent implements OnInit {
             }, 100);
 
         } else if (this.form.value.type === 1 || this.form.value.type === 2) {
-                this.storeOrder();
-    
+            this.storeOrder();
+
             this.homeService.productAlert = false;
         } else {
             this.storeOrder();
@@ -120,7 +120,7 @@ export class PainelPedidoComponent implements OnInit {
 
     public storeOrder() {
         this.homeService.create(this.form.value).subscribe((response) => {
-            if(response){
+            if (response) {
                 this.msgOrder(response.warning);
                 this.homeService.removeProducUnits(this.form.value.products);
                 this.homeService.clearPainel();
@@ -128,12 +128,12 @@ export class PainelPedidoComponent implements OnInit {
                 this.helper.message("Pedido efetuado");
                 console.log(response)
 
-                if(this.impressora.printer_options.create){
+                if (this.impressora.printer_options.create) {
                     this.impressora.printer(response);
                 }
             }
 
-          
+
         });
     }
 
@@ -147,9 +147,9 @@ export class PainelPedidoComponent implements OnInit {
         });
     }
 
-   async msgOrder(response){
-        if(response){
-            
+    async msgOrder(response) {
+        if (response) {
+
             response.forEach(async (element) => {
                 const alert = await this.alertCtrl.create({
                     header: 'Aviso',
@@ -161,7 +161,7 @@ export class PainelPedidoComponent implements OnInit {
                         }
                     ]
                 });
-        
+
                 return await alert.present();
 
             });

@@ -2,7 +2,8 @@
   &times;
 </a>
 <div class="product-title">
-    <h4 class="text-center text-theme">{{ product.name }}</h4>
+    <h4 class="text-center text-theme">{{ product.name }}  -  <small>Pré Montagem</small></h4>
+ 
 </div>
 <div class="container scrollbar-inner beauty-scroll">
     <div class="row">
@@ -11,14 +12,14 @@
             <ul class="list-group">
                 <li class="list-group-item  complement-item" 
                 *ngFor="let complement of product.complements"
-                [ngClass]="{'active': complement.selected}"
+                [ngClass]="{'selected': complement.selected}"
                 (click)="toggleComplement(complement)" >
                     <span class="d-inline-block">
                         <strong>Nome:</strong>  {{ complement.name }} | &nbsp; &nbsp;
                         <strong>Preço: </strong> {{ complement.price  | currency:'BRL':'R$':'1.2-2' }}
                     </span>
-                    <a href="javascript:void(0)" class="close toggle" >
-                        <i class="fas fa-times "></i>
+                    <a href="javascript:void(0)" class="close toggle text-success" *ngIf="complement.selected">
+                        <i class="fas fa-check "></i>
                     </a>
                 </li>
             </ul>
@@ -36,11 +37,11 @@
                         </span>
                         <span class="d-block border-bottom">
                             <strong>Preço Adicionais: </strong> &nbsp;
-                            <span class="text-warning">{{ aditionalPrice.value | currency:'BRL':'R$':'1.2-2' }}</span> 
+                            <span class="text-warning" >{{ aditionalPrice | currency:'BRL':'R$':'1.2-2' }}</span> 
                         </span>
                         <span class="d-block border-bottom">
                             <strong>Preço Atualizado: </strong> 
-                            <span class="text-success">{{ product.sale_price +  aditionalPrice.value | currency:'BRL':'R$':'1.2-2' }}</span> 
+                            <span class="text-success">{{ product.sale_price +  aditionalPrice | currency:'BRL':'R$':'1.2-2' }}</span> 
                         </span>
                     </div>
                     <div class="col-lg-12">

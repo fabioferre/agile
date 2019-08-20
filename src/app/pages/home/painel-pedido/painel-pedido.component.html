@@ -28,6 +28,7 @@
             <thead>
                 <tr>
                     <th>Nome</th>
+                    <th></th>
                     <th>QTD</th>
                     <th>Preço</th>
                     <th></th>
@@ -36,7 +37,7 @@
 
             <tbody>
                 <tr *ngFor="let product of homeService.productSelected">
-                    <td class="text-truncate d-inline-block" style="max-width: 66px;">{{ product.name }}</td>
+                    <td  colspan="2" class="text-truncate d-inline-block" style="max-width:150px;">{{ product.name }}</td>
                     <td>
                         {{  product.qtd }}
                         <a href="javascript:void(0)" *ngIf="!product.old"
@@ -93,8 +94,7 @@
                     <div class="client-order position-static" *ngIf="homeService.client">
                         <div class="wallet" [ngClass]="{
                             'positive': homeService.client.amount > 0,
-                            'negative':homeService.client.amount < 0
-                        }">
+                            'negative':homeService.client.amount < 0 }">
                             {{ homeService.client.amount | currency:'BRL':' R$  ':'1.2-2'  }} <i
                                 class="fas fa-wallet"></i>
                         </div>

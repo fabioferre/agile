@@ -12,9 +12,19 @@
                     <h4>Localize um produto</h4>
                 </div>
               <div class="col-lg-6 col-sm-6 pt-3">
-                <button mat-raised-button color="primary" class="btn-block w-100" (click)="showAlert()">
+                  <form class="example-form">
+                      <mat-form-field class="example-full-width">
+                        <input type="text" placeholder="Encontrar produto" aria-label="busque o produto" matInput [formControl]="myControl" [matAutocomplete]="auto">
+                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn"> 
+                          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                            {{option.name}}
+                          </mat-option>
+                        </mat-autocomplete>
+                      </mat-form-field>
+                    </form>
+                <!-- <button mat-raised-button color="primary" class="btn-block w-100" (click)="showAlert()">
                   Digitar
-                </button>
+                </button> -->
               </div>
               
               <div class="col-lg-6 col-sm-6 pt-3">

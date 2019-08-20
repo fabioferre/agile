@@ -21,7 +21,6 @@ export class ModalNecategoryComponent implements OnInit {
     });
 
     public complements: any = [];
-    public loading: boolean;
     constructor(
         public modalCtrl: ModalController,
         private fb: FormBuilder,

@@ -1,11 +1,14 @@
 import { StockService } from './../stock.service';
 import { Component, OnInit } from '@angular/core';
 import { ModalController, AlertController } from '@ionic/angular';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ProdutoService } from '../produto.service';
 import { HelperService } from 'src/app/service/helper.service';
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
 import { NativeAudio } from '@ionic-native/native-audio/ngx';
+import { startWith, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'app-modal-fluxo',
@@ -13,7 +16,7 @@ import { NativeAudio } from '@ionic-native/native-audio/ngx';
   styleUrls: ['./modal-fluxo.component.scss'],
 })
 export class ModalFluxoComponent implements OnInit {
-  public options: BarcodeScannerOptions;
+  public barcodeOptions: BarcodeScannerOptions;
   public productsFiltered: any = { 'id': null, 'name': '-----', 'cost_price': 0.00, 'units': 0 };
   public form: FormGroup = this.fb.group({
     quantity: [1, Validators.required],
@@ -21,6 +24,9 @@ export class ModalFluxoComponent implements OnInit {
     current_cost_price: [null, Validators.required],
     type: [1, Validators.required]
   });
+  myControl = new FormControl();
+
+  filteredOptions: Observable<any[]>;
 
   constructor(
     private nativeAudio: NativeAudio,
@@ -32,9 +38,54 @@ export class ModalFluxoComponent implements OnInit {
     public stockService: StockService,
     public produtoService: ProdutoService) { }
 
-  ngOnInit() {
 
-  }
+  
+    ngOnInit() {
+
+      this.filteredOptions = this.myControl.valueChanges
+        .pipe(
+          startWith(''),
+          map(value => this.search(value))
+        );
+    }
+
+    displayFn(product?): string | undefined {
+      return product ? product.name : undefined;
+    }
+
+    search(text: any) {
+      text = text.toString().toLowerCase().trim();
+      var productsFiltered = this.produtoService.products.filter((product: any) => {
+        product.code = product.code ? product.code : "";
+        if (product.name.toLowerCase().includes(text) || product.code.toLowerCase().includes(text)) {
+          if(product.stock){
+            return product;
+          }
+         
+        }
+      });
+  
+      // if (!productsFiltered[0]) {
+      //   this.helper.toast('Produto não encontrado', {color :'danger'})
+      //   this.productsFiltered = { 'id': null, '----': 'Produto', 'cost_price': 0.00, 'units': 0 };
+      //   return false;
+      // }
+  
+      // if (!productsFiltered[0].stock) {
+      //   this.helper.toast('Não possui controle de estoque', {color : 'secondary'})
+      //   return false;
+      // }
+  
+      // this.helper.toast('Produto encontrado')
+      // this.productsFiltered = productsFiltered[0];
+      // this.productsFiltered = productsFiltered[0]
+      // this.form.controls.product_id.setValue(this.productsFiltered.id);
+      // this.form.controls.current_cost_price.setValue(this.productsFiltered.cost_price)
+      return productsFiltered;
+  
+    }
+  
+
 
   get quantity() {
     return this.form.controls.quantity;
@@ -79,11 +130,11 @@ export class ModalFluxoComponent implements OnInit {
   }
 
   scanner() {
-    this.options = {
+    this.barcodeOptions = {
       prompt: 'Codigo de barras do produto'
     };
 
-    this.barcodeScanner.scan(this.options).then(barcodeData => {
+    this.barcodeScanner.scan(this.barcodeOptions).then(barcodeData => {
       this.search(barcodeData);
 
     }).catch(err => {
@@ -122,33 +173,7 @@ export class ModalFluxoComponent implements OnInit {
     return await alert.present();
   }
 
-  search(text: any) {
-    text = text.toString().toLowerCase().trim();
-    var productsFiltered = this.produtoService.products.filter((product: any) => {
-      product.code = product.code ? product.code : "";
-      if (product.name.toLowerCase().includes(text) || product.code.toLowerCase().includes(text)) {
-        return product;
-      }
-    });
-
-    if (!productsFiltered[0]) {
-      this.helper.toast('Produto não encontrado', {color :'danger'})
-      this.productsFiltered = { 'id': null, '----': 'Produto', 'cost_price': 0.00, 'units': 0 };
-      return false;
-    }
-
-    if (!productsFiltered[0].stock) {
-      this.helper.toast('Não possui controle de estoque', {color : 'secondary'})
-      return false;
-    }
-
-    this.helper.toast('Produto encontrado')
-    this.productsFiltered = productsFiltered[0];
-    this.productsFiltered = productsFiltered[0]
-    this.form.controls.product_id.setValue(this.productsFiltered.id);
-    this.form.controls.current_cost_price.setValue(this.productsFiltered.cost_price)
-
-  }
+  
 
   beep() {
     this.nativeAudio.preloadSimple('uniqueId1', './assets/beep-scanner.mp3').then(onSuccess => { console.log("foi") }, onError => { console.log(onError) });

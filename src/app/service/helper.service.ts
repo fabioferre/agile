@@ -23,30 +23,24 @@ export class HelperService {
     }
 
     message(message?, style?) {
-        if (style) {
-            this.toast(style, message);
-        } else {
             if (message.error) {
                 for (const i in message.error.errors) {
                     if (i) {
-                        this.toast('danger', 'Atenção: ' + message.error.errors[i]);
+                        this.toast('Atenção: ' + message.error.errors[i], {color :'danger'});
                     }
                 }
             } else {
-                this.toast('success', message);
+                this.toast(message, {color : style});
             }
-
-        }
-
-
     }
 
-    async toast(status, messageReceived) {
+    async toast(message, options:any = {}) {
+
         const toast = await this.toastCtrl.create(
             {
-                message: messageReceived,
-                position: 'top',
-                color: status,
+                message: message,
+                position: options.position ?  options.position : "top",
+                color: options.color ? options.color: "success",
                 duration: 3000,
                 showCloseButton: true
             });

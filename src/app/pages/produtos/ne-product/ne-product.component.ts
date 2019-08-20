@@ -5,9 +5,6 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { HelperService } from 'src/app/service/helper.service';
 import { CategoriasService } from '../categorias.service';
 import { Router } from '@angular/router';
-
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { MatAutocomplete, MatChipInputEvent, MatAutocompleteSelectedEvent } from '@angular/material';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
@@ -135,7 +132,7 @@ export class NeProductComponent implements OnInit, OnDestroy {
         this.productService.create(this.form.value)
             .subscribe((product) => {
                 if (product) {
-                    this.helper.message('produto cadastrado');
+                    this.helper.toast('produto cadastrado');
                     this.productService.products.push(product);
                     this.router.navigate(['/produtos']);
                 }
@@ -153,7 +150,7 @@ export class NeProductComponent implements OnInit, OnDestroy {
                     const idx = this.productService.products.indexOf(this.productService.productToEdit);
                     this.productService.products[idx] = product;
 
-                    this.helper.message('Edição efetuada com exito');
+                    this.helper.toast('Edição efetuada com exito');
                     this.router.navigate(['/produtos']);
                 }
             });
@@ -203,7 +200,7 @@ export class NeProductComponent implements OnInit, OnDestroy {
             if (this.items[idx].qtd < item.units) {
                 this.items[idx].qtd++;
             } else {
-                this.helper.message('Item sem estoque!', 'secondary');
+                this.helper.toast('Item sem estoque!', {color : 'secondary'});
             }
         } else {
             this.items[idx].qtd++;

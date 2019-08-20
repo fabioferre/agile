@@ -46,7 +46,7 @@ export class ListarPedidosComponent extends Controller implements OnInit {
             const idx = this.orderService.dataSource.data.indexOf(order);
             this.orderService.dataSource.data[idx] = response;
             this.orderService.dataSource._updateChangeSubscription();
-            this.helper.message(`Pedido ${order.number} cancelado`);
+            this.helper.toast(`Pedido ${order.number} cancelado`);
         });
     }
 

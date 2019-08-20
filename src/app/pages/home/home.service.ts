@@ -51,7 +51,7 @@ export class HomeService extends Model {
             if (this.productSelected[idx].qtd < product.units) {
                 this.productSelected[idx].qtd++;
             } else {
-                this.helper.message('Limite no estoque!', 'secondary');
+                this.helper.toast('Limite no estoque!', {color: 'secondary'});
             }
         } else {
 

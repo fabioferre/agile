@@ -47,7 +47,7 @@ export class MostraPedidoComponent implements OnInit, OnDestroy {
     finalize() {
         this.order.status = 2;
         this.orderService.changeStatus(this.order).subscribe(order => {
-            this.helper.message('Pedido finalizado!');
+            this.helper.toast('Pedido finalizado!');
             this.router.navigate(['/pedidos']);
             if(this.impressora.printer_options.close){
                 this.impressora.printer(order);
@@ -101,7 +101,7 @@ export class MostraPedidoComponent implements OnInit, OnDestroy {
                             this.order.form_payment = form_payment;
                             this.finalize();
                         } else {
-                            this.helper.message('Selecione forma de pagamento!','warning');
+                            this.helper.toast('Selecione forma de pagamento!', {color : 'warning'});
                         }
                     }
                 }

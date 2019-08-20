@@ -13,7 +13,7 @@ import { StockService } from '../stock.service';
 })
 export class FluxoComponent extends Controller implements OnInit {
 
-  public displayedColumns = ['created_at', 'name', 'type', 'quantity', 'current_cost_price', 'action'];
+  public displayedColumns = ['created_at', 'name', 'type', 'quantity', 'current_cost_price', 'units'];
   public flow;
   public productsFiltered;
 
@@ -37,6 +37,7 @@ export class FluxoComponent extends Controller implements OnInit {
     } else {
       this.updateDataTable(this.stockService.flows)
     }
+    console.log(this.stockService.flows)
 
     if (!this.produtoService.products) {
       this.produtoService.get().subscribe(data => this.produtoService.products  = data);

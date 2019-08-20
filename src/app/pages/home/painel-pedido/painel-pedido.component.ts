@@ -101,7 +101,7 @@ export class PainelPedidoComponent implements OnInit {
         this.form.controls.total.setValue(this.homeService.totalPrice);
         this.form.controls.products.setValue(this.homeService.productSelected);
         if (this.form.invalid) {
-            this.helper.message('Selecione ao menos um produto', 'warning')
+            this.helper.toast('Selecione ao menos um produto', {color: 'warning'})
             this.homeService.productAlert = false;
             setTimeout(() => {
                 this.homeService.productAlert = true;
@@ -125,7 +125,7 @@ export class PainelPedidoComponent implements OnInit {
                 this.homeService.removeProducUnits(this.form.value.products);
                 this.homeService.clearPainel();
                 this.changeActive(1);
-                this.helper.message("Pedido efetuado");
+                this.helper.toast("Pedido efetuado");
                 console.log(response)
 
                 if(this.impressora.printer_options.create){
@@ -143,7 +143,7 @@ export class PainelPedidoComponent implements OnInit {
             this.homeService.removeProducUnits(this.form.value.products);
             this.homeService.clearPainel();
             this.changeActive(1);
-            this.helper.message("Pedido acrescentado");
+            this.helper.toast("Pedido acrescentado");
         });
     }
 

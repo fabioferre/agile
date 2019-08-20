@@ -78,7 +78,7 @@ export class ImpressoraComponent implements OnInit {
     save() {
         this.impressora.printer_options = this.form.value;
         this.impressora.setOptions();
-        this.helper.message("Alteração efetuada !")
+        this.helper.toast("Alteração efetuada !")
     }
 
     get() {

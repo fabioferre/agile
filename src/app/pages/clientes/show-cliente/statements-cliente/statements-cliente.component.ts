@@ -58,7 +58,7 @@ export class StatementsClienteComponent extends Controller implements OnInit {
      
       this.statements = statement
       this.updateDataTable(statement)
-      this.helper.message("Extrato carregado!")
+      this.helper.toast("Extrato carregado!")
     });
 
   }
@@ -78,7 +78,7 @@ console.log(this.statements)
     this.impressora.printerStatement(this.statements).subscribe(response => {
       if (response) {
     
-        this.helper.message("Impressão efetuada !")
+        this.helper.toast("Impressão efetuada !")
 
       }
     })

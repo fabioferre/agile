@@ -106,7 +106,7 @@ export default class Model {
             finalize(() => {
                 this.helper.isLoading = false;
                 this.helper.load(false);
-                this.helper.message('Efetuado com sucesso');
+                this.helper.toast('Efetuado com sucesso');
 
             }),
             catchError(this.handleError)

@@ -40,7 +40,7 @@ export class NovoClienteComponent implements OnInit {
       this.clientesService.create(this.form.value)
         .subscribe((client) => {
           if(client){
-            this.helper.message('cliente cadastrado !')
+            this.helper.toast('cliente cadastrado !')
             this.clientesService.clientes.push(client)
             this.router.navigate(['/clientes']);
 

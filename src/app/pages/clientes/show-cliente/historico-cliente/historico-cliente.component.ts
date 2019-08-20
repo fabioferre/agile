@@ -77,7 +77,7 @@ export class HistoricoClienteComponent extends Controller implements OnInit {
     this.impressora.printerStatement(this.statements).subscribe(response => {
       if (response) {
         console.log(response)
-        this.helper.message("Impressão efetuada !")
+        this.helper.toast("Impressão efetuada !")
 
       }
     })

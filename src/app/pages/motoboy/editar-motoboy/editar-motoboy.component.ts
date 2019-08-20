@@ -45,7 +45,7 @@ export class EditarMotoboyComponent implements OnInit {
           if(motoboy){
             const idx = this.motoboyService.motoboy.indexOf(this.motoboy);
             this.motoboyService.motoboy[idx] = motoboy;
-            this.helper.message('Edição efetuada ')
+            this.helper.toast('Edição efetuada ')
             this.router.navigate(['/motoboy']);
           }
 

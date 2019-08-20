@@ -1,10 +1,10 @@
 import { StockService } from './../stock.service';
 import { Component, OnInit } from '@angular/core';
-import { ModalController,  AlertController } from '@ionic/angular';
+import { ModalController, AlertController } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProdutoService } from '../produto.service';
 import { HelperService } from 'src/app/service/helper.service';
-import { BarcodeScanner, BarcodeScannerOptions  } from '@ionic-native/barcode-scanner/ngx';
+import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
 import { NativeAudio } from '@ionic-native/native-audio/ngx';
 
 @Component({
@@ -13,8 +13,8 @@ import { NativeAudio } from '@ionic-native/native-audio/ngx';
   styleUrls: ['./modal-fluxo.component.scss'],
 })
 export class ModalFluxoComponent implements OnInit {
-  public options : BarcodeScannerOptions;
-  public productsFiltered;
+  public options: BarcodeScannerOptions;
+  public productsFiltered: any = { 'id': null, 'name': '-----', 'cost_price': 0.00, 'units': 0 };
   public form: FormGroup = this.fb.group({
     quantity: [1, Validators.required],
     product_id: [null, Validators.required],
@@ -40,43 +40,55 @@ export class ModalFluxoComponent implements OnInit {
     return this.form.controls.quantity;
   }
 
+
   plus() {
-    this.quantity.setValue(parseInt(this.quantity.value) + 1);
+    let sum = parseInt(this.quantity.value) + 1;
+    this.quantity.setValue(sum);
   }
 
   less() {
-    this.quantity.setValue(parseInt(this.quantity.value) - 1);
+    let sum = parseInt(this.quantity.value) - 1;
+    this.quantity.setValue(sum);
   }
 
   save() {
+    if (this.quantity.value === 0) {
+      this.helper.toast('Informe a quantidade', {color:'secondary'});
+      return false;
+    }
     if (Math.sign(this.quantity.value)) {
       this.form.controls.type.setValue(0);
     }
+
     this.stockService.create(this.form.value).subscribe(data => {
-      this.helper.message('Registro efetuado !');
+      this.beep()
+      this.helper.toast('Registro efetuado !');
       this.modalCtrl.dismiss();
-      this.stockService.flows.push(data)
+      this.stockService.flows.push(data);
     });
 
   }
-  encode(){
+
+  encode() {
     var textToEncode = window.prompt("enter text to encode");
-    this.barcodeScanner.encode(this.barcodeScanner.Encode.TEXT_TYPE, textToEncode).then((data)=>{
+    this.barcodeScanner.encode(this.barcodeScanner.Encode.TEXT_TYPE, textToEncode).then((data) => {
       alert(JSON.stringify(data));
-    },(err)=>{
+    }, (err) => {
       alert(JSON.stringify(err));
     })
   }
+
   scanner() {
     this.options = {
       prompt: 'Codigo de barras do produto'
     };
 
     this.barcodeScanner.scan(this.options).then(barcodeData => {
-      console.log('Barcode data', barcodeData);
+      this.search(barcodeData);
+
     }).catch(err => {
       this.beep()
-      this.helper.message('Leitor não encontrado', 'secondary')
+      this.helper.toast('Leitor não encontrado',{color :  'secondary'});
     });
 
   }
@@ -94,13 +106,11 @@ export class ModalFluxoComponent implements OnInit {
         {
           text: 'Buscar',
           handler: (data) => {
-
             this.search(data.text)
-
           }
         },
         {
-          text: 'Saida',
+          text: 'Cancelar',
           cssClass: 'danger',
           handler: () => {
 
@@ -111,28 +121,38 @@ export class ModalFluxoComponent implements OnInit {
 
     return await alert.present();
   }
-  search(text: string) {
-    text = text.toLowerCase().trim();
-    this.productsFiltered = this.produtoService.products.filter((product: any) => {
+
+  search(text: any) {
+    text = text.toString().toLowerCase().trim();
+    var productsFiltered = this.produtoService.products.filter((product: any) => {
       product.code = product.code ? product.code : "";
       if (product.name.toLowerCase().includes(text) || product.code.toLowerCase().includes(text)) {
         return product;
       }
     });
-    if (this.productsFiltered[0]) {
-      this.beep()
-      this.form.controls.product_id.setValue(this.productsFiltered[0].id);
-      this.form.controls.current_cost_price.setValue(this.productsFiltered[0].cost_price)
-      this.helper.message('Produto encontrado')
-    }else{
-      this.helper.message('Produto não encontrado', 'danger')
+
+    if (!productsFiltered[0]) {
+      this.helper.toast('Produto não encontrado', {color :'danger'})
+      this.productsFiltered = { 'id': null, '----': 'Produto', 'cost_price': 0.00, 'units': 0 };
+      return false;
     }
+
+    if (!productsFiltered[0].stock) {
+      this.helper.toaste('Não possui controle de estoque', {color : 'secondary'})
+      return false;
+    }
+
+    this.helper.toast('Produto encontrado')
+    this.productsFiltered = productsFiltered[0];
+    this.productsFiltered = productsFiltered[0]
+    this.form.controls.product_id.setValue(this.productsFiltered.id);
+    this.form.controls.current_cost_price.setValue(this.productsFiltered.cost_price)
 
   }
 
-  beep(){
-    this.nativeAudio.preloadSimple('uniqueId1', './assets/beep-scanner.mp3').then(onSuccess=> {console.log("foi")}, onError => { console.log(onError) });
-  this.nativeAudio.play('uniqueId1').then(onSuccess=> {console.log("foi")}, onError => { console.log(onError) });
+  beep() {
+    this.nativeAudio.preloadSimple('uniqueId1', './assets/beep-scanner.mp3').then(onSuccess => { console.log("foi") }, onError => { console.log(onError) });
+    this.nativeAudio.play('uniqueId1').then(onSuccess => { console.log("foi") }, onError => { console.log(onError) });
   }
 
 }

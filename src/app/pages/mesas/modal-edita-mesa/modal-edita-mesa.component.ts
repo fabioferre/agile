@@ -42,7 +42,7 @@ export class ModalEditaMesaComponent implements OnInit {
             let idx = this.tableService.tables.indexOf(this.tableService.tableToEdit);
             this.tableService.tables[idx] = this.form.value;
             this.tableService.tableToEdit = null;
-            this.helper.message(`mesa ${response.name} atualizada com sucesso!`);
+            this.helper.toast(`mesa ${response.name} atualizada com sucesso!`);
             this.modalCtrl.dismiss();
         });
     }

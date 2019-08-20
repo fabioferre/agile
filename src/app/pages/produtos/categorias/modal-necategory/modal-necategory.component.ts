@@ -38,33 +38,27 @@ export class ModalNecategoryComponent implements OnInit {
     }
 
     addComplement() {
-        this.loading = true;
-        // console.log( this.complementForm.value);
+        this.helper.load();
         this.categoryService.storeComplement(this.categoryService.elementToedit.id, this.complementForm.value).subscribe((response) => {
-            // console.log(response);
             this.complements.unshift(response);
             this.complementForm.reset();
-            this.loading = false;
-            this.helper.toast('success', 'Adicionado com sucesso');
+            this.helper.toast('Adicionado com sucesso');
         });
     }
 
     removeComplement(complement) {
-        this.loading = true;
-        // console.log( this.complementForm.value);
-        // console.log('das')
+        this.helper.load()
         this.categoryService.deleteComplement(this.categoryService.elementToedit.id, complement.id).subscribe((response) => {
             const idx = this.complements.indexOf(complement);
             this.complements.splice(idx, 1);
-            this.loading = false;
         });
     }
     save() {
+        this.helper.load(false)
         this.categoryService.updateById(this.categoryService.elementToedit.id, this.form.value).subscribe((response) => {
-            // console.log(response, 'update');
             const idx = this.categoryService.categories.indexOf(this.categoryService.elementToedit);
             this.categoryService.categories[idx] = response;
-            this.helper.toast('success', 'Atualizado com sucesso');
+            this.helper.toast('Atualizado com sucesso');
             this.modalCtrl.dismiss();
         });
     }

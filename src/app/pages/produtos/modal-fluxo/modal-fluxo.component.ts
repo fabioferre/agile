@@ -20,10 +20,10 @@ export class ModalFluxoComponent implements OnInit {
   public productsFiltered: any = { 'id': null, 'name': '-----', 'cost_price': 0.00, 'units': 0 };
   public form: FormGroup = this.fb.group({
     quantity: [1, Validators.required],
-    product_id: [null, Validators.required],
-    current_cost_price: [null, Validators.required],
-    type: [1, Validators.required],
-    myControl: ['']
+    product_id: [null,  Validators.required],
+    product: [null, Validators.required],
+    current_cost_price: [0, Validators.required],
+    type: [1, Validators.required]
   });
   
   filteredOptions: Observable<any[]>;
@@ -41,26 +41,37 @@ export class ModalFluxoComponent implements OnInit {
 
   
     ngOnInit() {
+      this.product.valueChanges.subscribe((valor)=>{
+        this.productsFiltered = valor
+        if(!valor.id){
+          this.helper.toast('Produto não encontrado', {color:'secondary'});
+            return false;
+        }
+        this.form.controls.product_id.setValue(valor.id);
+        this.form.controls.current_cost_price.setValue(valor.cost_price);
+      });
 
-      this.filteredOptions = this.myControl.valueChanges
+      this.filteredOptions = this.product.valueChanges
         .pipe(
           startWith(''),
           map(value => this.search(value))
         );
     }
 
-    get myControl() {
-      return this.form.controls.myControl;
+
+    get product() {
+      return this.form.controls.product;
     }
 
 
-    displayFn(product?): string | undefined {
+
+    displayFn(product?) {
       return product ? product.name : undefined;
     } 
 
     search(text: any) {
       text = text.toString().toLowerCase().trim();
-      var productsFiltered = this.produtoService.products.filter((product: any) => {
+      return   this.produtoService.products.filter((product: any) => {
         product.code = product.code ? product.code : "";
         if (product.name.toLowerCase().includes(text) || product.code.toLowerCase().includes(text)) {
           if(product.stock){
@@ -69,24 +80,6 @@ export class ModalFluxoComponent implements OnInit {
          
         }
       });
-  
-      // if (!productsFiltered[0]) {
-      //   this.helper.toast('Produto não encontrado', {color :'danger'})
-      //   this.productsFiltered = { 'id': null, '----': 'Produto', 'cost_price': 0.00, 'units': 0 };
-      //   return false;
-      // }
-  
-      // if (!productsFiltered[0].stock) {
-      //   this.helper.toast('Não possui controle de estoque', {color : 'secondary'})
-      //   return false;
-      // }
-  
-      // this.helper.toast('Produto encontrado')
-      // this.productsFiltered = productsFiltered[0];
-      // this.productsFiltered = productsFiltered[0]
-      // this.form.controls.product_id.setValue(this.productsFiltered.id);
-      // this.form.controls.current_cost_price.setValue(this.productsFiltered.cost_price)
-      return productsFiltered;
   
     }
   
@@ -108,6 +101,9 @@ export class ModalFluxoComponent implements OnInit {
   }
 
   save() {
+
+
+    
     if (this.quantity.value === 0) {
       this.helper.toast('Informe a quantidade', {color:'secondary'});
       return false;
@@ -125,12 +121,12 @@ export class ModalFluxoComponent implements OnInit {
 
   }
 
-  encode() {
-    var textToEncode = window.prompt("enter text to encode");
-    this.barcodeScanner.encode(this.barcodeScanner.Encode.TEXT_TYPE, textToEncode).then((data) => {
-      alert(JSON.stringify(data));
+  encode(textToEncode) {
+
+    return  this.barcodeScanner.encode(this.barcodeScanner.Encode.TEXT_TYPE, textToEncode).then((data) => {
+      return data ;
     }, (err) => {
-      alert(JSON.stringify(err));
+      return err;
     })
   }
 
@@ -140,7 +136,10 @@ export class ModalFluxoComponent implements OnInit {
     };
 
     this.barcodeScanner.scan(this.barcodeOptions).then(barcodeData => {
-      this.search(barcodeData);
+      let dados = this.search(this.encode(barcodeData))[0]
+      if(dados){
+        this.product.setValue(dados) ;
+      }
 
     }).catch(err => {
       this.beep()

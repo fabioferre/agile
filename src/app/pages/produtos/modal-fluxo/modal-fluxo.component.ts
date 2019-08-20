@@ -56,7 +56,7 @@ export class ModalFluxoComponent implements OnInit {
       this.helper.toast('Informe a quantidade', {color:'secondary'});
       return false;
     }
-    if (Math.sign(this.quantity.value)) {
+    if (this.quantity.value < 0) {
       this.form.controls.type.setValue(0);
     }
 
@@ -138,7 +138,7 @@ export class ModalFluxoComponent implements OnInit {
     }
 
     if (!productsFiltered[0].stock) {
-      this.helper.toaste('Não possui controle de estoque', {color : 'secondary'})
+      this.helper.toast('Não possui controle de estoque', {color : 'secondary'})
       return false;
     }
 

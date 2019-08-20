@@ -56,10 +56,8 @@
 
                 <!-- units Column -->
                 <ng-container matColumnDef="current_quantity">
-                    <th mat-header-cell *matHeaderCellDef>Unidades Atual</th>
-                    <td mat-cell *matCellDef="let element">
-                        {{  element.current_quantity }}
-                    </td>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Unidades Atual</th>
+                    <td mat-cell *matCellDef="let element"> {{  element.current_quantity }}</td>
                 </ng-container>
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

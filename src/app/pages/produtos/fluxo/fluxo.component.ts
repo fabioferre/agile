@@ -13,7 +13,7 @@ import { StockService } from '../stock.service';
 })
 export class FluxoComponent extends Controller implements OnInit {
 
-  public displayedColumns = ['created_at', 'name', 'type', 'quantity', 'current_cost_price', 'units'];
+  public displayedColumns = ['created_at', 'name', 'type', 'quantity', 'current_cost_price', 'current_quantity'];
   public flow;
   public productsFiltered;
 

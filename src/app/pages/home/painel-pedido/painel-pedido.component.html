@@ -24,46 +24,48 @@
     <form [formGroup]="form" class="painel-body beauty-scroll">
 
         <caption>Pedidos</caption>
-        <table class="order-list text-center">
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th></th>
-                    <th>QTD</th>
-                    <th>Preço</th>
-                    <th></th>
-                </tr>
-            </thead>
+        <div class="limit-table beauty-scroll">
+            <table class="order-list text-center ">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th></th>
+                        <th>QTD</th>
+                        <th>Preço</th>
+                        <th></th>
+                    </tr>
+                </thead>
 
-            <tbody>
-                <tr *ngFor="let product of homeService.productSelected">
-                    <td  colspan="2" class="text-truncate d-inline-block" style="max-width:150px;">{{ product.name }}</td>
-                    <td>
-                        {{  product.qtd }}
-                        <a href="javascript:void(0)" *ngIf="!product.old"
-                            (click)="homeService.lessProduct(product, $event)" class="float-left btn-order text-danger">
-                            <i class="fas fa-minus-circle"></i>
-                        </a>
+                <tbody>
+                    <tr *ngFor="let product of homeService.productSelected">
+                        <td  colspan="2" class="text-truncate d-inline-block" style="max-width:150px;">{{ product.name }}</td>
+                        <td>
+                            {{  product.qtd }}
+                            <a href="javascript:void(0)" *ngIf="!product.old"
+                                (click)="homeService.lessProduct(product, $event)" class="float-left btn-order text-danger">
+                                <i class="fas fa-minus-circle"></i>
+                            </a>
 
-                        <a href="javascript:void(0)" *ngIf="!product.old" class="float-right btn-order text-primary"
-                            (click)="homeService.plusProduct(product, $event)">
-                            <i class="fas fa-plus-circle"></i>
-                        </a>
-                    </td>
-                    <td> {{ homeService.getTotalSale(product ) | currency:'BRL':'R$':'1.2-2'}} </td>
-                    <td>
-                        <a href="javascript:void(0)" *ngIf="!homeService.buildingProduct"
-                            (click)="homeService.removeProductSelected(product); homeService.selection.deselect(product) "
-                            class="d-block text-center text-dark">
-                            <i class="fas fa-times"></i>
-                        </a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                            <a href="javascript:void(0)" *ngIf="!product.old" class="float-right btn-order text-primary"
+                                (click)="homeService.plusProduct(product, $event)">
+                                <i class="fas fa-plus-circle"></i>
+                            </a>
+                        </td>
+                        <td> {{ homeService.getTotalSale(product ) | currency:'BRL':'R$':'1.2-2'}} </td>
+                        <td>
+                            <a href="javascript:void(0)" *ngIf="!homeService.buildingProduct"
+                                (click)="homeService.removeProductSelected(product); homeService.selection.deselect(product) "
+                                class="d-block text-center text-dark">
+                                <i class="fas fa-times"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
         
-        <div class="painel-footer">
+        <div class="painel-footer bg-white">
         
             <div class="row mx-0 text-theme price-content mt-4">
                 <div class="col-lg-6 ">

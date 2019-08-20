@@ -24,9 +24,11 @@
 
 }
 .painel-body {
-    min-height: 500px;
-    max-height: 600px;
-    overflow: auto;
+    height: 64vh;
+    .limit-table {
+        max-height: 43vh;
+        overflow: auto;
+    }
 }
 .painel-item {
     width: 60px;
@@ -131,7 +133,8 @@ caption {
 
 .painel-footer {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 97%;
+    bottom: 15px;
+    left: 16px;
+    width: 94%;
+    
 }

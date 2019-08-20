@@ -70,7 +70,13 @@ export class HomeService extends Model {
 
 
     public getTotalSale(product) {
-        return product.sale_price * product.qtd;
+        let price = 0;
+        if (product.aditional_price) {
+            price = product.aditional_price;
+        }
+
+        price +=  product.sale_price * product.qtd;
+        return price ;
     }
 
     public removeProducUnits(listProducts) {

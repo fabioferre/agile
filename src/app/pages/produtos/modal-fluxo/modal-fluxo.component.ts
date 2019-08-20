@@ -22,10 +22,10 @@ export class ModalFluxoComponent implements OnInit {
     quantity: [1, Validators.required],
     product_id: [null, Validators.required],
     current_cost_price: [null, Validators.required],
-    type: [1, Validators.required]
+    type: [1, Validators.required],
+    myControl: ['']
   });
-  myControl = new FormControl();
-
+  
   filteredOptions: Observable<any[]>;
 
   constructor(
@@ -49,9 +49,14 @@ export class ModalFluxoComponent implements OnInit {
         );
     }
 
+    get myControl() {
+      return this.form.controls.myControl;
+    }
+
+
     displayFn(product?): string | undefined {
       return product ? product.name : undefined;
-    }
+    } 
 
     search(text: any) {
       text = text.toString().toLowerCase().trim();

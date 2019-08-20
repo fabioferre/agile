@@ -2,7 +2,7 @@
   &times;
 </a>
 <div class="product-title">
-    <h4 class="text-center text-theme">{{ product.name }}  -  <small>Pré Montagem</small></h4>
+    <h4 class="text-center text-theme">{{ homeService.productModal.name }}  -  <small>Pré Montagem</small></h4>
  
 </div>
 <div class="container scrollbar-inner beauty-scroll">
@@ -11,7 +11,7 @@
             <h5 class="bg-theme py-1 text-center text-light">Complementos</h5>
             <ul class="list-group">
                 <li class="list-group-item  complement-item" 
-                *ngFor="let complement of product.complements"
+                *ngFor="let complement of homeService.productModal.complements"
                 [ngClass]="{'selected': complement.selected}"
                 (click)="toggleComplement(complement)" >
                     <span class="d-inline-block">
@@ -23,17 +23,14 @@
                     </a>
                 </li>
             </ul>
-            <p>
-                Complementos selecionados: {{ complementsSelected }}
-            </p>
         </div>
-        <div class="col-lg-12 mb-5 pb-5">
-            <h5 class="bg-theme py-1 text-center text-light">Resumo</h5>
+        <div class="col-lg-12 mb-5 pb-5 ">
+            <h5 class="bg-theme py-1 text-center text-light my-2">Resumo</h5>
             <form [formGroup]="form">
                 <div class="form-row">
                     <div class="col-lg-12 ">
                         <span class="d-block border-bottom">
-                            <strong>Preço do produto: </strong> {{ product.sale_price | currency:'BRL':'R$':'1.2-2' }}
+                            <strong>Preço do produto: </strong> {{  homeService.productModal.sale_price | currency:'BRL':'R$':'1.2-2' }}
                         </span>
                         <span class="d-block border-bottom">
                             <strong>Preço Adicionais: </strong> &nbsp;
@@ -41,7 +38,7 @@
                         </span>
                         <span class="d-block border-bottom">
                             <strong>Preço Atualizado: </strong> 
-                            <span class="text-success">{{ product.sale_price +  aditionalPrice | currency:'BRL':'R$':'1.2-2' }}</span> 
+                            <span class="text-success">{{ homeService.productModal.sale_price +  aditionalPrice | currency:'BRL':'R$':'1.2-2' }}</span> 
                         </span>
                     </div>
                     <div class="col-lg-12">

@@ -17,7 +17,7 @@ import { ComplementsModalComponent } from '../modal/complements-modal/complement
 })
 export class ListaProdutosComponent extends Controller implements OnInit {
     @Input() public products: any;
-    public displayedColumns: string[] = ['select', 'id', 'image', 'name', 'category', 'unity', 'sale_price'];
+    public displayedColumns: string[] = ['select', 'id', 'image', 'name', 'category_name', 'unity', 'sale_price'];
     public selection: any;
     @ViewChild(MatSort) sort: MatSort;
     constructor(
@@ -34,19 +34,22 @@ export class ListaProdutosComponent extends Controller implements OnInit {
     }
 
 
-    async modalComplement() {
+    async modalComplement(product: any) {
         const modal = await this.modalCtrl.create({
             component: ComplementsModalComponent,
             cssClass: 'sm responsive'
         });
         modal.onDidDismiss().then(() => {
             if (this.homeService.productModal.canAdd) {
+                this.homeService.productModal.canAdd = null;
                 this.homeService.productSelected.push(this.homeService.productModal);
             } else {
                 this.homeService.selection.deselect(this.homeService.productModal);
             }
             this.homeService.productModal = null;
         });
+
+        this.homeService.productModal = product;
         return  await modal.present();
     }
 
@@ -74,7 +77,6 @@ export class ListaProdutosComponent extends Controller implements OnInit {
 
 
     public verifyStock(product) {
-
         if (product.units <= 0 && product.stock) {
             this.helper.toast('Produto sem estoque!', {color : 'warning'});
             this.selection.toggle(product);
@@ -84,11 +86,11 @@ export class ListaProdutosComponent extends Controller implements OnInit {
         }
     }
 
-    public verifyComplements( product) {
+    public verifyComplements( product ) {
         // console.log(product);
         if (product.complements.length > 0) {
-            this.homeService.productModal = product;
-            this.modalComplement();
+            // this.homeService.productModal = ;
+            this.modalComplement(product);
             return true;
         } else {
             return false;

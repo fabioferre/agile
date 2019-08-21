@@ -26,10 +26,12 @@ export class ImpressoraService extends Model {
   }
 
   setOptions() {
+    
     this.storage.set('printer_options', this.printer_options);
   }
 
   printer(request) {
+   this.urlApi = this.printer_options.ip ? "" : "";
     let dado = {
       "order": request.number,
       "total": request.total,

@@ -40,6 +40,9 @@ export class ListarPedidosComponent extends Controller implements OnInit {
         });
     }
 
+    public applyFilter(filterValue: string) {
+        this.orderService.dataSource.filter = filterValue.trim().toLowerCase();
+    }
     public delete(order): void {
         const orderToChange = order;
         orderToChange.status = 0;

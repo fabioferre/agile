@@ -12,6 +12,7 @@ import { HelperService } from 'src/app/service/helper.service';
     styleUrls: ['./modal-necategory.component.scss'],
 })
 export class ModalNecategoryComponent implements OnInit {
+    public loading;
     public form: FormGroup = this.fb.group({
         name: ['', Validators.required],
     });
@@ -37,23 +38,26 @@ export class ModalNecategoryComponent implements OnInit {
     }
 
     addComplement() {
-        this.helper.load();
+        this.loading = true;
         this.categoryService.storeComplement(this.categoryService.elementToedit.id, this.complementForm.value).subscribe((response) => {
+            this.loading = false;
             this.complements.unshift(response);
             this.complementForm.reset();
             this.helper.toast('Adicionado com sucesso');
+            
         });
     }
 
     removeComplement(complement) {
-        this.helper.load()
+        this.loading = true;
         this.categoryService.deleteComplement(this.categoryService.elementToedit.id, complement.id).subscribe((response) => {
+            this.loading = false;
             const idx = this.complements.indexOf(complement);
             this.complements.splice(idx, 1);
         });
     }
     save() {
-        this.helper.load(false)
+       
         this.categoryService.updateById(this.categoryService.elementToedit.id, this.form.value).subscribe((response) => {
             const idx = this.categoryService.categories.indexOf(this.categoryService.elementToedit);
             this.categoryService.categories[idx] = response;

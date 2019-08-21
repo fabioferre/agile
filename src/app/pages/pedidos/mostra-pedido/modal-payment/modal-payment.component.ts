@@ -5,11 +5,8 @@ import { PedidosService } from '../../pedidos.service';
 import { HelperService } from 'src/app/service/helper.service';
 import { ImpressoraService } from 'src/app/pages/sistema/impressora.service';
 import { Router } from '@angular/router';
-<<<<<<< HEAD
 import { Observable } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
-=======
->>>>>>> beta
 
 @Component({
     selector: 'app-modal-payment',
@@ -18,24 +15,14 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class ModalPaymentComponent implements OnInit {
     public paymentOptions: any = [
-<<<<<<< HEAD
-        {  name: 'Cartão Debito / Crédito', icon: 'fa-credit-card' },
-        {  name: 'Vaucher', icon: 'fa-money-check' },
-        {  name: 'Dinheiro', icon: 'fa-money-bill-wave' },
-=======
-        { showCalc: false, name: 'Cartão Debito / Crédito', icon: 'fa-credit-card' },
-        { showCalc: false, name: 'Vaucher', icon: 'fa-money-check' },
-        { showCalc: true, name: 'Dinheiro', icon: 'fa-money-bill-wave' },
->>>>>>> beta
+        { name: 'Cartão Debito / Crédito', icon: 'fa-credit-card' },
+        { name: 'Vaucher', icon: 'fa-money-check' },
+        { name: 'Dinheiro', icon: 'fa-money-bill-wave' },
     ];
 
     public form: FormGroup = this.fb.group({
         paymentMethod: ['', Validators.required],
-<<<<<<< HEAD
         paymentValue: ['', Validators.required],
-=======
-        paymentValue: [''],
->>>>>>> beta
         change: [0],
         missingPayment: [0]
     });
@@ -54,16 +41,9 @@ export class ModalPaymentComponent implements OnInit {
 
     ngOnInit() {
         this.order = this.orderService.orderToFinalize;
-<<<<<<< HEAD
         this.form.controls.paymentMethod.valueChanges.subscribe(name => this.selectMethod(name));
         if (this.order.client) {
             this.paymentOptions.push({ name: 'Conta cliente', icon: 'fa-wallet', clientAccount: true });
-=======
-        console.log(this.order);
-        this.form.controls.paymentMethod.valueChanges.subscribe(name => this.selectMethod(name));
-        if (this.order.client) {
-            this.paymentOptions.push({ showCalc: true, name: 'Conta cliente', icon: 'fa-wallet', clientAccount: true });
->>>>>>> beta
         }
     }
 
@@ -93,20 +73,12 @@ export class ModalPaymentComponent implements OnInit {
             }
             this.form.controls.paymentValue.setValue(value);
         }
-<<<<<<< HEAD
-=======
-        console.log(this.paymentOptionChose);
->>>>>>> beta
     }
 
     public calcChange() {
         let change: any = this.form.value.paymentValue - parseFloat(this.order.total);
         if (change < 0) {
             this.form.controls.missingPayment.setValue(Math.abs(change));
-<<<<<<< HEAD
-=======
-            console.log(Math.abs(change));
->>>>>>> beta
             change = 0;
         } else {
             this.form.controls.missingPayment.setValue(0);
@@ -116,13 +88,12 @@ export class ModalPaymentComponent implements OnInit {
 
     finalize() {
         this.order.status = 2;
-<<<<<<< HEAD
         this.order.form_payment = this.paymentMethod.value;
         this.order.change = this.change;
-        this.orderService.changeStatus(this.order).subscribe((order: any ) => {
-            console.log(order)
+        this.orderService.changeStatus(this.order).subscribe((order: any) => {
+            console.log(order);
             if (order) {
-                
+
                 this.helper.toast('Pedido finalizado!');
                 this.modalCtrl.dismiss();
                 this.orderService.orderToFinalize = order;
@@ -136,16 +107,5 @@ export class ModalPaymentComponent implements OnInit {
                 }
             }
         }, (error: HttpErrorResponse) => this.orderService.handleError(error));
-=======
-        this.order.form_payment = this.paymentMethod;
-        this.order.change = this.change;
-        this.orderService.changeStatus(this.order).subscribe(order => {
-            this.helper.toast('Pedido finalizado!');
-            this.router.navigate(['/pedidos']);
-            if (this.impressora.printer_options.close) {
-                this.impressora.printer(order);
-            }
-        });
->>>>>>> beta
     }
 }

@@ -136,22 +136,7 @@ export class HomeService extends Model {
     }
 
 
-    public finalizeBuild() {
-        const productToSend = { id: null, sale_price: 0, name: '', custom: true, qtd: 1, stock: false, fractioned: null, collection: null };
-
-        for (const product of this.buildedProducts) {
-            productToSend.name += product.name + ' 1/2 ';
-
-            if (product.sale_price > productToSend.sale_price) {
-                productToSend.id = product.id;
-                productToSend.sale_price = product.sale_price;
-            }
-
-        }
-
-        this.productSelected.push(productToSend);
-        this.toggleBuild();
-    }
+  
 
 
 

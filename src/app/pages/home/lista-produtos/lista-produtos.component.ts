@@ -50,7 +50,7 @@ export class ListaProdutosComponent extends Controller implements OnInit {
         });
 
         this.homeService.productModal = product;
-        return  await modal.present();
+        return await modal.present();
     }
 
     putOrder(product): void {
@@ -78,7 +78,7 @@ export class ListaProdutosComponent extends Controller implements OnInit {
 
     public verifyStock(product) {
         if (product.units <= 0 && product.stock) {
-            this.helper.toast('Produto sem estoque!', {color : 'warning'});
+            this.helper.toast('Produto sem estoque!', { color: 'warning' });
             this.selection.toggle(product);
             return false;
         } else {
@@ -86,7 +86,7 @@ export class ListaProdutosComponent extends Controller implements OnInit {
         }
     }
 
-    public verifyComplements( product ) {
+    public verifyComplements(product) {
         // console.log(product);
         if (product.complements.length > 0) {
             // this.homeService.productModal = ;
@@ -97,4 +97,32 @@ export class ListaProdutosComponent extends Controller implements OnInit {
         }
     }
 
+
+    public finalizeBuild() {
+        const productToSend = {
+            id: null, sale_price: 0,
+            name: '',
+            custom: true,
+            qtd: 1,
+            stock: false,
+            fractioned: null,
+            collection: null,
+            complements: null
+        };
+        for (const product of this.homeService.buildedProducts) {
+            productToSend.name += product.name + ' 1/2 ';
+
+            if (product.sale_price > productToSend.sale_price) {
+                productToSend.id = product.id;
+                productToSend.sale_price = product.sale_price;
+                productToSend.complements = product.complements;
+            }
+
+        }
+
+        if ( !this.verifyComplements(productToSend) ) {
+            this.homeService.productSelected.push(productToSend);
+        }
+        this.homeService.toggleBuild();
+    }
 }

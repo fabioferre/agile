@@ -8,8 +8,8 @@ export default class Model {
     public elementToedit;
     public ne = false;
     protected url;
-    // protected urlApi = 'http://tagmus/api';
-    protected urlApi = 'http://tagmus.com.br/api';
+    protected urlApi = 'http://tagmus/api';
+    // protected urlApi = 'http://tagmus.com.br/api';
     constructor(
         protected http: HttpClient,
         protected helper: HelperService) {

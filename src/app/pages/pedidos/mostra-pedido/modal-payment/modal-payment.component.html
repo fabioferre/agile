@@ -18,7 +18,11 @@
                             </mat-radio-button>
                         </mat-radio-group>
                     </div>
+<<<<<<< HEAD
                     <div class="col-lg-12" >
+=======
+                    <div class="col-lg-12" *ngIf="paymentOptionChose?.showCalc">
+>>>>>>> beta
                         <mat-form-field class="full-width" appearance="outline">
                             <mat-label>Valor do pagamento</mat-label>
                             <input matInput 
@@ -61,7 +65,12 @@
 </div>
 
 <div class="button-area">
+<<<<<<< HEAD
     <button class="btn btn-success btn-block" [disabled]="form.invalid" (click)="finalize()">
        <i class="fas fa-check"></i> Finalizar
+=======
+    <button class="btn btn-success btn-block" (click)="continueProcess()">
+       <i class="fas fa-check"></i> Pronto
+>>>>>>> beta
     </button>
 </div>

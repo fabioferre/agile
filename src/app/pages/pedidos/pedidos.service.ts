@@ -29,7 +29,12 @@ export class PedidosService extends Model {
 
     public changeStatus(order) {
         this.helper.load();
+<<<<<<< HEAD
         return this.http.patch(`${this.urlApi}/${this.url}/${order.id}/close`, order).pipe(
+=======
+        return this.http.patch(`${this.urlApi}/${this.url}/${order.id}/clos`, order).pipe(
+            catchError(this.handleError),
+>>>>>>> beta
             finalize(() => {
                 this.helper.load(false);
             }),

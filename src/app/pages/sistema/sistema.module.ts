@@ -1,3 +1,4 @@
+import { SubscriptionComponent } from './subscription/subscription.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -32,7 +33,11 @@ const routes: Routes = [
       {
         path: 'security',
         component: SecurityComponent
-    }
+    },
+    {
+      path: 'subscription',
+      component: SubscriptionComponent
+  }
   ]
   }
 ];
@@ -54,7 +59,7 @@ const routes: Routes = [
     ThermalPrintModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [SistemaPage, ImpressoraComponent, SecurityComponent],
+  declarations: [SistemaPage, ImpressoraComponent, SecurityComponent, SubscriptionComponent],
   providers:[SistemaService]
 })
 export class SistemaPageModule {}

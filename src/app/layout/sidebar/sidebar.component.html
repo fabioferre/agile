@@ -106,9 +106,14 @@
                     <i class="fas fa-user-cog"></i><span>Funcionarios</span>
                 </a>
             </li>
+            <li  *ngIf="auth.canDo('app_menu_admin')" [routerLink]="['/account']" routerLinkActive="navigation__active">
+                    <a href="javascript:void(0)">
+                        <i class="fas fa-user-lock"></i><span>Minha conta</span>
+                    </a>
+                </li>
             <li  *ngIf="auth.canDo('app_menu_fluxo_caixa')">
                 <a href="http://www.tagmus.com.br/admin">
-                    <i class="fas fa-user-lock"></i><span>Area restrita</span>
+                    <i class="fas fa-lock"></i><span>Area restrita</span>
                 </a>
             </li>
 
@@ -127,22 +132,8 @@
                             <span class="text-truncate">Segurança</span>
                         </a>
                     </li>
-                    <!-- <li [routerLink]="['/produtos/novo']" routesrLinkActive="navigation__active">
-                        <a href="javascript:void(0)">
-                            <span class="text-truncate"> sistema</span>
-                        </a>
-                    </li> -->
-                    <!-- <li [routerLink]="['/produtos/novo']" routesrLinkActive="navigation__active">
-                        <a href="javascript:void(0)">
-                            <span class="text-truncate">tema</span>
-                        </a>
-                    </li> -->
                 </ul>
             </li>
-
-
-
-
         </ul>
     </div>
 </aside>

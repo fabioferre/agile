@@ -35,24 +35,41 @@ export class MostraPedidoComponent implements OnInit, OnDestroy {
             this.routerActive.params.subscribe(parans => {
                 this.orderService.getById(parans.id).subscribe(order => {
                     this.order = order;
+<<<<<<< HEAD
                     this.orderService.orderToFinalize = this.order;
                     console.log(this.orderService.orderToFinalize);
+=======
+                    this.orderService.orderToFinalize = order;
+>>>>>>> beta
                 });
             });
         } else {
             this.order = this.orderService.orderToFinalize;
         }
+
+<<<<<<< HEAD
+
+=======
+        setTimeout(() => {
+            this.modalPayment();
+        }, 1000);
     }
 
 
+>>>>>>> beta
     async modalPayment() {
         const modal = await this.modalCtrl.create({
             component: ModalPaymentComponent,
             cssClass: 'sm responsive'
         });
+<<<<<<< HEAD
         this.orderService.activeNE();
         modal.onDidDismiss().then(() => {
             this.order = this.orderService.orderToFinalize;
+=======
+        modal.onDidDismiss().then(() => {
+
+>>>>>>> beta
         });
 
         return await modal.present();

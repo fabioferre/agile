@@ -6,6 +6,7 @@ import { HelperService } from 'src/app/service/helper.service';
 import { AlertController, ModalController } from '@ionic/angular';
 import { ImpressoraService } from '../../sistema/impressora.service';
 import { ModalPaymentComponent } from './modal-payment/modal-payment.component';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
     selector: 'app-mostra-pedido',
@@ -36,7 +37,7 @@ export class MostraPedidoComponent implements OnInit, OnDestroy {
                 this.orderService.getById(parans.id).subscribe(order => {
                     this.order = order;
                     this.orderService.orderToFinalize = this.order;
-                    console.log(this.orderService.orderToFinalize);
+                    // console.log(this.orderService.orderToFinalize);
                 });
             });
         } else {
@@ -44,6 +45,14 @@ export class MostraPedidoComponent implements OnInit, OnDestroy {
         }
     }
 
+
+    public prepareFinalized() {
+        if (this.order.status !== 4) {
+            this.modalPayment();
+        } else {
+            this.finalize();
+        }
+    }
     async modalPayment() {
         const modal = await this.modalCtrl.create({
             component: ModalPaymentComponent,
@@ -58,6 +67,22 @@ export class MostraPedidoComponent implements OnInit, OnDestroy {
     }
 
 
+    finalize() {
+        this.order.status = 2;
+        this.orderService.changeStatus(this.order).subscribe((order: any) => {
+            console.log(order);
+            if (order) {
+                this.helper.toast('Pedido finalizado!');
+                this.orderService.orderToFinalize = order;
+                this.router.navigate(['/pedidos']);
+                if (this.impressora.printer_options) {
+                    if (this.impressora.printer_options.close) {
+                        this.impressora.printer(order);
+                    }
+                }
+            }
+        }, (error: HttpErrorResponse) => this.orderService.handleError(error));
+    }
     ngOnDestroy(): void {
         this.orderService.orderToFinalize = [];
     }

@@ -60,7 +60,7 @@
                         title="Visualizar pedido"  
                         (click)="finalize(element)"
                         [routerLink]="['/pedidos/detalhes', element.id]"
-                        *ngIf="element.label?.in_table == 2 || element.label?.in_table == 4">
+                        *ngIf="element.label?.in_table == 2 || element.label?.in_table == 0">
                             <i class="fas fa-eye"></i>
                         </button> 
 

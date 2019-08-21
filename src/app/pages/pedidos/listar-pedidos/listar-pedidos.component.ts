@@ -26,7 +26,7 @@ export class ListarPedidosComponent extends Controller implements OnInit {
     ) { super(alertCtrl); }
 
     ngOnInit() {
-        const date = this.helper.date(null, '-1 day');
+        const date = this.helper.date(null, '-2 day');
         this.orderService.dataSource.sort = this.sort;
         this.orderService.get({
             status: 1,
@@ -36,7 +36,7 @@ export class ListarPedidosComponent extends Controller implements OnInit {
         }).subscribe(pedidos => {
             this.orderService.dataSource.data = pedidos;
             this.orderService.dataSource._updateChangeSubscription();
-            console.log( pedidos)
+            // console.log( pedidos)
         });
     }
 

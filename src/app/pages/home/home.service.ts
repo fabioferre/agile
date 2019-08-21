@@ -13,6 +13,7 @@ export class HomeService extends Model {
     public selection = new SelectionModel<any>(true, this.productSelected);
     public client: any;
     public table: any;
+    // tslint:disable-next-line: variable-name
     public order_id: number;
     public productAlert: boolean;
     public loadOrders: boolean;
@@ -107,7 +108,7 @@ export class HomeService extends Model {
         this.client = client;
 
         if (client.freight) {
-            this.freight = client.freight.freight;
+            this.freight = parseFloat(client.freight.freight) ;
         }
     }
 
@@ -135,8 +136,6 @@ export class HomeService extends Model {
         }
     }
 
-
-  
 
 
 

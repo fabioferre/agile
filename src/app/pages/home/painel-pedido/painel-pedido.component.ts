@@ -6,6 +6,8 @@ import { ClienteModalComponent } from '../modal/cliente-modal/cliente-modal.comp
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ImpressoraService } from '../../sistema/impressora.service';
+import { PedidosService } from '../../pedidos/pedidos.service';
+import { ModalPaymentComponent } from '../../pedidos/mostra-pedido/modal-payment/modal-payment.component';
 
 
 
@@ -39,6 +41,7 @@ export class PainelPedidoComponent implements OnInit {
         private helper: HelperService,
         private router: Router,
         private impressora: ImpressoraService,
+        private orderService: PedidosService
     ) { }
 
     ngOnInit() {
@@ -58,8 +61,10 @@ export class PainelPedidoComponent implements OnInit {
     }
 
     public changeActive(typeToActive): void {
-        for (let type in this.types) {
-            this.types[type] = false;
+        for ( const type in this.types) {
+            if (type) {
+                this.types[type] = false;
+            }
         }
         this.setTypeSelling = typeToActive;
         this.types[`selling${typeToActive}`] = true;
@@ -92,8 +97,20 @@ export class PainelPedidoComponent implements OnInit {
             component: ClienteModalComponent,
         });
         modal.onDidDismiss().then(() => {
-            this.checkSelling()
+            this.checkSelling();
         });
+        return await modal.present();
+    }
+
+    async modalPayment() {
+        const modal = await this.modalCtrl.create({
+            component: ModalPaymentComponent,
+            cssClass: 'sm responsive'
+        });
+        modal.onDidDismiss().then(() => {
+
+        });
+
         return await modal.present();
     }
 
@@ -101,7 +118,7 @@ export class PainelPedidoComponent implements OnInit {
         this.form.controls.total.setValue(this.homeService.totalPrice);
         this.form.controls.products.setValue(this.homeService.productSelected);
         if (this.form.invalid) {
-            this.helper.toast('Selecione ao menos um produto', {color: 'warning'})
+            this.helper.toast('Selecione ao menos um produto', { color: 'warning' });
             this.homeService.productAlert = false;
             setTimeout(() => {
                 this.homeService.productAlert = true;
@@ -109,14 +126,11 @@ export class PainelPedidoComponent implements OnInit {
 
         } else if (this.form.value.type === 1 || this.form.value.type === 2) {
             this.storeOrder();
-
             this.homeService.productAlert = false;
         } else {
             this.storeOrder();
         }
     }
-
-
 
     public storeOrder() {
         this.homeService.create(this.form.value).subscribe((response) => {
@@ -125,25 +139,29 @@ export class PainelPedidoComponent implements OnInit {
                 this.homeService.removeProducUnits(this.form.value.products);
                 this.homeService.clearPainel();
                 this.changeActive(1);
-                this.helper.toast("Pedido efetuado");
-                console.log(response)
-
-                if (this.impressora.printer_options.create) {
-                    this.impressora.printer(response);
+                this.helper.toast('Pedido efetuado');
+                // console.log(this.impressora.printer_options);
+                if ( [2].indexOf(response.type) > -1 ) {
+                    this.orderService.orderToFinalize = response;
+                    this.modalPayment();
+                }
+                if (this.impressora.printer_options) {
+                    if (this.impressora.printer_options.create) {
+                        this.impressora.printer(response);
+                    }
                 }
             }
-
 
         });
     }
 
-    public updateOrder(order_id): void {
+    public updateOrder(orderId): void {
         this.prepareSale();
-        this.homeService.updateById(order_id, this.form.value).subscribe(response => {
+        this.homeService.updateById(orderId, this.form.value).subscribe(response => {
             this.homeService.removeProducUnits(this.form.value.products);
             this.homeService.clearPainel();
             this.changeActive(1);
-            this.helper.toast("Pedido acrescentado");
+            this.helper.toast('Pedido acrescentado');
         });
     }
 

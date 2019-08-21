@@ -15,21 +15,6 @@ import { NeProductComponent } from './ne-product/ne-product.component';
 import { FluxoComponent } from './fluxo/fluxo.component';
 
 
-// materialize
-import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatSortModule } from '@angular/material/sort';
-import { MatInputModule } from '@angular/material/input';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatSelectModule } from '@angular/material/select';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatTabsModule } from '@angular/material/tabs';
-import { MatCardModule } from '@angular/material/card';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatListModule } from '@angular/material/list';
-import {MatButtonModule} from '@angular/material/button';
-
-
 // service
 import { CategoriasService } from './categorias.service';
 import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher, MatChipsModule, MatIconModule } from '@angular/material';
@@ -37,6 +22,7 @@ import { ModalNecategoryComponent } from './categorias/modal-necategory/modal-ne
 
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { NativeAudio } from '@ionic-native/native-audio/ngx';
+import { MaterialModule } from 'src/app/material/material.module';
 
 
 const routes: Routes = [
@@ -84,22 +70,10 @@ const routes: Routes = [
         FormsModule,
         ReactiveFormsModule,
         IonicModule,
+        MaterialModule,
         RouterModule.forChild(routes),
-        MatTableModule,
-        MatPaginatorModule,
-        MatSortModule,
-        MatInputModule,
-        MatSlideToggleModule,
-        MatSelectModule,
-        MatFormFieldModule,
-        MatTabsModule,
-        MatCardModule,
         BrMaskerModule,
-        CKEditorModule,
-        MatIconModule,
-        MatAutocompleteModule,
-        MatButtonModule,
-        MatListModule
+        CKEditorModule
     ],
     declarations: [
         ProdutosPage,

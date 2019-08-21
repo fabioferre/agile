@@ -44,7 +44,7 @@ export default class Model {
                 this.helper.isLoading = false;
                 this.helper.load(false);
             }),
-            catchError(error => of(this.helper.message(error)))
+            catchError(error => this.handleError(error))
         );
 
     }
@@ -53,7 +53,7 @@ export default class Model {
 
         return this.http.get<any>(`${this.urlApi}/${this.url}?${parans}`).pipe(
             retry(1),
-            catchError(error => of(this.helper.message(error)))
+            catchError(error => this.handleError(error))
         );
 
     }
@@ -66,7 +66,7 @@ export default class Model {
                 this.helper.isLoading = false;
                 this.helper.load(false);
             }),
-            catchError(error => of(this.helper.message(error)))
+            catchError(error => this.handleError(error))
         );
     }
 
@@ -77,7 +77,7 @@ export default class Model {
                 this.helper.isLoading = false;
                 this.helper.load(false);
             }),
-            catchError(error => of(this.helper.message(error)))
+            catchError(error => this.handleError(error))
         );
     }
 
@@ -88,15 +88,15 @@ export default class Model {
                 this.helper.isLoading = false;
                 this.helper.load(false);
             }),
-            catchError(error => of(this.helper.message(error)))
+            catchError(error => this.handleError(error))
         );
     }
 
     public createNoLoad(params): Observable<any> {
 
         return this.http.post<any>(`${this.urlApi}/${this.url}`, params).pipe(
-            catchError(error => of(this.helper.message(error)))
-        )
+            catchError(error => this.handleError(error))
+        );
     }
 
     public deleteById(id): Observable<any> {
@@ -109,21 +109,25 @@ export default class Model {
                 this.helper.toast('Efetuado com sucesso');
 
             }),
-            catchError(this.handleError)
+            catchError(error => this.handleError(error))
         );
     }
 
     handleError(error) {
-        let errorMessage = '';
-        if (error.error instanceof ErrorEvent) {
-            // client-side error
-            errorMessage = `Error: ${error.error.message}`;
-        } else {
-            // server-side error
-            errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-        }
-        window.alert(errorMessage);
-        return throwError(errorMessage);
-    }
+        // let errorMessage = '';
+        // if (error.error instanceof ErrorEvent) {
+        //   // client-side error
+        //   errorMessage = `Error: ${error.error.message}`;
+        // } else {
+        //   // server-side error
+        //   errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+        // }
+        // console.log('deu ruim', errorMessage)
+        // this.helper.load(false);
+        // window.alert(errorMessage);
+        this.helper.message(error);
+        this.helper.load(false);
+        return throwError(error);
+      }
 
 }

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ToastController,  ModalController } from '@ionic/angular';
+import { ToastController, ModalController } from '@ionic/angular';
+import { timeout } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -23,24 +24,24 @@ export class HelperService {
     }
 
     message(message?, style?) {
-            if (message.error) {
-                for (const i in message.error.errors) {
-                    if (i) {
-                        this.toast('Atenção: ' + message.error.errors[i], {color :'danger'});
-                    }
+        if (message.error) {
+            for (const i in message.error.errors) {
+                if (i) {
+                    this.toast('Atenção: ' + message.error.errors[i], { color: 'danger' });
                 }
-            } else {
-                this.toast(message, {color : style});
             }
+        } else {
+            this.toast(message, { color: style });
+        }
     }
 
-    async toast(message, options:any = {}) {
+    async toast(messageToShow, options: any = {}) {
 
         const toast = await this.toastCtrl.create(
             {
-                message: message,
-                position: options.position ?  options.position : "top",
-                color: options.color ? options.color: "success",
+                message: messageToShow,
+                position: options.position ? options.position : 'top',
+                color: options.color ? options.color : 'success',
                 duration: 3000,
                 showCloseButton: true
             });
@@ -53,10 +54,8 @@ export class HelperService {
         if (status === false) {
             this.isLoading = false;
         } else {
-            this.isLoading = true;
-            setTimeout(() => {
-                this.isLoading = false;
-            }, 100000);
+            setTimeout(() => this.isLoading = true, 100);
+            setTimeout(() =>     this.isLoading = false, 100000);
 
         }
 
@@ -92,11 +91,11 @@ export class HelperService {
         } else {
             if (formatter === '/') {
                 data = data.split('-');
-                return data = data[2] + '/' + data[1] + '/' + data[0]
+                return data = data[2] + '/' + data[1] + '/' + data[0];
             }
             if (formatter === '-') {
                 data = data.split('/');
-                return data = data[2] + '-' + data[1] + '-' + data[0]
+                return data = data[2] + '-' + data[1] + '-' + data[0];
             }
             format = new Date().toISOString();
 

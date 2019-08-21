@@ -9,15 +9,16 @@ import { async } from 'q';
   providedIn: 'root'
 })
 export class ImpressoraService extends Model {
-  public printer_options: any;
-  printers: any;
-  protected url = 'printer'
+  // tslint:disable-next-line: variable-name
+  public printer_options: any = {};
+  public printers: any;
+  protected url = 'printer';
   protected urlApi = 'http://localhost:3002';
   constructor(
     http: HttpClient,
     helper: HelperService,
     private storage: Storage
-  ) { super(http, helper) }
+  ) { super(http, helper); }
 
   public getOptions() {
 
@@ -30,16 +31,16 @@ export class ImpressoraService extends Model {
   }
 
   printer(request) {
-    let dado = {
-      "order": request.number,
-      "total": request.total,
-      "type": request.type,
-      "freight": request.freight,
-      "printer_options": this.printer_options,
-      "products": request.current_products,
-      "client": request.client,
-      "table": request.table
-    }
+    const dado = {
+      order: request.number,
+      total: request.total,
+      type: request.type,
+      freight: request.freight,
+      printer_options: this.printer_options,
+      products: request.current_products,
+      client: request.client,
+      table: request.table
+    };
 
 
     this.createNoLoad(dado).subscribe();
@@ -48,12 +49,12 @@ export class ImpressoraService extends Model {
   printerStatement(params) {
 
 
-    let dado = {
-      "data": params,
-      "printer_options": this.printer_options,
-    }
+    const dado = {
+      data: params,
+      printer_options: this.printer_options,
+    };
 
-    return this.http.post(`http://localhost:3002/printer/statement`, dado)
+    return this.http.post(`http://localhost:3002/printer/statement`, dado);
 
   }
 

@@ -100,14 +100,17 @@ export class ListaProdutosComponent extends Controller implements OnInit {
 
     public finalizeBuild() {
         const productToSend = {
-            id: null, sale_price: 0,
+            id: null,
+            sale_price: 0,
             name: '',
             custom: true,
             qtd: 1,
             stock: false,
             fractioned: null,
             collection: null,
-            complements: null
+            complements: null,
+            cost_price: 0,
+            descriptions: ''
         };
         for (const product of this.homeService.buildedProducts) {
             productToSend.name += product.name + ' 1/2 ';
@@ -115,6 +118,7 @@ export class ListaProdutosComponent extends Controller implements OnInit {
             if (product.sale_price > productToSend.sale_price) {
                 productToSend.id = product.id;
                 productToSend.sale_price = product.sale_price;
+                productToSend.cost_price = product.cost_price;
                 productToSend.complements = product.complements;
             }
 

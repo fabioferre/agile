@@ -1,0 +1,67 @@
+<a href="javascript:void(0)" (click)="modalCtrl.dismiss()" class="close mt-3 mr-3 text-right">
+  &times;
+</a>
+<div class="container scrollbar-inner beauty-scroll">
+    <div class="row">
+        <div class="col-lg-12">
+            <form [formGroup]="form">
+                <div class="form-row">
+                    <div class="col-lg-12">
+                        <mat-radio-group
+                            formControlName="paymentMethod"
+                            aria-labelledby="Payments-radio"
+                            class="example-radio-group">
+                            <mat-radio-button class="example-radio-button" 
+                            *ngFor="let item of paymentOptions" 
+                            [value]="item.name">
+                            &nbsp; <i class="fas" [ngClass]="item.icon"></i>   {{ item.name }} 
+                            </mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                    <div class="col-lg-12" >
+                        <mat-form-field class="full-width" appearance="outline">
+                            <mat-label>Valor do pagamento</mat-label>
+                            <input matInput 
+                            placeholder="Digite o valor" 
+                            type="text"  
+                            (keyup)="calcChange()"
+                            formControlName="paymentValue"
+                            [brmasker]="{form: form.get('paymentValue'), money: true, decimalCaracter: '.'}">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-lg-12 pb-1 mx-auto text-center border-bottom">
+                        <h5>Total</h5>
+                      <span> {{ order.total | currency:'BRL':'R$':'1.2-2' }}</span> 
+                    </div>
+                    <div class="col-lg-12 mt-2">
+                        <div class="form-row">
+                            <div class="col-lg-4 text-center">
+                                <h5>Recebido</h5>
+                                <span class="text-success price-info" *ngIf="received > 0"> {{  received | currency:'BRL':'R$':'1.2-2' }}</span>  
+                                <span class="text-secondary" *ngIf="!received "> N/A </span>  
+                            </div>
+                            <div class="col-lg-4 text-center">
+                                <h5>Troco</h5>
+                                <span class="text-info price-info"> {{ change | currency:'BRL':'R$':'1.2-2' }}</span>
+                            </div>
+        
+                            <div class="col-lg-4 text-center">
+                                <h5>Faltando</h5>
+                                <span class="text-danger price-info" *ngIf="missing > 0">+ {{ missing | currency:'BRL':'R$':'1.2-2' }}</span> 
+                                <span class="text-secondary" *ngIf="missing == 0">
+                                    N/A
+                                </span> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="button-area">
+    <button class="btn btn-success btn-block" [disabled]="form.invalid" (click)="finalize()">
+       <i class="fas fa-check"></i> Finalizar
+    </button>
+</div>

@@ -7,10 +7,7 @@ import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ImpressoraService } from '../../sistema/impressora.service';
 import { PedidosService } from '../../pedidos/pedidos.service';
-<<<<<<< HEAD
 import { ModalPaymentComponent } from '../../pedidos/mostra-pedido/modal-payment/modal-payment.component';
-=======
->>>>>>> beta
 
 
 
@@ -101,7 +98,6 @@ export class PainelPedidoComponent implements OnInit {
         });
         modal.onDidDismiss().then(() => {
             this.checkSelling();
-<<<<<<< HEAD
         });
         return await modal.present();
     }
@@ -113,8 +109,6 @@ export class PainelPedidoComponent implements OnInit {
         });
         modal.onDidDismiss().then(() => {
 
-=======
->>>>>>> beta
         });
 
         return await modal.present();
@@ -146,7 +140,6 @@ export class PainelPedidoComponent implements OnInit {
                 this.homeService.clearPainel();
                 this.changeActive(1);
                 this.helper.toast('Pedido efetuado');
-<<<<<<< HEAD
                 // console.log(this.impressora.printer_options);
                 if ( [2].indexOf(response.type) > -1 ) {
                     this.orderService.orderToFinalize = response;
@@ -156,24 +149,8 @@ export class PainelPedidoComponent implements OnInit {
                     if (this.impressora.printer_options.create) {
                         this.impressora.printer(response);
                     }
-=======
-                console.log(response);
-
-                if (this.impressora.printer_options.create) {
-                    this.impressora.printer(response);
->>>>>>> beta
                 }
-
-<<<<<<< HEAD
-=======
-                if ( [2].indexOf(this.type) > -1 ) {
-                    // this.
-                }
-
-                console.log(response);
             }
-
->>>>>>> beta
         });
     }
 

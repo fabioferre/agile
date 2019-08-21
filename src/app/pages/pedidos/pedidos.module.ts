@@ -8,13 +8,15 @@ import { ModalMotoboyComponent } from './listar-pedidos/modal-motoboy/modal-moto
 import { IonicModule } from '@ionic/angular';
 import { PedidosPage } from './pedidos.page';
 import { PedidosService } from './pedidos.service';
-import { MatTableModule, MatPaginatorModule, MatSortModule, MatFormFieldModule, MatInputModule, MatSlideToggleModule, MatSelectModule } from '@angular/material';
 import { PedidoMesasComponent } from './pedido-mesas/pedido-mesas.component';
 
 import { MesasService } from '../mesas/mesas.service';
 import { MostraPedidoComponent } from './mostra-pedido/mostra-pedido.component';
 
 import { BrMaskerModule } from 'br-mask';
+import { ModalPaymentComponent } from './mostra-pedido/modal-payment/modal-payment.component';
+import { MaterialModule } from 'src/app/material/material.module';
+import { FinalizeOrderModule } from './finalize-order/finalize-order.module';
 
 const routes: Routes = [
     {
@@ -22,9 +24,9 @@ const routes: Routes = [
         component: PedidosPage,
         children: [
             {
-                path: '', 
-                redirectTo: 'lista', 
-                pathMatch: 'full' 
+                path: '',
+                redirectTo: 'lista',
+                pathMatch: 'full'
             },
             {
                 path: 'lista',
@@ -50,23 +52,18 @@ const routes: Routes = [
         CommonModule,
         FormsModule,
         IonicModule,
+        MaterialModule,
         ReactiveFormsModule,
-        MatInputModule,
-        MatSlideToggleModule,
-        MatSelectModule,
-        MatFormFieldModule,
-        MatTableModule,
-        MatPaginatorModule,
-        MatSortModule,
         RouterModule.forChild(routes),
-        BrMaskerModule
+        BrMaskerModule,
+        FinalizeOrderModule
     ],
     declarations: [
         PedidosPage,
-        ListarPedidosComponent, 
+        ListarPedidosComponent,
         PedidoMesasComponent,
         MostraPedidoComponent,
-        ModalMotoboyComponent
+        ModalMotoboyComponent,
     ],
     providers: [PedidosService, MesasService]
 })

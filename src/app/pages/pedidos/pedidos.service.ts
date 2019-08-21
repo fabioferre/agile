@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import Model from 'src/app/service/model';
 import { HttpClient } from '@angular/common/http';
 import { HelperService } from 'src/app/service/helper.service';
-import { catchError, retryWhen, finalize } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { catchError, retryWhen, finalize, retry } from 'rxjs/operators';
+import { of, Observable } from 'rxjs';
 import { MatTableDataSource } from '@angular/material';
 
 @Injectable({
@@ -29,12 +29,16 @@ export class PedidosService extends Model {
 
     public changeStatus(order) {
         this.helper.load();
+<<<<<<< HEAD
+        return this.http.patch(`${this.urlApi}/${this.url}/${order.id}/close`, order).pipe(
+=======
         return this.http.patch(`${this.urlApi}/${this.url}/${order.id}/clos`, order).pipe(
             catchError(this.handleError),
+>>>>>>> beta
             finalize(() => {
-                this.helper.isLoading = false;
                 this.helper.load(false);
-            })
+            }),
+            catchError(this.handleError)
         );
     }
 }

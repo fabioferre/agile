@@ -10,51 +10,24 @@ import { AuthService } from './auth.service';
 })
 export class InterceptorService implements HttpInterceptor {
 
-    constructor(private storage: Storage, private auth: AuthService) { }
+    constructor( private auth: AuthService) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        let promise = this.storage.get('user');
-
-        return from(promise).pipe(mergeMap(user => {
-
-            let clonedReq = this.addToken(request, user);
-            return next.handle(clonedReq).pipe(
-                
-            )
-        }));
-        
-    }
-
-    private addToken(request: HttpRequest<any>, user: any) {
-        if (user) {
-            
-            let clone: HttpRequest<any>;
-            clone = request.clone({
+        let clonedReq: HttpRequest<any>;
+        if (this.auth.user) {
+            clonedReq = request.clone({
                 setHeaders: {
-                    "Content-Type": "application/json",
-                    "cache-control": "no-cache",
-                    Accept: "application/json",
-                    key: `${user.key}`,
+                    'Content-Type': 'application/json',
+                    'cache-control': 'no-cache',
+                    Accept: 'application/json',
+                    key: `${this.auth.user.key}`,
                 },
-                setParams: {store_id: this.auth.user.store_id}
-
+                setParams: { store_id: this.auth.user.store_id }
             });
-            return clone;
         } else {
-            let clone: HttpRequest<any>;
-            clone = request.clone({
-                setHeaders: {
-                    "Content-Type": "application/json",
-                    "cache-control": "no-cache",
-                    Accept: "application/json"
-                }
-
-            });
-            return clone;
-
+            clonedReq = request;
         }
-
-        return request;
+        return next.handle(clonedReq);
 
     }
 

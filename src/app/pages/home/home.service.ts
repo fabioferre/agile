@@ -13,6 +13,7 @@ export class HomeService extends Model {
     public selection = new SelectionModel<any>(true, this.productSelected);
     public client: any;
     public table: any;
+    // tslint:disable-next-line: variable-name
     public order_id: number;
     public productAlert: boolean;
     public loadOrders: boolean;
@@ -107,7 +108,7 @@ export class HomeService extends Model {
         this.client = client;
 
         if (client.freight) {
-            this.freight = client.freight.freight;
+            this.freight = parseFloat(client.freight.freight) ;
         }
     }
 
@@ -135,23 +136,6 @@ export class HomeService extends Model {
         }
     }
 
-
-    public finalizeBuild() {
-        const productToSend = { id: null, sale_price: 0, name: '', custom: true, qtd: 1, stock: false, fractioned: null, collection: null };
-
-        for (const product of this.buildedProducts) {
-            productToSend.name += product.name + ' 1/2 ';
-
-            if (product.sale_price > productToSend.sale_price) {
-                productToSend.id = product.id;
-                productToSend.sale_price = product.sale_price;
-            }
-
-        }
-
-        this.productSelected.push(productToSend);
-        this.toggleBuild();
-    }
 
 
 

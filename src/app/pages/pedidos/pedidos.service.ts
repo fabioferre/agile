@@ -10,6 +10,8 @@ import { MatTableDataSource } from '@angular/material';
     providedIn: 'root'
 })
 export class PedidosService extends Model {
+    protected url = 'orders';
+    public dataSource = new MatTableDataSource<any>([]);
     public typeSelling = {
         type1: 'Balcão',
         type2: 'Entrega',
@@ -18,19 +20,17 @@ export class PedidosService extends Model {
     };
     public pedidos;
     public orderToFinalize;
-    protected url = 'orders'
-    public dataSource = new MatTableDataSource<any>([]);  
 
-    constructor(http: HttpClient, helper: HelperService) { super(http, helper) }
+    constructor(http: HttpClient, helper: HelperService) { super(http, helper); }
 
     public removeOrder(order): void {
-        let re = this.pedidos.splice(this.pedidos.indexOf(order), 1)
+        const re = this.pedidos.splice(this.pedidos.indexOf(order), 1);
     }
 
     public changeStatus(order) {
         this.helper.load();
-        return this.http.patch(`${this.urlApi}/${this.url}/${order.id}/close`, order).pipe(
-            catchError((error: any) => of( this.helper.message(error) )),
+        return this.http.patch(`${this.urlApi}/${this.url}/${order.id}/clos`, order).pipe(
+            catchError(this.handleError),
             finalize(() => {
                 this.helper.isLoading = false;
                 this.helper.load(false);

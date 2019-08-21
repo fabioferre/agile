@@ -32,7 +32,7 @@
         </mat-chip-list>
         <button mat-icon-button color="primary" 
         matTooltip="Concluir montagem"
-        (click)="homeService.finalizeBuild();"
+        (click)="finalizeBuild();"
         matTooltipPosition="below" class="btn-build"  
         *ngIf="homeService.buildedProducts.length > 1">
             <i class="fas fa-check-circle fa-2x"></i>

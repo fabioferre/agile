@@ -61,7 +61,7 @@ export class PainelPedidoComponent implements OnInit {
     }
 
     public changeActive(typeToActive): void {
-        for ( const type in this.types) {
+        for (const type in this.types) {
             if (type) {
                 this.types[type] = false;
             }
@@ -109,11 +109,7 @@ export class PainelPedidoComponent implements OnInit {
         });
         modal.onDidDismiss().then(() => {
             if (this.orderService.orderToFinalize.finalized) {
-                if (this.impressora.printer_options) {
-                    if (this.impressora.printer_options.create) {
-                        this.impressora.printer(this.orderService.orderToFinalize);
-                    }
-                }
+               this.impressora.printerOrder(this.orderService.orderToFinalize);
             }
         });
 
@@ -147,11 +143,11 @@ export class PainelPedidoComponent implements OnInit {
                 this.changeActive(1);
                 this.helper.toast('Pedido efetuado');
                 // console.log(this.impressora.printer_options);
-                if ( [2].indexOf(response.type) > -1 ) {
+                if ([2].indexOf(response.type) > -1) {
                     this.orderService.orderToFinalize = response;
                     this.modalPayment();
                 } else {
-                    
+                    this.impressora.printerOrder(response);
                 }
             }
         });

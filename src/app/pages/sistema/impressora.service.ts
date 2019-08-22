@@ -62,6 +62,13 @@ export class ImpressoraService extends Model {
 
   }
 
+  printerOrder(order) {
+      if (this.printer_options) {
+        if (this.printer_options.create) {
+            this.printer(order);
+        }
+    }
+  }
 
 
 }

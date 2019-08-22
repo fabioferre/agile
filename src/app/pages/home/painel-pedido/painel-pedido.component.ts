@@ -108,7 +108,13 @@ export class PainelPedidoComponent implements OnInit {
             cssClass: 'sm responsive'
         });
         modal.onDidDismiss().then(() => {
-
+            if (this.orderService.orderToFinalize.finalized) {
+                if (this.impressora.printer_options) {
+                    if (this.impressora.printer_options.create) {
+                        this.impressora.printer(this.orderService.orderToFinalize);
+                    }
+                }
+            }
         });
 
         return await modal.present();
@@ -144,11 +150,8 @@ export class PainelPedidoComponent implements OnInit {
                 if ( [2].indexOf(response.type) > -1 ) {
                     this.orderService.orderToFinalize = response;
                     this.modalPayment();
-                }
-                if (this.impressora.printer_options) {
-                    if (this.impressora.printer_options.create) {
-                        this.impressora.printer(response);
-                    }
+                } else {
+                    
                 }
             }
         });

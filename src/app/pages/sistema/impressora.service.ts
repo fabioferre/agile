@@ -35,6 +35,8 @@ export class ImpressoraService extends Model {
     this.urlApi = this.printer_options.ip ? `http://${this.printer_options.ip}:3002` : "http://localhost:3002";
     const dado = {
       order: request.number,
+      change: request.change,
+      form_payment: request.form_payment,
       total: request.total,
       type: request.type,
       freight: request.freight,

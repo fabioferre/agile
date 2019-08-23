@@ -55,7 +55,7 @@ export class HelperService {
             this.isLoading = false;
         } else {
             setTimeout(() => this.isLoading = true, 100);
-            setTimeout(() =>     this.isLoading = false, 100000);
+            setTimeout(this.loadDismiss, 90000);
 
         }
 

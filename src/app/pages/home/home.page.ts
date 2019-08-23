@@ -33,7 +33,7 @@ export class HomePage implements OnInit, OnDestroy {
                 product.qtd = 1;
                 product.sale_price = product.sale_price ? parseFloat(product.sale_price) : 0;
             });
-            this.helper.load(false);
+            this.helper.loadDismiss();
         });
 
     }

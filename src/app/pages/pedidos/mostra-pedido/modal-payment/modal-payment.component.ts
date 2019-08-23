@@ -91,7 +91,7 @@ export class ModalPaymentComponent implements OnInit {
         this.order.form_payment = this.paymentMethod.value;
         this.order.change = this.change;
         this.orderService.changeStatus(this.order).subscribe((order: any) => {
-            // console.log(order,' modal');
+            console.log(order,' modal');
             if (order) {
 
                 this.helper.toast('Pedido finalizado!');

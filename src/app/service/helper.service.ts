@@ -52,9 +52,9 @@ export class HelperService {
 
     async load(status?) {
         if (status === false) {
-            this.isLoading = false;
+            this.isLoading = await false;
         } else {
-            setTimeout(() => this.isLoading = true, 100);
+            this.isLoading = await true;
             setTimeout(this.loadDismiss, 90000);
 
         }
@@ -62,7 +62,7 @@ export class HelperService {
     }
 
     async  loadDismiss() {
-        this.isLoading = false;
+        this.isLoading = await false;
         // await this.loading.dismiss();
     }
 

@@ -13,6 +13,7 @@ export class HelperService {
     public format: string;
     public order: any;
     public isLoading: boolean;
+    public nextDay: Date;
     constructor(
         private toastCtrl: ToastController,
         private modalCtrl: ModalController,
@@ -78,55 +79,87 @@ export class HelperService {
 
     }
 
-    date(data?, more?, formatter?) {
+    formatDate(options: any) {
 
         const date = new Date();
-        let format;
-        if ((data) && (!formatter)) {
-            format = new Date(data).toISOString();
-            this.format = format.split('T')[0];
-            const hours = date.getHours() + data;
-            const min = (date.getMinutes() < 10 ? '0' : '') + date.getMinutes();
-            this.hours = hours + ':' + min;
-        } else {
-            if (formatter === '/') {
-                data = data.split('-');
-                return data = data[2] + '/' + data[1] + '/' + data[0];
+        let year: any = date.getFullYear();
+        let month: any = (1 + date.getMonth()).toString().padStart(2, '0');
+        let day: any = date.getDate().toString().padStart(2, '0');
+
+        if (options.add) {
+            const more = options.add.split(' ');
+            switch (more[1]) {
+                case 'month':
+                    month = Number(month) + Number(more[0]);
+                    month = (month < 10 ? '0' : '') + month;
+                    break;
+
+                case 'day':
+                    day = Number(day) + Number(more[0]);
+                    day = (day < 10 ? '0' : '') + day;
+                    break;
+
+                case 'year':
+                    year = Number(year) + Number(more[0]);
+                    year = (year < 10 ? '0' : '') + year;
+                    break;
             }
-            if (formatter === '-') {
-                data = data.split('/');
-                return data = data[2] + '-' + data[1] + '-' + data[0];
-            }
-            format = new Date().toISOString();
-
-            if (more) {
-                const som = format.split('T')[0].split('-');
-                more = more.split(' ');
-
-                switch (more[1]) {
-                    case 'month':
-                        som[1] = parseInt(som[1], 11) + parseInt(more[0], 11);
-                        som[1] = (som[1] < 10 ? '0' : '') + som[1];
-                        break;
-
-                    case 'day':
-                        som[2] = parseInt(som[2], 11) + parseInt(more[0], 11);
-                        som[2] = (som[2] < 10 ? '0' : '') + som[2];
-                        break;
-
-                    case 'year':
-                        som[0] = parseInt(som[0], 11) + parseInt(more[0], 11);
-                        som[0] = (som[0] < 10 ? '0' : '') + som[0];
-                        break;
-                }
-                return som[0] + '-' + som[1] + '-' + som[2];
-            }
-            const min = (date.getMinutes() < 10 ? '0' : '') + date.getMinutes();
-            this.hours = new Date().getHours() + ':' + min;
-            return this.today = format.split('T')[0];
-
 
         }
+
+        return `${year}-${month}-${day}`;
+
+    }
+
+    date(data?, more?, formatter?) {
+
+        // const date = new Date();
+        // let format;
+        // if ((data) && (!formatter)) {
+        //     format = new Date(data).toISOString();
+        //     this.format = format.split('T')[0];
+        //     const hours = date.getHours() + data;
+        //     const min = (date.getMinutes() < 10 ? '0' : '') + date.getMinutes();
+        //     this.hours = hours + ':' + min;
+        // } else {
+        //     if (formatter === '/') {
+        //         data = data.split('-');
+        //         return data = data[2] + '/' + data[1] + '/' + data[0];
+        //     }
+        //     if (formatter === '-') {
+        //         data = data.split('/');
+        //         return data = data[2] + '-' + data[1] + '-' + data[0];
+        //     }
+        //     format = new Date().toISOString();
+
+        //     if (more) {
+        //         const som = format.split('T')[0].split('-');
+        //         more = more.split(' ');
+
+        //         switch (more[1]) {
+        //             case 'month':
+        //                 som[1] = Number(som[1]) + Number(more[0]);
+        //                 som[1] = (som[1] < 10 ? '0' : '') + som[1];
+        //                 break;
+
+        //             case 'day':
+        //                 som[2] = Number(som[2]) + Number(more[0]);
+        //                 som[2] = (som[2] < 10 ? '0' : '') + som[2];
+        //                 break;
+
+        //             case 'year':
+        //                 som[0] = Number(som[0]) + Number(more[0]);
+        //                 som[0] = (som[0] < 10 ? '0' : '') + som[0];
+        //                 break;
+        //         }
+        //         return som[0] + '-' + som[1] + '-' + som[2];
+        //     }
+        //     const min = (date.getMinutes() < 10 ? '0' : '') + date.getMinutes();
+        //     this.hours = new Date().getHours() + ':' + min;
+        //     return this.today = format.split('T')[0];
+
+
+        // }
 
 
 

@@ -25,7 +25,7 @@ export class NeProductComponent implements OnInit, OnDestroy {
         cost_price: [''],
         sale_price: [''],
         stock: [false],
-        units: [1],
+        units: [{value: 1, disabled: true}],
         minimum_units: [1],
         maximum_units: [1],
         code: [''],

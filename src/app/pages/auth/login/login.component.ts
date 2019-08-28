@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
     public form: FormGroup = this.fb.group({
         email: ['', [Validators.required, Validators.email]],
         password: ['', Validators.required],
-        'system_name':'agile'
+        'system_name': 'agile'
     });
 
     constructor(
@@ -34,18 +34,17 @@ export class LoginComponent implements OnInit {
     }
 
     public submit(): void {
-    
-        if(this.form.valid)
-        {
+
+        if (this.form.valid) {
             this.helper.load();
             this.auth.authenticate(this.form.value).subscribe(user => {
-                if(user){
+                if (user) {
                     this.helper.toast("Seja bem vindo !")
-                    this.storage.set('user', user)
+                    this.storage.set('user', user);
                     this.auth.configSystem(user);
                     this.router.navigate(['/home']);
                 }
-
+                this.helper.loadDismiss();
             },
             error => {
                 this.helper.message(error)
@@ -53,5 +52,5 @@ export class LoginComponent implements OnInit {
         }
     }
 
-    
+
 }

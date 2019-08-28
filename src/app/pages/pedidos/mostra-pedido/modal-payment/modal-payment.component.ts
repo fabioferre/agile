@@ -15,9 +15,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class ModalPaymentComponent implements OnInit {
     public paymentOptions: any = [
-        { name: 'Cartão Debito / Crédito', icon: 'fa-credit-card' },
-        { name: 'Vaucher', icon: 'fa-money-check' },
-        { name: 'Dinheiro', icon: 'fa-money-bill-wave' },
+        { id: 1, name: 'Cartão Debito / Crédito', icon: 'fa-credit-card' },
+        { id: 2, name: 'Vaucher', icon: 'fa-money-check' },
+        { id: 3, name: 'Dinheiro', icon: 'fa-money-bill-wave' },
     ];
 
     public form: FormGroup = this.fb.group({
@@ -43,7 +43,7 @@ export class ModalPaymentComponent implements OnInit {
         this.order = this.orderService.orderToFinalize;
         this.form.controls.paymentMethod.valueChanges.subscribe(name => this.selectMethod(name));
         if (this.order.client) {
-            this.paymentOptions.push({ name: 'Conta cliente', icon: 'fa-wallet', clientAccount: true });
+            this.paymentOptions.push({ id: 4, name: 'Conta cliente', icon: 'fa-wallet', clientAccount: true });
         }
     }
 

@@ -26,7 +26,7 @@ export class ListarPedidosComponent extends Controller implements OnInit {
     ) { super(alertCtrl); }
 
     ngOnInit() {
-        const date = this.helper.date(null, '-2 day');
+        const date = this.helper.formatDate({add: '-1 day'});
         this.orderService.dataSource.sort = this.sort;
         this.orderService.get({
             status: 1,

@@ -13,7 +13,7 @@
                             class="example-radio-group">
                             <mat-radio-button class="example-radio-button" 
                             *ngFor="let item of paymentOptions" 
-                            [value]="item.name">
+                            [value]="item.id">
                             &nbsp; <i class="fas" [ngClass]="item.icon"></i>   {{ item.name }} 
                             </mat-radio-button>
                         </mat-radio-group>

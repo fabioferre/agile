@@ -4,6 +4,9 @@ import { HelperService } from 'src/app/service/helper.service';
 import Model from 'src/app/service/model';
 import { Storage } from '@ionic/storage';
 import { async } from 'q';
+import { MasterModel } from '../../printer/master-model';
+import { PrepareModel } from '../../printer/prepare-model';
+import { DeliveryModel } from '../../printer/delivery-model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +17,12 @@ export class ImpressoraService extends Model {
   public printers: any;
   protected url = 'printer';
   protected urlApi = 'http://localhost:3002';
+  public paymentOptions: any = [
+    { id: 1, name: 'Cartão Debito / Crédito', icon: 'fa-credit-card' },
+    { id: 2, name: 'Vaucher', icon: 'fa-money-check' },
+    { id: 3, name: 'Dinheiro', icon: 'fa-money-bill-wave' },
+    { id: 4, name: 'Conta cliente', icon: 'fa-wallet', clientAccount: true }
+  ];
   constructor(
     http: HttpClient,
     helper: HelperService,
@@ -27,13 +36,22 @@ export class ImpressoraService extends Model {
   }
 
   setOptions() {
-    
+
     this.storage.set('printer_options', this.printer_options);
   }
 
-  printer(request) {
+  prepare(request) {
     this.urlApi = this.printer_options.ip ? `http://${this.printer_options.ip}:3002` : "http://localhost:3002";
+    var payment = this.paymentOptions.find((opt: any) => {
+      if (Number(opt.id) == Number(request.form_payment)) {
+        return opt;
+      }
+    });
+
+    request.form_payment = payment ? payment.name : "";
     const dado = {
+      url: this.printer_options.ip ? `http://${this.printer_options.ip}:3002` : "http://localhost:3002",
+      cmds:"",
       order: request.number,
       change: request.change,
       form_payment: request.form_payment,
@@ -45,10 +63,35 @@ export class ImpressoraService extends Model {
       client: request.client,
       table: request.table
     };
-
-
-    this.createNoLoad(dado).subscribe();
+    return dado;
   }
+
+
+  printer(request) {
+
+    var dados = this.prepare(request)
+    const Master = new MasterModel();
+    const Prepare = new PrepareModel();
+    const Delivery = new DeliveryModel();
+
+    if (this.printer_options.master) {
+      Master.build(dados).execute(dados);
+    }
+
+    if (this.printer_options.prepare) {
+      Prepare.build(dados).execute(dados)
+    }
+
+    if (this.printer_options.delivery) {
+      if (dados.type == 2) {
+        Delivery.build(dados).execute(dados)
+      }
+    }
+
+
+  }
+
+ 
 
   printerStatement(params) {
 
@@ -63,10 +106,10 @@ export class ImpressoraService extends Model {
   }
 
   printerOrder(order) {
-      if (this.printer_options) {
-        if (this.printer_options.create) {
-            this.printer(order);
-        }
+    if (this.printer_options) {
+      if (this.printer_options.create) {
+        this.printer(order);
+      }
     }
   }
 

@@ -63,9 +63,14 @@ export class ModalPaymentComponent implements OnInit {
         return this.form.controls.paymentMethod;
     }
 
-    public selectMethod(name: any) {
+    public selectMethod(id: number) {
         this.form.controls.paymentValue.setValue(0);
-        this.paymentOptionChose = this.paymentOptions.find((opt: any) => opt.name.toLowerCase().includes(name.toString().toLowerCase()));
+        this.paymentOptionChose = this.paymentOptions.find((opt: any) => {
+            if(Number(opt.id ) === id) {
+                return opt;
+            }
+        });
+        // console.log(this.paymentOptionChose)
         if (!this.paymentOptionChose.showCalc) {
             let value = this.order.total;
             if (this.paymentOptionChose.clientAccount) {
@@ -97,6 +102,7 @@ export class ModalPaymentComponent implements OnInit {
                 this.helper.toast('Pedido finalizado!');
                 this.modalCtrl.dismiss();
                 this.orderService.orderToFinalize = order;
+                this.orderService.orderToFinalize.finalized = true;
                 if (this.orderService.ne) {
                     this.router.navigate(['/pedidos']);
                 }

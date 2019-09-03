@@ -110,6 +110,7 @@ export class PainelPedidoComponent implements OnInit {
         modal.onDidDismiss().then(() => {
             if (this.orderService.orderToFinalize.finalized) {
                this.impressora.printerOrder(this.orderService.orderToFinalize);
+               console.log('finalizou')
             }
         });
 

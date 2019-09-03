@@ -106,12 +106,12 @@ export class ModalPaymentComponent implements OnInit {
                 if (this.orderService.ne) {
                     this.router.navigate(['/pedidos']);
                 }
-                if (this.impressora.printer_options) {
-                    if (this.impressora.printer_options.close) {
-                        this.impressora.printer(order);
-                    }
-                }
+        
             }
         }, (error: HttpErrorResponse) => this.orderService.handleError(error));
+    }
+
+    printer(element){
+        this.impressora.printer(element);
     }
 }

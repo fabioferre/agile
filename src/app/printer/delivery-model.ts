@@ -1,10 +1,9 @@
 import { PrinterModel } from "./printer-model"
-
+import { HttpClient } from '@angular/common/http';
 export class DeliveryModel extends PrinterModel {
 
-
-    constructor() {
-        super()
+    constructor(protected http: HttpClient){
+        super(http)
     }
 
     headers(options, order) {
@@ -36,8 +35,8 @@ export class DeliveryModel extends PrinterModel {
                 this.addCmd(this.quote(product.product_name))
             }
 
-            if(product.description){
-                this.newLine().addCmd("obs: "+this.quote(product.description));
+            if(product.obs){
+                this.newLine().addCmd("obs: "+this.quote(product.obs));
             }
 
             this.newLine().addCmd("----------------------").newLine()

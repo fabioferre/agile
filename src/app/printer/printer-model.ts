@@ -1,6 +1,5 @@
 
 import { HttpClient } from '@angular/common/http';
-import { HelperService } from '../service/helper.service';
 
 
 export class PrinterModel {
@@ -11,8 +10,7 @@ export class PrinterModel {
     public esc = '\x1B';
     public cmds = "";
     public pages = "";
-    constructor(    protected http: HttpClient,
-        protected helper: HelperService) { 
+    constructor(    protected http: HttpClient) { 
         this.copy = 1;
         this.sum = 0;
         this.total = 0;
@@ -88,7 +86,7 @@ export class PrinterModel {
     execute(dados) {
 
         dados.cmds = this.cmds;
-        console.log(this.http)
+      
         this.http.post(`${dados.url}/printer`, dados).subscribe(sucess => {
             console.log(sucess)
         }, err => {
@@ -179,14 +177,14 @@ export class PrinterModel {
 
     resume(req) {
         let change = req.change ? req.change : 0.00;
-        this.addCmd("FORMA DE PAGAMENTO: " + req.form_payment)
-            .newLine().addCmd("TROCO: " + change).newLine()
-        this.addCmd("SUBTOTAL: R$ " + this.sum).newLine()
-            .setFreight(req.freight)
+ 
+        this.setFreight(req.freight)
             .calcRateService(req.printer_options.rate_service)
             .addCmd("TOTAL: R$" + parseFloat(this.total.toFixed(2)))
-            .newLine(2)
+            .newLine(1)
             .newLine().addCmd("----------------------").newLine()
+            .addCmd("PAGAMENTO : " + req.form_payment)
+            .newLine().addCmd("TROCO: " + change).newLine()
         return this;
     }
 

@@ -51,7 +51,7 @@ export class ImpressoraService extends Model {
     request.form_payment = payment ? payment.name : "";
     const dado = {
       url: this.printer_options.ip ? `http://${this.printer_options.ip}:3002` : "http://localhost:3002",
-      cmds:"",
+      cmds: "",
       order: request.number,
       change: request.change,
       form_payment: request.form_payment,
@@ -70,28 +70,40 @@ export class ImpressoraService extends Model {
   printer(request) {
 
     var dados = this.prepare(request)
-    const Master = new MasterModel();
-    const Prepare = new PrepareModel();
-    const Delivery = new DeliveryModel();
+    const Master = new MasterModel(this.http);
+    const Prepare = new PrepareModel(this.http);
+    const Delivery = new DeliveryModel(this.http);
 
     if (this.printer_options.master) {
-      Master.build(dados).execute(dados);
+      for (var i = 1; i <= this.printer_options.copy_master; i++) {
+   
+        Master.build(dados).execute(dados);
+      }
+
     }
 
     if (this.printer_options.prepare) {
-      Prepare.build(dados).execute(dados)
+      for (var i = 1; i <= this.printer_options.prepare; i++) {
+       
+        Prepare.build(dados).execute(dados)
+      }
     }
 
     if (this.printer_options.delivery) {
       if (dados.type == 2) {
-        Delivery.build(dados).execute(dados)
+        for (var i = 1; i <= this.printer_options.copy_delivery; i++) {
+      
+          Delivery.build(dados).execute(dados)
+        }
       }
     }
+
+    return false;
 
 
   }
 
- 
+
 
   printerStatement(params) {
 
@@ -105,13 +117,7 @@ export class ImpressoraService extends Model {
 
   }
 
-  printerOrder(order) {
-    if (this.printer_options) {
-      if (this.printer_options.create) {
-        this.printer(order);
-      }
-    }
-  }
+
 
 
 }

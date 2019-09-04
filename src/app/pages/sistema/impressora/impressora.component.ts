@@ -19,8 +19,6 @@ export class ImpressoraComponent implements OnInit {
         company_name: ['', [Validators.required, Validators.minLength(2)]],
         company_cnpj: ['', [Validators.required, Validators.minLength(2)]],
         company_phone: ['', [Validators.required, Validators.minLength(2)]],
-        create: [null],
-        close: [null],
         default: [null],
         copy_master: [1],
         copy_delivery: [1],

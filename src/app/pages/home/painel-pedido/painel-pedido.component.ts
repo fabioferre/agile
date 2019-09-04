@@ -109,7 +109,8 @@ export class PainelPedidoComponent implements OnInit {
         });
         modal.onDidDismiss().then(() => {
             if (this.orderService.orderToFinalize.finalized) {
-               this.impressora.printerOrder(this.orderService.orderToFinalize);
+               this.impressora.printer(this.orderService.orderToFinalize);
+               console.log('finalizou')
             }
         });
 
@@ -147,7 +148,7 @@ export class PainelPedidoComponent implements OnInit {
                     this.orderService.orderToFinalize = response;
                     this.modalPayment();
                 } else {
-                    this.impressora.printerOrder(response);
+                    this.impressora.printer(response);
                 }
             }
         });

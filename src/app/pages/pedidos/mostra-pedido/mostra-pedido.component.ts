@@ -75,14 +75,15 @@ export class MostraPedidoComponent implements OnInit, OnDestroy {
                 this.helper.toast('Pedido finalizado!');
                 this.orderService.orderToFinalize = order;
                 this.router.navigate(['/pedidos']);
- 
+                if (this.impressora.printer_options) {
+                    if (this.impressora.printer_options.close) {
+                        this.impressora.printer(order);
+                    }
+                }
             }
         }, (error: HttpErrorResponse) => this.orderService.handleError(error));
     }
     ngOnDestroy(): void {
         this.orderService.orderToFinalize = [];
-    }
-    printer(element){
-        this.impressora.printer(element);
     }
 }

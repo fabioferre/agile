@@ -57,7 +57,7 @@ export class ComplementsModalComponent implements OnInit {
     continueProcess() {
         this.homeService.productModal.canAdd = true;
         this.homeService.productModal.aditional_price = this.aditionalPrice;
-        this.homeService.productModal.description = this.form.controls.description.value;
+        this.homeService.productModal.obs = this.form.controls.description.value;
         this.modalCtr.dismiss();
     }
 

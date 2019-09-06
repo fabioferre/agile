@@ -1,6 +1,6 @@
-import { PrinterModel } from "./printer-model"
+import { PrinterModel } from "../printer-model"
 import { HttpClient } from '@angular/common/http';
-export class DeliveryModel extends PrinterModel {
+export class MiniDeliveryModel extends PrinterModel {
 
     constructor(protected http: HttpClient){
         super(http)
@@ -16,7 +16,7 @@ export class DeliveryModel extends PrinterModel {
     }
 
     setProducts(products) {
-        this.newLine();
+       
         for (var _i = 0, products_1 = products; _i < products_1.length; _i++) {
             var product = products_1[_i];
             this.sum += product.quantity * product.price;
@@ -39,7 +39,7 @@ export class DeliveryModel extends PrinterModel {
                 this.newLine().addCmd("obs: "+this.quote(product.obs));
             }
 
-            this.newLine().addCmd("----------------------").newLine()
+            this.newLine()
 
 
         }
@@ -61,10 +61,10 @@ export class DeliveryModel extends PrinterModel {
                 .addCmd("Bairro: " + this.quote(client.address_neighborhood))
                 .newLine()
                 .addCmd("Referencia: " + this.quote(client.reference_point))
-                .newLine().addCmd("----------------------") .newLine();
+                .newLine();
                
         }
-        this.resume(req)
+        this.resumeMini(req)
         return this;
 
     }
@@ -73,7 +73,18 @@ export class DeliveryModel extends PrinterModel {
         this.headers(req.printer_options, req.order)
             .setProducts(req.products)
             .footer(req.client, req)
-            .cut('full');
+        return this;
+    }
+
+    resumeMini(req) {
+        let change = req.change ? req.change : 0.00;
+ 
+        this.setFreight(req.freight)
+            .calcRateService(req.printer_options.rate_service)
+            .addCmd("TOTAL: R$" + parseFloat(this.total.toFixed(2)))
+            .newLine()
+            .addCmd("PAGAMENTO : " + req.form_payment)
+            .newLine().addCmd("TROCO: " + change).newLine()
         return this;
     }
 

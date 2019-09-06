@@ -28,6 +28,7 @@ export class ImpressoraComponent implements OnInit {
         master: [true],
         prepare: [true],
         delivery: [true],
+        format: [2],
         ip: ["localhost"]
      
     }); 

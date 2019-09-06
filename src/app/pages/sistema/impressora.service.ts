@@ -8,6 +8,10 @@ import { MasterModel } from '../../printer/master-model';
 import { PrepareModel } from '../../printer/prepare-model';
 import { DeliveryModel } from '../../printer/delivery-model';
 
+import { MiniMasterModel } from '../../printer/mini/master-model';
+import { MiniPrepareModel } from '../../printer/mini/prepare-model';
+import { MiniDeliveryModel } from '../../printer/mini/delivery-model';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -66,9 +70,7 @@ export class ImpressoraService extends Model {
     return dado;
   }
 
-
-  printer(request) {
-
+  profissional(request){
     var dados = this.prepare(request)
     const Master = new MasterModel(this.http);
     const Prepare = new PrepareModel(this.http);
@@ -97,8 +99,59 @@ export class ImpressoraService extends Model {
         }
       }
     }
+  
+    console.log("grande")
 
     return false;
+
+  }
+
+  mini(request){
+    var dados = this.prepare(request)
+    const MiniMaster = new MiniMasterModel(this.http);
+    const MiniPrepare = new MiniPrepareModel(this.http);
+    const MiniDelivery = new MiniDeliveryModel(this.http);
+
+    if (this.printer_options.master) {
+      for (var i = 1; i <= this.printer_options.copy_master; i++) {
+   
+        MiniMaster.build(dados).execute(dados);
+      }
+
+    }
+
+    if (this.printer_options.prepare) {
+      for (var i = 1; i <= this.printer_options.prepare; i++) {
+       
+        MiniPrepare.build(dados).execute(dados)
+      }
+    }
+
+    if (this.printer_options.delivery) {
+      if (dados.type == 2) {
+        for (var i = 1; i <= this.printer_options.copy_delivery; i++) {
+      
+          MiniDelivery.build(dados).execute(dados)
+        }
+      }
+    }
+  
+    console.log("pequena")
+
+    return false;
+
+  }
+
+
+  printer(request) {
+    if (this.printer_options.format == 1) {
+      this.mini(request);
+    }else{
+      this.profissional(request);
+    }
+
+
+
 
 
   }

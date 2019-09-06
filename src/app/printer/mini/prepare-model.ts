@@ -1,7 +1,7 @@
-import { PrinterModel } from "./printer-model"
+import { PrinterModel } from "../printer-model"
 import { HttpClient } from '@angular/common/http';
 
-export class  PrepareModel extends PrinterModel {
+export class  MiniPrepareModel extends PrinterModel {
 
 
 constructor(protected http: HttpClient){
@@ -18,7 +18,7 @@ headers(options, order) {
 }
 
 setProducts(products) {
-    this.newLine();
+ 
     for (var _i = 0, products_1 = products; _i < products_1.length; _i++) {
         var product = products_1[_i];
         let custom: any =  product.product_name.split("1/2")
@@ -40,9 +40,7 @@ setProducts(products) {
         if(product.obs){
             this.newLine().addCmd("obs: "+this.quote(product.obs));
         }
-
-        this.newLine().addCmd("----------------------").newLine()
-
+        this.newLine();
     }
     this.total += this.sum;
     return this;
@@ -50,9 +48,6 @@ setProducts(products) {
 
 footer() {
     this.setFontSize(0);
-    this.newLine(2).addCmd("----------------------")
-    this.newLine(1).addCmd("----------------------")
-
     return this;
 }
 
@@ -60,8 +55,7 @@ build(req) {
     this.headers(req.printer_options, req.order)
         .setFontSize(req.printer_options.font_size)
         .setProducts(req.products)
-        .footer()
-        .cut('full');
+        .footer();
     return this;
 }
 

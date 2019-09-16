@@ -71,7 +71,9 @@ export class DeliveryModel extends PrinterModel {
 
     build(req) {
         this.headers(req.printer_options, req.order)
+            .setFontSize(req.printer_options.font_size)
             .setProducts(req.products)
+            .setFontSize(0)
             .footer(req.client, req)
             .cut('full');
         return this;

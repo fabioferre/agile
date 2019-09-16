@@ -181,8 +181,8 @@ export class ModalFluxoComponent implements OnInit {
   
 
   beep() {
-    this.nativeAudio.preloadSimple('uniqueId1', './assets/beep-scanner.mp3').then(onSuccess => { console.log("foi") }, onError => { console.log(onError) });
-    this.nativeAudio.play('uniqueId1').then(onSuccess => { console.log("foi") }, onError => { console.log(onError) });
+    this.nativeAudio.preloadSimple('uniqueId1', './assets/beep-scanner.mp3').then(onSuccess => { }, onError => {  });
+    this.nativeAudio.play('uniqueId1').then(onSuccess => { }, onError => {  });
   }
 
 }

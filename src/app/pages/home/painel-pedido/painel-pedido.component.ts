@@ -110,9 +110,10 @@ export class PainelPedidoComponent implements OnInit {
         modal.onDidDismiss().then(() => {
             if (this.orderService.orderToFinalize.finalized) {
                this.impressora.printer(this.orderService.orderToFinalize);
-               console.log('finalizou')
+              
             }
         });
+       
 
         return await modal.present();
     }
@@ -143,7 +144,7 @@ export class PainelPedidoComponent implements OnInit {
                 this.homeService.clearPainel();
                 this.changeActive(1);
                 this.helper.toast('Pedido efetuado');
-                // console.log(this.impressora.printer_options);
+               
                 if ([2].indexOf(response.type) > -1) {
                     this.orderService.orderToFinalize = response;
                     this.modalPayment();

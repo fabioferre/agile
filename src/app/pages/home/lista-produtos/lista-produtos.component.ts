@@ -87,7 +87,7 @@ export class ListaProdutosComponent extends Controller implements OnInit {
     }
 
     public verifyComplements(product) {
-        // console.log(product);
+        
         if (product.complements.length > 0) {
             // this.homeService.productModal = ;
             this.modalComplement(product);

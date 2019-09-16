@@ -8,12 +8,20 @@ constructor(protected http: HttpClient){
     super(http)
 }
 
-headers(options, order) {
-    this.copy = options.copy_prepare;
+headers(req) {
+    this.copy = req.printer_options.copy_prepare;
     this.setFontSize(38);
     this.addCmd('Preparo'.toUpperCase());
-    this.newLine(1).addCmd(("Pedido: " + order).toUpperCase()).newLine(1);
+    this.newLine().addCmd(("Pedido: " + req.order).toUpperCase()).newLine();
     this.setFontSize(0);
+    console.log(req.type)
+    if ( req.type == 2) {
+        this.addCmd('ENTREGA').newLine();
+    }else{
+        this.addCmd('BALCAO').newLine();
+    }
+
+   
     return this;
 }
 
@@ -41,7 +49,7 @@ setProducts(products) {
             this.newLine().addCmd("obs: "+this.quote(product.obs));
         }
 
-        this.newLine().addCmd("----------------------").newLine()
+        this.newLine().addCmd("----------------------").newLine();
 
     }
     this.total += this.sum;
@@ -49,17 +57,17 @@ setProducts(products) {
 }
 
 footer() {
-    this.setFontSize(0);
-    this.newLine(2).addCmd("----------------------")
-    this.newLine(1).addCmd("----------------------")
+    this.newLine(2)
+    this.newLine().addCmd("----------------------");
 
     return this;
 }
 
 build(req) {
-    this.headers(req.printer_options, req.order)
+    this.headers(req)
         .setFontSize(req.printer_options.font_size)
         .setProducts(req.products)
+        .setFontSize(0)
         .footer()
         .cut('full');
     return this;

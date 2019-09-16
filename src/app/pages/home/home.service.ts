@@ -34,6 +34,10 @@ export class HomeService extends Model {
         for (const product of this.productSelected) {
             total = total + this.getTotalSale(product);
         }
+
+        if(this.freight) {
+            total += Number(this.freight);
+        }
         return total;
     }
 

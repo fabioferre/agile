@@ -70,37 +70,28 @@ export class ImpressoraService extends Model {
     return dado;
   }
 
+  send(model, options: any = {}){
+    if (options.printer === true) {
+      for (var cont = 1; cont <= options.copy; cont++) {
+
+        model.build(options.data).execute(options.data);
+      }
+    
+    }
+
+  }
+
+
   profissional(request){
     var dados = this.prepare(request)
     const Master = new MasterModel(this.http);
     const Prepare = new PrepareModel(this.http);
     const Delivery = new DeliveryModel(this.http);
-
-    if (this.printer_options.master) {
-      for (var i = 1; i <= this.printer_options.copy_master; i++) {
-   
-        Master.build(dados).execute(dados);
-      }
-
-    }
-
-    if (this.printer_options.prepare) {
-      for (var i = 1; i <= this.printer_options.prepare; i++) {
-       
-        Prepare.build(dados).execute(dados)
-      }
-    }
-
-    if (this.printer_options.delivery) {
+    this.send(Master, {data: dados, printer : this.printer_options.master, copy : this.printer_options.copy_master });
+    this.send(Prepare, {data: dados, printer : this.printer_options.prepare, copy : this.printer_options.copy_prepare });
       if (dados.type == 2) {
-        for (var i = 1; i <= this.printer_options.copy_delivery; i++) {
-      
-          Delivery.build(dados).execute(dados)
-        }
+        this.send(Delivery, {data: dados, printer : this.printer_options.delivery, copy : this.printer_options.copy_delivery });
       }
-    }
-  
-    console.log("grande")
 
     return false;
 
@@ -111,37 +102,15 @@ export class ImpressoraService extends Model {
     const MiniMaster = new MiniMasterModel(this.http);
     const MiniPrepare = new MiniPrepareModel(this.http);
     const MiniDelivery = new MiniDeliveryModel(this.http);
-
-    if (this.printer_options.master) {
-      for (var i = 1; i <= this.printer_options.copy_master; i++) {
-   
-        MiniMaster.build(dados).execute(dados);
-      }
-
-    }
-
-    if (this.printer_options.prepare) {
-      for (var i = 1; i <= this.printer_options.prepare; i++) {
-       
-        MiniPrepare.build(dados).execute(dados)
-      }
-    }
-
-    if (this.printer_options.delivery) {
+    this.send(MiniMaster, {data: dados, printer : this.printer_options.master, copy : this.printer_options.copy_master });
+    this.send(MiniPrepare, {data: dados, printer : this.printer_options.prepare, copy : this.printer_options.copy_prepare });
       if (dados.type == 2) {
-        for (var i = 1; i <= this.printer_options.copy_delivery; i++) {
-      
-          MiniDelivery.build(dados).execute(dados)
-        }
+        this.send(MiniDelivery, {data: dados, printer : this.printer_options.delivery, copy : this.printer_options.copy_delivery });
       }
-    }
-  
-    console.log("pequena")
 
     return false;
 
   }
-
 
   printer(request) {
     if (this.printer_options.format == 1) {
@@ -149,11 +118,6 @@ export class ImpressoraService extends Model {
     }else{
       this.profissional(request);
     }
-
-
-
-
-
   }
 
 

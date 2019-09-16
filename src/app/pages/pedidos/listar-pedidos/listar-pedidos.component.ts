@@ -36,7 +36,7 @@ export class ListarPedidosComponent extends Controller implements OnInit {
         }).subscribe(pedidos => {
             this.orderService.dataSource.data = pedidos;
             this.orderService.dataSource._updateChangeSubscription();
-            // console.log( pedidos)
+           
         });
     }
 

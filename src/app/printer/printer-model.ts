@@ -88,9 +88,9 @@ export class PrinterModel {
         dados.cmds = this.cmds;
       
         this.http.post(`${dados.url}/printer`, dados).subscribe(sucess => {
-            console.log(sucess)
+           
         }, err => {
-            console.log(err)
+          
         });
     }
 
@@ -183,7 +183,7 @@ export class PrinterModel {
             .addCmd("TOTAL: R$" + parseFloat(this.total.toFixed(2)))
             .newLine(1)
             .newLine().addCmd("----------------------").newLine()
-            .addCmd("PAGAMENTO : " + req.form_payment)
+            .addCmd("PAGAMENTO : " + this.quote(req.form_payment))
             .newLine().addCmd("TROCO: " + change).newLine()
         return this;
     }

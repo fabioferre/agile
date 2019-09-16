@@ -37,7 +37,7 @@ export class MostraPedidoComponent implements OnInit, OnDestroy {
                 this.orderService.getById(parans.id).subscribe(order => {
                     this.order = order;
                     this.orderService.orderToFinalize = this.order;
-                    // console.log(this.orderService.orderToFinalize);
+                   
                 });
             });
         } else {
@@ -70,7 +70,7 @@ export class MostraPedidoComponent implements OnInit, OnDestroy {
     finalize() {
         this.order.status = 2;
         this.orderService.changeStatus(this.order).subscribe((order: any) => {
-            console.log(order);
+           
             if (order) {
                 this.helper.toast('Pedido finalizado!');
                 this.orderService.orderToFinalize = order;

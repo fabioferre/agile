@@ -28,6 +28,7 @@ export class ImpressoraComponent implements OnInit {
         master: [true],
         prepare: [true],
         delivery: [true],
+        format: [2],
         ip: ["localhost"]
      
     }); 
@@ -91,7 +92,7 @@ export class ImpressoraComponent implements OnInit {
       return await  this.impressora.getOptions().then( async res => {
             this.printer_options = await res;
             this.form.patchValue(res) 
-            console.log( this.printer_options)
+        
                 return await res
         })
 
@@ -122,7 +123,7 @@ export class ImpressoraComponent implements OnInit {
                 "name": "4 "
             }
         }).subscribe(res => {
-            console.log(res)
+           
         });
     }
 

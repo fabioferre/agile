@@ -8,6 +8,10 @@ import { MasterModel } from '../../printer/master-model';
 import { PrepareModel } from '../../printer/prepare-model';
 import { DeliveryModel } from '../../printer/delivery-model';
 
+import { MiniMasterModel } from '../../printer/mini/master-model';
+import { MiniPrepareModel } from '../../printer/mini/prepare-model';
+import { MiniDeliveryModel } from '../../printer/mini/delivery-model';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -66,41 +70,54 @@ export class ImpressoraService extends Model {
     return dado;
   }
 
+  send(model, options: any = {}){
+    if (options.printer === true) {
+      for (var cont = 1; cont <= options.copy; cont++) {
 
-  printer(request) {
+        model.build(options.data).execute(options.data);
+      }
+    
+    }
 
+  }
+
+
+  profissional(request){
     var dados = this.prepare(request)
     const Master = new MasterModel(this.http);
     const Prepare = new PrepareModel(this.http);
     const Delivery = new DeliveryModel(this.http);
-
-    if (this.printer_options.master) {
-      for (var i = 1; i <= this.printer_options.copy_master; i++) {
-   
-        Master.build(dados).execute(dados);
-      }
-
-    }
-
-    if (this.printer_options.prepare) {
-      for (var i = 1; i <= this.printer_options.prepare; i++) {
-       
-        Prepare.build(dados).execute(dados)
-      }
-    }
-
-    if (this.printer_options.delivery) {
+    this.send(Master, {data: dados, printer : this.printer_options.master, copy : this.printer_options.copy_master });
+    this.send(Prepare, {data: dados, printer : this.printer_options.prepare, copy : this.printer_options.copy_prepare });
       if (dados.type == 2) {
-        for (var i = 1; i <= this.printer_options.copy_delivery; i++) {
-      
-          Delivery.build(dados).execute(dados)
-        }
+        this.send(Delivery, {data: dados, printer : this.printer_options.delivery, copy : this.printer_options.copy_delivery });
       }
-    }
 
     return false;
 
+  }
 
+  mini(request){
+    var dados = this.prepare(request)
+    const MiniMaster = new MiniMasterModel(this.http);
+    const MiniPrepare = new MiniPrepareModel(this.http);
+    const MiniDelivery = new MiniDeliveryModel(this.http);
+    this.send(MiniMaster, {data: dados, printer : this.printer_options.master, copy : this.printer_options.copy_master });
+    this.send(MiniPrepare, {data: dados, printer : this.printer_options.prepare, copy : this.printer_options.copy_prepare });
+      if (dados.type == 2) {
+        this.send(MiniDelivery, {data: dados, printer : this.printer_options.delivery, copy : this.printer_options.copy_delivery });
+      }
+
+    return false;
+
+  }
+
+  printer(request) {
+    if (this.printer_options.format == 1) {
+      this.mini(request);
+    }else{
+      this.profissional(request);
+    }
   }
 
 

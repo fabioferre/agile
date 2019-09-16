@@ -1,6 +1,6 @@
-import { PrinterModel } from "./printer-model"
+import { PrinterModel } from "../printer-model"
 import { HttpClient } from '@angular/common/http';
-export class  MasterModel extends PrinterModel {
+export class  MiniMasterModel extends PrinterModel {
 
 
     constructor(protected http: HttpClient){
@@ -13,18 +13,15 @@ export class  MasterModel extends PrinterModel {
         this.setFontSize(38);
         this.addCmd(this.quote(options.company_name));
         this.setFontSize(0);
-        this.newLine(1).addCmd("cnpj: " + options.company_cnpj);
-        this.newLine(1).addCmd("contato: " + options.company_phone);
-        this.newLine(1);
-        this.addCmd("==========================");
+        this.newLine().addCmd("cnpj: " + options.company_cnpj);
+        this.newLine().addCmd("contato: " + options.company_phone);
         this.newLine(1);
         this.align('left')
         return this;
     };
 
     setProducts(products) {
-        this.newLine();
-
+ 
         for (var _i = 0, products_1 = products; _i < products_1.length; _i++) {
             var product = products_1[_i];
             var tot = product.quantity * product.price;
@@ -42,12 +39,12 @@ export class  MasterModel extends PrinterModel {
                 this.addCmd(this.quote(product.product_name))
             }
             this.newLine()
-                .addCmd("R$ " + product.price + "  " + product.quantity + "x  =  R$ " + tot);
+            this.addCmd("R$ " + product.price + "  " + product.quantity + "x  =  R$ " + tot);
                 if(product.obs){
                     this.newLine().addCmd("obs: "+this.quote(product.obs));
                 }
                 
-                this.newLine().addCmd("----------------------").newLine()
+                this.newLine();
         }
 
 
@@ -58,18 +55,28 @@ export class  MasterModel extends PrinterModel {
 
 
     footer(req) {
-        this.resume(req)
+        this.resumeMini(req)
             this.setFontSize(38);
-            this.newLine(1).addCmd(("Pedido: " + req.order).toUpperCase()).newLine(1);
+            this.newLine().addCmd(("Pedido: " + req.order).toUpperCase());
             this.setFontSize(0)
-            this.newLine(3)
-            .cut('full');
     }
 
     build(req) {
         this.headers(req.printer_options)
             .setProducts(req.products)
             .footer(req);
+        return this;
+    }
+
+    resumeMini(req) {
+        let change = req.change ? req.change : 0.00;
+ 
+        this.setFreight(req.freight)
+            .calcRateService(req.printer_options.rate_service)
+            .addCmd("TOTAL: R$" + parseFloat(this.total.toFixed(2)))
+            .newLine()
+            .addCmd("PAGAMENTO : " + req.form_payment)
+            .newLine().addCmd("TROCO: " + change).newLine()
         return this;
     }
 

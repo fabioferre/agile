@@ -148,8 +148,10 @@ export class PainelPedidoComponent implements OnInit {
                 if ([2].indexOf(response.type) > -1) {
                     this.orderService.orderToFinalize = response;
                     this.modalPayment();
+                  
                 } else {
-                    this.impressora.printerOrder(response);
+                    this.impressora.printer(response);
+                 
                 }
             }
         });

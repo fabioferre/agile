@@ -17,7 +17,8 @@ import { BrMaskerModule } from 'br-mask';
 import { ModalPaymentComponent } from './mostra-pedido/modal-payment/modal-payment.component';
 import { MaterialModule } from 'src/app/material/material.module';
 import { FinalizeOrderModule } from './finalize-order/finalize-order.module';
-
+import { MomentModule } from 'ngx-moment';
+import 'moment/locale/pt-br';
 
 const routes: Routes = [
     {
@@ -57,7 +58,8 @@ const routes: Routes = [
         ReactiveFormsModule,
         RouterModule.forChild(routes),
         BrMaskerModule,
-        FinalizeOrderModule
+        FinalizeOrderModule,
+        MomentModule 
     ],
     declarations: [
         PedidosPage,

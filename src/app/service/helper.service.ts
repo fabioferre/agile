@@ -80,21 +80,30 @@ export class HelperService {
     }
 
     formatDate(options: any) {
-
         const date = new Date();
         let year: any = date.getFullYear();
         let month: any = (1 + date.getMonth()).toString().padStart(2, '0');
-        let day: any = date.getDate().toString().padStart(2, '0');
-
+        let day: any = options.day ? options.day : date.getDate().toString().padStart(2, '0');
         if (options.add) {
             const more = options.add.split(' ');
             switch (more[1]) {
                 case 'month':
-                    month = Number(month) + Number(more[0]);
+                    if (month === 12) {
+                        month = 1;
+                    } else {
+                        month = Number(month) + Number(more[0]);
+                    }
+
                     month = (month < 10 ? '0' : '') + month;
+
                     break;
 
                 case 'day':
+                    if (day === 31) {
+                        month = 1;
+                    } else {
+                        month = Number(month) + Number(more[0]);
+                    }
                     day = Number(day) + Number(more[0]);
                     day = (day < 10 ? '0' : '') + day;
                     break;

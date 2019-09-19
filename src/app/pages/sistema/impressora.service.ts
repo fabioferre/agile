@@ -71,6 +71,7 @@ export class ImpressoraService extends Model {
   }
 
   send(model, options: any = {}){
+  
     if (options.printer === true) {
       for (var cont = 1; cont <= options.copy; cont++) {
 
@@ -113,6 +114,7 @@ export class ImpressoraService extends Model {
   }
 
   printer(request) {
+    console.log("foi impri")
     if (this.printer_options.format == 1) {
       this.mini(request);
     }else{

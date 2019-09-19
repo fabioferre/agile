@@ -150,6 +150,7 @@ export class PainelPedidoComponent implements OnInit {
                     this.modalPayment();
                   
                 } else {
+                   
                     this.impressora.printer(response);
                  
                 }

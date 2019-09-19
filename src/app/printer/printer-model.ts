@@ -88,7 +88,7 @@ export class PrinterModel {
         dados.cmds = this.cmds;
       
         this.http.post(`${dados.url}/printer`, dados).subscribe(sucess => {
-           
+           console.log(sucess)
         }, err => {
           
         });

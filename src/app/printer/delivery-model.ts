@@ -8,10 +8,14 @@ export class DeliveryModel extends PrinterModel {
 
     headers(options, order) {
         this.copy = options.copy_delivery;
+        this.align('center')
+        this.configDate();
         this.setFontSize(38);
         this.addCmd('Entrega');
         this.newLine().addCmd("Pedido: " + order).newLine(1);
         this.setFontSize(0);
+        this.align('left');
+
         return this;
     }
 

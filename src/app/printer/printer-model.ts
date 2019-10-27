@@ -19,7 +19,7 @@ export class PrinterModel {
         this.addCmd(this.esc + "@"); //espaçamento entre as linhas
         this.newLine(2);
         this.addCmd('\x1b\x33'); //espaçamento entre as linhas
-        this.configDate();
+      
 
     }
 
@@ -39,13 +39,13 @@ export class PrinterModel {
 
     }
 
-    async configDate() {
-        var date: any = new Date();
-        this.newLine(1);
-        date = await date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear() + "  " + date.getHours() + ":" + (date.getMinutes() < 10 ? '0' : '') + date.getMinutes() + ":" + date.getSeconds();
+    configDate() {
         this.align('center')
+        var date: any = new Date();
+        date =  date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear() + "  " + date.getHours() + ":" + (date.getMinutes() < 10 ? '0' : '') + date.getMinutes() + ":" + date.getSeconds();
         this.addCmd(date)
-        this.newLine(1);
+        this.newLine();
+
     }
 
     setFontSize(value) {
@@ -151,7 +151,6 @@ export class PrinterModel {
         this.addCmd(this.esc + "@"); //espaçamento entre as linhas
         this.newLine(2);
         this.addCmd('\x1b\x33'); //espaçamento entre as linhas
-        this.configDate();
         return this;
     }
 

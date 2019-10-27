@@ -10,14 +10,15 @@ export class  MasterModel extends PrinterModel {
     headers(options) {
         this.copy = options.copy_master;
         this.align('center')
+        this.configDate();
         this.setFontSize(38);
         this.addCmd(this.quote(options.company_name));
         this.setFontSize(0);
-        this.newLine(1).addCmd("cnpj: " + options.company_cnpj);
-        this.newLine(1).addCmd("contato: " + options.company_phone);
-        this.newLine(1);
+        this.newLine().addCmd("cnpj: " + options.company_cnpj);
+        this.newLine().addCmd("contato: " + options.company_phone);
+        this.newLine();
         this.addCmd("==========================");
-        this.newLine(1);
+        this.newLine();
         this.align('left')
         return this;
     };

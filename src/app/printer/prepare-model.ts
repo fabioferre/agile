@@ -10,16 +10,19 @@ constructor(protected http: HttpClient){
 
 headers(req) {
     this.copy = req.printer_options.copy_prepare;
+    this.align('center')
+    this.configDate();
     this.setFontSize(38);
     this.addCmd('Preparo'.toUpperCase());
     this.newLine().addCmd(("Pedido: " + req.order).toUpperCase()).newLine();
     this.setFontSize(0);
-    console.log(req.type)
+
     if ( req.type == 2) {
         this.addCmd('ENTREGA').newLine();
     }else{
         this.addCmd('BALCAO').newLine();
     }
+    this.align('left')
 
    
     return this;

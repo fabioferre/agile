@@ -84,16 +84,16 @@ export class ImpressoraComponent implements OnInit {
     }
 
     get() {
-        this.impressora.get().subscribe(printers => {
-            this.impressora.printers = printers;
-        });
+        // this.impressora.get().subscribe(printers => {
+        //     this.impressora.printers = printers;
+        // });
     }
 
 
   async getOptions() {
       return await  this.impressora.getOptions().then( async res => {
             this.printer_options = await res;
-            this.form.patchValue(res) 
+           await this.form.patchValue(res) 
         
                 return await res
         })

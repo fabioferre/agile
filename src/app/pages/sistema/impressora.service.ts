@@ -18,7 +18,7 @@ import { MiniDeliveryModel } from '../../printer/mini/delivery-model';
 export class ImpressoraService extends Model {
   // tslint:disable-next-line: variable-name
   public printer_options: any = {};
-  public printers: any;
+  public printers: any = [];
   protected url = 'printer';
   protected urlApi = 'http://localhost:3002';
   public paymentOptions: any = [
@@ -74,7 +74,7 @@ export class ImpressoraService extends Model {
   
     if (options.printer === true) {
       for (var cont = 1; cont <= options.copy; cont++) {
-
+    
         model.build(options.data).execute(options.data);
       }
     
@@ -114,7 +114,7 @@ export class ImpressoraService extends Model {
   }
 
   printer(request) {
-    console.log("foi impri")
+   
     if (this.printer_options.format == 1) {
       this.mini(request);
     }else{

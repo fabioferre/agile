@@ -1,6 +1,6 @@
 import { HelperService } from './../../../service/helper.service';
 import { HomeService } from './../home.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { ModalController, AlertController, } from '@ionic/angular';
 import { ClienteModalComponent } from '../modal/cliente-modal/cliente-modal.component';
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
@@ -31,7 +31,9 @@ export class PainelPedidoComponent implements OnInit {
         selling2: false,
         selling3: false,
         selling4: false,
-    };
+    };  
+
+    @Input() public isVisible: boolean;
 
     constructor(
         private modalCtrl: ModalController,
@@ -143,14 +145,9 @@ export class PainelPedidoComponent implements OnInit {
                 this.homeService.removeProducUnits(this.form.value.products);
                 this.homeService.clearPainel();
                 this.changeActive(1);
-                this.helper.toast('Pedido efetuado');
-               
-                if ([2].indexOf(response.type) > -1) {
-                    this.orderService.orderToFinalize = response;
-                    this.modalPayment();
-                  
-                } else {
-                   
+                this.helper.message("Pedido efetuado");
+
+                if(this.impressora.printer_options? this.impressora.printer_options.create: false){
                     this.impressora.printer(response);
                  
                 }

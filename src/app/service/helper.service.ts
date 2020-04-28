@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { ToastController, ModalController } from '@ionic/angular';
-import { timeout } from 'rxjs/operators';
+import { ToastController, LoadingController, ModalController } from '@ionic/angular';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class HelperService {
-    private apiURL = 'http://tagmus.com.br/api';
+    private apiURL = environment.host;
     // private apiURL = 'http://18.228.52.166/api';
     public today: string;
     public hours: string;

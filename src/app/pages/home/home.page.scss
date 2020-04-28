@@ -1,3 +1,40 @@
+
+@import '~bootstrap/scss/bootstrap-reboot.scss';
+.finalize-button {
+    // display: none;
+    z-index: 1000;
+    visibility: hidden;
+    .count {
+        position: absolute;
+        top: 0px;
+        left: 45%;
+    }
+}
+
+.close-painel {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 99999;
+}
+
+@include media-breakpoint-down(md) { 
+    .painel-d {
+        display: none;
+
+        &.active-mobile-painel {
+            display: block;
+        }
+    }
+
+    .finalize-button {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        visibility: visible;
+    }
+}
+
 .painel-footer {
     position: fixed;
     bottom: 0;

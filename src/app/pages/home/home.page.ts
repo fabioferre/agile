@@ -36,8 +36,12 @@ export class HomePage implements OnInit, OnDestroy {
             this.helper.loadDismiss();
         });
 
+        
+
     }
 
+
+   
 
     ngOnDestroy(): void {
         this.homeService.clearPainel();
@@ -46,3 +50,7 @@ export class HomePage implements OnInit, OnDestroy {
 
 
 }
+
+
+
+

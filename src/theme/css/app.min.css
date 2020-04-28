@@ -11217,19 +11217,22 @@ textarea {
 
 @media (max-width:575.98px) {
     .content:not(.content--boxed):not(.content--full) {
-        padding: 87px 15px 0
+        padding: 87px 0 0;
+        max-width: 100%;
     }
 }
 
 @media (min-width:576px) {
     .content--full {
-        padding: 102px 30px 0
+        padding: 102px 0 0;
+        max-width: 100%;
     }
 }
 
 @media (max-width:767.98px) {
     .content--full {
-        padding: 87px 15px 0
+        padding: 87px 0 0;
+        max-width: 100%;
     }
 }
 

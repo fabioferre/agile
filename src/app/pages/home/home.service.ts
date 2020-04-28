@@ -9,7 +9,7 @@ import Model from 'src/app/service/model';
 })
 export class HomeService extends Model {
     protected url = 'orders';
-    public productSelected: any = [];
+    public productSelected: any[] = [];
     public selection = new SelectionModel<any>(true, this.productSelected);
     public client: any;
     public table: any;
@@ -42,6 +42,11 @@ export class HomeService extends Model {
     }
 
 
+    get totalItens() {
+        return this.productSelected.length;
+    }
+
+  
 
     public removeProductSelected(product): void {
         this.productSelected.splice(this.productSelected.indexOf(product), 1);

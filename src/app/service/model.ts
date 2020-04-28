@@ -3,13 +3,14 @@ import { retry, finalize, catchError } from 'rxjs/operators';
 import { Observable, of, throwError } from 'rxjs';
 import { HelperService } from './helper.service';
 import { async } from 'q';
+import { environment } from 'src/environments/environment';
 
 export default class Model {
     public elementToedit;
     public ne = false;
     protected url;
-    // protected urlApi = 'http://tagmus/api';
-    protected urlApi = 'http://tagmus.com.br/api';
+    protected urlApi = environment.host;
+    // protected urlApi = 'http://www.tagmus.com.br/api';
     constructor(
         protected http: HttpClient,
         protected helper: HelperService) {

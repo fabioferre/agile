@@ -14,7 +14,7 @@
             <div class="">
                 <div class="search-stycky-top">
                     <mat-form-field class="w-100">
-                        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
+                        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Procurar por cliente">
                     </mat-form-field>
                 </div>
                 <div class="table-hover link-table responsive-table ">
@@ -49,7 +49,7 @@
                     </table>
 
                     <div class="text-center pt-4 my-3" *ngIf="alertToRegister">
-                        Nenhum encontrado, deseja cadastrar? &nbsp;
+                        Nenhum cliente encontrado, deseja cadastrar? &nbsp;
                         <button class="btn btn-danger mr-2" (click)="modalCrl.dismiss()">
                             Não
                         </button>

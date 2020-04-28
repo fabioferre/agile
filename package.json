@@ -63,6 +63,7 @@
     "ng-thermal-print": "^0.1.2",
     "ngx-moment": "^3.4.0",
     "phonegap-plugin-barcodescanner": "8.1.0",
+    "node-sass": "^4.13.1",
     "popper.js": "^1.15.0",
     "rxjs": "~6.5.1",
     "tslib": "^1.9.0",

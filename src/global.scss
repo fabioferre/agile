@@ -24,9 +24,7 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import '~@angular/cdk/overlay-prebuilt.css';
 
-@import '~bootstrap/scss/functions';
-@import '~bootstrap/scss/variables';
-@import '~bootstrap/scss/mixins';
+@import '~bootstrap/scss/bootstrap-reboot.scss';
 
 .alert-button.ion-focusable.ion-activatable.danger {
     color: var(--danger);
@@ -260,4 +258,94 @@ ion-modal.lg{
 
 .scrollbar-inner {
     overflow: auto;
+}
+
+
+.hiper-responsive {
+	table {
+		width: 100%;
+	}	
+
+	
+	@media screen and (min-width: 600px) {
+		.mat-cell.text-truncate {
+			max-width: 60px;
+		}
+	}
+
+	@media screen and (min-width: 700px) {
+		.mat-cell.text-truncate {
+			max-width: 150px;
+		}
+	}
+    @media screen and (max-width: 600px) {
+       .mat-table, table  {
+			border: 0;
+			padding: 5px 15px 15px 15px;
+		}
+		
+		
+        .mat-table caption {
+            font-size: 1.3em;
+        }
+        .mat-table .mat-header-row, table thead tr {
+            border: none;
+            clip: rect(0 0 0 0);
+            height: 1px;
+            margin: -1px;
+            overflow: hidden;
+            padding: 0;
+            position: absolute;
+            width: 1px;
+        }
+		.mat-table .mat-row, table tr {
+			border: 1px solid #ddd;
+			border-bottom-width: 3px ;
+            display: block;
+			margin: .625em 2px;
+            padding: 0.35em;
+            height: auto;
+
+            &.selected {
+                border: 3px solid blue;
+            }
+			// box-shadow: 0px 18px 21px -17px rgba(0,0,0,0.57);
+        }
+        .mat-table .mat-cell, table td {
+			border-bottom: 1px solid #ddd;
+			background: #f8f8f8;
+            display: block;
+            font-size: .8em;
+			text-align: right;
+			padding: 0.625em;
+			min-height: auto;
+			&:last-of-type {
+				border-bottom: none;
+			}
+		}
+		.mat-row:nth-child(even) .mat-cell, tr:nth-child(even) th {
+			background: rgba(145, 151, 187, 0.34)
+		}
+
+		.mat-cell:first-of-type, mat-footer-cell:first-of-type, mat-header-cell:first-of-type {
+			padding-left: 0.625em;
+		}
+
+		.mat-footer-row::after, .mat-header-row::after, .mat-row::after  {
+			content: none;
+		}
+
+		
+		.mat-table .mat-cell::before,  table td::before {
+            content: attr(data-label);
+			float: left;
+			margin-right: 10px;
+			// margin-top: 5px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        table td:last-child {
+            border-bottom: 0;
+        }
+    }
 }

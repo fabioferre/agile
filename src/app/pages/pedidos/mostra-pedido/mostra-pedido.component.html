@@ -1,4 +1,7 @@
-<div class="container-fluid content-page scrollbar-inner pt-5">
+<ion-buttons slot="start" *ngIf="helper.isMobile">
+    <ion-back-button defaultHref="/pedidos"></ion-back-button>
+</ion-buttons>
+<div class="container-fluid content-page scrollbar-inner pt-5" [ngClass]="{ 'mobile-content': helper.isMobile }">
     <div class="row">
         <div class="col-md-10 mx-auto shadow-lg mt-4 " *ngIf="order">
             <div class="painel-item active disabled-events" *ngIf="order.type == 1">
@@ -45,9 +48,13 @@
                     
                 </div>
                 <div class="col-lg-3 ml-auto" [ngClass]="{'bg-light': order.status != 2}">
-                    <div class="btn-finalize btn btn-outline-success is-link "
-                    (click)="prepareFinalized()" *ngIf="order.status != 2">
+                    <div class="btn-finalize btn btn-outline-success is-link " [ngClass]="{ 'mobile': helper.isMobile }"
+                    (click)="prepareFinalized()" *ngIf="order.status != 2 && order.status != 0">
                             <i class="fas fa-dollar-sign"></i> Fechar pedido
+                    </div>
+                    <div class="btn-finalize btn btn-danger "
+                    *ngIf="order.status == 0">
+                            <i class="fas fa-times"></i> Cancelado
                     </div>
                 </div>
             </div>

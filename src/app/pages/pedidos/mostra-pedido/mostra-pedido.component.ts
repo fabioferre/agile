@@ -47,11 +47,7 @@ export class MostraPedidoComponent implements OnInit, OnDestroy {
 
 
     public prepareFinalized() {
-        if (this.order.status !== 4) {
-            this.modalPayment();
-        } else {
-            this.finalize();
-        }
+        this.modalPayment();
     }
     async modalPayment() {
         const modal = await this.modalCtrl.create({

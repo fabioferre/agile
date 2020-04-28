@@ -1,12 +1,26 @@
+@import '~bootstrap/scss/bootstrap-reboot.scss';
+
 p span {
     font-size: 20px
 }
 
 div.painel-item {
     position: absolute;
-    left: -33px;
-    top: -38px;
+
+
     z-index: 10;
+
+    @include media-breakpoint-up(md) {
+        top: -38px;
+        left: -33px;
+        right: auto;
+    }
+
+    @include media-breakpoint-down(md) {
+        top: -50px;
+        left: auto;
+        right: 20px;
+    }
 }
 
 .payment-calcs {
@@ -16,6 +30,7 @@ div.painel-item {
     text-align: center;
     text-transform: uppercase;
     border: 1px solid #f3f3f3;
+
     h2 {
         font-size: 18px;
         color: var(--white);
@@ -25,7 +40,7 @@ div.painel-item {
         font-size: 15px;
         display: block;
         color: var(--dark);
-        background:#f3f3f3;
+        background: #f3f3f3;
     }
 }
 
@@ -36,17 +51,36 @@ div.painel-item {
 
 
 .btn-finalize {
-    position: absolute;
-    width: 98%;
-    height: 98%;
-    top: 1%;
-    left: 1%;
+
     font-size: 18px;
-    padding-top: 22px;
+
+    @include media-breakpoint-up(md) {
+
+        position: absolute;
+        height: 98%;
+        top: 1%;
+        left: 1%;
+        width: 98%;
+        padding-top: 22px;
+    }
+
+    &.mobile {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        min-height: 28px;
+        z-index: 999;
+    }
+
 }
 
 .client-info {
     small {
         font-size: 12px;
     }
+}
+
+.mobile-content {
+    margin-bottom: 100px;
 }

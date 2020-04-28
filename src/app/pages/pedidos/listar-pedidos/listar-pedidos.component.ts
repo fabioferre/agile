@@ -7,7 +7,7 @@ import { HelperService } from 'src/app/service/helper.service';
 import { AlertController, ModalController } from '@ionic/angular';
 import { ModalMotoboyComponent } from './modal-motoboy/modal-motoboy.component';
 import { Controller } from 'src/app/service/controller';
-
+import  * as moment from 'moment';
 @Component({
     selector: 'app-listar-pedidos',
     templateUrl: './listar-pedidos.component.html',
@@ -26,7 +26,7 @@ export class ListarPedidosComponent extends Controller implements OnInit {
     ) { super(alertCtrl); }
 
     ngOnInit() {
-        const date = this.helper.formatDate({add: '-1 day'});
+        const date = this.helper.momentDate().add(-24, 'hours').format('Y-MM-DD');
         this.orderService.dataSource.sort = this.sort;
         this.orderService.get({
             status: 1,
@@ -34,9 +34,9 @@ export class ListarPedidosComponent extends Controller implements OnInit {
                 ['created_at', '>=', date]
             ]
         }).subscribe(pedidos => {
+            console.log(pedidos)
             this.orderService.dataSource.data = pedidos;
             this.orderService.dataSource._updateChangeSubscription();
-           
         });
     }
 

@@ -14,15 +14,15 @@ const routes: Routes = [
   { path: 'lojas', canActivate: [AuthService], loadChildren: './pages/lojas/lojas.module#LojasPageModule' },
   { path: 'clientes', canActivate: [AuthService], loadChildren: './pages/clientes/clientes.module#ClientesPageModule' },
   { path: 'sistema', canActivate: [AuthService], loadChildren: './pages/sistema/sistema.module#SistemaPageModule' },
-  { path: 'fretes',canActivate: [AuthService], loadChildren: './pages/fretes/fretes.module#FretesPageModule' },  { path: 'account', loadChildren: './pages/account/account.module#AccountPageModule' }
-
+  { path: 'fretes',canActivate: [AuthService], loadChildren: './pages/fretes/fretes.module#FretesPageModule' },
+  { path: 'account', loadChildren: './pages/account/account.module#AccountPageModule' }
 
 
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, {useHash: true })
+    RouterModule.forRoot(routes, {useHash: true, scrollPositionRestoration: 'enabled', anchorScrolling: 'enabled' })
   ],
   exports: [RouterModule]
 })

@@ -24,9 +24,12 @@ export class HomeService extends Model {
     public finalProductBuilded: any;
 
     public productModal: any;
+    public isVisible: boolean;
+
     constructor(
         http: HttpClient,
-        helper: HelperService
+        helper: HelperService,
+
     ) { super(http, helper); }
 
     get totalPrice() {
@@ -108,8 +111,7 @@ export class HomeService extends Model {
         this.table = null;
         this.order_id = null;
         this.freight = 0;
-
-
+        this.isVisible = false;
         if (removeProducts) { this.productSelected = []; }
 
     }

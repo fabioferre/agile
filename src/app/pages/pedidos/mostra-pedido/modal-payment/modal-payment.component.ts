@@ -14,7 +14,7 @@ import { HttpErrorResponse } from '@angular/common/http';
     styleUrls: ['./modal-payment.component.scss'],
 })
 export class ModalPaymentComponent implements OnInit {
-    public paymentOptions: any = [
+    public paymentOptions: any[] = [
         { id: 1, name: 'Cartão Debito / Crédito', icon: 'fa-credit-card' },
         { id: 2, name: 'Vaucher', icon: 'fa-money-check' },
         { id: 3, name: 'Dinheiro', icon: 'fa-money-bill-wave' },
@@ -93,7 +93,9 @@ export class ModalPaymentComponent implements OnInit {
 
     finalize() {
         this.order.status = 2;
-        this.order.form_payment = this.paymentMethod.value;
+        this.order.form_payment = this.paymentOptions.find(e => e.id == this.paymentMethod.value).name;
+
+        console.log(this.paymentMethod.value)
         this.order.change = this.change;
         this.orderService.changeStatus(this.order).subscribe((order: any) => {
        

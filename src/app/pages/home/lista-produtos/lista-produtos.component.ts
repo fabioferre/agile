@@ -17,7 +17,7 @@ import { ComplementsModalComponent } from '../modal/complements-modal/complement
 })
 export class ListaProdutosComponent extends Controller implements OnInit {
     @Input() public products: any;
-    public displayedColumns: string[] = ['select', 'id',  'name', 'category', 'unity', 'sale_price'];
+    public displayedColumns: string[] = ['select', 'id',  'name', 'category_name', 'unity', 'sale_price'];
     public selection: any;
     @ViewChild(MatSort) sort: MatSort;
     constructor(

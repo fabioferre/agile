@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ToastController, LoadingController, ModalController } from '@ionic/angular';
+import { ToastController, LoadingController, ModalController, Platform } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
-
+import * as moment from 'moment';
 @Injectable({
     providedIn: 'root'
 })
@@ -17,8 +17,13 @@ export class HelperService {
     constructor(
         private toastCtrl: ToastController,
         private modalCtrl: ModalController,
+        private platform: Platform
     ) { }
 
+
+    get isMobile() {
+        return this.platform.is('mobile');
+    }
 
     get url() {
         return this.apiURL;
@@ -120,61 +125,15 @@ export class HelperService {
 
     }
 
-    date(data?, more?, formatter?) {
-
-        // const date = new Date();
-        // let format;
-        // if ((data) && (!formatter)) {
-        //     format = new Date(data).toISOString();
-        //     this.format = format.split('T')[0];
-        //     const hours = date.getHours() + data;
-        //     const min = (date.getMinutes() < 10 ? '0' : '') + date.getMinutes();
-        //     this.hours = hours + ':' + min;
-        // } else {
-        //     if (formatter === '/') {
-        //         data = data.split('-');
-        //         return data = data[2] + '/' + data[1] + '/' + data[0];
-        //     }
-        //     if (formatter === '-') {
-        //         data = data.split('/');
-        //         return data = data[2] + '-' + data[1] + '-' + data[0];
-        //     }
-        //     format = new Date().toISOString();
-
-        //     if (more) {
-        //         const som = format.split('T')[0].split('-');
-        //         more = more.split(' ');
-
-        //         switch (more[1]) {
-        //             case 'month':
-        //                 som[1] = Number(som[1]) + Number(more[0]);
-        //                 som[1] = (som[1] < 10 ? '0' : '') + som[1];
-        //                 break;
-
-        //             case 'day':
-        //                 som[2] = Number(som[2]) + Number(more[0]);
-        //                 som[2] = (som[2] < 10 ? '0' : '') + som[2];
-        //                 break;
-
-        //             case 'year':
-        //                 som[0] = Number(som[0]) + Number(more[0]);
-        //                 som[0] = (som[0] < 10 ? '0' : '') + som[0];
-        //                 break;
-        //         }
-        //         return som[0] + '-' + som[1] + '-' + som[2];
-        //     }
-        //     const min = (date.getMinutes() < 10 ? '0' : '') + date.getMinutes();
-        //     this.hours = new Date().getHours() + ':' + min;
-        //     return this.today = format.split('T')[0];
-
-
-        // }
-
-
-
+    date() {
         return this;
     }
 
+    momentDate(date: any = new Date()) {
+        return moment(date)
+        .parseZone()
+        .locale(window.navigator.language);
+    }
 
 
 

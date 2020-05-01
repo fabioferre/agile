@@ -12268,6 +12268,14 @@ textarea {
     } 
 }
 
+@media (max-width:600px) {
+    .navigation__sub>ul>li>a {
+        padding-top: .6rem;
+        padding-bottom: .6rem;
+        padding-left: 26px;
+    } 
+}
+
 
 .navigation__sub>ul>li:last-child {
     padding-bottom: .8rem

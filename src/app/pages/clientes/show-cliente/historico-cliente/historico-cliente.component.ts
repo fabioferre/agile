@@ -21,8 +21,8 @@ export class HistoricoClienteComponent extends Controller implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   public form: FormGroup = this.fb.group({
-    start: [this.helper.date(null, "-3 month")],
-    end: [this.helper.date(), [Validators.required, Validators.minLength(2)]],
+    start: [this.helper.momentDate().add(-3,'months').format('Y-MM-DD')],
+    end: [this.helper.momentDate().format('Y-MM-DD'), [Validators.required, Validators.minLength(2)]],
 
   });
 
@@ -37,7 +37,6 @@ export class HistoricoClienteComponent extends Controller implements OnInit {
     public helper: HelperService) { super(alertCtrl) }
 
   ngOnInit() {
-    console.log(this.helper.date(null, "30 day"))
     this.dataSource.sort = this.sort;
     this.impressora.getOptions().then(res => {
       this.impressora.printer_options = res;

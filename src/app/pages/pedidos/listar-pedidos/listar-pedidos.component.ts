@@ -34,7 +34,6 @@ export class ListarPedidosComponent extends Controller implements OnInit {
                 ['created_at', '>=', date]
             ]
         }).subscribe(pedidos => {
-            console.log(pedidos)
             this.orderService.dataSource.data = pedidos;
             this.orderService.dataSource._updateChangeSubscription();
         });

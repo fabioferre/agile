@@ -21,8 +21,8 @@ export class StatementsClienteComponent extends Controller implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   public form: FormGroup = this.fb.group({
-    start: [this.helper.date(this.helper.date(null, "-3 month"), null, "/"), [Validators.required, Validators.minLength(2)]],
-    end: [this.helper.date(this.helper.date(), null, "/"), [Validators.required, Validators.minLength(2)]]
+    start: [this.helper.momentDate().add(-3, 'months').format('Y-MM-DD'), [Validators.required, Validators.minLength(2)]],
+    end: [this.helper.momentDate().format('Y-MM-DD'), [Validators.required, Validators.minLength(2)]]
 
   });
 
@@ -51,11 +51,11 @@ export class StatementsClienteComponent extends Controller implements OnInit {
 
     this.clientesService.statement(this.clientesService.clientToShow.id, {
       filter: [
-        ['created_at', '>=', this.helper.date(this.form.value.start, null, "-")],
-        ['created_at', '<=', this.helper.date(this.form.value.end, null, "-")]
-      ]
+        ['created_at', '>=', this.helper.momentDate(this.form.value.start).format('Y-MM-DD')],
+        ['created_at', '<=', this.helper.momentDate(this.form.value.end).format('Y-MM-DD')]
+      ] 
     }).subscribe((statement) => {
-     
+
       this.statements = statement
       this.updateDataTable(statement)
       this.helper.toast("Extrato carregado!")
@@ -74,10 +74,9 @@ export class StatementsClienteComponent extends Controller implements OnInit {
   }
 
   printer() {
-console.log(this.statements)
     this.impressora.printerStatement(this.statements).subscribe(response => {
       if (response) {
-    
+
         this.helper.toast("Impressão efetuada !")
 
       }

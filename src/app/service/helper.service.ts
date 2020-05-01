@@ -43,6 +43,9 @@ export class HelperService {
 
     async toast(messageToShow, options: any = {}) {
 
+        if(this.isMobile) {
+            options.position = 'bottom';
+        }
         const toast = await this.toastCtrl.create(
             {
                 message: messageToShow,

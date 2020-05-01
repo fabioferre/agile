@@ -33,7 +33,12 @@ export class ListarPedidosComponent extends Controller implements OnInit {
             filter: [
                 ['created_at', '>=', date]
             ]
-        }).subscribe(pedidos => {
+        }).subscribe((pedidos: any[]) => {
+            pedidos.map(e => {
+                if(e.client) {
+                    e.client_name = e.client.name
+                }
+            });
             this.orderService.dataSource.data = pedidos;
             this.orderService.dataSource._updateChangeSubscription();
         });

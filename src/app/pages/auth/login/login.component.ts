@@ -47,6 +47,7 @@ export class LoginComponent implements OnInit {
                 this.helper.loadDismiss();
             },
             error => {
+                this.helper.loadDismiss();
                 this.helper.message(error)
             });
         }

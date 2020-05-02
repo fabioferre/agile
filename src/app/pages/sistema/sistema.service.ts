@@ -11,11 +11,11 @@ import { finalize, catchError, retry } from 'rxjs/operators';
 })
 export class SistemaService extends Model {
   public niveis = [
-    { name: "nivel 1", id: 5 },
-    { name: "nivel 2", id: 6 },
-    { name: "nivel 3", id: 7 },
-    { name: "nivel 4", id: 8 },
-    { name: "nivel 5", id: 9 }]
+    { name: "nivel 1", id: 4 },
+    { name: "nivel 2", id: 5 },
+    { name: "nivel 3", id: 6 },
+    { name: "nivel 4", id: 7 },
+    { name: "nivel 5", id: 8 }]
     
   protected url = 'auth/roles'
   constructor(http :HttpClient , helper : HelperService) { super(http, helper)}

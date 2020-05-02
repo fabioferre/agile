@@ -14,7 +14,7 @@ import  * as moment from 'moment';
     styleUrls: ['./listar-pedidos.component.scss'],
 })
 export class ListarPedidosComponent extends Controller implements OnInit {
-    public displayedColumns: string[] = ['status', 'created_at', 'number', 'type', 'total', 'action'];
+    public displayedColumns: string[] = ['status', 'created_at', 'number','client_name', 'type', 'total', 'action'];
     @ViewChild(MatSort) sort: MatSort;
 
     constructor(

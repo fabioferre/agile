@@ -28,19 +28,13 @@ export class FluxoComponent extends Controller implements OnInit {
   ngOnInit() {
     this.dataSource.sort = this.sort;
 
-    if (!this.stockService.flows) {
-
-      this.stockService.get().subscribe(data => {
-        this.stockService.flows = data;
-        this.updateDataTable(data)
-      });
-    } else {
-      this.updateDataTable(this.stockService.flows)
-    }
-   
+    this.stockService.get().subscribe(data => {
+      this.stockService.flows = data;
+      this.updateDataTable(data)
+    });
 
     if (!this.produtoService.products) {
-      this.produtoService.get().subscribe(data => this.produtoService.products  = data);
+      this.produtoService.get().subscribe(data => this.produtoService.products = data);
     }
 
   }
@@ -59,17 +53,17 @@ export class FluxoComponent extends Controller implements OnInit {
   async modalFound() {
 
     const modal = await this.modalCtrl.create({
-        component: ModalFluxoComponent,
-        cssClass: 'sm responsive'
+      component: ModalFluxoComponent,
+      cssClass: 'sm responsive'
     });
-    modal.onDidDismiss().then(()=>{
+    modal.onDidDismiss().then(() => {
 
       this.updateDataTable(this.stockService.flows)
     })
     return await modal.present();
-}
+  }
 
 
-  
+
 
 }

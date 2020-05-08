@@ -97,6 +97,7 @@ export class PainelPedidoComponent implements OnInit {
         }
         const modal = await this.modalCtrl.create({
             component: ClienteModalComponent,
+            cssClass: 'lg responsive'
         });
         modal.onDidDismiss().then(() => {
             this.checkSelling();
@@ -104,11 +105,12 @@ export class PainelPedidoComponent implements OnInit {
         return await modal.present();
     }
 
-    async modalPayment() {
+    async modalPayment(order) {
         const modal = await this.modalCtrl.create({
             component: ModalPaymentComponent,
             cssClass: 'sm responsive'
         });
+        this.orderService.orderToFinalize = order;
         modal.onDidDismiss().then(() => {
             if (this.orderService.orderToFinalize.finalized) {
                this.impressora.printer(this.orderService.orderToFinalize);
@@ -130,15 +132,15 @@ export class PainelPedidoComponent implements OnInit {
                 this.homeService.productAlert = true;
             }, 100);
 
-        } else if (this.form.value.type === 1 || this.form.value.type === 2) {
-            this.storeOrder();
+        } else if (this.form.value.type === 1 ) {
+            this.storeOrder(true);
             this.homeService.productAlert = false;
         } else {
-            this.storeOrder();
+            this.storeOrder(false);
         }
     }
 
-    public storeOrder() {
+    public storeOrder(finalize = false) {
         this.homeService.create(this.form.value).subscribe((response) => {
             if (response) {
                 this.msgOrder(response.warning);
@@ -146,10 +148,15 @@ export class PainelPedidoComponent implements OnInit {
                 this.homeService.clearPainel();
                 this.changeActive(1);
                 this.helper.message("Pedido efetuado");
+                if(finalize) {
+                    this.modalPayment(response)
+                }
                 if(this.impressora.printer_options? this.impressora.printer_options.create: false){
                     this.impressora.printer(response);
                  
                 }
+
+                this.homeService.onRemoveOrder.next(response);
             }
         });
     }

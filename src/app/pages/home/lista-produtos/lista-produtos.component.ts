@@ -17,7 +17,7 @@ import { ComplementsModalComponent } from '../modal/complements-modal/complement
 })
 export class ListaProdutosComponent extends Controller implements OnInit {
     @Input() public products: any;
-    public displayedColumns: string[] = ['select', 'id',  'name', 'category_name', 'unity', 'sale_price'];
+    public displayedColumns: string[] = ['select',   'name', 'category_name', 'unity', 'sale_price'];
     public selection: any;
     @ViewChild(MatSort) sort: MatSort;
     constructor(
@@ -31,6 +31,10 @@ export class ListaProdutosComponent extends Controller implements OnInit {
         this.dataSource.sort = this.sort;
         this.selection = this.homeService.selection;
         this.updateDataTable(this.products);
+
+        this.homeService.onRemoveOrder.subscribe(() => {
+            this.dataSource.data.map((e) => e.qtd = 1);
+        });
     }
 
 

@@ -158,15 +158,12 @@ ion-modal.lg{
 
 
 @include media-breakpoint-down(md) { 
-    ion-modal.md.responsive {
-        --width: 95% !important;
-        --height: 200px !important
-    }
 
-    ion-modal.sm.responsive {
+    ion-modal.sm.responsive,  ion-modal.lg.responsive, ion-modal.md.responsive {
         --width: 95% !important;
         --height: 91% !important;
     }
+    
 }
 @include media-breakpoint-up(md) { 
     ion-modal.md.responsive {
@@ -178,15 +175,23 @@ ion-modal.lg{
         --width:  400px !important;
         --height: 65% !important;
     }
+    ion-modal.lg.responsive {
+        --width:   55%  !important;
+        --height: 65% !important;
+    }
 }
 @include media-breakpoint-up(xl) { 
     ion-modal.md.responsive {
-        --width: 400px !important;
+        --width: 55% !important;
         --height: 180px !important
     }
 
     ion-modal.sm.responsive {
         --width:  500px !important;
+        --height: 65% !important;
+    }
+    ion-modal.lg.responsive {
+        --width:   55%  !important;
         --height: 65% !important;
     }
 }

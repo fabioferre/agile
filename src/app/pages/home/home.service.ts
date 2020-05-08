@@ -3,6 +3,7 @@ import { HelperService } from './../../service/helper.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import Model from 'src/app/service/model';
+import { Subject } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -25,7 +26,7 @@ export class HomeService extends Model {
 
     public productModal: any;
     public isVisible: boolean;
-
+    public onRemoveOrder: Subject<any> = new Subject();
     constructor(
         http: HttpClient,
         helper: HelperService,
@@ -53,7 +54,7 @@ export class HomeService extends Model {
 
     public removeProductSelected(product): void {
         this.productSelected.splice(this.productSelected.indexOf(product), 1);
-
+        this.onRemoveOrder.next();
     }
 
 
@@ -97,6 +98,7 @@ export class HomeService extends Model {
             if (!product.old && product.stock) {
                 const idx = this.productSelected.indexOf(product);
                 this.productSelected[idx].units -= product.qtd;
+                this.productSelected[idx].qtd = 1;
             }
         }
 
@@ -112,6 +114,7 @@ export class HomeService extends Model {
         this.order_id = null;
         this.freight = 0;
         this.isVisible = false;
+
         if (removeProducts) { this.productSelected = []; }
 
     }

@@ -4,6 +4,7 @@ import { ProdutoService } from '../produto.service';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Controller } from '../../../service/controller';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
     selector: 'app-listagem',
@@ -11,22 +12,19 @@ import { Controller } from '../../../service/controller';
     styleUrls: ['./listagem.component.scss'],
 })
 export class ListagemComponent  extends Controller implements OnInit {
-    public displayedColumns = ['number',  'name', 'sale_price', 'category', 'unity', 'action'];
+    public displayedColumns = [ 'name', 'sale_price', 'category', 'unity', 'action'];
 
     @ViewChild(MatSort) sort: MatSort;
 
     constructor(
         public productService: ProdutoService,
         private router: Router,
+        public auth: AuthService,
         public alertCtrl: AlertController ) { super(alertCtrl)}
 
     ngOnInit() {
         this.dataSource.sort = this.sort;
-        if (!this.productService.products) {
-            this.productService.get().subscribe(products => this.setProducts(products));
-        } else {
-            this.setProducts(this.productService.products)
-        }
+        this.productService.get().subscribe(products => this.setProducts(products));
     }
 
     public setProducts(products) {

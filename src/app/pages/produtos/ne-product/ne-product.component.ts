@@ -41,7 +41,7 @@ export class NeProductComponent implements OnInit, OnDestroy {
 
     public editor = ClassicEditor;
     public filteredProduct: Observable<any>;
-    public items = [];
+    public items: any[] = [];
 
     constructor(
         private fb: FormBuilder,
@@ -61,7 +61,8 @@ export class NeProductComponent implements OnInit, OnDestroy {
         this.productService.checkNE();
         if (this.productService.productToEdit) {
             if (this.productService.productToEdit.items) {
-                this.items = JSON.parse(this.productService.productToEdit.items);
+                this.items =  JSON.parse(this.productService.productToEdit.items);
+                // console.log( JSON.parse(JSON.parse(this.productService.productToEdit.items)))
             }
             this.form.patchValue(this.productService.productToEdit);
         }
@@ -177,9 +178,7 @@ export class NeProductComponent implements OnInit, OnDestroy {
         item.qtd = 1;
         const idx = this.items.indexOf(item);
         if (idx < 0 && !remove) {
-            if (this.productService.verifyStock(item)) {
-                this.items.push(item);
-            }
+          this.items.push(item);
             this.productsCtrl.reset();
 
         } else {
@@ -196,15 +195,7 @@ export class NeProductComponent implements OnInit, OnDestroy {
 
     public plusItem(item: any) {
         const idx = this.items.indexOf(item);
-        if (item.stock) {
-            if (this.items[idx].qtd < item.units) {
-                this.items[idx].qtd++;
-            } else {
-                this.helper.toast('Item sem estoque!', {color : 'secondary'});
-            }
-        } else {
-            this.items[idx].qtd++;
-        }
+        this.items[idx].qtd++;
     }
 
     ngOnDestroy(): void {

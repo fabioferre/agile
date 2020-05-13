@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  host: 'http://tagmus/api'
+  // host: 'http://tagmus/api',
+  host: 'https://tagmus.com.br/api'
 };
 
 /*

@@ -49,13 +49,28 @@
               <!-- action Column -->
               <ng-container matColumnDef="action">
                   <th mat-header-cell *matHeaderCellDef > Ações </th>
-                  <td mat-cell *matCellDef="let element"> 
-                      <button class="btn btn-primary mx-1" (click)="edit(element)">
-                          <i class="zmdi zmdi-edit"></i>
+                  <td mat-cell *matCellDef="let element; let idx = index"> 
+                      
+              
+                      <mat-menu #appMenu="matMenu">
+                        <button mat-menu-item (click)="edit(element)">
+                            <i class="zmdi zmdi-edit"></i>
+                            Editar
+                        </button>
+                        <button mat-menu-item (click)="useStore(element, idx)" [disabled]="element.id == auth.user.store_id">
+                           
+                            <ng-container *ngIf=" element.id == auth.user.store_id; else nousing">
+                                Já Utilizando
+                            </ng-container>
+                            <ng-template #nousing>
+                                <i class="fas fa-chalkboard-teacher"></i> Usar loja
+                            </ng-template>
+                        </button>
+                      </mat-menu>
+                      
+                      <button mat-button [matMenuTriggerFor]="appMenu">
+                        <i class="fas fa-ellipsis-v"></i>
                       </button>
-                      <!-- <button class="btn btn-danger mx-1" (click)="delete()">
-                          <i class="zmdi zmdi-close"></i>
-                      </button> -->
                   </td>
               </ng-container>
 

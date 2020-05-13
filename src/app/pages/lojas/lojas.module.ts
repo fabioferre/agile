@@ -11,7 +11,7 @@ import { BrMaskerModule } from 'br-mask';
 import { IonicModule } from '@ionic/angular';
 
 import { LojasPage } from './lojas.page';
-import { MatInputModule, MatSlideToggleModule, MatSelectModule, MatFormFieldModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
+import { MatInputModule, MatSlideToggleModule, MatSelectModule, MatFormFieldModule, MatTableModule, MatPaginatorModule, MatSortModule, MatMenuModule } from '@angular/material';
 
 const routes: Routes = [
   {
@@ -47,6 +47,7 @@ const routes: Routes = [
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    MatMenuModule,
     BrMaskerModule,
     RouterModule.forChild(routes)
   ],

@@ -9,10 +9,27 @@
 
 <div class="card  responsive-table" >
     <div class="card-body ">
-        <mat-form-field class="w-100">
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro">
-        </mat-form-field>
+        <ion-row>
+            <ion-col size="12" size-lg="6" class="my-2">
+                <mat-form-field class="w-100">
+                    <mat-label>Pesquisar</mat-label>
+                    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Digite o nome, unidade, categoria para filtrar">
+                </mat-form-field>
+            </ion-col>
+            <ion-col size="12" size-lg="6"  class="my-2 ion-text-right">
+                <button mat-raised-button [color]="!onlyReplenish? 'primary': 'default'" type="button" (click)="!onlyReplenish? replenishStock(): removereplenishStockFilter()">
+                   <span *ngIf="!onlyReplenish">
+                       <i class="fas fa-undo"></i>
+                        Produtos para reposição
+                    </span>
+                   <span *ngIf="onlyReplenish">Mostrar todos produtos</span>
+                </button>
+            </ion-col>
+        </ion-row>
         <div class="mat-elevation-z8  hiper-responsive " >
+            <div class="alert alert-warning" *ngIf="onlyReplenish" >
+                Mostrando apenas produtos precisando de reposição de estoque.
+            </div>
             <table mat-table [dataSource]="dataSource" matSort class="w-100 ">
 
                 <!-- ID Column -->

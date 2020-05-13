@@ -13,7 +13,7 @@ import { AuthService } from 'src/app/service/auth.service';
 })
 export class ListagemComponent  extends Controller implements OnInit {
     public displayedColumns = [ 'name', 'sale_price', 'category', 'unity', 'action'];
-
+    public onlyReplenish: boolean;
     @ViewChild(MatSort) sort: MatSort;
 
     constructor(
@@ -38,9 +38,21 @@ export class ListagemComponent  extends Controller implements OnInit {
         this.router.navigate(['/produtos/editar', product.id]);
     }
 
+    public replenishStock() {
+        this.onlyReplenish = true;
+        this.dataSource.data =  this.productService.products.filter((product) => {
+            if(product.stock && product.units <= product.minimum_units) {
+                return product;
+            }
+        });
+        this.dataSource._updateChangeSubscription()
+    }
 
-
-
+    public removereplenishStockFilter() {
+        this.dataSource.data = this.productService.products;
+        this.dataSource._updateChangeSubscription();
+        this.onlyReplenish = false;
+    }
     delete(product) {
 
         this.productService.deleteById(product.id).subscribe(response => {

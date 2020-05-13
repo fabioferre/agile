@@ -16,7 +16,7 @@ export class AuthService implements CanActivate {
     constructor(
         private http: HttpClient,
         private router: Router,
-        private storage: Storage,
+        public storage: Storage,
         private helper: HelperService
     ) { }
 
@@ -42,6 +42,7 @@ export class AuthService implements CanActivate {
     }
 
     canActivate() {
+      
         return this.storage.get('user').then(val => {
             if (val) {
                 this.configSystem(val);
@@ -53,8 +54,17 @@ export class AuthService implements CanActivate {
         });
     }
 
-    public configSystem(user): void {
+    public configSystem(user, store?): void {
         this.user = user;
+        
+        if(store) 
+        {
+            this.store = store;
+        } else {
+            this.storage.get('store').then((store) => {
+                this.store = store;
+            });
+        }
         this.permissions = user.permissions;
     }
 

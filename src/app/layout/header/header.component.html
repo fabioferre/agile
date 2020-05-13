@@ -23,7 +23,16 @@
             <i class="zmdi zmdi-search search__helper" data-ma-action="search-close"></i>
         </div>
     </form> -->
-
+    
+    <div class="mx-auto" *ngIf="auth.user?.using_another_store">
+        <div class="alert alert-warning mx-auto another-store-warning d-inline-block">
+            <h5 class="d-inline  no-bold">Você está utilizando a loja    </h5> <h4 class="d-inline text-white">{{ auth.user.another_store?.name }}</h4>.
+            
+        </div>
+        <a href="javascript:void(0)" (click)="useMyStore()" class="btn btn-primary  d-inline-block ml-2">
+            Voltar para minha loja
+        </a>
+    </div>
     <ul class="top-nav">
         <li class="hidden-lg-up"><a href="#" data-ma-action="search-open"><i class="zmdi zmdi-search"></i></a></li>
 

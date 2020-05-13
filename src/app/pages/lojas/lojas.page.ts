@@ -3,21 +3,20 @@ import { Component, OnInit } from '@angular/core';
 
 
 @Component({
-  selector: 'app-lojas',
-  templateUrl: './lojas.page.html',
-  styleUrls: ['./lojas.page.scss'],
+    selector: 'app-lojas',
+    templateUrl: './lojas.page.html',
+    styleUrls: ['./lojas.page.scss'],
 })
 export class LojasPage implements OnInit {
 
-  constructor(public lojasService: LojasService) { }
+    constructor(public lojasService: LojasService) { }
 
-  ngOnInit(  ) {
-    if(!this.lojasService.lojas) {
-        this.lojasService.get().subscribe(lojas => {
-            this.lojasService.lojas = lojas;
-         
-        })
+    ngOnInit() {
+        if (!this.lojasService.lojas) {
+            this.lojasService.get().subscribe(lojas => {
+                this.lojasService.lojas = lojas;
+            });
+        }
     }
-}
 
 }

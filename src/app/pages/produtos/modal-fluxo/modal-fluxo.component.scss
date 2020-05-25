@@ -1,6 +1,6 @@
 
 .scrollbar-inner {
-    padding-bottom: 50px;
+    // padding-bottom: 50px;
 }
 .form-area {
     min-height: 300px;
@@ -8,10 +8,8 @@
 
 
 form {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
+    position: relative;
+    min-height: 350px;
     width: 100%;
 }
 .font-size-20{
@@ -26,4 +24,19 @@ form {
 }
 .btn-order{
     font-size: 30px;
+}
+
+
+.loading-content {
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width:  calc(100% + 20px);
+    height: calc(100% + 20px);
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    z-index: 15;
+    background-color: #00000054;
 }

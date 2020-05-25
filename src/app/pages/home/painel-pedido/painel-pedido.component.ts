@@ -156,7 +156,7 @@ export class PainelPedidoComponent implements OnInit {
                  
                 }
 
-                this.homeService.onRemoveOrder.next(response);
+                this.homeService.onRemoveOrder.next();
             }
         });
     }

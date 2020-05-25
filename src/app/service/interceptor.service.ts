@@ -15,6 +15,8 @@ export class InterceptorService implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         let clonedReq: HttpRequest<any>;
         if (this.auth.user) {
+            
+            
             clonedReq = request.clone({
                 setHeaders: {
                     'Content-Type': 'application/json',
@@ -22,8 +24,12 @@ export class InterceptorService implements HttpInterceptor {
                     Accept: 'application/json',
                     key: `${this.auth.user.key}`,
                 },
-                setParams: { store_id: this.auth.user.store_id }
+                setParams: { store_id: this.auth.user.store_id },
             });
+
+            // if(clonedReq.body) {
+            //     clonedReq.body.store_id = this.auth.user.store_id;
+            // }
         } else {
             clonedReq = request;
         }

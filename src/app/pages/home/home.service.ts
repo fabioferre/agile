@@ -53,8 +53,8 @@ export class HomeService extends Model {
   
 
     public removeProductSelected(product): void {
+        this.onRemoveOrder.next(product.id);
         this.productSelected.splice(this.productSelected.indexOf(product), 1);
-        this.onRemoveOrder.next();
     }
 
 

@@ -32,8 +32,13 @@ export class ListaProdutosComponent extends Controller implements OnInit {
         this.selection = this.homeService.selection;
         this.updateDataTable(this.products);
 
-        this.homeService.onRemoveOrder.subscribe(() => {
-            this.dataSource.data.map((e) => e.qtd = 1);
+        this.homeService.onRemoveOrder.subscribe((id) => {
+            if(id) {
+                // console.log(id);
+                this.dataSource.data.find(e => e.id == id).qtd = 1;
+            } else {
+                this.dataSource.data.map((e) => e.qtd = 1);
+            }
         });
     }
 

@@ -49,7 +49,11 @@
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>
                     <td mat-cell *matCellDef="let element" [attr.data-label]="'Nome '"> {{  element.name }} </td>
                 </ng-container>
-                
+                 <!-- saleprice Column -->
+                 <ng-container matColumnDef="cost_price">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Preço de custo </th>
+                    <td mat-cell *matCellDef="let element" [attr.data-label]="'Custo '">R$ {{  element.cost_price }} </td>
+                </ng-container>
                 <!-- saleprice Column -->
                 <ng-container matColumnDef="sale_price">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Preço </th>
@@ -63,6 +67,25 @@
                     <td mat-cell *matCellDef="let element" [attr.data-label]="'Categoria'"> {{  element.category?.name }} </td>
                 </ng-container>
 
+
+                <ng-container matColumnDef="minimum_units">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Qtd. Minima </th>
+                    <td mat-cell *matCellDef="let element" [attr.data-label]="'Qtd. Minima'">
+                        <span *ngIf="!element.stock; else stock">
+                            <i class="fas fa-infinity"></i>
+                        </span>
+                        <ng-template #stock> {{  element.minimum_units }} </ng-template> 
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="maximum_units">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Qtd. Maxima </th>
+                    <td mat-cell *matCellDef="let element" [attr.data-label]="'Qtd. Maxima'">
+                        <span *ngIf="!element.stock; else stock">
+                            <i class="fas fa-infinity"></i>
+                        </span>
+                        <ng-template #stock> {{  element.maximum_units }} </ng-template> 
+                    </td>
+                </ng-container>
                 <!-- units Column -->
                 <ng-container matColumnDef="unity">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Unidades </th>

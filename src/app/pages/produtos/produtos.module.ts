@@ -17,7 +17,7 @@ import { FluxoComponent } from './fluxo/fluxo.component';
 
 // service
 import { CategoriasService } from './categorias.service';
-import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher, MatChipsModule, MatIconModule } from '@angular/material';
+import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher, MatChipsModule, MatIconModule, MatTooltipModule, MatDialogModule } from '@angular/material';
 import { ModalNecategoryComponent } from './categorias/modal-necategory/modal-necategory.component';
 
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
@@ -73,7 +73,9 @@ const routes: Routes = [
         MaterialModule,
         RouterModule.forChild(routes),
         BrMaskerModule,
-        CKEditorModule
+        CKEditorModule,
+        MatTooltipModule,
+        MatDialogModule
     ],
     declarations: [
         ProdutosPage,

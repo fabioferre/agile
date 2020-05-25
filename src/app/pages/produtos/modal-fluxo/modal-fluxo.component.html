@@ -1,10 +1,15 @@
 <a href="javascript:void(0)" (click)="modalCtrl.dismiss()" class="close mt-3 mr-3 text-right">
-  &times;
+    &times;
 </a>
+
 <form [formGroup]="form">
-    <div class="container-fluid scrollbar-inner beauty-scroll pt-5">
+    <div class="loading-content" *ngIf="helper.isLoading || completed" (click)="completed = false">
+        <i class="fas fa-2x" [ngClass]="{'fa-spinner fa-spin': helper.isLoading, ' fa-check':  completed}"></i>
+    </div>
+    <div class="container-fluid scrollbar-inner beauty-scroll pt-1">
         <div class="row">
             <div class="col-lg-12 form-area mb-5">
+               
                 <div class="form-row">
                     <div class="col-lg-12 text-center">
                         <div class="form-row">
@@ -12,8 +17,10 @@
                                 <h4>Localize um produto</h4>
                             </div>
                             <div class="col-lg-12 col-sm-12 pb-3 ">
-                                <mat-form-field class="example-full-width">
-                                    <input type="text" aria-label="busque o produto" matInput [formControl]="product" [matAutocomplete]="auto">
+                                <mat-form-field class="w-100"  appearance="fill">
+                                    <mat-label>Pesquisar produto</mat-label>
+                                    <input type="text" placeholder="Digite o nome do produto" matInput [formControl]="product"
+                                        [matAutocomplete]="auto">
                                     <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
                                         <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                                             {{option.name}}
@@ -24,45 +31,96 @@
 
                             <div class="col-lg-12 col-sm-12 mr-auto ">
                                 <button mat-raised-button color="primary" class="btn-block w-100" (click)="scanner()">
-                  Ler código
-                </button>
+                                    Ler código
+                                </button>
                             </div>
                         </div>
 
                     </div>
                     <div class="col-lg-12 mt-3">
-                        <div class="col-lg-12  beauty-scroll">
-                            <table class="table text-center">
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <mat-form-field>
-                                                <input matInput class="font-size-20" formControlName="quantity">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <button mat-icon-button type="button" matTooltip="Calculo por caixa/unidade"
+                                    [color]="calcType == 2? 'primary': 'default'" (click)="calcType = 2">
+                                    <i class="fas fa-boxes"></i>
+                                </button>
+                                <button mat-icon-button type="button" matTooltip="Calculo por unidade"
+                                    [color]="calcType == 1? 'primary': 'default'" (click)="calcType = 1">
+                                    <i class="fas fa-box"></i>
+                                </button>
+                            </div>
+                            <div class="col-lg-12  beauty-scroll" *ngIf="calcType == 1">
+                                <table class="table text-center">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <mat-form-field appearance="outline">
+                                                    <input matInput class="font-size-20" formControlName="quantity">
+                                                </mat-form-field>
+
+                                                <a href="javascript:void(0)" (click)="less()"
+                                                    class="float-left btn-order text-danger">
+                                                    <i class="fas fa-minus-circle"></i>
+                                                </a>
+
+                                                <a href="javascript:void(0)" (click)="plus()"
+                                                    class="float-right btn-order text-primary">
+                                                    <i class="fas fa-plus-circle "></i>
+                                                </a>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <mat-form-field  appearance="outline">
+                                                <input matInput class="font-size-10"
+                                                    [brmasker]="{form: form.get('current_cost_price'), money: true, decimalCaracter: '.'}"
+                                                    placeholder="Preço de custo" formControlName="current_cost_price">
                                             </mat-form-field>
+                                        </tr>
 
-                                            <a href="javascript:void(0)" (click)="less()" class="float-left btn-order text-danger">
-                                                <i class="fas fa-minus-circle"></i>
-                                            </a>
+                                    </tbody>
+                                </table>
+                            </div>
 
-                                            <a href="javascript:void(0)" (click)="plus()" class="float-right btn-order text-primary">
-                                                <i class="fas fa-plus-circle "></i>
-                                            </a>
-                                        </td>
-
-                                    </tr>
-                                    <tr>
-                                        <mat-form-field>
-                                            <input matInput class="font-size-10" [brmasker]="{form: form.get('current_cost_price'), money: true, decimalCaracter: '.'}" placeholder="Preço de custo" formControlName="current_cost_price">
+                            <div class="col-lg-12  beauty-scroll" *ngIf="calcType == 2">
+                                <div class="form-row"> 
+                                    <ng-container formGroupName="custom_calc">
+                                        <div class="col-lg-12">
+                                            <mat-form-field class="w-100" appearance="outline">
+                                                <mat-label>Quantidade de caixas</mat-label>
+                                                <input matInput type="number" autocomplete="off"  placeholder="Digite a quantidade" formControlName="qtd_box">
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <mat-form-field class="w-100" appearance="outline">
+                                                <mat-label>Unidades por caixa</mat-label>
+                                                <input matInput  type="number" autocomplete="off" placeholder="Digite a quantidade" formControlName="qtd_per_box">
+                                            </mat-form-field>
+                                        </div>
+                                    </ng-container>
+                                    
+                                    <div class="col-lg-12">
+                                        <mat-form-field class="w-100" appearance="outline">
+                                            <mat-label>Preço de custo(unidade)</mat-label>
+                                            <input matInput
+                                            autocomplete="off"
+                                                [brmasker]="{form: form.get('current_cost_price'), money: true, decimalCaracter: '.'}"
+                                                placeholder="Digite o preço aqui" formControlName="current_cost_price">
                                         </mat-form-field>
-                                    </tr>
-
-                                </tbody>
-                            </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+
                         <div class="text-center" *ngIf="productsFiltered">
                             <h4>{{ productsFiltered.name }}</h4>
                             <h6>Quantidade atual: {{productsFiltered.units }}</h6>
                         </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <button mat-raised-button type="button" color="primary" [disabled]="form.invalid" class="btn-block " (click)="save()">
+                            Lançar
+                        </button>
                     </div>
                 </div>
             </div>
@@ -70,9 +128,4 @@
     </div>
 
 
-    <div class="button-area">
-        <button mat-raised-button color="primary" [disabled]="form.invalid" class="btn-block w-100" (click)="save()">
-     Lançar
-    </button>
-    </div>
 </form>

@@ -12,7 +12,7 @@ import { AuthService } from 'src/app/service/auth.service';
     styleUrls: ['./listagem.component.scss'],
 })
 export class ListagemComponent  extends Controller implements OnInit {
-    public displayedColumns = [ 'name', 'sale_price', 'category', 'unity', 'action'];
+    public displayedColumns = [ 'name', 'cost_price', 'sale_price', 'category', 'minimum_units', 'maximum_units', 'unity', 'action'];
     public onlyReplenish: boolean;
     @ViewChild(MatSort) sort: MatSort;
 

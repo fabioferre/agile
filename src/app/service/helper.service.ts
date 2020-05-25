@@ -49,10 +49,10 @@ export class HelperService {
         const toast = await this.toastCtrl.create(
             {
                 message: messageToShow,
-                position: options.position ? options.position : 'top',
+                position: 'bottom',
                 color: options.color ? options.color : 'success',
                 duration: 3000,
-                showCloseButton: true
+                showCloseButton: true,
             });
 
         toast.present();

@@ -1,0 +1,14 @@
+<mat-card class=" shadow-none">
+  <mat-card-header>
+    <mat-card-title> <i class="fas fa-warning"></i> Aviso ! </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+     
+      <span class="badge text-wrap wrap-force" [ngClass]="'badge-'+data.style" *ngFor="let error of errors">
+        {{ error }}
+      </span>
+  </mat-card-content>
+  <mat-card-actions class="text-right">
+    <button mat-button (click)="dialogRef.close()">Entendi</button>
+  </mat-card-actions>
+</mat-card>

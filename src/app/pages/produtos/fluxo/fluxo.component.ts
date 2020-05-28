@@ -32,7 +32,7 @@ export class FluxoComponent extends Controller implements OnInit {
 
         this.stockService.get().subscribe(data => {
             this.stockService.flows = data;
-            this.updateDataTable(data)
+            this.updateDataTable(data);
         });
 
         if (!this.produtoService.products) {

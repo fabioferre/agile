@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { ToastController, LoadingController, ModalController, Platform } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
 import * as moment from 'moment';
+import { MatDialog } from '@angular/material';
+import { ErrorModalComponent } from '../layout/error-modal/error-modal.component';
 @Injectable({
     providedIn: 'root'
 })
@@ -17,7 +19,8 @@ export class HelperService {
     constructor(
         private toastCtrl: ToastController,
         private modalCtrl: ModalController,
-        private platform: Platform
+        private platform: Platform,
+        public dialog: MatDialog
     ) { }
 
 
@@ -29,6 +32,14 @@ export class HelperService {
         return this.apiURL;
     }
 
+    modalError(errorEvent, style= 'danger')  {
+        const modal = this.dialog.open(ErrorModalComponent, {
+            minHeight: '100px',
+            width: '350px',
+            panelClass: 'custom-dialog',
+            data: {errorEvent: errorEvent, style: style}
+        });
+    }
     message(message?, style?) {
         if (message.error) {
             for (const i in message.error.errors) {
@@ -61,7 +72,7 @@ export class HelperService {
 
     async load(status?) {
         if (status === false) {
-            this.isLoading = await false;
+           return  this.isLoading = await false;
         } else {
             this.isLoading = await true;
             setTimeout(this.loadDismiss, 90000);

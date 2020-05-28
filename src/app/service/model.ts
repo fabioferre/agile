@@ -1,9 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { retry, finalize, catchError } from 'rxjs/operators';
 import { Observable, of, throwError } from 'rxjs';
 import { HelperService } from './helper.service';
 import { async } from 'q';
 import { environment } from 'src/environments/environment';
+import { MatDialog } from '@angular/material';
 
 export default class Model {
     public elementToedit;
@@ -13,7 +14,8 @@ export default class Model {
     // protected urlApi = 'http://www.tagmus.com.br/api';
     constructor(
         protected http: HttpClient,
-        protected helper: HelperService) {
+        protected helper: HelperService,
+    ) {
 
     }
 
@@ -114,7 +116,7 @@ export default class Model {
         );
     }
 
-    handleError(error) {
+    handleError(error: any) {
         // let errorMessage = '';
         // if (error.error instanceof ErrorEvent) {
         //   // client-side error
@@ -126,8 +128,9 @@ export default class Model {
         // console.log('deu ruim', errorMessage)
         // this.helper.load(false);
         // window.alert(errorMessage);
-        this.helper.message(error);
-        this.helper.load(false);
+        // this.helper.message(error);
+        // this.helper.modalError(error);
+        this.helper.loadDismiss();
         return throwError(error);
       }
 

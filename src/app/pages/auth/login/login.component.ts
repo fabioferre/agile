@@ -40,8 +40,6 @@ export class LoginComponent implements OnInit {
             this.auth.authenticate(this.form.value).subscribe(user => {
                 if (user) {
                     this.helper.toast("Seja bem vindo !")
-
-
                     let store = {id: user.store_id};
                     this.storage.set('user', user);
                     this.storage.set('store', store);
@@ -52,7 +50,8 @@ export class LoginComponent implements OnInit {
             },
             error => {
                 this.helper.loadDismiss();
-                this.helper.message(error)
+                // this.helper.message(error)
+                console.log(error)
             });
         }
     }

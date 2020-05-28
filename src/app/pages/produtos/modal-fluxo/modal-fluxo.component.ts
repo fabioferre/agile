@@ -52,12 +52,10 @@ export class ModalFluxoComponent implements OnInit {
     ngOnInit() {
         this.product.valueChanges.subscribe((valor) => {
             this.productsFiltered = valor
-            if (!valor.id) {
-                this.helper.toast('Produto não encontrado', { color: 'secondary' });
-                return false;
+            if (valor.id) {
+                this.form.controls.product_id.setValue(valor.id);
+                this.form.controls.current_cost_price.setValue(valor.cost_price);
             }
-            this.form.controls.product_id.setValue(valor.id);
-            this.form.controls.current_cost_price.setValue(valor.cost_price);
         });
 
         this.filteredOptions = this.product.valueChanges
@@ -66,14 +64,13 @@ export class ModalFluxoComponent implements OnInit {
                 map(value => this.search(value))
             );
 
-
-
         this.customForm.valueChanges.subscribe(() => {
             let qtd_box = parseFloat(this.customForm.get('qtd_box').value );
             let qtd_per_box = parseFloat(this.customForm.get('qtd_per_box').value );
             
             this.form.get('quantity').setValue(qtd_box * qtd_per_box);
         });
+
     }
 
     get customForm() {
@@ -82,6 +79,13 @@ export class ModalFluxoComponent implements OnInit {
     get product() {
         return this.form.controls.product;
     }
+
+    get productSelected() {
+        let product = this.form.get('product').value;
+        return product? product: {};
+    }
+
+
 
 
 
@@ -125,9 +129,8 @@ export class ModalFluxoComponent implements OnInit {
     }
 
     save() {
-
         if (this.quantity.value === 0) {
-            this.helper.toast('Informe a quantidade', { color: 'secondary' });
+            this.helper.modalError('Por favor, precisa informar uma quantidade maior que 0', 'info');
             return false;
         }
         if (this.quantity.value < 0) {

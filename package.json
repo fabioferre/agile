@@ -61,6 +61,7 @@
     "material-design-iconic-font": "^2.2.0",
     "moment": "^2.24.0",
     "ng-thermal-print": "^0.1.2",
+    "ngx-input-file": "^8.0.1",
     "ngx-moment": "^3.5.0",
     "phonegap-plugin-barcodescanner": "8.1.0",
     "popper.js": "^1.15.0",

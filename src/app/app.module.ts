@@ -20,16 +20,21 @@ import { InterceptorService } from './service/interceptor.service';
 import { HelperService } from './service/helper.service';
 import { ProdutoService } from './pages/produtos/produto.service';
 import { HomeService } from './pages/home/home.service';
-import { MatProgressBarModule } from '@angular/material';
+import { MatProgressBarModule, MatDialogModule } from '@angular/material';
 import { OverlayModule } from '@angular/cdk/overlay';
+import { ErrorModalComponent } from './layout/error-modal/error-modal.component';
+import { MaterialModule } from './material/material.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     SidebarComponent,
-    HeaderComponent
+    HeaderComponent,
+    ErrorModalComponent
   ],
-  entryComponents: [],
+  entryComponents: [
+    ErrorModalComponent
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -38,7 +43,9 @@ import { OverlayModule } from '@angular/cdk/overlay';
     IonicModule.forRoot(),
     AppRoutingModule,
     MatProgressBarModule,
-    OverlayModule
+    OverlayModule,
+    MatDialogModule,
+    MaterialModule
   ],
   providers: [
     StatusBar,

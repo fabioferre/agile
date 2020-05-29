@@ -2,12 +2,12 @@ import { Controller } from 'src/app/service/controller';
 import { HelperService } from './../../../../service/helper.service';
 import { PedidosService } from './../../../pedidos/pedidos.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatSort } from '@angular/material';
 import { ClientesService } from '../../clientes.service';
 import { ModalController, AlertController } from '@ionic/angular';
 import { StatementsModalComponent } from '../statements-modal/statements-modal.component';
 import { ImpressoraService } from 'src/app/pages/sistema/impressora.service';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-statements-cliente',

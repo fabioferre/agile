@@ -12,13 +12,9 @@ import { SistemaPage } from './sistema.page';
 import { SistemaService } from './sistema.service';
 // materialize
 
-import {MatInputModule} from '@angular/material/input';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import {MatSelectModule} from '@angular/material/select';
-import {MatFormFieldModule} from '@angular/material/form-field';
 import { SecurityComponent } from './security/security.component';
-import { MatCardModule, MatTabsModule } from '@angular/material';
 import { BrMaskerModule } from 'br-mask';
+import { MaterialModule } from 'src/app/material/material.module';
 
 const routes: Routes = [
   {
@@ -43,13 +39,7 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-    MatSlideToggleModule,
-    MatInputModule,
-    MatSlideToggleModule,
-    MatSelectModule,
-    MatFormFieldModule,
-    MatCardModule,
-    MatTabsModule,
+    MaterialModule,
     BrMaskerModule,
     ThermalPrintModule,
     RouterModule.forChild(routes)

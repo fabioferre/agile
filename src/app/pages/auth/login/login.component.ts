@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/service/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
+import { ClientesService } from '../../clientes/clientes.service';
 
 
 @Component({
@@ -24,7 +25,8 @@ export class LoginComponent implements OnInit {
         private fb: FormBuilder,
         private router: Router,
         private storage: Storage,
-        private helper: HelperService
+        private helper: HelperService,
+        private client: ClientesService
     ) { }
 
     ngOnInit() { }
@@ -49,10 +51,8 @@ export class LoginComponent implements OnInit {
                 this.helper.loadDismiss();
             },
             error => {
-                this.helper.loadDismiss();
-                // this.helper.message(error)
-                console.log(error)
-            });
+                this.client.handleError(error);
+            }).add(() => this.helper.loadDismiss());
         }
     }
 

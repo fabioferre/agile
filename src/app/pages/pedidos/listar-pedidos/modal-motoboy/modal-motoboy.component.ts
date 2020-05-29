@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { FormBuilder } from '@angular/forms';
 import { MotoboyService } from 'src/app/pages/motoboy/motoboy.service';
-import { MatTableDataSource } from '@angular/material';
 import { PedidosService } from '../../pedidos.service';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
     selector: 'app-modal-motoboy',

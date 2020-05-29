@@ -2,10 +2,11 @@ import { Controller } from 'src/app/service/controller';
 import { AuthService } from './../../../service/auth.service';
 import { FuncionariosService } from './../funcionarios.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { HelperService } from 'src/app/service/helper.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-listar-funcionario',

@@ -17,12 +17,12 @@ import { FluxoComponent } from './fluxo/fluxo.component';
 
 // service
 import { CategoriasService } from './categorias.service';
-import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher, MatChipsModule, MatIconModule, MatTooltipModule, MatDialogModule } from '@angular/material';
 import { ModalNecategoryComponent } from './categorias/modal-necategory/modal-necategory.component';
 
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { NativeAudio } from '@ionic-native/native-audio/ngx';
 import { MaterialModule } from 'src/app/material/material.module';
+import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
 
 
 const routes: Routes = [
@@ -74,8 +74,7 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         BrMaskerModule,
         CKEditorModule,
-        MatTooltipModule,
-        MatDialogModule
+        MaterialModule
     ],
     declarations: [
         ProdutosPage,

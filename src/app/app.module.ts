@@ -20,7 +20,6 @@ import { InterceptorService } from './service/interceptor.service';
 import { HelperService } from './service/helper.service';
 import { ProdutoService } from './pages/produtos/produto.service';
 import { HomeService } from './pages/home/home.service';
-import { MatProgressBarModule, MatDialogModule } from '@angular/material';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ErrorModalComponent } from './layout/error-modal/error-modal.component';
 import { MaterialModule } from './material/material.module';
@@ -42,9 +41,7 @@ import { MaterialModule } from './material/material.module';
     IonicStorageModule.forRoot({ name: '_agile' }),
     IonicModule.forRoot(),
     AppRoutingModule,
-    MatProgressBarModule,
     OverlayModule,
-    MatDialogModule,
     MaterialModule
   ],
   providers: [

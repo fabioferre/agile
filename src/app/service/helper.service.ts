@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ToastController, LoadingController, ModalController, Platform } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
 import * as moment from 'moment';
-import { MatDialog } from '@angular/material';
+import {MatDialog } from '@angular/material/dialog';
 import { ErrorModalComponent } from '../layout/error-modal/error-modal.component';
 @Injectable({
     providedIn: 'root'
@@ -63,7 +63,6 @@ export class HelperService {
                 position: 'bottom',
                 color: options.color ? options.color : 'success',
                 duration: 3000,
-                showCloseButton: true,
             });
 
         toast.present();

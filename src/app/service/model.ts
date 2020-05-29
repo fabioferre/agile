@@ -4,7 +4,6 @@ import { Observable, of, throwError } from 'rxjs';
 import { HelperService } from './helper.service';
 import { async } from 'q';
 import { environment } from 'src/environments/environment';
-import { MatDialog } from '@angular/material';
 
 export default class Model {
     public elementToedit;
@@ -129,7 +128,7 @@ export default class Model {
         // this.helper.load(false);
         // window.alert(errorMessage);
         // this.helper.message(error);
-        // this.helper.modalError(error);
+        this.helper.modalError(error);
         this.helper.loadDismiss();
         return throwError(error);
       }

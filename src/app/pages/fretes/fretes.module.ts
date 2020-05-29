@@ -8,9 +8,15 @@ import { IonicModule } from '@ionic/angular';
 import { FretesPage } from './fretes.page';
 import { ListarFretesComponent } from './listar-fretes/listar-fretes.component';
 import { FretesService } from './fretes.service';
-import { MatInputModule, MatSlideToggleModule, MatSelectModule, MatFormFieldModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 import { BrMaskerModule } from 'br-mask';
 import { NeFretesComponent } from './ne-fretes/ne-fretes.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 const routes: Routes = [
   {

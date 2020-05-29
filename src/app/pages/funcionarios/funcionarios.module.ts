@@ -10,14 +10,8 @@ import { IonicModule } from '@ionic/angular';
 import { BrMaskerModule } from 'br-mask';
 
 import { FuncionariosPage } from './funcionarios.page';
-import {
-  MatInputModule,
-  MatSelectModule,
-  MatFormFieldModule,
-  MatTableModule,
-  MatPaginatorModule,
-  MatSortModule
-}from '@angular/material';
+import { MaterialModule } from 'src/app/material/material.module';
+
 
 
 const routes: Routes = [
@@ -47,12 +41,7 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-    MatInputModule,
-    MatSelectModule,
-    MatFormFieldModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
+   MaterialModule,
     BrMaskerModule,
     RouterModule.forChild(routes)
   ],

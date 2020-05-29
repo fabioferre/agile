@@ -1,13 +1,13 @@
 import { PedidosService } from './../pedidos.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProdutoService } from '../../produtos/produto.service';
-import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { Router } from '@angular/router';
 import { HelperService } from 'src/app/service/helper.service';
 import { AlertController, ModalController } from '@ionic/angular';
 import { ModalMotoboyComponent } from './modal-motoboy/modal-motoboy.component';
 import { Controller } from 'src/app/service/controller';
 import  * as moment from 'moment';
+import { MatSort } from '@angular/material/sort';
 @Component({
     selector: 'app-listar-pedidos',
     templateUrl: './listar-pedidos.component.html',

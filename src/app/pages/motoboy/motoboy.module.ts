@@ -10,8 +10,7 @@ import { BrMaskerModule } from 'br-mask';
 
 import { MotoboyPage } from './motoboy.page';
 import { MotoboyService } from './motoboy.service';
-import { MatInputModule, MatSlideToggleModule, MatSelectModule, MatFormFieldModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
-
+import { MaterialModule } from 'src/app/material/material.module';
 const routes: Routes = [
   {
     path: '',
@@ -39,13 +38,7 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-    MatInputModule,
-    MatSlideToggleModule,
-    MatSelectModule,
-    MatFormFieldModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
+   MaterialModule,
     BrMaskerModule,
     RouterModule.forChild(routes)
   ],

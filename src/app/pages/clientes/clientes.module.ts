@@ -13,11 +13,11 @@ import { BrMaskerModule } from 'br-mask';
 import { IonicModule } from '@ionic/angular';
 
 import { ClientesPage } from './clientes.page';
-import { MatInputModule, MatSlideToggleModule, MatSelectModule, MatFormFieldModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 import { StatementsClienteComponent } from './show-cliente/statements-cliente/statements-cliente.component';
 import { PerfilClienteComponent } from './show-cliente/perfil-cliente/perfil-cliente.component';
 import { HistoricoClienteComponent } from './show-cliente/historico-cliente/historico-cliente.component';
 import { StatementsModalComponent } from './show-cliente/statements-modal/statements-modal.component';
+import { MaterialModule } from 'src/app/material/material.module';
 
 const routes: Routes = [
   {
@@ -70,14 +70,8 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-    MatInputModule,
-    MatSlideToggleModule,
-    MatSelectModule,
-    MatFormFieldModule,
-    MatTableModule,
+     MaterialModule,
     BrMaskerModule,
-    MatPaginatorModule,
-    MatSortModule,
     RouterModule.forChild(routes)
   ],
   declarations: [

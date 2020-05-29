@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Controller } from 'src/app/service/controller';
-import { MatSort } from '@angular/material';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { AlertController, ModalController } from '@ionic/angular';
 import { ClientesService } from '../../clientes.service';
@@ -8,6 +7,7 @@ import { PedidosService } from 'src/app/pages/pedidos/pedidos.service';
 import { ImpressoraService } from 'src/app/pages/sistema/impressora.service';
 import { HelperService } from 'src/app/service/helper.service';
 import { StatementsModalComponent } from '../statements-modal/statements-modal.component';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-historico-cliente',

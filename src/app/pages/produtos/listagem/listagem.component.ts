@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatSort } from '@angular/material';
 import { ProdutoService } from '../produto.service';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Controller } from '../../../service/controller';
 import { AuthService } from 'src/app/service/auth.service';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
     selector: 'app-listagem',

@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { HelperService } from 'src/app/service/helper.service';
 import { catchError, retryWhen, finalize, retry } from 'rxjs/operators';
 import { of, Observable } from 'rxjs';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Injectable({
     providedIn: 'root'

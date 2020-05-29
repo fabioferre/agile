@@ -1,11 +1,11 @@
 import { ClientesService } from './../../../clientes/clientes.service';
 import { HomeService } from './../../home.service';
 import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material';
 import { ModalController } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ProdutoService } from 'src/app/pages/produtos/produto.service';
+import { MatTableDataSource } from '@angular/material/table';
 
 
 @Component({

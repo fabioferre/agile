@@ -8,7 +8,7 @@ import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-sca
 import { NativeAudio } from '@ionic-native/native-audio/ngx';
 import { startWith, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { MatDialog, MatDialogRef } from '@angular/material';
+import { MatDialogRef } from '@angular/material/dialog';
 
 
 @Component({

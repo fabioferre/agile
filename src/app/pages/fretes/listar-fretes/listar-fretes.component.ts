@@ -1,9 +1,10 @@
 import { FretesService } from './../fretes.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatSort } from '@angular/material';
 import { AlertController } from '@ionic/angular';
 import { HelperService } from 'src/app/service/helper.service';
 import { Router } from '@angular/router';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-listar-fretes',

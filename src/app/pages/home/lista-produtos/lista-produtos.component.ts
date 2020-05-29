@@ -3,11 +3,11 @@ import { Controller } from './../../../service/controller';
 import { HomeService } from './../home.service';
 import { Component, OnInit, ViewChild, Input, ChangeDetectorRef } from '@angular/core';
 import { ProdutoService } from '../../produtos/produto.service';
-import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Router } from '@angular/router';
 import { HelperService } from 'src/app/service/helper.service';
 import { ComplementsModalComponent } from '../modal/complements-modal/complements-modal.component';
+import { MatSort } from '@angular/material/sort';
 
 
 @Component({

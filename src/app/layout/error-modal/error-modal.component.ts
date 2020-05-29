@@ -1,10 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ModalFluxoComponent } from 'src/app/pages/produtos/modal-fluxo/modal-fluxo.component';
 import { HttpErrorResponse } from '@angular/common/http';
 import { isObject, isArray, isString } from 'util';
 
-
+import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { HelperService } from 'src/app/service/helper.service';
 @Component({
     selector: 'app-error-modal',
     templateUrl: './error-modal.component.html',
@@ -14,7 +14,7 @@ export class ErrorModalComponent implements OnInit {
     public errors: string[] = [];
     constructor(
         public dialogRef: MatDialogRef<ModalFluxoComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: any
+        @Inject(MAT_DIALOG_DATA) public data: any,
     ) { }
 
     ngOnInit() {
@@ -37,6 +37,8 @@ export class ErrorModalComponent implements OnInit {
         } else if(isString(this.data.errorEvent)) {
             this.errors.push(this.data.errorEvent)
         }
+
+        console.log(this.errors)
     }
 
 }

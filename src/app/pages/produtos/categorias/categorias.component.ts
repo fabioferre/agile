@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CategoriasService } from '../categorias.service';
-import { MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
 import { Router } from '@angular/router';
 import { AlertController, ModalController } from '@ionic/angular';
 import { HelperService } from 'src/app/service/helper.service';
 import { Controller } from 'src/app/service/controller';
 import { ModalNecategoryComponent } from './modal-necategory/modal-necategory.component';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
     selector: 'app-categorias',

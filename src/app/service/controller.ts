@@ -1,4 +1,4 @@
-import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { MatTableDataSource } from '@angular/material/table';
 import { AlertController } from '@ionic/angular';
 
 export class Controller {

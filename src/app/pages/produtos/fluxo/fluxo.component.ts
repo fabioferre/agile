@@ -1,10 +1,11 @@
 import { ModalFluxoComponent } from './../modal-fluxo/modal-fluxo.component';
 import { ProdutoService } from 'src/app/pages/produtos/produto.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatSort, MatDialog } from '@angular/material';
 import { AlertController, ModalController } from '@ionic/angular';
 import { Controller } from 'src/app/service/controller';
 import { StockService } from '../stock.service';
+import { MatSort } from '@angular/material/sort';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
     selector: 'app-fluxo',

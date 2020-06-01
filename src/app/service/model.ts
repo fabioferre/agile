@@ -5,6 +5,7 @@ import { HelperService } from './helper.service';
 import { async } from 'q';
 import { environment } from 'src/environments/environment';
 
+export type OptionReq = {method: 'put'| 'post' | 'patch' | 'get' | 'delete'}
 export default class Model {
     public elementToedit;
     public ne = false;
@@ -71,10 +72,10 @@ export default class Model {
             catchError(error => this.handleError(error))
         );
     }
-
-    public updateById(id, params): Observable<any> {
+    
+    public updateById(id, params, options: OptionReq = {method: 'put'}) {
         this.helper.load();
-        return this.http.put<any>(`${this.urlApi}/${this.url}/${id}`, params).pipe(
+        return this.http[options.method](`${this.urlApi}/${this.url}/${id}`, params).pipe(
             finalize(() => {
                 this.helper.isLoading = false;
                 this.helper.load(false);

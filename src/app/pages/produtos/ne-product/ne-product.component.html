@@ -78,19 +78,14 @@
                     <mat-card class="p-5">
                         <mat-card-content>
                             <div class="form-row ">
-                                <div class="col-md-5 content-photo disponible-warning msg-warning"  
-                                    data-warning="Em breve dispońivel :)">
-                                    <div class="content-photo-header">
-                                        <img src="./assets/no-product.png" alt="">
-                                    </div>
-                                    <div class="actions text-center">
-                                        <button type="button" class="btn btn-secondary mr-3" hidden>
-                                            cancelar
-                                        </button>
-                                        <label for="" class="btn btn-primary btn-add-photo my-0" hidden>
-                                            adicionar
-                                        </label>
-                                    </div>
+                                <div class="col-md-5 text-center content-photo ">
+                                    <input-file
+                                    class="single-file "
+                                    placeholder="Foto destaque"
+                                    (deletedFile)="addRemove()"
+                                    (acceptedFile)="deleteRemove()"
+                                    formControlName="files">
+                                </input-file> 
                                 </div>
                                 <div class="col-md-6 ml-auto">
                                     <div class="row">

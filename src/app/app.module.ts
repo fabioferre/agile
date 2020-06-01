@@ -23,7 +23,9 @@ import { HomeService } from './pages/home/home.service';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ErrorModalComponent } from './layout/error-modal/error-modal.component';
 import { MaterialModule } from './material/material.module';
-
+import { InputFileConfig, InputFileModule } from 'ngx-input-file';
+ 
+const config: InputFileConfig = {};
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +44,8 @@ import { MaterialModule } from './material/material.module';
     IonicModule.forRoot(),
     AppRoutingModule,
     OverlayModule,
-    MaterialModule
+    MaterialModule,
+    InputFileModule.forRoot(config)
   ],
   providers: [
     StatusBar,

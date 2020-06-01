@@ -19,7 +19,7 @@ export class InterceptorService implements HttpInterceptor {
             
             clonedReq = request.clone({
                 setHeaders: {
-                    'Content-Type': 'application/json',
+                    // 'Content-Type': 'application/json',
                     'cache-control': 'no-cache',
                     Accept: 'application/json',
                     key: `${this.auth.user.key}`,

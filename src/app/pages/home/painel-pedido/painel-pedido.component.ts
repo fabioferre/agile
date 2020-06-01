@@ -140,6 +140,9 @@ export class PainelPedidoComponent implements OnInit {
         }
     }
 
+    public finishOrder(response, finalize) {
+        
+    }
     public storeOrder(finalize = false) {
         this.homeService.create(this.form.value).subscribe((response) => {
             if (response) {
@@ -155,7 +158,7 @@ export class PainelPedidoComponent implements OnInit {
                     this.impressora.printer(response);
                  
                 }
-
+    
                 this.homeService.onRemoveOrder.next();
             }
         });

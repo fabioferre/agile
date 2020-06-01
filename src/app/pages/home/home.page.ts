@@ -27,7 +27,8 @@ export class HomePage implements OnInit, OnDestroy, AfterViewChecked {
         this.homeService.productAlert = false;
         this.productService.get({
             filter: [
-                ['sale', '1']
+                ['sale', '1'],
+                ['status', 1]
             ]
         }).subscribe(products => {
             this.products = products;
@@ -52,6 +53,10 @@ export class HomePage implements OnInit, OnDestroy, AfterViewChecked {
         this.homeService.clearPainel();
     }
 
+
+    emitRemove() {
+        
+    }
 
 
 }

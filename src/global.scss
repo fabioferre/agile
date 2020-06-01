@@ -372,3 +372,37 @@ ion-modal.lg{
 .wrap-force {
     white-space:  normal !important;
 }
+
+
+.file-container {
+    .mat-button {
+        background: #eeeeee;
+        border: 1px dashed  #eeeeee;
+    }
+    .secondary-button {
+        margin-top: 3px;
+    }
+}
+
+.single-file {
+  
+    .input-file-container .file-name {
+        margin: 0 auto !important;
+        width: 80% !important;
+    }
+
+   
+    .input-file-container .replace-button, .input-file-container  .file-button, .input-file-container  .file-container  {
+        width: 100% !important;
+        text-align: center !important;
+    }
+
+
+    .input-file-container img.image-preview {
+        left: 0;
+        height: 58% !important;
+        width: 100% !important;
+        z-index: 3;
+        top: 26px;
+    }
+}

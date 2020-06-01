@@ -33,12 +33,25 @@ export class ErrorModalComponent implements OnInit {
                     this.errors.push(errors);
                 }
 
+            } else if(isObject(this.data.errorEvent.error)) {
+                for (let i in this.data.errorEvent.error) {
+                    this.errors.push(this.data.errorEvent.error[i]);
+                }
+            } else if(isString(this.data.errorEvent.error)) {
+                this.errors.push(this.data.errorEvent.error);
+            } else if(isArray(this.data.errorEvent.error)) {
+                this.errors = this.errors.concat(this.data.errorEvent.error);
             }
+
+            
         } else if(isString(this.data.errorEvent)) {
             this.errors.push(this.data.errorEvent)
+        } else if(Array.isArray(this.data.errorEvent))
+        {
+            this.errors = this.errors.concat(this.data.errorEvent);
         }
 
-        console.log(this.errors)
+        console.log(this.data)
     }
 
 }

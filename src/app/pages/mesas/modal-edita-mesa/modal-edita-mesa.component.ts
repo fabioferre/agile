@@ -38,7 +38,7 @@ export class ModalEditaMesaComponent implements OnInit {
 
     public update(): void {
         this.tableService.updateById(this.tableService.tableToEdit.id ,this.form.value)
-        .subscribe((response) => {
+        .subscribe((response: any) => {
             let idx = this.tableService.tables.indexOf(this.tableService.tableToEdit);
             this.tableService.tables[idx] = this.form.value;
             this.tableService.tableToEdit = null;

@@ -7,6 +7,7 @@ import { CategoriasService } from '../categorias.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -36,7 +37,8 @@ export class NeProductComponent implements OnInit, OnDestroy {
         weight_value_sale: [null],
         collection: [null],
         items: [null],
-        productsCtrl: ['']
+        productsCtrl: [''],
+        files: ['']
     });
 
     public editor = ClassicEditor;
@@ -63,6 +65,9 @@ export class NeProductComponent implements OnInit, OnDestroy {
             if (this.productService.productToEdit.items) {
                 this.items =  JSON.parse(this.productService.productToEdit.items);
                 // console.log( JSON.parse(JSON.parse(this.productService.productToEdit.items)))
+            }
+            if( this.productService.productToEdit.photo) {
+                this.productService.productToEdit.files = [{ preview: environment.storage + this.productService.productToEdit.photo.url_thumbnail }];
             }
             this.form.patchValue(this.productService.productToEdit);
         }
@@ -99,8 +104,12 @@ export class NeProductComponent implements OnInit, OnDestroy {
         return this.form.controls.weight_type.value;
     }
 
-
-
+    public deleteRemove() {
+        this.form.removeControl('remove_file');
+    }
+    public addRemove() {
+        this.form.setControl('remove_file', this.fb.control(true));
+    }
     public onReady(editor) {
         editor.ui.getEditableElement().parentElement.insertBefore(
             editor.ui.view.toolbar.element,
@@ -125,12 +134,18 @@ export class NeProductComponent implements OnInit, OnDestroy {
     }
 
     public save() {
+        let data: any = this.form.value;
         if (this.hasCollection > 0) {
             this.form.controls.items.setValue(JSON.stringify(this.items));
         }
-
-
-        this.productService.create(this.form.value)
+        if( data.files[0]) {
+            data.files = data.files[0].file;
+        }
+        const formData: FormData = new FormData();
+        for(let i in data) {
+            formData.append(i, data[i]);
+        }
+        this.productService.create(formData)
             .subscribe((product) => {
                 if (product) {
                     this.helper.toast('produto cadastrado');
@@ -142,10 +157,22 @@ export class NeProductComponent implements OnInit, OnDestroy {
     }
 
     public update() {
+        let data: any = this.form.value;
         if (this.hasCollection > 0) {
             this.form.controls.items.setValue(JSON.stringify(this.items));
         }
-        this.productService.updateById(this.productService.productToEdit.id, this.form.value)
+
+        if( data.files[0]) {
+            data.files = data.files[0].file;
+        }
+
+        const formData: FormData = new FormData();
+
+        for(let i in data) {
+            formData.append(i, data[i]);
+        }
+        formData.append('_method', 'PUT');
+        this.productService.updateById(this.productService.productToEdit.id, formData, {method: 'post'})
             .subscribe((product) => {
                 if (product) {
                     const idx = this.productService.products.indexOf(this.productService.productToEdit);

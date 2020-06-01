@@ -37,7 +37,9 @@ export class FluxoComponent extends Controller implements OnInit {
         });
 
         if (!this.produtoService.products) {
-            this.produtoService.get().subscribe(data => this.produtoService.products = data);
+            this.produtoService.get({filter:[
+                ['status', 1]
+            ]}).subscribe(data => this.produtoService.products = data);
         }
 
     }

@@ -14,6 +14,8 @@ export class SecurityComponent implements OnInit {
         nivel: [5, [Validators.required, Validators.minLength(2)]],
         permissions: [],
     })
+    public toSale: boolean;
+    
     public form: FormGroup = this.fb.group({
         5: [''],
         6: [''],

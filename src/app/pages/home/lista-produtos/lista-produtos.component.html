@@ -21,19 +21,19 @@
     </mat-form-field>
     <div class="mat-elevation-z8 position-relative link-table table-hover hiper-responsive "
         [ngClass]="{'alertUser': homeService.productAlert}">
-        <div class="build-produt pt-5 pl-2" *ngIf="homeService.buildingProduct">
+        <!-- <div class="build-produt pt-5 pl-2" *ngIf="homeService.buildingProduct">
             <mat-chip-list #chipList aria-label="Products to build selection">
                 <mat-chip *ngFor="let product of homeService.buildedProducts" [selectable]="selectable"
-                    [removable]="removable" (removed)="homeService.toggleProductBuilded(product); ">
+                  (removed)="homeService.toggleProductBuilded(product); ">
                     {{ product.name }}
                 </mat-chip>
             </mat-chip-list>
             <button mat-icon-button color="primary" matTooltip="Concluir montagem"
-                (click)="homeService.finalizeBuild();" matTooltipPosition="below" class="btn-build"
+                (click)="finalizeBuild();" matTooltipPosition="below" class="btn-build"
                 *ngIf="homeService.buildedProducts.length > 1">
                 <i class="fas fa-check-circle fa-2x"></i>
             </button>
-        </div>
+        </div> -->
         <table mat-table [dataSource]="dataSource" matSort class=" ">
 
             <ng-container matColumnDef="select">

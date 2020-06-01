@@ -13,6 +13,7 @@ import { NavParams} from '@ionic/angular';
 })
 export class StatementsModalComponent implements OnInit {
   public order: any;
+  public orderShow: boolean;
   constructor(public pedidosService: PedidosService,
     public params : NavParams) { }
 

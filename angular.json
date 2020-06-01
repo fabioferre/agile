@@ -43,6 +43,9 @@
               },
               {
                 "input": "src/theme/css/app.min.css"
+              },
+              {
+                "input": "node_modules/material-design-icons/iconfont/material-icons.css"
               }
             ],
             "scripts": [

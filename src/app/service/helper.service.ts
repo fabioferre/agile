@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ToastController, LoadingController, ModalController, Platform } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
 import * as moment from 'moment';
-import {MatDialog } from '@angular/material/dialog';
+import {MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ErrorModalComponent } from '../layout/error-modal/error-modal.component';
 @Injectable({
     providedIn: 'root'
@@ -32,13 +32,15 @@ export class HelperService {
         return this.apiURL;
     }
 
-    modalError(errorEvent, style= 'danger')  {
+    modalError(errorEvent, style= 'danger'): MatDialogRef<ErrorModalComponent>  {
         const modal = this.dialog.open(ErrorModalComponent, {
             minHeight: '100px',
             width: '350px',
             panelClass: 'custom-dialog',
             data: {errorEvent: errorEvent, style: style}
         });
+
+        return modal;
     }
     message(message?, style?) {
         if (message.error) {

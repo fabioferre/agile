@@ -3,10 +3,14 @@
     <mat-card-title> <i class="fas fa-warning"></i> Aviso ! </mat-card-title>
   </mat-card-header>
   <mat-card-content>
-     
-      <span class="badge text-wrap wrap-force" [ngClass]="'badge-'+data.style" *ngFor="let error of errors">
+
+    <ng-container *ngFor="let error of errors">
+      <span class="badge text-wrap wrap-force mt-2" [ngClass]="'badge-'+data.style" >
         {{ error }}
-      </span>
+      </span> <br>
+    </ng-container>
+    
+      
   </mat-card-content>
   <mat-card-actions class="text-right">
     <button mat-button (click)="dialogRef.close()">Entendi</button>

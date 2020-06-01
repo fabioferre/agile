@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   host: 'http://tagmus/api',
+  storage: 'http://tagmus/storage/',
   // host: 'https://tagmus.com.br/api'
 };
 

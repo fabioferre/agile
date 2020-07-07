@@ -15,8 +15,8 @@ export class InterceptorService implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         let clonedReq: HttpRequest<any>;
         if (this.auth.user) {
-            
-            
+
+
             clonedReq = request.clone({
                 setHeaders: {
                     // 'Content-Type': 'application/json',

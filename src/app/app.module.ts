@@ -29,8 +29,7 @@ const config: InputFileConfig = {};
 @NgModule({
   declarations: [
     AppComponent,
-    SidebarComponent,
-    HeaderComponent,
+    
     ErrorModalComponent
   ],
   entryComponents: [

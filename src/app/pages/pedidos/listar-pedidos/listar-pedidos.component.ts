@@ -8,6 +8,7 @@ import { ModalMotoboyComponent } from './modal-motoboy/modal-motoboy.component';
 import { Controller } from 'src/app/service/controller';
 import  * as moment from 'moment';
 import { MatSort } from '@angular/material/sort';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 @Component({
     selector: 'app-listar-pedidos',
     templateUrl: './listar-pedidos.component.html',
@@ -16,23 +17,37 @@ import { MatSort } from '@angular/material/sort';
 export class ListarPedidosComponent extends Controller implements OnInit {
     public displayedColumns: string[] = ['status', 'created_at', 'number','client_name', 'type', 'total', 'action'];
     @ViewChild(MatSort) sort: MatSort;
+    public form: FormGroup = this.fb.group({
+        status: [[1, 3, 4], Validators.required]
+    });
 
     constructor(
         public orderService: PedidosService,
         private router: Router,
         private helper: HelperService,
         public alertCtrl: AlertController,
-        public modalCtrl: ModalController
+        public modalCtrl: ModalController,
+        private fb: FormBuilder
     ) { super(alertCtrl); }
 
     ngOnInit() {
-        const date = this.helper.momentDate().add(-24, 'hours').format('Y-MM-DD');
         this.orderService.dataSource.sort = this.sort;
+        this.getOrders();
+
+        this.form.valueChanges.subscribe(() => {
+            this.getOrders()
+        });
+    }
+
+
+    public getOrders()
+    {
+        const date = this.helper.momentDate().add(-24, 'hours').format('Y-MM-DD');
         this.orderService.get({
-            status: 1,
             filter: [
                 ['created_at', '>=', date]
-            ]
+            ],
+            whereIn: ['status', this.form.get('status').value]
         }).subscribe((pedidos: any[]) => {
             pedidos.map(e => {
                 if(e.client) {
@@ -43,7 +58,6 @@ export class ListarPedidosComponent extends Controller implements OnInit {
             this.orderService.dataSource._updateChangeSubscription();
         });
     }
-
     public applyFilter(filterValue: string) {
         this.orderService.dataSource.filter = filterValue.trim().toLowerCase();
     }

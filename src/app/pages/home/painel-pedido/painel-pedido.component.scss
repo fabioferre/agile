@@ -153,3 +153,19 @@ caption {
         background-color: #fff;
     }
 }
+
+.client-order {
+    cursor: pointer;
+}
+
+.btn-edit-client {
+    position: absolute;
+    right: 10px;
+    top: -9px;
+    transition: all 1s;
+}
+.client-order:hover .btn-edit-client {
+    right: 23%;
+    top: -2%;
+    transition: all 500ms;
+}

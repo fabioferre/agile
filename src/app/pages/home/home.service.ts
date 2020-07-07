@@ -40,7 +40,7 @@ export class HomeService extends Model {
         }
 
         if(this.freight) {
-            total += Number(this.freight);
+            this.freight = Number(this.freight);
         }
         return total;
     }

@@ -86,7 +86,10 @@
                 <div class="col-lg-6 ">
                     Total
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-6" *ngIf="type == 2">
+                    {{ homeService.totalPrice + homeService.freight | currency:'BRL':'R$':'1.2-2' }}
+                </div>
+                <div class="col-lg-6" *ngIf="type != 2">
                     {{ homeService.totalPrice | currency:'BRL':'R$':'1.2-2' }}
                 </div>
             </div>
@@ -96,13 +99,16 @@
                 <div class="col-lg-12 ">
                     <div id="order-information" *ngIf="homeService.client || homeService.table">
 
-                        <div class="client-order position-static" *ngIf="homeService.client">
+                        <div class="client-order position-static" (click)="editClient(homeService.client)" *ngIf="homeService.client" matTooltip="Clique para editar ">
                             <div class="wallet" [ngClass]="{
                                 'positive': homeService.client.amount > 0,
                                 'negative':homeService.client.amount < 0 }">
                                 {{ homeService.client.amount | currency:'BRL':' R$  ':'1.2-2'  }} <i
                                     class="fas fa-wallet"></i>
                             </div>
+
+                           
+                            <button mat-icon-button class="btn-edit-client"><mat-icon>edit</mat-icon></button>
                             <span class="order-info-item ">
                                 <strong>Nome:</strong>
                                 {{ homeService.client.name }}

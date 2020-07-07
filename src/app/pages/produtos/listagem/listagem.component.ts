@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { ProdutoService } from '../produto.service';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
@@ -6,6 +6,7 @@ import { Controller } from '../../../service/controller';
 import { AuthService } from 'src/app/service/auth.service';
 import { MatSort } from '@angular/material/sort';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LojasService } from '../../lojas/lojas.service';
 
 @Component({
     selector: 'app-listagem',
@@ -17,8 +18,10 @@ export class ListagemComponent extends Controller implements OnInit {
     public onlyReplenish: boolean;
 
     public form: FormGroup = this.fb.group({
-        status: [1, { updateOn: 'blur' }]
+        status: [1, { updateOn: 'blur' }],
+        store_id: [0]
     });
+
     @ViewChild(MatSort) sort: MatSort;
 
     constructor(
@@ -26,7 +29,8 @@ export class ListagemComponent extends Controller implements OnInit {
         private router: Router,
         public auth: AuthService,
         private fb: FormBuilder,
-        public alertCtrl: AlertController
+        public alertCtrl: AlertController,
+        public lojasService: LojasService
     ) { super(alertCtrl) }
 
     get onlyActive() {
@@ -34,18 +38,27 @@ export class ListagemComponent extends Controller implements OnInit {
     }
     ngOnInit() {
         this.dataSource.sort = this.sort;
-
+        console.log(this.auth.store)
 
         this.getProducts();
         this.form.valueChanges.subscribe(() => {
             this.getProducts();
         });
+
+     
     }
 
+ 
 
     getProducts() {
+
+        let filter = [['status', this.form.value.status]];
+        if(this.form.get('store_id').value) {
+            filter[1] = ['store_id', this.form.get('store_id').value];
+        } 
+
         this.productService.get({
-            filter: [['status', this.form.value.status]]
+            filter: filter,
         }).subscribe(products => this.setProducts(products));
 
     }
@@ -77,7 +90,7 @@ export class ListagemComponent extends Controller implements OnInit {
     }
     delete(product, status = 2) {
         product.status = status;
-        this.productService.deleteById(product.id).subscribe(response => {
+        this.productService.updateById(product.id, {status: status}).subscribe(response => {
             const idx = this.productService.products.indexOf(product)
             this.productService.products.splice(idx, 1);
             this.dataSource.data = this.productService.products;
@@ -86,6 +99,7 @@ export class ListagemComponent extends Controller implements OnInit {
         });
 
     }
+
 
 }
 

@@ -1,6 +1,6 @@
 import { ClientesService } from './../../../clientes/clientes.service';
 import { HomeService } from './../../home.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -14,12 +14,12 @@ import { MatTableDataSource } from '@angular/material/table';
     styleUrls: ['./cliente-modal.component.scss'],
 })
 export class ClienteModalComponent implements OnInit {
-    displayedColumns: string[] = ['name', 'cellphone', 'action'];
+    displayedColumns: string[] = ['name', 'cellphone', 'address', 'action'];
     dataSource: any;
     public alertToRegister: boolean;
     public showForm: boolean;
     public clients: any;
-
+    @Input() public clientToEdit: any;
     constructor(
         public modalCrl: ModalController,
         public homeService: HomeService,
@@ -27,13 +27,17 @@ export class ClienteModalComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.clientService.get().subscribe((clients) => {
-            if (clients.length > 0) {
-                this.dataSource = new MatTableDataSource<any>(clients);
-            } else {
-                this.alertToRegister = true;
-            }
-        });
+        if(this.clientToEdit) {
+            this.showForm = true;
+        } else {
+            this.clientService.get().subscribe((clients) => {
+                if (clients.length > 0) {
+                    this.dataSource = new MatTableDataSource<any>(clients);
+                } else {
+                    this.alertToRegister = true;
+                }
+            });
+        }
     }
 
     applyFilter(filterValue: string) {

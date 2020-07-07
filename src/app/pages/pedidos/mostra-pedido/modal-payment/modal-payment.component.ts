@@ -18,6 +18,7 @@ export class ModalPaymentComponent implements OnInit {
         { id: 1, name: 'Cartão Debito / Crédito', icon: 'fa-credit-card' },
         { id: 2, name: 'Vaucher(VR, VA)', icon: 'fa-money-check' },
         { id: 3, name: 'Dinheiro', icon: 'fa-money-bill-wave' },
+        { id: 4, name: 'Dinheiro', icon: 'fa-money-bill-wave' },
     ];
 
     public form: FormGroup = this.fb.group({

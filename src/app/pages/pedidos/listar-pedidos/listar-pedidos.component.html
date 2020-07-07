@@ -6,11 +6,45 @@
 
 </header>
 
+<mat-card class="mb-3">
+    <mat-card-content>
+        <form [formGroup]="form" >
+            <ion-row>
+                <ion-col size="12" size-lg="6" class="mb-1">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar pedido">
+                    </mat-form-field>
+                </ion-col>
+                <ion-col size="12" size-lg="6" class="mb-1">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Status</mat-label>
+                        <mat-select formControlName="status" [multiple]="true">
+                            <mat-option  [value]="1">
+                                Pendentes
+                            </mat-option>
+                            <mat-option  [value]="3">
+                                Apenas Entrega
+                            </mat-option>
+                            <mat-option  [value]="4">
+                                Entregando
+                            </mat-option>
+                            <mat-option  [value]="2">
+                                Concluidos
+                            </mat-option>
+                            <mat-option  [value]="0">
+                                Cancelados
+                            </mat-option>
+                        </mat-select>
+                        <mat-hint>Filtre os pedidos conforme os status selecionados.</mat-hint>
+                    </mat-form-field>
+                </ion-col>
+            </ion-row>
+        </form>
+    </mat-card-content>
+</mat-card>
 <div class="card  hiper-responsive" >
     <div class="card-body ">
-        <mat-form-field class="w-100">
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro">
-        </mat-form-field>
+        
         <div class="mat-elevation-z8 ">
             <table mat-table [dataSource]="orderService.dataSource" matSort class="w-100 ">
                 <!-- item5 Column -->

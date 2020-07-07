@@ -1,25 +1,25 @@
 <header class="content__title">
     <h1>Listagem de produtos</h1>
-    <button type="button" class="btn btn-success btn-add" 
-    (click)="productService.activeNE()"
-    [routerLink]="['/produtos/novo']">
+    <button type="button" class="btn btn-success btn-add" (click)="productService.activeNE()"
+        [routerLink]="['/produtos/novo']">
         <i class="fas fa-plus fa-2x"></i>
     </button>
 </header>
 <mat-card class="mb-2">
     <mat-card-content>
-        <ion-row>
-            <ion-col size="6" size-lg="6" class="my-2">
-                <mat-form-field class="w-100">
-                    <mat-label>Pesquisar</mat-label>
-                    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Digite o nome, unidade, categoria para filtrar">
-                </mat-form-field>
-            </ion-col>
-            <ion-col size="3">
-                <form [formGroup]="form">
+        <form [formGroup]="form">
+            <ion-row>
+                <ion-col size="6" size-lg="6" class="my-2">
+                    <mat-form-field class="w-100">
+                        <mat-label>Pesquisar</mat-label>
+                        <input matInput (keyup)="applyFilter($event.target.value)"
+                            placeholder="Digite o nome, unidade, categoria para filtrar">
+                    </mat-form-field>
+                </ion-col>
+                <ion-col size="3">
                     <mat-form-field appearance="fill" class="w-100">
                         <mat-label>Status</mat-label>
-                        <mat-select   formControlName="status">
+                        <mat-select formControlName="status">
                             <mat-option [value]="1">
                                 Ativos
                             </mat-option>
@@ -29,35 +29,52 @@
                         </mat-select>
                         <mat-hint>Filtra produtos com base nos status escolhido</mat-hint>
                     </mat-form-field>
-                </form>
-            </ion-col>
-        </ion-row>
+                </ion-col>
+
+                <!-- <ion-col size="3" *ngIf="form.get('status').value == 2">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Filtrar por loja atual</mat-label>
+                        <mat-select formControlName="store_id">
+                            <mat-option [value]="auth.user.store_id">
+                                Sim
+                            </mat-option>
+                            <mat-option [value]="0">
+                               Não
+                            </mat-option>
+                        </mat-select>
+                        <mat-hint>Filtra produtos por loja selecionado</mat-hint>
+                    </mat-form-field>
+                </ion-col> -->
+
+            </ion-row>
+        </form>
     </mat-card-content>
 </mat-card>
-<div class="card  responsive-table" >
+<div class="card  responsive-table">
     <div class="card-body ">
-        <button mat-raised-button [color]="!onlyReplenish? 'primary': 'default'" type="button" (click)="!onlyReplenish? replenishStock(): removereplenishStockFilter()">
+        <button mat-raised-button [color]="!onlyReplenish? 'primary': 'default'" type="button"
+            (click)="!onlyReplenish? replenishStock(): removereplenishStockFilter()">
             <span *ngIf="!onlyReplenish">
                 <i class="fas fa-undo"></i>
-                 Produtos para reposição
-             </span>
+                Produtos para reposição
+            </span>
             <span *ngIf="onlyReplenish">Mostrar todos produtos</span>
-         </button>
+        </button>
         <div class="mb-2 text-right">
             <div class=" d-inline-block label-info border-right border-secondary">
                 <span class="danger"></span> Abaixo da quantidade minima
             </div>
             <div class=" d-inline-block label-info border-right border-secondary">
-               <span  class=" warning"></span> Perto da quantidade minima 
+                <span class=" warning"></span> Perto da quantidade minima
             </div>
             <div class=" d-inline-block label-info ">
                 <span></span> Possuí estoque suficiente
-             </div>
+            </div>
         </div>
 
 
-        <div class="mat-elevation-z8  hiper-responsive " >
-            <div class="alert alert-warning" *ngIf="onlyReplenish" >
+        <div class="mat-elevation-z8  hiper-responsive ">
+            <div class="alert alert-warning" *ngIf="onlyReplenish">
                 Mostrando apenas produtos precisando de reposição de estoque.
             </div>
             <table mat-table [dataSource]="dataSource" matSort class="w-100 ">
@@ -79,22 +96,25 @@
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>
                     <td mat-cell *matCellDef="let element" [attr.data-label]="'Nome '"> {{  element.name }} </td>
                 </ng-container>
-                 <!-- saleprice Column -->
-                 <ng-container matColumnDef="cost_price">
+                <!-- saleprice Column -->
+                <ng-container matColumnDef="cost_price">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Preço de custo </th>
-                    <td mat-cell *matCellDef="let element" [attr.data-label]="'Custo '">R$ {{  element.cost_price }} </td>
+                    <td mat-cell *matCellDef="let element" [attr.data-label]="'Custo '">R$ {{  element.cost_price }}
+                    </td>
                 </ng-container>
                 <!-- saleprice Column -->
                 <ng-container matColumnDef="sale_price">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Preço </th>
-                    <td mat-cell *matCellDef="let element" [attr.data-label]="'Preço '">R$ {{  element.sale_price }} </td>
+                    <td mat-cell *matCellDef="let element" [attr.data-label]="'Preço '">R$ {{  element.sale_price }}
+                    </td>
                 </ng-container>
 
 
                 <!-- category Column -->
                 <ng-container matColumnDef="category">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Categoria </th>
-                    <td mat-cell *matCellDef="let element" [attr.data-label]="'Categoria'"> {{  element.category?.name }} </td>
+                    <td mat-cell *matCellDef="let element" [attr.data-label]="'Categoria'">
+                        {{  element.category?.name }} </td>
                 </ng-container>
 
 
@@ -104,7 +124,7 @@
                         <span *ngIf="!element.stock; else stock">
                             <i class="fas fa-infinity"></i>
                         </span>
-                        <ng-template #stock> {{  element.minimum_units }} </ng-template> 
+                        <ng-template #stock> {{  element.minimum_units }} </ng-template>
                     </td>
                 </ng-container>
                 <ng-container matColumnDef="maximum_units">
@@ -113,33 +133,37 @@
                         <span *ngIf="!element.stock; else stock">
                             <i class="fas fa-infinity"></i>
                         </span>
-                        <ng-template #stock> {{  element.maximum_units }} </ng-template> 
+                        <ng-template #stock> {{  element.maximum_units }} </ng-template>
                     </td>
                 </ng-container>
                 <!-- units Column -->
                 <ng-container matColumnDef="unity">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-center"> Unidades </th>
-                    <td mat-cell *matCellDef="let element" class=" highlight-cell" [ngClass]="{'warning': element.units < (element.minimum_units * 2) , danger: element.units < element.minimum_units }" [attr.data-label]="'Unidades'">
+                    <td mat-cell *matCellDef="let element" class=" highlight-cell"
+                        [ngClass]="{'warning': (element.units < (element.minimum_units * 2) ) && element.stock, danger: (element.units < element.minimum_units) && element.stock }"
+                        [attr.data-label]="'Unidades'">
                         <span class="badge badge-info" matTooltip="Unidade atuais {{ element.units }}">
                             <span *ngIf="!element.stock; else stock">
                                 <i class="fas fa-infinity"></i>
                             </span>
-                            <ng-template #stock> {{  element.units }} </ng-template> 
+                            <ng-template #stock> {{  element.units }} </ng-template>
                         </span>
                     </td>
                 </ng-container>
 
                 <!-- action Column -->
                 <ng-container matColumnDef="action">
-                    <th mat-header-cell *matHeaderCellDef  class="text-center" > Ações </th>
+                    <th mat-header-cell *matHeaderCellDef class="text-center"> Ações </th>
                     <td mat-cell *matCellDef="let element" class="text-center" [attr.data-label]="'Ações'">
                         <button class="btn btn-primary mx-1" (click)="edit(element)">
                             <i class="zmdi zmdi-edit"></i>
                         </button>
-                        <button class="btn btn-danger mx-1" matTooltip="Desativar produto" (click)="delete(element)" *ngIf="onlyActive">
+                        <button class="btn btn-danger mx-1" matTooltip="Desativar produto" (click)="delete(element)"
+                            *ngIf="onlyActive">
                             <i class="zmdi zmdi-pause"></i>
                         </button>
-                        <button class="btn btn-successd mx-1" matTooltip="Ativar produto novamente" (click)="delete(element, 1)" *ngIf="!onlyActive">
+                        <button class="btn btn-success mx-1" matTooltip="Ativar produto novamente"
+                            (click)="delete(element, 1)" *ngIf="!onlyActive">
                             <i class="zmdi zmdi-play"></i>
                         </button>
                     </td>

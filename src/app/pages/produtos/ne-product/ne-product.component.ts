@@ -134,10 +134,12 @@ export class NeProductComponent implements OnInit, OnDestroy {
     }
 
     public save() {
-        let data: any = this.form.value;
-        if (this.hasCollection > 0) {
+       
+        if (this.hasCollection) {
             this.form.controls.items.setValue(JSON.stringify(this.items));
         }
+
+        let data: any = this.form.value;
         if( data.files[0]) {
             data.files = data.files[0].file;
         }
@@ -157,10 +159,11 @@ export class NeProductComponent implements OnInit, OnDestroy {
     }
 
     public update() {
-        let data: any = this.form.value;
-        if (this.hasCollection > 0) {
+        if (this.hasCollection) {
             this.form.controls.items.setValue(JSON.stringify(this.items));
         }
+        
+        let data: any = this.form.value;
 
         if( data.files[0]) {
             data.files = data.files[0].file;

@@ -52,6 +52,8 @@ export class PainelPedidoComponent implements OnInit {
             this.impressora.printer_options = res;
         });
 
+       
+
     }
 
     get type() {
@@ -78,7 +80,7 @@ export class PainelPedidoComponent implements OnInit {
 
             this.form.addControl('client', new FormControl(this.homeService.client));
             this.form.controls.client_id.setValue(this.homeService.client.id);
-
+            
         } else if (this.homeService.table) {
             this.form.addControl('table', new FormControl(this.homeService.table));
             this.form.controls.table_id.setValue(this.homeService.table.id);
@@ -90,11 +92,24 @@ export class PainelPedidoComponent implements OnInit {
 
     }
 
+
+    async editClient(client: any) {
+        
+        const modal = await this.modalCtrl.create({
+            component: ClienteModalComponent,
+            cssClass: 'lg responsive',
+            componentProps: { clientToEdit: client }
+        });
+        modal.onDidDismiss().then((client) => {
+            // this.checkSelling();
+        });
+        return await modal.present();
+    }
     async modalClient(type?) {
         this.homeService.clearPainel(false);
-        if (type === 3) {
-            this.homeService.loadOrders = true;
-        }
+        // if (type === 3) {
+        //     this.homeService.loadOrders = true;
+        // }
         const modal = await this.modalCtrl.create({
             component: ClienteModalComponent,
             cssClass: 'lg responsive'
@@ -123,7 +138,12 @@ export class PainelPedidoComponent implements OnInit {
     }
 
     public prepareSale(): void {
-        this.form.controls.total.setValue(this.homeService.totalPrice);
+        let total = this.homeService.totalPrice;
+        if(this.homeService.freight && this.types.selling2)
+        {
+            total += this.homeService.freight;
+        }
+        this.form.controls.total.setValue( total);
         this.form.controls.products.setValue(this.homeService.productSelected);
         if (this.form.invalid) {
             this.helper.toast('Selecione ao menos um produto', { color: 'warning' });
@@ -150,15 +170,14 @@ export class PainelPedidoComponent implements OnInit {
                 this.homeService.removeProducUnits(this.form.value.products);
                 this.homeService.clearPainel();
                 this.changeActive(1);
-                this.helper.message("Pedido efetuado");
+                this.helper.message(" Pedido efetuado");
                 if(finalize) {
                     this.modalPayment(response)
                 }
                 if(this.impressora.printer_options? this.impressora.printer_options.create: false){
                     this.impressora.printer(response);
-                 
                 }
-    
+                
                 this.homeService.onRemoveOrder.next();
             }
         });

@@ -25,7 +25,7 @@ export class ModalMotoboyComponent implements OnInit {
 
     ngOnInit() {
         if(!this.motoboyService.motoboys) {
-            this.motoboyService.get().subscribe((motoboys) => {
+            this.motoboyService.get({filter: [['status', 1]]}).subscribe((motoboys) => {
                 this.motoboyService.motoboys = motoboys;
                 if (motoboys.length > 0) {
                     this.dataSource.data = motoboys;

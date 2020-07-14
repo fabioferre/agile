@@ -5,7 +5,7 @@ import { HelperService } from './helper.service';
 import { async } from 'q';
 import { environment } from 'src/environments/environment';
 
-export type OptionReq = {method: 'put'| 'post' | 'patch' | 'get' | 'delete'}
+export type OptionReq = {method: 'put'| 'post' | 'patch' | 'get' | 'delete', noLoad?: boolean}
 export default class Model {
     public elementToedit;
     public ne = false;
@@ -73,8 +73,10 @@ export default class Model {
         );
     }
     
-    public updateById(id, params, options: OptionReq = {method: 'put'}) {
-        this.helper.load();
+    public updateById(id, params, options: OptionReq = {method: 'put', noLoad: false}) {
+        if(!options.noLoad) {
+            this.helper.load();
+        }
         return this.http[options.method](`${this.urlApi}/${this.url}/${id}`, params).pipe(
             finalize(() => {
                 this.helper.isLoading = false;

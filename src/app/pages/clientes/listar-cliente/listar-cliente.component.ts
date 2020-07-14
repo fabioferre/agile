@@ -4,6 +4,7 @@ import { ClientesService } from '../clientes.service';
 import { NavController } from '@ionic/angular';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
     selector: 'app-listar-cliente',
@@ -17,24 +18,43 @@ export class ListarClienteComponent implements OnInit {
 
     @ViewChild(MatSort) sort: MatSort;
 
-    constructor(private clientService: ClientesService,
+
+    public form: FormGroup = this.fb.group({
+        amount: ['']
+    });
+    constructor(
+        private clientService: ClientesService,
         private router: Router,
-        public navCtrl: NavController) { }
+        public navCtrl: NavController,
+        private fb: FormBuilder
+    ) { }
 
     ngOnInit() {
         this.dataSource.sort = this.sort;
-        this.clientService.get().subscribe(clientes => {
 
+
+        this.form.get('amount').valueChanges.subscribe((val) => {
+            this.dataSource.data = this.clients;
+            if (val) {
+                this.dataSource.data = this.clients.filter((c) => Number(c.amount) < 0)
+            }
+            this.dataSource._updateChangeSubscription()
+        })
+
+        this.clientService.get().subscribe(clientes => {
             this.clients = clientes;
             this.dataSource.data = this.clients;
             this.dataSource._updateChangeSubscription();
         });
+
     }
 
     applyFilter(filterValue: string) {
         this.dataSource.filter = filterValue.trim().toLowerCase();
 
     }
+
+
 
     public delete(): void {
 

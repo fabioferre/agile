@@ -1,69 +1,81 @@
-
-
 <header class="content__title">
-  <h1>Listagem de clientes</h1>
-  <button type="button" class="btn bg-theme btn-add text-white" [routerLink]="['novo']" >
-    <i class="fas fa-plus fa-2x" ></i>
-  </button>
-  
+    <h1>Listagem de clientes</h1>
+    <button type="button" class="btn bg-theme btn-add text-white" [routerLink]="['novo']">
+        <i class="fas fa-plus fa-2x"></i>
+    </button>
+
 </header>
-  
+
 <div class="card  responsive-table">
-  <div class="card-body ">
-      <mat-form-field class="w-100">
-          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro">
-      </mat-form-field>
-      <div class="mat-elevation-z8 " >
-          <table mat-table [dataSource]="dataSource" matSort class="w-100 ">
+    <div class="card-header">
+        <form  [formGroup]="form" >
+            <div class="row">
+                <div class="col-lg-4">
+                    <mat-form-field class="w-100">
+                        <mat-label>Procurar</mat-label>
+                        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="digite aqui...">
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-4 pt-3">
+                    <mat-slide-toggle formControlName="amount">Filtrar por devedores</mat-slide-toggle>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="card-body ">
+        <div class="alert alert-info" *ngIf="form.get('amount').value">
+            Filtrando apenas por clientes devedores.
+        </div>
+        <div class="mat-elevation-z8 ">
+            <table mat-table [dataSource]="dataSource" matSort class="w-100 ">
 
-              <!-- item1 name -->
-              <ng-container matColumnDef="name">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>
-                  <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-              </ng-container>
+                <!-- item1 name -->
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>
+                    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                </ng-container>
 
-                  <!-- cell_phone Column -->
-              <ng-container matColumnDef="cellphone">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header >Celular  </th>
-                  <td mat-cell *matCellDef="let element"> {{element.cellphone }} </td>
-              </ng-container>
+                <!-- cell_phone Column -->
+                <ng-container matColumnDef="cellphone">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Celular </th>
+                    <td mat-cell *matCellDef="let element"> {{element.cellphone }} </td>
+                </ng-container>
 
-              <!-- address_streetColumn -->
-              <ng-container matColumnDef="address_street">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Rua </th>
-                  <td mat-cell *matCellDef="let element"> {{element.address_street}} </td>
-              </ng-container>
+                <!-- address_streetColumn -->
+                <ng-container matColumnDef="address_street">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Rua </th>
+                    <td mat-cell *matCellDef="let element"> {{element.address_street}} </td>
+                </ng-container>
 
-              <!-- item4 Column -->
-              <ng-container matColumnDef="item4">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Categoria </th>
-                  <td mat-cell *matCellDef="let element"> {{element.item4?.item}} </td>
-              </ng-container>
+                <!-- item4 Column -->
+                <ng-container matColumnDef="item4">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Categoria </th>
+                    <td mat-cell *matCellDef="let element"> {{element.item4?.item}} </td>
+                </ng-container>
 
-              <!-- amount Column -->
-              <ng-container matColumnDef="amount">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Conta </th>
-                  <td mat-cell *matCellDef="let element" >R$ {{element.amount}} </td>
-              </ng-container>
+                <!-- amount Column -->
+                <ng-container matColumnDef="amount">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Conta </th>
+                    <td mat-cell *matCellDef="let element">R$ {{element.amount}} </td>
+                </ng-container>
 
-              <!-- action Column -->
-              <ng-container matColumnDef="action">
-                  <th mat-header-cell *matHeaderCellDef > Ações </th>
-                  <td mat-cell *matCellDef="let element"> 
-                      <button class="btn btn-primary mx-1" (click)="edit(element)">
-                          <i class="zmdi zmdi-edit"></i>
-                      </button>
-                      <button class="btn btn-success mx-1" (click)="show(element)">
-                          <i class="zmdi zmdi-eye"></i>
-                      </button>
-                  </td>
-              </ng-container>
+                <!-- action Column -->
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef> Ações </th>
+                    <td mat-cell *matCellDef="let element">
+                        <button class="btn btn-primary mx-1" (click)="edit(element)">
+                            <i class="zmdi zmdi-edit"></i>
+                        </button>
+                        <button class="btn btn-success mx-1" (click)="show(element)">
+                            <i class="zmdi zmdi-eye"></i>
+                        </button>
+                    </td>
+                </ng-container>
 
-              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          </table>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
 
-      </div>
-  </div>
+        </div>
+    </div>
 </div>
-  

@@ -34,6 +34,13 @@ export class ListarMotoboyComponent implements OnInit {
 
   }
 
+
+  public update(idx, {checked}) {
+    this.dataSource.data[idx].status = checked? 1: 2;
+    this.motoboyService.updateById(this.dataSource.data[idx].id,  this.dataSource.data[idx], {method: 'put', noLoad: true}).subscribe((response) => {
+      this.dataSource._updateChangeSubscription() 
+    });
+  }
   public edit(req): void {
     this.motoboyService.motoboyEdit = req;
       this.router.navigate(['/motoboy/editar',req]);

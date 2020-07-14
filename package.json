@@ -20,6 +20,7 @@
     "@angular/forms": "^9.1.9",
     "@angular/http": "^7.2.16",
     "@angular/material": "^9.2.4",
+    "@angular/material-moment-adapter": "^10.0.2",
     "@angular/platform-browser": "^9.1.9",
     "@angular/platform-browser-dynamic": "^9.1.9",
     "@angular/router": "^9.1.9",
@@ -67,6 +68,7 @@
     "phonegap-plugin-barcodescanner": "8.1.0",
     "popper.js": "^1.16.1",
     "rxjs": "~6.5.5",
+    "saturn-datepicker": "^8.0.5",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.3"
   },

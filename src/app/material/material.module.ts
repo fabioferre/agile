@@ -36,6 +36,8 @@ import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { InputFileModule } from 'ngx-input-file';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, SatDatepickerModule } from 'saturn-datepicker'
+import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter'
 
 
 
@@ -79,7 +81,24 @@ import { MatFormFieldModule } from '@angular/material/form-field';
         MatBadgeModule,
         MatBottomSheetModule,
         InputFileModule,
-        MatFormFieldModule
+        MatFormFieldModule,
+        SatDatepickerModule
+    ],
+    providers: [
+        { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+        {
+            provide: MAT_DATE_FORMATS, useValue: {
+                parse: {
+                    dateInput: ['l', 'LL'],
+                },
+                display: {
+                    dateInput: 'L',
+                    monthYearLabel: 'MMM YYYY',
+                    dateA11yLabel: 'LL',
+                    monthYearA11yLabel: 'MMMM YYYY',
+                },
+            }
+        },
     ]
 })
 export class MaterialModule { }

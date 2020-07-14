@@ -6,10 +6,31 @@
 </header>
 
 <div class="card  responsive-table">
+    <div class="card-header">
+        <div class="row">
+            
+            <div class="col-lg-3  mb-3">
+                <mat-form-field class="w-100">
+                    <mat-label>A partir de:</mat-label>
+                    <input matInput [formControl]="date" [satDatepicker]="resultPicker">
+                    <mat-datepicker-toggle matSuffix [for]="resultPicker"></mat-datepicker-toggle>
+                    <sat-datepicker
+                        #resultPicker
+                        [rangeMode]="false"
+                        orderPeriodLabel="month">
+                    </sat-datepicker>
+                    <mat-hint>Filtra as entradas/saídas da data escolhida e adiante</mat-hint>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-4 ml-auto">
+                <mat-form-field class="w-100">
+                    <mat-label>Procurar</mat-label>
+                    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Digite aqui...">
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
     <div class="card-body ">
-        <mat-form-field class="w-100">
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro">
-        </mat-form-field>
         <div class="mat-elevation-z8 hiper-responsive ">
             <table mat-table [dataSource]="dataSource" matSort class="w-100 ">
 

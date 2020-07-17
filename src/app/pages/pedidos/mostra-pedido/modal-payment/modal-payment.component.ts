@@ -18,14 +18,14 @@ export class ModalPaymentComponent implements OnInit {
         { id: 1, name: 'Cartão Debito / Crédito', icon: 'fa-credit-card' },
         { id: 2, name: 'Vaucher(VR, VA)', icon: 'fa-money-check' },
         { id: 3, name: 'Dinheiro', icon: 'fa-money-bill-wave' },
-        { id: 4, name: 'Dinheiro', icon: 'fa-money-bill-wave' },
     ];
 
     public form: FormGroup = this.fb.group({
         paymentMethod: ['', Validators.required],
         paymentValue: ['', Validators.required],
         change: [0],
-        missingPayment: [0]
+        missingPayment: [0],
+        discount_amount: ['']
     });
 
     public paymentOptionChose: any;
@@ -43,9 +43,12 @@ export class ModalPaymentComponent implements OnInit {
     ngOnInit() {
         this.order = this.orderService.orderToFinalize;
         this.form.controls.paymentMethod.valueChanges.subscribe(name => this.selectMethod(name));
+
+        this.form.get('paymentValue').setValue(this.order.total)
         if (this.order.client) {
             this.paymentOptions.push({ id: 4, name: 'Conta cliente', icon: 'fa-wallet', clientAccount: true });
         }
+
     }
 
     get change() {
@@ -64,6 +67,10 @@ export class ModalPaymentComponent implements OnInit {
         return this.form.controls.paymentMethod;
     }
 
+    get discountLimit() {
+       return Number(this.order.total) * 0.14;
+    }
+
     public selectMethod(id: any) {
         this.form.controls.paymentValue.setValue(0);
         this.paymentOptionChose = this.paymentOptions.find((opt: any) => {
@@ -80,24 +87,24 @@ export class ModalPaymentComponent implements OnInit {
             this.form.controls.paymentValue.setValue(value);
         }
     }
-
-    public calcChange() {
-        let change: any = this.form.value.paymentValue - parseFloat(this.order.total);
-        if (change < 0) {
-            this.form.controls.missingPayment.setValue(Math.abs(change));
-            change = 0;
+    calc() {
+       let discount = Number(this.form.get('discount_amount').value);
+        if(discount > this.discountLimit+0.01) {
+            this.form.get('discount_amount').setValue(this.discountLimit);
+            this.form.get('discount_amount').setErrors({limit: true});
         } else {
-            this.form.controls.missingPayment.setValue(0);
+            this.form.get('discount_amount').setErrors(null);
+           
         }
-        this.form.controls.change.setValue(change);
+
+        this.order.discount_amount = Number(this.form.get('discount_amount').value);
     }
+
 
     finalize() {
         this.order.status = 2;
         this.order.form_payment = this.paymentOptions.find(e => e.id == this.paymentMethod.value).name;
 
-        console.log(this.paymentMethod.value)
-        this.order.change = this.change;
         this.orderService.changeStatus(this.order).subscribe((order: any) => {
        
             if (order) {

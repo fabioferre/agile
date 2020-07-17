@@ -13,7 +13,7 @@ import { MatTableDataSource } from '@angular/material/table';
 export class ModalMotoboyComponent implements OnInit {
 
     displayedColumns: string[] = ['name', 'cell_phone', 'action'];
-    dataSource =  new MatTableDataSource<any>([]);
+    dataSource = new MatTableDataSource<any>([]);
     public alertToRegister: boolean;
 
     constructor(
@@ -24,8 +24,12 @@ export class ModalMotoboyComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        if(!this.motoboyService.motoboys) {
-            this.motoboyService.get({filter: [['status', 1]]}).subscribe((motoboys) => {
+        if (!this.motoboyService.motoboys) {
+            this.motoboyService.get({
+                filter: [
+                    ['motoboys.status', 1]
+                ]
+            }).subscribe((motoboys) => {
                 this.motoboyService.motoboys = motoboys;
                 if (motoboys.length > 0) {
                     this.dataSource.data = motoboys;
@@ -54,8 +58,8 @@ export class ModalMotoboyComponent implements OnInit {
     public selectMotoboy(motoboy) {
         this.orderService.orderToFinalize.motoboy_id = motoboy.id;
         this.modalCrl.dismiss();
-    
-        this.orderService.changeStatus( this.orderService.orderToFinalize ).subscribe(response => {
+
+        this.orderService.changeStatus(this.orderService.orderToFinalize).subscribe(response => {
             let idx = this.orderService.dataSource.data.indexOf(this.orderService.orderToFinalize);
             this.orderService.dataSource.data[idx] = response;
             this.orderService.dataSource._updateChangeSubscription();

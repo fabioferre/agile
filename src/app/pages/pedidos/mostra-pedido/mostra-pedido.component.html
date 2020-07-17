@@ -40,9 +40,13 @@
                         <h2>Frete</h2>
                         <small>{{ order.freight | currency:'BRL':'R$ ':'1.2-2' }}</small>
                     </div>
+                    <div class="payment-calcs" *ngIf="order.discount_amount">
+                        <h2>Desconto</h2>
+                        <small>{{ order.discount_amount | currency:'BRL':'R$ ':'1.2-2' }}</small>
+                    </div>
                     <div class="payment-calcs" >
                         <h2>Total</h2>
-                        <small>{{ order.total | currency:'BRL':'R$ ':'1.2-2' }}</small>
+                        <small>{{ order.total - (order.discount_amount?order.discount_amount: 0) | currency:'BRL':'R$ ':'1.2-2' }}</small>
                     </div>
 
                     

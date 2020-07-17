@@ -9,7 +9,7 @@ const routes: Routes = [
         path: '',
         component: PagesPage,
         children: [
-            { path: '', redirectTo: '', canActivate: [AuthService], pathMatch: 'full' },
+            { path: '', redirectTo: 'home', canActivate: [AuthService], pathMatch: 'full' },
             { path: 'home', canActivate: [AuthService], loadChildren: () => import('../pages/home/home.module').then(m => m.HomePageModule) },
             { path: 'pedidos', canActivate: [AuthService], loadChildren: () => import('../pages/pedidos/pedidos.module').then(m => m.PedidosPageModule) },
             { path: 'auth', loadChildren: () => import('../pages/auth/auth.module').then(m => m.AuthPageModule) },

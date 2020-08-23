@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  host: 'https://tagmus.com.br/api',
-  storage: 'https://tagmus.com.br/storage/',
+  host: 'https://cors-anywhere.herokuapp.com/http://ec2-18-228-245-67.sa-east-1.compute.amazonaws.com/api',
+  storage: 'https://cors-anywhere.herokuapp.com/http://ec2-18-228-245-67.sa-east-1.compute.amazonaws.com/api',
 };
